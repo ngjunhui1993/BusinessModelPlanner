@@ -20,10 +20,10 @@
                     <option value="<%=i%>"><%=i%></option>
                 <%}%>
             </select> <br>
-            
+           
             <input type="submit" value="Select" />
             
-            
+            <a href="FileDownload">File Download </a>
 
             
         </form>
