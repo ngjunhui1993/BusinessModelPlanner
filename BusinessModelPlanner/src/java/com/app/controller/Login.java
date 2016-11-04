@@ -5,28 +5,24 @@
  */
 package com.app.controller;
 
-import com.app.model.Export;
-import com.app.model.entity.Operator;
-import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
-import com.app.model.entity.QadimProduct;
+import com.app.model.DemographicsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import javafx.scene.chart.PieChart.Data;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
 /**
- *
- * @author jiaohui.lee.2014
+ *Login controller process login username and password and redirects users to relevant page.
+ * 
  */
-@WebServlet(name = "MainValidation", urlPatterns = {"/MainValidation"})
-public class MainValidation extends HttpServlet {
+public class Login extends HttpServlet {  
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,39 +37,35 @@ public class MainValidation extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String productName = request.getParameter("productName");
-            String userId = request.getParameter("userID");
-            String projectName = request.getParameter("projectName");
-            //Assigns a product ID to Product (Based on the number of products in the user's DB)
-            int size = QaDIMDAO.retrieveNoOfProjects(userId);
-            int productId = 0;
-            if (size != 0){
-                productId = size+1;
-            }else{
-                productId = 1;
-            }
-            QaDIMDAO.createQadimProduct(userId, projectName, productId, productName);
             
-            int noOfOperators = Integer.parseInt(request.getParameter("numberOfBoxes"));
-            ArrayList<Operator> oList = new ArrayList<>();
-            for(int i = 1; i <=noOfOperators; i++){
-                String operatorName = request.getParameter("operatorName"+i);
-                String verb = request.getParameter("verb"+i);
-                String generalPhrase = request.getParameter("generalPhrase"+i);
-                String specificPhrase = request.getParameter("specificPhrase"+i);
-                String dimension = request.getParameter("dimension"+i);
-                
-                int operatorId = Integer.parseInt(request.getParameter("operatorId"+i));
-                Operator operator = new Operator(operatorName, verb, generalPhrase, specificPhrase, dimension, productId, operatorId);
-                oList.add(operator);
-            }    
-
-               QaDIMDAO.upload(oList);
-               Export.Export(oList, productName, productId);
-               //request.getRequestDispatcher("FileDownload").forward(request,response);
-               response.sendRedirect("index.jsp");
-                
-
+            String login = request.getParameter("submit");
+            
+            if(login == null){
+                response.sendRedirect("index.jsp");
+                return;
+            }
+           //retrieve the email id sent from the form
+           String username = request.getParameter("username");
+           //retrieve the password sent from the form
+           String password = request.getParameter("password");
+           String admin = "admin";
+           //retrieve username
+           Demographics user = DemographicsDAO.retrieveByUsername(username);
+           if (username.contains("@")){
+                request.setAttribute("errorMsg", "Please login with your Email ID Only");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }else if(user != null && user.authenticate(password)){
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("index.jsp");
+                return;
+            }else{
+                request.setAttribute("errorMsg", "Wrong Email ID / Password Entered");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }
         }
     }
 
