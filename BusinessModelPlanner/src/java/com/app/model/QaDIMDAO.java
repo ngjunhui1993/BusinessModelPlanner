@@ -163,6 +163,8 @@ public class QaDIMDAO {
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, Integer.toString(productId));
             preStmt.setString(2, userId);
+            preStmt.setString(3, Integer.toString(productId));
+            preStmt.setString(4, userId);
             preStmt.executeUpdate();
 
         } catch (SQLException e) {

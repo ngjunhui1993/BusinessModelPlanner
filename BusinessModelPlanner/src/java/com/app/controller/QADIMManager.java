@@ -47,9 +47,9 @@ public class QADIMManager extends HttpServlet {
             if(request.getParameter("edit")!=null){
                 edit = true;
             }
-            Demographics userId = (Demographics)request.getSession().getAttribute("user");
+            Demographics user = (Demographics)request.getSession().getAttribute("user");
+            String userId = user.getUserid();
             String project = request.getParameter("project");
-            String errorMsg = "";
             
             if(project!=null){
                 if (delete){
@@ -73,8 +73,7 @@ public class QADIMManager extends HttpServlet {
                     }
                 }
             }
-                errorMsg="Please Select a Project";
-                request.getReqestDispatcher("")
+                response.sendRedirect("QADIMEdit.jsp");
             }
             
         
