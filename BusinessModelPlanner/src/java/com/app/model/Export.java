@@ -6,25 +6,15 @@
 package com.app.model;
 
 import com.app.model.entity.Operator;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import javax.servlet.http.HttpServlet;
+
 
 /**
  *
@@ -34,20 +24,20 @@ public class Export {
     public static void Export(ArrayList<Operator> oList, String pName, int pId){
             try{
                 if(!oList.isEmpty()){
-                Workbook workbook =new HSSFWorkbook();
+                 Workbook workbook =new HSSFWorkbook();
                String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+"QADIM.xls");
-                String localDir = new String("C:/Users/junhui.ng.2014/Desktop/QADIM.xls");
+                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/QADIM.xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
-                 file = new File(pathdir);
+                 file = new File(localDir);
                 
                 //}else{
                  //  file = new File(pathdir); 
                // }
                 FileOutputStream output = new FileOutputStream(file); // Creates an Excel FILE with the name QADIM.
                 Sheet sheet1 = workbook.createSheet("QADIM"); //Create a Excel sheet with sheetname of QADIM
-                
+               
                 //Creates Top portion
                 Row row = sheet1.createRow(1);
                 Cell product = row.createCell(1);

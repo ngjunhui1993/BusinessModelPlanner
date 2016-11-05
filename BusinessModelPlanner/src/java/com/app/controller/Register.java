@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,13 +22,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "Register", urlPatterns = {"/Register"})
 /**
- *Login controller process login username and password and redirects users to relevant page.
- * 
+ * Login controller process login username and password and redirects users to
+ * relevant page.
+ *
  */
-public class Register extends HttpServlet {  
+public class Register extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,64 +44,64 @@ public class Register extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String register = request.getParameter("submit");
-            
-            if(register == null){
+
+            if (register == null) {
                 response.sendRedirect("index.jsp");
                 return;
             }
+            
             //retrieve the name sent from the form
-           String name = request.getParameter("name").trim();
-           //retrieve the email id sent from the form
-           String email = request.getParameter("email").trim();
-           //retrieve the password sent from the form
-           String password = request.getParameter("password").trim();
-           DemographicsDAO demoDAO = new DemographicsDAO();
-           if(email=="" || password == "" || name == ""){
-               request.setAttribute("errorMsg", "Please do not leave any fields blank");
-               RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-               rd.forward(request, response);
-               return;
-            }else if(demoDAO.userExist(email)){
-               request.setAttribute("errorMsg", "The email had been registered. Please use another email address!");
-               RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-               rd.forward(request, response);
-               return;
-            }else if(email.indexOf('@')==-1){
-               request.setAttribute("errorMsg", "The email address entered is invalid. Please Enter a valid email address!");
-               RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-               rd.forward(request, response);
-               return;
+            String name = request.getParameter("name");
+            //retrieve the email id sent from the form
+            String email = request.getParameter("email");
+            //retrieve the password sent from the form
+            String password = request.getParameter("password");
+            
+            if(name == null || email == null || password == null) {
+                request.setAttribute("errorMsg", "Please do not leave any fields blank");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;                
             }
-           
-            Connection conn = null ;
-            PreparedStatement pstmt = null ;
-            ResultSet rs = null ;
-            String statement = null ;
-            System.out.println("there is no problem with the validations it is with the connection manager and sql");
-            try{
-                conn = ConnectionManager.getConnection();
-                System.out.println("There is no problem with connection Manager");
-                
-                pstmt = conn.prepareStatement("INSERT INTO demographics (name, password, email) VALUES (?, ?, ?)");
-                pstmt.setString(1 , name);
-                pstmt.setString(2 , password);
-                pstmt.setString(3 , email);
-                pstmt.executeUpdate();
-                
-               request.setAttribute("successMsg", "Congratulation! Your account has been created!");
-               RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-               rd.forward(request, response);
-               return;
-                    
-            }catch(Exception e){
-                System.out.println("There is an error while adding new user");
-                e.printStackTrace();
-            }finally{
-                ConnectionManager.close(conn , pstmt , rs);
-                
+            
+            name = name.trim();
+            email = email.trim();
+            password = password.trim();
+            
+            DemographicsDAO demoDAO = new DemographicsDAO();
+            if (email == "" || password == "" || name == "") {
+                request.setAttribute("errorMsg", "Please do not leave any fields blank");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            } else if (demoDAO.userExist(email)) {
+                request.setAttribute("errorMsg", "The email had been registered. Please use another email address!");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            } else if (!validEmail(email)) {
+                request.setAttribute("errorMsg", "The email address entered is invalid. Please Enter a valid email address!");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
             }
-           
+            String userid = email;
+            String success = demoDAO.register(name, password, email, userid);
+            request.setAttribute("successMsg", success);
+            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+            rd.forward(request, response);
         }
+    }
+
+    public boolean validEmail(String email) {
+        String emailPattern
+                = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        Pattern pattern = Pattern.compile(emailPattern);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -62,7 +62,7 @@ public class FileDownload extends HttpServlet {
         PrintWriter out = response.getWriter();
         System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
         String fileName = "QADIM.xls";
-        String filePath = "C:\\Users\\junhui.ng.2014\\Desktop\\";// tells the server where to find
+        String filePath = "C:\\Users\\jiaohui.lee.2014\\Desktop\\";// tells the server where to find
         String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
         
         response.setContentType("APPLICATION/OCTET-STREAM");
@@ -70,7 +70,7 @@ public class FileDownload extends HttpServlet {
         // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
         FileInputStream fi = null ;
         //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
-         fi= new FileInputStream(pathdir+fileName);
+         fi= new FileInputStream(filePath+fileName);
         
         //}else{
          //     fi= new FileInputStream(pathdir+fileName);

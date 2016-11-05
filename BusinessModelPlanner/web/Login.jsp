@@ -1,6 +1,6 @@
 
 <%
-    if (session.getAttribute("user") == "admin") {
+   /* if (session.getAttribute("user") == "admin") {
         response.sendRedirect("admin.jsp");
         return;
     }else if(session.getAttribute("user") != null){
@@ -8,6 +8,7 @@
         return;
 
     }
+    */
     
 %>
 <html>
@@ -27,6 +28,7 @@
                 <input class="btn" type="submit" id="register" value="Register »" name="submit">
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
               </form>
+                
               <form class="login-form" method="post" action="Login">
                 <input type="text" placeholder="username" name="username"/>
                 <input type="password" placeholder="password" name="password"/>

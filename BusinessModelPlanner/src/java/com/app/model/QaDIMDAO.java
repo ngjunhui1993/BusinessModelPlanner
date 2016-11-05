@@ -24,7 +24,7 @@ public class QaDIMDAO {
         if (operator.isEmpty()) {
             //input error;
         } else {
-            String sql = "insert into `qadim_operator`(`operator_name`, `product_id`, `operator_id`, `verb`, `general_phrase`, `specific_phrase`, `dimension`) values (?,?,?,?,?,?,?);"; //insert base on table
+            String sql = "insert into `qadim_operator`(`userid`,`operator_name`, `product_id`, `operator_id`, `verb`, `general_phrase`, `specific_phrase`, `dimension`) values (?,?,?,?,?,?,?,?);"; //insert base on table
             Connection conn = null;
             PreparedStatement preStmt = null;
             ResultSet rs = null;
@@ -33,13 +33,14 @@ public class QaDIMDAO {
                 conn.setAutoCommit(false);
                 preStmt = conn.prepareStatement(sql);
                 for (Operator op : operator) {
-                    preStmt.setString(1, op.getOperatorName());
-                    preStmt.setInt(2, op.getProductId());
-                    preStmt.setInt(3, op.getOperatorId());
-                    preStmt.setString(4, op.getVerb());
-                    preStmt.setString(5, op.getGeneralPhrase());
-                    preStmt.setString(6, op.getSpecificPhrase());
-                    preStmt.setString(7, op.getDimensions());
+                    preStmt.setString(1, op.getUserid());
+                    preStmt.setString(2, op.getOperatorName());
+                    preStmt.setInt(3, op.getProductId());
+                    preStmt.setInt(4, op.getOperatorId());
+                    preStmt.setString(5, op.getVerb());
+                    preStmt.setString(6, op.getGeneralPhrase());
+                    preStmt.setString(7, op.getSpecificPhrase());
+                    preStmt.setString(8, op.getDimensions());
                     preStmt.execute();
                 }
                 conn.commit();
@@ -89,7 +90,7 @@ public class QaDIMDAO {
             preStmt.setString(1, projectName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                product = new QadimProduct(rs.getString("userid"), rs.getString("project_name"), Integer.parseInt(rs.getString("product_id")));
+                product = new QadimProduct(rs.getString("userid"), rs.getString("project_name"), Integer.parseInt(rs.getString("product_id")), rs.getString("product_name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +114,7 @@ public class QaDIMDAO {
             preStmt.setString(2, Integer.toString(productId));
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                Operator operator = new Operator(rs.getString("operator_name"), rs.getString("verb"), rs.getString("general_phrase"), rs.getString("specific_phrase"), rs.getString("dimension"), Integer.parseInt(rs.getString("product_id")), Integer.parseInt(rs.getString("operator_id")));
+                Operator operator = new Operator(rs.getString("userid"),rs.getString("operator_name"), rs.getString("verb"), rs.getString("general_phrase"), rs.getString("specific_phrase"), rs.getString("dimension"), Integer.parseInt(rs.getString("product_id")), Integer.parseInt(rs.getString("operator_id")));
                 oList.add(operator);
             }
         } catch (SQLException e) {
@@ -139,7 +140,8 @@ public class QaDIMDAO {
                 String userid = rs.getString("userid");
                 String projName = rs.getString("project_name");
                 int productID = rs.getInt("product_id");
-                QadimProduct product = new QadimProduct(userid, projName, productID);
+                String productName = rs.getString("product_name");
+                QadimProduct product = new QadimProduct(userid, projName, productID, productName);
                 products.add(product);
             }
         } catch (SQLException e) {

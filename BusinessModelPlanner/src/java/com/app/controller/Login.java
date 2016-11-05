@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
             String login = request.getParameter("submit");
             
             if(login == null){
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("Login.jsp");
                 return;
             }
            //retrieve the email id sent from the form
@@ -51,12 +51,7 @@ public class Login extends HttpServlet {
            String admin = "admin";
            //retrieve username
            Demographics user = DemographicsDAO.retrieveByUsername(username);
-           if (username.contains("@")){
-                request.setAttribute("errorMsg", "Please login with your Email ID Only");
-                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                rd.forward(request, response);
-                return;
-            }else if(user != null && user.authenticate(password)){
+            if(user != null && user.authenticate(password)){
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("index.jsp");
                 return;

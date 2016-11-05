@@ -13,6 +13,7 @@ import java.util.HashMap;
  * @author jiaohui.lee.2014
  */
 public class Operator {
+    private String userid;
     private String operatorName;
     private String verb;
     private String generalPhrase;
@@ -21,7 +22,8 @@ public class Operator {
     private int productId;
     private int operatorId;
 
-    public Operator(String operatorName, String verb, String generalPhrase, String specificPhrase, String dimensions, int productId, int operatorId) {
+    public Operator(String userid, String operatorName, String verb, String generalPhrase, String specificPhrase, String dimensions, int productId, int operatorId) {
+        this.userid = userid;
         this.operatorName = operatorName;
         this.verb = verb;
         this.generalPhrase = generalPhrase;
@@ -31,12 +33,18 @@ public class Operator {
         this.operatorId = operatorId;
     }
 
+
+
     public String getOperatorName() {
         return operatorName;
     }
 
     public String getVerb() {
         return verb;
+    }
+
+    public String getUserid() {
+        return userid;
     }
 
     public String getGeneralPhrase() {
@@ -67,10 +75,6 @@ public class Operator {
         this.verb = verb;
     }
 
-    public void setGeneralPhase(String generalPhrase) {
-        this.generalPhrase = generalPhrase;
-    }
-
     public void setSpecificPhrase(String specificPhrase) {
         this.specificPhrase = specificPhrase;
     }
@@ -87,6 +91,12 @@ public class Operator {
         this.operatorId = operatorId;
     }
 
-    
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public void setGeneralPhrase(String generalPhrase) {
+        this.generalPhrase = generalPhrase;
+    }
     
 }

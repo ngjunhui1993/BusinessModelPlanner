@@ -64,7 +64,7 @@ public class MainValidation extends HttpServlet {
                 String dimension = request.getParameter("dimension"+i);
                 
                 int operatorId = Integer.parseInt(request.getParameter("operatorId"+i));
-                Operator operator = new Operator(operatorName, verb, generalPhrase, specificPhrase, dimension, productId, operatorId);
+                Operator operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension, productId, operatorId);
                 oList.add(operator);
             }    
 

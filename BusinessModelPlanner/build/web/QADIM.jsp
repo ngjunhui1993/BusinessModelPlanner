@@ -3,7 +3,6 @@
     Created on : Oct 22, 2016, 1:44:59 PM
     Author     : jiaohui.lee.2014
 --%>
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="com.app.model.QaDIMDAO"%>
@@ -52,36 +51,6 @@
                 <input type="submit" value="Submit"/>
         </form>
         
-        <!--Retrieves ALL projects uploaded to be deleted-->
-        <form action="QADIMManager">
-            <%  
-                String userId = user.getEmail().substring(0,user.getEmail().indexOf("@"));
-                ArrayList<QadimProduct> qList= (ArrayList<QadimProduct>)session.getAttribute("allProjects");
-                if (qList!=null){%>
-            Select Project:
-                <select name="toDelete">
-                   <% for(QadimProduct q: qList){%>
-                   <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>
-                   <%}%>
-                </select>
-                <%}%>    
-                <input type="hidden" name="userId" value="<%=userId%>"/>
-                <input type="submit" value="Delete" />
-        </form>
-        
-        <!--To Edit a Project-->
-        <form action="QADIMEdit.jsp">
-            <%             
-                if (qList!=null){%>
-            Select Project:
-                <select name="toEdit">
-                   <% for(QadimProduct q: qList){%>
-                   <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>
-                   <%}%>
-                </select>
-                <%}%>    
-                <input type="hidden" name="userId" value="<%=userId%>"/>
-                <input type="submit" value="Edit" />
-        </form>
+       
     </body>
 </html>

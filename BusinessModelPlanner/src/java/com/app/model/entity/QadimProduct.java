@@ -13,12 +13,15 @@ public class QadimProduct {
     private String  userID ;
     private String project_name;
     private int productID ;
-    public QadimProduct(String userID , String project_name , int productID){
-        this.userID = userID ;
-        this.project_name = project_name ;
-        this.productID = productID ;
-        
+    private String product_name;
+
+    public QadimProduct(String userID, String project_name, int productID, String product_name) {
+        this.userID = userID;
+        this.project_name = project_name;
+        this.productID = productID;
+        this.product_name = product_name;
     }
+    
     
     public String getUserID(){
         return userID ;
@@ -31,6 +34,10 @@ public class QadimProduct {
     public int getProductID(){
         return productID;
         
+    }
+
+    public String getProductName() {
+        return product_name;
     }
     
     public void setUserID(String userID){
@@ -45,6 +52,10 @@ public class QadimProduct {
     public void setProductID(int productID){
         this.productID = productID ;
         
+    }
+
+    public void setProductName(String product_name) {
+        this.product_name = product_name;
     }
     
 
