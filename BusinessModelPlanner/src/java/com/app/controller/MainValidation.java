@@ -5,7 +5,7 @@
  */
 package com.app.controller;
 
-import com.app.model.Export;
+import com.app.model.Excel;
 import com.app.model.entity.Operator;
 import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
@@ -69,7 +69,7 @@ public class MainValidation extends HttpServlet {
             }    
 
                QaDIMDAO.upload(oList);
-               Export.Export(oList, productName, productId);
+               Excel.Export(userId, oList, projectName, productName, productId);
                //request.getRequestDispatcher("FileDownload").forward(request,response);
                response.sendRedirect("index.jsp");
                 

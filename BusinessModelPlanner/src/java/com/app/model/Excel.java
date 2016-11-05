@@ -5,38 +5,56 @@
  */
 package com.app.model;
 
+import com.app.model.entity.Demographics;
 import com.app.model.entity.Operator;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 
 /**
  *
  * @author jiaohui.lee.2014
  */
-public class Export {
-    public static void Export(ArrayList<Operator> oList, String pName, int pId){
+public class Excel {
+    public static void Export(String userId, ArrayList<Operator> oList, String projectName, String pName, int pId){
             try{
                 if(!oList.isEmpty()){
-                 Workbook workbook =new HSSFWorkbook();
-               String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+"QADIM.xls");
-                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/QADIM.xls");
+                String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
+                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
-                 file = new File(localDir);
-                
+                 file = new File(localDir); 
                 //}else{
                  //  file = new File(pathdir); 
                // }
-                FileOutputStream output = new FileOutputStream(file); // Creates an Excel FILE with the name QADIM.
-                Sheet sheet1 = workbook.createSheet("QADIM"); //Create a Excel sheet with sheetname of QADIM
+                FileInputStream fsIP = null;
+                FileOutputStream output = null;
+                Workbook workbook = null;
+                //Checks if the file at Directory Exists
+                if (file.isFile()){
+                    fsIP= new FileInputStream(file);
+                    //Access Existing Workbook
+                    workbook=new HSSFWorkbook(fsIP);
+                    //Open OutputStream to write updates
+                    output = new FileOutputStream(file);
+                }else{
+                    output = new FileOutputStream(file);
+                    //Creates a new Workbook
+                    workbook=new HSSFWorkbook();
+                }
+                 
+                 // Creates an Excel Sheet with the projectName.
+                Sheet sheet1 = workbook.createSheet(projectName); //Create a Excel sheet with sheetname of the Product
                
                 //Creates Top portion
                 Row row = sheet1.createRow(1);
@@ -110,4 +128,47 @@ public class Export {
         }
     }
     
+    
+     public static void delete(String userId, String projectName){
+        try{
+            String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
+            String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
+            System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
+            File file= null ;
+            //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
+             file = new File(localDir); 
+            //}else{
+             //  file = new File(pathdir); 
+           // }
+            FileInputStream fsIP = null;
+            POIFSFileSystem fsPoi = null;
+            FileOutputStream output = null;
+            Workbook workbook = null;
+            //Checks if the file at Directory Exists
+            if (file.isFile()){
+                fsIP= new FileInputStream(file);
+                fsPoi = new POIFSFileSystem(fsIP);
+                //Access Existing Workbook
+                workbook=new HSSFWorkbook(fsPoi);
+                //Open OutputStream to write updates
+                output = new FileOutputStream(file);
+            }
+
+            Sheet sheet = workbook.getSheet(projectName);
+            int index = 0;
+            if(sheet != null)   {
+                index = workbook.getSheetIndex(sheet);
+                if(index == 0){
+                    boolean delete = file.delete();
+                }else{
+                workbook.removeSheetAt(index);
+                }
+            }
+            workbook.write(output);
+            output.close();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.app.controller;
 
+import com.app.model.Excel;
 import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
 import com.app.model.entity.Operator;
@@ -60,6 +61,7 @@ public class QADIMManager extends HttpServlet {
                     successMsg = "You have successfully delete your project titled: " + projectName;
                     request.setAttribute("successMsg", successMsg);    
                     request.getRequestDispatcher("QADIMEdit.jsp").forward(request,response);
+                    Excel.delete(userId, projectName);
                 }
                 else if(edit){
                     int productId = QaDIMDAO.retrieveProject(projectName).getProductID();
