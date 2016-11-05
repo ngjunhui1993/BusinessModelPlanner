@@ -67,7 +67,7 @@ public class QADIMManager extends HttpServlet {
                         String specificPhrase = request.getParameter("specificPhrase"+i);
                         String dimension = request.getParameter("dimension"+i);
                         int operatorId = i;
-                        operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,Integer.parseInt(edit), operatorId);
+                        operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,Integer.parseInt(project), operatorId);
                         toUpload.add(operator);
                         QaDIMDAO.update(toUpload);
                     }
@@ -78,7 +78,7 @@ public class QADIMManager extends HttpServlet {
             
         
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
