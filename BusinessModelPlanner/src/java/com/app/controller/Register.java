@@ -84,7 +84,12 @@ public class Register extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
+            } else if (password.length() < 8) {
+                request.setAttribute("errorMsg", "Please enter a password with at least 8 characters");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
             }
+            
             String userid = email;
             String success = demoDAO.register(name, password, email, userid);
             request.setAttribute("successMsg", success);
