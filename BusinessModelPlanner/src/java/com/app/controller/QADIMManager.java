@@ -49,15 +49,21 @@ public class QADIMManager extends HttpServlet {
             }
             Demographics user = (Demographics)request.getSession().getAttribute("user");
             String userId = user.getUserid();
-            String project = request.getParameter("project");
+            String projectName = request.getParameter("project");
+            String successMsg = "";
             
-            if(project!=null){
+            if(projectName!=null){
                 if (delete){
-                    int productId = QaDIMDAO.retrieveProject(project).getProductID();
+                    int productId = QaDIMDAO.retrieveProject(projectName).getProductID();
                     QaDIMDAO.deleteProject(productId, userId);
+                    QaDIMDAO.deleteOperators(productId, userId);
+                    successMsg = "You have successfully delete your project titled: " + projectName;
+                    request.setAttribute("successMsg", successMsg);    
+                    request.getRequestDispatcher("QADIMEdit.jsp").forward(request,response);
                 }
                 else if(edit){
-                    ArrayList<Operator> operators = QaDIMDAO.retrieveOperators(Integer.parseInt(project), userId);
+                    int productId = QaDIMDAO.retrieveProject(projectName).getProductID();
+                    ArrayList<Operator> operators = QaDIMDAO.retrieveOperators(productId, userId);
                     ArrayList<Operator> toUpload = null;
                     for (int i =1; i<=operators.size();i++){
                         Operator operator = null;
@@ -67,18 +73,17 @@ public class QADIMManager extends HttpServlet {
                         String specificPhrase = request.getParameter("specificPhrase"+i);
                         String dimension = request.getParameter("dimension"+i);
                         int operatorId = i;
-                        operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,Integer.parseInt(project), operatorId);
+                        operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,productId, operatorId);
                         toUpload.add(operator);
-                        QaDIMDAO.update(toUpload);
                     }
+                    QaDIMDAO.update(toUpload);
+                    successMsg = "You have successfully edited your project titled: " + projectName;
+                    request.setAttribute("successMsg", successMsg);    
+                    request.getRequestDispatcher("QADIMEdit.jsp").forward(request,response);
                 }
             }
-                response.sendRedirect("QADIMEdit.jsp");
-            }
-            
-        
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

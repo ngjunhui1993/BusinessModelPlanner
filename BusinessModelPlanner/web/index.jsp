@@ -32,8 +32,6 @@
             
              
             <a href="QADIMEdit.jsp">Edit QADIM Project</a>
-            
-            <a href="QADIMDelete.jsp">Delete QADIM Project</a>
                
             
     </body>

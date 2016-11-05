@@ -124,15 +124,14 @@ public class QaDIMDAO {
         }
         return oList;
     }
-    public static ArrayList<QadimProduct> retrieveAllProjects (String userId){ //buggy does not work. NullPointer occurs
-        ArrayList<QadimProduct> products= null;
-       // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
+    public static ArrayList<QadimProduct> retrieveAllProjects (String userId){
+        ArrayList<QadimProduct> products= new ArrayList<QadimProduct>();
         Connection conn = null;
         PreparedStatement preStmt = null;
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from qadim_product where userid = ?;";
+            String sql = "select userid, project_name, product_id, product_name from qadim_product where userid = ?";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, userId);
             rs = preStmt.executeQuery();
@@ -142,6 +141,7 @@ public class QaDIMDAO {
                 int productID = rs.getInt("product_id");
                 String productName = rs.getString("product_name");
                 QadimProduct product = new QadimProduct(userid, projName, productID, productName);
+                
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -158,13 +158,29 @@ public class QaDIMDAO {
         PreparedStatement preStmt = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "delete from qadim_product where product_id = ? and userid = ?;" +
-                    "delete from qadim_operator where product_id = ? and userid = ?; ";
+            String sql = "delete from qadim_product where product_id = ? and userid = ?;";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, Integer.toString(productId));
             preStmt.setString(2, userId);
-            preStmt.setString(3, Integer.toString(productId));
-            preStmt.setString(4, userId);
+            preStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+    }
+    
+        public static void deleteOperators(int productId , String userId) {
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement preStmt = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "delete from qadim_operator where product_id = ? and userid = ?; ";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, Integer.toString(productId));
+            preStmt.setString(2, userId);
             preStmt.executeUpdate();
 
         } catch (SQLException e) {

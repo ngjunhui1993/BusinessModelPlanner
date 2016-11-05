@@ -18,7 +18,8 @@
     </head>
     <body>
         <%
-            String userid = (String)session.getAttribute("user");
+            Demographics user = (Demographics)session.getAttribute("user");
+            String userid = user.getUserid();
             ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
 
         %>
@@ -28,12 +29,15 @@
             <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
            <% }%>  
             </select>
-        </form>
+            <br>
             <input type="submit" value="Edit Project" name="edit"/>
             <input type="submit" value="Delete Project" name="delete"/>
+        </form>
             <% 
-            
-       
+            String successMsg = (String)request.getAttribute("successMsg");
+            if(successMsg!=null){
+                out.println(successMsg);
+            }
         %>
     </body>
 </html>
