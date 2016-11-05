@@ -5,7 +5,6 @@
  */
 package com.app.model;
 
-import com.app.model.entity.Demographics;
 import com.app.model.entity.Operator;
 import com.app.model.entity.QadimProduct;
 import java.sql.Connection;

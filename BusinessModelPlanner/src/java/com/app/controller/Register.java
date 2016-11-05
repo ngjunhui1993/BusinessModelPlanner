@@ -5,14 +5,9 @@
  */
 package com.app.controller;
 
-import com.app.model.ConnectionManager;
-import com.app.model.entity.Demographics;
 import com.app.model.DemographicsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;

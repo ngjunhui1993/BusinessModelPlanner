@@ -1,12 +1,9 @@
 package com.app.model;
 
-import com.app.model.ConnectionManager;
 import com.app.model.entity.*;
 import java.util.*;
-import java.io.*;
 import java.sql.*;
-import java.text.*;
-import javax.servlet.RequestDispatcher;
+
 /**
   * A DemographicsDAO retrieves information from the demographics database.
   */

@@ -5,7 +5,6 @@
  */
 package com.app.model;
 
-import com.app.model.entity.Demographics;
 import com.app.model.entity.Operator;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +16,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 
 /**
@@ -43,6 +41,7 @@ public class Excel {
                 //Checks if the file at Directory Exists
                 if (file.isFile()){
                     fsIP= new FileInputStream(file);
+                    file.setWritable(true);
                     //Access Existing Workbook
                     workbook=new HSSFWorkbook(fsIP);
                     //Open OutputStream to write updates
@@ -50,6 +49,7 @@ public class Excel {
                 }else{
                     output = new FileOutputStream(file);
                     //Creates a new Workbook
+                    file.setWritable(true);
                     workbook=new HSSFWorkbook();
                 }
                  
@@ -157,15 +157,17 @@ public class Excel {
             Sheet sheet = workbook.getSheet(projectName);
             int index = 0;
             if(sheet != null)   {
+                workbook.write(output);
+                output.close();
                 index = workbook.getSheetIndex(sheet);
                 if(index == 0){
                     boolean delete = file.delete();
                 }else{
                 workbook.removeSheetAt(index);
+                workbook.write(output);
+            output.close();
                 }
             }
-            workbook.write(output);
-            output.close();
             
         }catch(Exception e){
             e.printStackTrace();
