@@ -20,8 +20,17 @@
         <%
             String userid = (String)session.getAttribute("user");
             ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
+
         %>
         <form action="QADIMManager">
+            <select name="project">
+                <%for(QadimProduct q: product){%>
+            <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
+           <% }%>  
+            </select>
+        </form>
+            <input type="submit" value="Edit Project" name="edit"/>
+            <input type="submit" value="Delete Project" name="delete"/>
             <% 
             
        

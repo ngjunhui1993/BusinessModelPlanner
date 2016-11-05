@@ -38,30 +38,45 @@ public class QADIMManager extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            Boolean delete = false;
+            Boolean edit = false;
             
-            String projectToDelete = request.getParameter("toDelete");
-            String userId = request.getParameter("userId");
-            String projectToEdit = request.getParameter("toEdit");
-            if (projectToDelete != null){
-                int productId = QaDIMDAO.retrieveProject(projectToDelete).getProductID();
-                QaDIMDAO.deleteProject(productId, userId);
+            if(request.getParameter("delete")!=null){
+                delete = true;
             }
-            if(projectToEdit!=null){
-                ArrayList<Operator> operators = QaDIMDAO.retrieveOperators(Integer.parseInt(projectToEdit), userId);
-                ArrayList<Operator> toUpload = null;
-                for (int i =1; i<=operators.size();i++){
-                    Operator operator = null;
-                    String operatorName = request.getParameter("operatorName"+i);
-                    String verb = request.getParameter("verb"+i);
-                    String generalPhrase = request.getParameter("generalPhrase"+i);
-                    String specificPhrase = request.getParameter("specificPhrase"+i);
-                    String dimension = request.getParameter("dimension"+i);
-                    int operatorId = i;
-                    operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,Integer.parseInt(projectToEdit), operatorId);
-                    toUpload.add(operator);
+            if(request.getParameter("edit")!=null){
+                edit = true;
+            }
+            Demographics userId = (Demographics)request.getSession().getAttribute("user");
+            String project = request.getParameter("project");
+            String errorMsg = "";
+            
+            if(project!=null){
+                if (delete){
+                    int productId = QaDIMDAO.retrieveProject(project).getProductID();
+                    QaDIMDAO.deleteProject(productId, userId);
                 }
-                QaDIMDAO.update(toUpload);
+                else if(edit){
+                    ArrayList<Operator> operators = QaDIMDAO.retrieveOperators(Integer.parseInt(project), userId);
+                    ArrayList<Operator> toUpload = null;
+                    for (int i =1; i<=operators.size();i++){
+                        Operator operator = null;
+                        String operatorName = request.getParameter("operatorName"+i);
+                        String verb = request.getParameter("verb"+i);
+                        String generalPhrase = request.getParameter("generalPhrase"+i);
+                        String specificPhrase = request.getParameter("specificPhrase"+i);
+                        String dimension = request.getParameter("dimension"+i);
+                        int operatorId = i;
+                        operator = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension,Integer.parseInt(edit), operatorId);
+                        toUpload.add(operator);
+                        QaDIMDAO.update(toUpload);
+                    }
+                }
             }
+                errorMsg="Please Select a Project";
+                request.getReqestDispatcher("")
+            }
+            
         
         }
     }
