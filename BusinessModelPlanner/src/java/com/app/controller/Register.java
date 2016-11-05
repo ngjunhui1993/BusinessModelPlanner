@@ -74,20 +74,24 @@ public class Register extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
-            } else if (demoDAO.userExist(email)) {
+            } 
+            if (demoDAO.userExist(email)) {
                 request.setAttribute("errorMsg", "The email had been registered. Please use another email address!");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
-            } else if (!validEmail(email)) {
+            }
+            if (!validEmail(email)) {
                 request.setAttribute("errorMsg", "The email address entered is invalid. Please Enter a valid email address!");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
-            } else if (password.length() < 8) {
+            }
+            if (password.length() < 8) {
                 request.setAttribute("errorMsg", "Please enter a password with at least 8 characters");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
+                return;
             }
             
             String userid = email;
