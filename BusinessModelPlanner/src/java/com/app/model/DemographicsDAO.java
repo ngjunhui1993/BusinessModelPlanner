@@ -116,7 +116,7 @@ public class DemographicsDAO {
   * @param username
   * @return a Demographics object. 
   */  
-    public static Demographics retrieveByUsername(String username){
+    public static Demographics retrieveByUsername(String userName){
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -128,16 +128,13 @@ public class DemographicsDAO {
             //pstmt.setString(1, "'" + username + "%'");
             rs = pstmt.executeQuery();
             while (rs.next()) {
+              String name = rs.getString(1);
+              String password = rs.getString(2);
               String email = rs.getString(3);
-              int n = email.indexOf("@");
-              String userName = email.substring(0, n);
-              int end = email.indexOf(".",n);
-              String school = email.substring(n+1,end);
-              String year = email.substring((n-4),n);
-              
+              String username = rs.getString(4);
               
               if(username.equals(userName)){
-                user = new Demographics(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                user = new Demographics(name, password, email, username);
               }
             }
 
@@ -166,7 +163,7 @@ public class DemographicsDAO {
                 pstmt.setString(2 , password);
                 pstmt.setString(3 , email);
                 pstmt.setString(4 , userid);
-                pstmt.executeUpdate();
+                pstmt.execute();
                 
                     
             }catch(Exception e){
