@@ -25,9 +25,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class Excel {
     public static void Export(String userId, ArrayList<Operator> oList, String projectName, String pName, int pId){
             try{
-                if(!oList.isEmpty()){
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
-                String localDir = new String("C:/Users/farkill/Desktop/" + userId +".xls");
+                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
@@ -81,48 +80,48 @@ public class Excel {
                 Cell Dimensionheader = row3.createCell(5);
                 Dimensionheader.setCellValue("Dimension");
                 
-                
-                for (int i = 0; i<oList.size(); i++){
-                    
-                    Operator operator = oList.get(i);
-                    String operatorName = operator.getOperatorName();
-                    String verb = operator.getVerb();
-                    String generalPhrase = operator.getGeneralPhrase();
-                    String specificPhrase = operator.getSpecificPhrase();
-                    String dimensions = operator.getDimensions();
-                    int operatorid = operator.getOperatorId();
-                    int columnCounter = 0;
-                    int rowCounter = 4;
-                    Row rowTable = sheet1.createRow(i+rowCounter);
-                    if (i%2 == 0){
-                        Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                        operatorNumberTable.setCellValue("Operator"+operatorid);
+                if(oList!=null){
+                    for (int i = 0; i<oList.size(); i++){
+
+                        Operator operator = oList.get(i);
+                        String operatorName = operator.getOperatorName();
+                        String verb = operator.getVerb();
+                        String generalPhrase = operator.getGeneralPhrase();
+                        String specificPhrase = operator.getSpecificPhrase();
+                        String dimensions = operator.getDimensions();
+                        int operatorid = operator.getOperatorId();
+                        int columnCounter = 0;
+                        int rowCounter = 4;
+                        Row rowTable = sheet1.createRow(i+rowCounter);
+                        if (i%2 == 0){
+                            Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                            operatorNumberTable.setCellValue("Operator"+operatorid);
+                            columnCounter++;
+                        }else{
+                            Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                            operatorNumberTable.setCellValue("Operator"+operatorid+"'");
+                            columnCounter++;
+                        }
+                        Cell operatorNameTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        operatorNameTable.setCellValue(operatorName);
                         columnCounter++;
-                    }else{
-                        Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                        operatorNumberTable.setCellValue("Operator"+operatorid+"'");
+                        Cell verbTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        verbTable.setCellValue(verb);
                         columnCounter++;
-                    }
-                    Cell operatorNameTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    operatorNameTable.setCellValue(operatorName);
-                    columnCounter++;
-                    Cell verbTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    verbTable.setCellValue(verb);
-                    columnCounter++;
-                    Cell generalPhraseTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    generalPhraseTable.setCellValue(generalPhrase);
-                    columnCounter++;
-                    Cell specificPhraseTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    specificPhraseTable.setCellValue(specificPhrase);
-                    columnCounter++;
-                    Cell dimensionHeader= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    dimensionHeader.setCellValue(dimensions);
-                    columnCounter++;
-                    
+                        Cell generalPhraseTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        generalPhraseTable.setCellValue(generalPhrase);
+                        columnCounter++;
+                        Cell specificPhraseTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        specificPhraseTable.setCellValue(specificPhrase);
+                        columnCounter++;
+                        Cell dimensionHeader= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        dimensionHeader.setCellValue(dimensions);
+                        columnCounter++;
+
+                        }
                 }
                 workbook.write(output);
                 output.close();
-            }
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -178,7 +177,7 @@ public class Excel {
          try{
                 if(!oList.isEmpty()){
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
-                String localDir = new String("C:/Users/farkill/Desktop/" + userId +".xls");
+                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
@@ -271,6 +270,7 @@ public class Excel {
                     dimensionHeader.setCellValue(dimensions);
                     columnCounter++;
                     
+                
                 }
                 workbook.write(output);
                 output.close();

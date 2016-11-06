@@ -124,20 +124,28 @@ public class QaDIMDAO {
     }
     
     public static ArrayList<Operator> retrieveOperators (int productId, String userId){
-        ArrayList<Operator> oList= null;
+        ArrayList<Operator> oList= new ArrayList<Operator>();
        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
         Connection conn = null;
         PreparedStatement preStmt = null;
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from qadim_operator inner join qadim_product on qadim_product.product_id = qadim_operator.product_id where userid = ? and product_id =?;";
+            String sql = "Select * from qadim_operator where userid = ? and product_id =?;";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, userId);
             preStmt.setString(2, Integer.toString(productId));
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                Operator operator = new Operator(rs.getString("userid"),rs.getString("operator_name"), rs.getString("verb"), rs.getString("general_phrase"), rs.getString("specific_phrase"), rs.getString("dimension"), Integer.parseInt(rs.getString("product_id")), Integer.parseInt(rs.getString("operator_id")));
+                String userid = rs.getString("userid");
+                String operatorName = rs.getString("operator_name");
+                String verb = rs.getString("verb");
+                String generalPhrase = rs.getString("general_phrase");
+                String specificPhrase = rs.getString("specific_phrase");
+                String dimension = rs.getString("dimension");
+                int productid = Integer.parseInt(rs.getString("product_id"));
+                int operatorid = Integer.parseInt(rs.getString("operator_id"));
+                Operator operator = new Operator(userid ,operatorName, verb,generalPhrase ,specificPhrase ,dimension ,productid ,operatorid );
                 oList.add(operator);
             }
         } catch (SQLException e) {
@@ -213,12 +221,8 @@ public class QaDIMDAO {
         }
     }
     
-    public static void update(ArrayList<Operator> oList ){
-        String sql = "update qadim_operator set operator_name=?, product_id=?,operator_id=?,verb=?,general_phrase=?,specific_phrase=?,dimension=? where operator_name=? and product_id=? and operator_id=?;";  
-        int totalUploaded = 0;
-            final int batchSize = 1000;
-            int count = 0;
-            ArrayList<int[]> list = new ArrayList<int[]>();
+    public static void update(ArrayList<Operator> oList, String userid){
+            String sql = "update qadim_operator set operator_name=?,verb=?,general_phrase=?,specific_phrase=?,dimension=? where userid=? and product_id=? and operator_id=?;";  
             Connection conn = null;
             PreparedStatement preStmt = null;
             ResultSet rs = null;
@@ -228,23 +232,18 @@ public class QaDIMDAO {
                 preStmt = conn.prepareStatement(sql);
                 for (Operator op: oList) {
                     preStmt.setString(1, op.getOperatorName());
-                    preStmt.setInt(2, op.getProductId());
-                    preStmt.setInt(3, op.getOperatorId());
-                    preStmt.setString(4, op.getVerb());
-                    preStmt.setString(5, op.getGeneralPhrase());
-                    preStmt.setString(6, op.getSpecificPhrase());
-                    preStmt.setString(7, op.getDimensions());
-                    preStmt.setString(8, op.getOperatorName());
-                    preStmt.setInt(9, op.getProductId());
-                    preStmt.setInt(10, op.getOperatorId());
+                    preStmt.setString(2, op.getVerb());
+                    preStmt.setString(3, op.getGeneralPhrase());
+                    preStmt.setString(4, op.getSpecificPhrase());
+                    preStmt.setString(5, op.getDimensions());
+                    preStmt.setString(6, userid);
+                    preStmt.setInt(7, op.getProductId());
+                    preStmt.setInt(8, op.getOperatorId());
                     
-                    preStmt.addBatch();
-                     System.out.println("editted 1 row of operator to db");
-                    if (++count % batchSize == 0) {
-                        list.add(preStmt.executeBatch());
-                    }
+                  //   preStmt.addBatch();
+                     System.out.println("edited 1 row of operator to db");
+                     preStmt.executeUpdate();
                 }
-                list.add(preStmt.executeBatch());
                 conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();

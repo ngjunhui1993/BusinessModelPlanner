@@ -9,6 +9,7 @@ import com.app.model.Excel;
 import com.app.model.entity.Operator;
 import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
+import com.app.model.entity.QadimProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -38,44 +39,54 @@ public class MainValidation extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ArrayList<String> operator1 = (ArrayList<String>)request.getSession().getAttribute("operator1");
-            ArrayList<String> operator2 = (ArrayList<String>)request.getSession().getAttribute("operator2");
-            ArrayList<String> operator3 = (ArrayList<String>)request.getSession().getAttribute("operator3");
-            ArrayList<String> operator4 = (ArrayList<String>)request.getSession().getAttribute("operator4");
-            
-            String productName = (String)request.getSession().getAttribute("productName");
-            String projectName = (String)request.getSession().getAttribute("projectName");
-            Demographics user = (Demographics)request.getSession().getAttribute("user");
+            ArrayList<String> operator1 = (ArrayList<String>) request.getSession().getAttribute("operator1");
+            ArrayList<String> operator2 = (ArrayList<String>) request.getSession().getAttribute("operator2");
+            ArrayList<String> operator3 = (ArrayList<String>) request.getSession().getAttribute("operator3");
+            ArrayList<String> operator4 = (ArrayList<String>) request.getSession().getAttribute("operator4");
+
+            String productName = (String) request.getSession().getAttribute("productName");
+            String projectName = (String) request.getSession().getAttribute("projectName");
+            Demographics user = (Demographics) request.getSession().getAttribute("user");
             String userId = user.getUserid();
             int size = QaDIMDAO.retrieveNoOfProjects(userId);
             int productId = 0;
-            if (size != 0){
-                productId = size+1;
-            }else{
+            if (size != 0) {
+                productId = size + 1;
+            } else {
                 productId = 1;
             }
-            
+
             String save = request.getParameter("Save");
             boolean savefunction = false;
+            boolean projectExists = false;
             //Checks which button was clicked
-            if(save != null && save.equals("Save")){
-                savefunction=true;
+            if (save != null && save.equals("Save")) {
+                savefunction = true;
                 System.out.println("Test");
-            }else if(save != null && save.equals("New / Load Project")){
+            } else if (save != null && save.equals("New / Load Project")) {
                 request.getSession().setAttribute("productName", null);
                 request.getSession().setAttribute("projectName", null);
-                request.getSession().setAttribute("operator1", new ArrayList<String>());
-                request.getSession().setAttribute("operator2", new ArrayList<String>());
-                request.getSession().setAttribute("operator3", new ArrayList<String>());
-                request.getSession().setAttribute("operator4", new ArrayList<String>());
+                request.getSession().setAttribute("operator1", null);
+                request.getSession().setAttribute("operator2", null);
+                request.getSession().setAttribute("operator3", null);
+                request.getSession().setAttribute("operator4", null);
                 System.out.println("LOL");
                 response.sendRedirect("QADIM.jsp");
                 return;
             }
-            if(savefunction){
+            if (savefunction) {
+                //check if project is an existing project user is editing
+                if (QaDIMDAO.retrieveProject(projectName) != null) {
+                    QadimProduct product = QaDIMDAO.retrieveProject(projectName);
+                    if (product.getProductName().equals(productName)) {
+                        projectExists = true;
+                        productId = product.getProductID();
+                    }
+                }
+
                 ArrayList<Operator> oList = new ArrayList<>();
-                
-                if(operator1!=null){
+
+                if (operator1 != null) {
                     String operatorName = operator1.get(0);
                     String comOperatorName = operator1.get(1);
                     String verb = operator1.get(2);
@@ -88,12 +99,12 @@ public class MainValidation extends HttpServlet {
                     String comDimension = operator1.get(9);
                     int operatorid = 1;
                     int operatorid2 = 2;
-                    Operator operatorOne = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension, productId, operatorid );
-                    Operator operatorTwo = new Operator(userId, comOperatorName, comVerb, comGeneralPhrase, comSpecificPhrase, comDimension, productId, operatorid2 );
+                    Operator operatorOne = new Operator(userId, operatorName, verb, generalPhrase, specificPhrase, dimension, productId, operatorid);
+                    Operator operatorTwo = new Operator(userId, comOperatorName, comVerb, comGeneralPhrase, comSpecificPhrase, comDimension, productId, operatorid2);
                     oList.add(operatorOne);
                     oList.add(operatorTwo);
                 }
-                if(operator2!=null){
+                if (operator2 != null) {
                     String operatorName2 = operator2.get(0);
                     String comOperatorName2 = operator2.get(1);
                     String verb2 = operator2.get(2);
@@ -106,12 +117,12 @@ public class MainValidation extends HttpServlet {
                     String comDimension2 = operator2.get(9);
                     int operatorid3 = 3;
                     int operatorid4 = 4;
-                    Operator operatorThree = new Operator(userId, operatorName2, verb2, generalPhrase2, specificPhrase2, dimension2, productId, operatorid3 );
-                    Operator operatorFour = new Operator(userId, comOperatorName2, comVerb2, comGeneralPhrase2, comSpecificPhrase2, comDimension2, productId, operatorid4 );
+                    Operator operatorThree = new Operator(userId, operatorName2, verb2, generalPhrase2, specificPhrase2, dimension2, productId, operatorid3);
+                    Operator operatorFour = new Operator(userId, comOperatorName2, comVerb2, comGeneralPhrase2, comSpecificPhrase2, comDimension2, productId, operatorid4);
                     oList.add(operatorThree);
                     oList.add(operatorFour);
                 }
-                if(operator3!=null){
+                if (operator3 != null) {
                     String operatorName3 = operator3.get(0);
                     String comOperatorName3 = operator3.get(1);
                     String verb3 = operator3.get(2);
@@ -124,12 +135,12 @@ public class MainValidation extends HttpServlet {
                     String comDimension3 = operator3.get(9);
                     int operatorid5 = 5;
                     int operatorid6 = 6;
-                    Operator operatorFive = new Operator(userId, operatorName3, verb3, generalPhrase3, specificPhrase3, dimension3, productId, operatorid5 );
-                    Operator operatorSix = new Operator(userId, comOperatorName3, comVerb3, comGeneralPhrase3, comSpecificPhrase3, comDimension3, productId, operatorid6 );
+                    Operator operatorFive = new Operator(userId, operatorName3, verb3, generalPhrase3, specificPhrase3, dimension3, productId, operatorid5);
+                    Operator operatorSix = new Operator(userId, comOperatorName3, comVerb3, comGeneralPhrase3, comSpecificPhrase3, comDimension3, productId, operatorid6);
                     oList.add(operatorFive);
                     oList.add(operatorSix);
                 }
-                if(operator4!=null){
+                if (operator4 != null) {
                     String operatorName4 = operator4.get(0);
                     String comOperatorName4 = operator4.get(1);
                     String verb4 = operator4.get(2);
@@ -142,17 +153,34 @@ public class MainValidation extends HttpServlet {
                     String comDimension4 = operator4.get(9);
                     int operatorid7 = 7;
                     int operatorid8 = 8;
-                    Operator operatorSeven = new Operator(userId, operatorName4, verb4, generalPhrase4, specificPhrase4, dimension4, productId, operatorid7 );
-                    Operator operatorEight = new Operator(userId, comOperatorName4, comVerb4, comGeneralPhrase4, comSpecificPhrase4, comDimension4, productId, operatorid8 );
+                    Operator operatorSeven = new Operator(userId, operatorName4, verb4, generalPhrase4, specificPhrase4, dimension4, productId, operatorid7);
+                    Operator operatorEight = new Operator(userId, comOperatorName4, comVerb4, comGeneralPhrase4, comSpecificPhrase4, comDimension4, productId, operatorid8);
                     oList.add(operatorSeven);
                     oList.add(operatorEight);
                 }
-                QaDIMDAO.createQadimProduct(userId, projectName, productId, productName);
-                QaDIMDAO.upload(oList);
-                Excel.Export(userId, oList, projectName, productName, productId);
+                if (!projectExists) {
+                    QaDIMDAO.createQadimProduct(userId, projectName, productId, productName);
+                    QaDIMDAO.upload(oList);
+                    Excel.Export(userId, oList, projectName, productName, productId);
+                } else {
+                    ArrayList<Operator> currentOperators = QaDIMDAO.retrieveOperators(productId, userId);
+                    int sizeOfCurrentOperators = currentOperators.size();
+                    if(sizeOfCurrentOperators == 8 && sizeOfCurrentOperators == oList.size()) {
+                        QaDIMDAO.update(oList, userId);
+                        Excel.delete(userId, projectName);
+                        Excel.Export(userId, oList, projectName, save, size);
+                    } else{
+                        QaDIMDAO.deleteOperators(productId, userId);
+                        QaDIMDAO.upload(oList);
+                        Excel.delete(userId, projectName);
+                        Excel.Export(userId, oList, projectName, save, size);
+                    } 
+                        
+                }
                 response.sendRedirect("index.jsp");
+
             }
-    
+
         }
     }
 

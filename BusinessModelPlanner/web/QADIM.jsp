@@ -1,3 +1,6 @@
+<%@page import="com.app.model.QaDIMDAO"%>
+<%@page import="com.app.model.entity.QadimProduct"%>
+<%@page import="com.app.model.entity.Demographics"%>
 <%@page import="java.util.ArrayList"%>
 <%
     String error = (String) request.getAttribute("errorMsg");
@@ -156,21 +159,23 @@
         </div>
         <div class="box" id="loadProject">
             <span class="boxtitle" >QADIM: Load Project</span>
-            <form method="GET" action="QADIMPageUpdate" target="_parent">
+            
+            <%
+                Demographics user = (Demographics)session.getAttribute("user");
+                String userid = user.getUserid();
+                ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
+            %>
+            <form method="GET" action="LoadManager" target="_parent">
 
                 <p>Choose your project to load
                     <select class="projectList" name="projectList">
-                        <option selected> Apples</option>
-                        <option> Bananas</option>
-                        <option> Oranges</option>
-                        <option> Watermelon</option>
-                        <option> Kiwi</option>
-                        <option> Cantaloupe</option>
-                        <option> Strawberries</option>
+                        <%for(QadimProduct q: product){%>
+                            <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
+                        <% }%>  
                     </select>
                 </p>
                 <p> 
-                    <input type="submit" name="submit" value="Load"><BR>
+            <input type="submit" name="submit" value="Load"><BR>
                     
         <%
 
