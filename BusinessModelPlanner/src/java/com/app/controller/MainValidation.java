@@ -168,12 +168,12 @@ public class MainValidation extends HttpServlet {
                     if(sizeOfCurrentOperators == 8 && sizeOfCurrentOperators == oList.size()) {
                         QaDIMDAO.update(oList, userId);
                         Excel.delete(userId, projectName);
-                        Excel.Export(userId, oList, projectName, save, size);
+                        Excel.Export(userId, oList, projectName, productName, productId);
                     } else{
                         QaDIMDAO.deleteOperators(productId, userId);
                         QaDIMDAO.upload(oList);
                         Excel.delete(userId, projectName);
-                        Excel.Export(userId, oList, projectName, save, size);
+                        Excel.Export(userId, oList, projectName, productName, productId);
                     } 
                         
                 }

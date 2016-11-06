@@ -23,7 +23,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author jiaohui.lee.2014
  */
 public class Excel {
-    public static void Export(String userId, ArrayList<Operator> oList, String projectName, String pName, int pId){
+    public static void Export(String userId, ArrayList<Operator> oList, String projectName, String prodName, int prodId){
             try{
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
                 String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
@@ -60,12 +60,12 @@ public class Excel {
                 Cell product = row.createCell(1);
                 product.setCellValue("Product");
                 Cell productName = row.createCell(2);
-                productName.setCellValue(pName);
+                productName.setCellValue(prodName);
                 Row row2 = sheet1.createRow(2);
                 Cell productID = row2.createCell(1);
                 productID.setCellValue("Product ID");
                 Cell id = row2.createCell(2);
-                id.setCellValue(Integer.toString(pId));
+                id.setCellValue(Integer.toString(prodId));
                 
                 //Creates Table Headers
                 Row row3 = sheet1.createRow(3);
@@ -172,7 +172,7 @@ public class Excel {
         }
     }
      
-     public static void edit(String userId, ArrayList<Operator> oList, String projectName, String pName, int pId){
+     public static void edit(String userId, ArrayList<Operator> oList, String projectName, String prodName, int prodId){
          try{
                 if(!oList.isEmpty()){
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
@@ -211,12 +211,12 @@ public class Excel {
                 Cell product = row.createCell(1);
                 product.setCellValue("Product");
                 Cell productName = row.createCell(2);
-                productName.setCellValue(pName);
+                productName.setCellValue(prodName);
                 Row row2 = sheet1.createRow(2);
                 Cell productID = row2.createCell(1);
                 productID.setCellValue("Product ID");
                 Cell id = row2.createCell(2);
-                id.setCellValue(Integer.toString(pId));
+                id.setCellValue(Integer.toString(prodId));
                 
                 //Creates Table Headers
                 Row row3 = sheet1.createRow(3);
