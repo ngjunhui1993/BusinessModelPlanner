@@ -155,15 +155,14 @@ public class Excel {
             Sheet sheet = workbook.getSheet(projectName);
             int index = 0;
             if(sheet != null)   {
-                workbook.write(output);
-                output.close();
                 index = workbook.getSheetIndex(sheet);
-                if(index == 0){
+                int noOfSheets = workbook.getNumberOfSheets();
+                if(index == 0 && noOfSheets==1){
                     boolean delete = file.delete();
                 }else{
-                workbook.removeSheetAt(index);
-                workbook.write(output);
-            output.close();
+                    workbook.removeSheetAt(index);
+                    workbook.write(output);
+                    output.close();
                 }
             }
             
