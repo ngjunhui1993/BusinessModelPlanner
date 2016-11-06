@@ -6,6 +6,7 @@
 package com.app.controller;
 
 import com.app.model.QaDIMDAO;
+import com.app.model.entity.Demographics;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "QADIMPageUpdate", urlPatterns = {"/QADIMPageUpdate"})
@@ -36,9 +38,11 @@ public class QADIMPageUpdate extends HttpServlet {
             QaDIMDAO qadimDAO = new QaDIMDAO();
             //Retrieve operator & complimentary operator
             String projectName = request.getParameter("projectName");
-            
+            HttpSession session = request.getSession(true);
+            Demographics loggedIn = (Demographics)session.getAttribute("user");
+            String loggedInUserID = loggedIn.getUserid();
             //if project name exists, prompt user to input another name.
-            if(qadimDAO.retrieveProject(projectName) != null) {
+            if(qadimDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
                 request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
                 RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
                 rd.forward(request, response);

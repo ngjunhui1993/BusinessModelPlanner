@@ -99,6 +99,30 @@ public class QaDIMDAO {
         return product;
     }
     
+    public static QadimProduct retrieveProjectByUser (String projectName, String userid) {
+        QadimProduct product= null;
+       // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from qadim_product where project_name = ? and userid =?";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, projectName);
+            preStmt.setString(2, userid);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                product = new QadimProduct(rs.getString("userid"), rs.getString("project_name"), Integer.parseInt(rs.getString("product_id")), rs.getString("product_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return product;
+    }
+    
     public static ArrayList<Operator> retrieveOperators (int productId, String userId){
         ArrayList<Operator> oList= null;
        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));

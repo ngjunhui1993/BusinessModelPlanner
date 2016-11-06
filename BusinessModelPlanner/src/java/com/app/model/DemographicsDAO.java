@@ -48,21 +48,14 @@ public class DemographicsDAO {
 
         try{
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT name, password, email, userid FROM "+demographicsCSV);
-
+            pstmt = conn.prepareStatement("SELECT name, password, email, userid FROM demographics");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 String name = rs.getString(1);
                 String password = rs.getString(2);
                 String email = rs.getString(3);
-
-                int n = email.indexOf('@');
-                int end = email.indexOf(".",n);
-                String school = email.substring((n+1),end);
-                String userId = rs.getString(4);
-                String year = email.substring((n-4),n);
-
-                Demographics u = new Demographics(name,password,email,userId);
+                String userid = rs.getString(4);
+                Demographics u = new Demographics(name,password,email,userid);
                 userList.put(email,u);
             }	
         }catch(SQLException e){

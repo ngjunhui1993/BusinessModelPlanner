@@ -62,12 +62,12 @@ public class Register extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;                
+            } else {
+                name = name.trim();
+                email = email.trim();
+                password = password.trim();
             }
-            
-            name = name.trim();
-            email = email.trim();
-            password = password.trim();
-            
+           
             DemographicsDAO demoDAO = new DemographicsDAO();
             if (email == "" || password == "" || name == "") {
                 request.setAttribute("errorMsg", "Please do not leave any fields blank");
