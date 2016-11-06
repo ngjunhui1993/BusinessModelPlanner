@@ -5,9 +5,11 @@
  */
 package com.app.controller;
 
+import com.app.model.QaDIMDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +33,18 @@ public class QADIMPageUpdate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            QaDIMDAO qadimDAO = new QaDIMDAO();
             //Retrieve operator & complimentary operator
             String projectName = request.getParameter("projectName");
+            
+            //if project name exists, prompt user to input another name.
+            if(qadimDAO.retrieveProject(projectName) != null) {
+                request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
+                RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+                rd.forward(request, response);
+                return;
+            }
+                
             String productName = request.getParameter("productName");
             String operatorName = request.getParameter("operatorName");
             String comOperatorName = request.getParameter("comOperatorName");
