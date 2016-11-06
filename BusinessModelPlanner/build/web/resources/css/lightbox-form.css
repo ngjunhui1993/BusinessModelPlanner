@@ -1,0 +1,103 @@
+
+.shadowing
+{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #CCA;
+    z-index:10;
+    opacity:0.5;
+    filter: alpha(opacity=50);
+}
+
+
+.box 
+{
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    padding: 48px;
+    margin:0;
+    border: 1px solid black;
+    background-color: white;
+    z-index:101;
+    overflow: auto;
+}
+
+.box2
+{
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 650px;
+    height: 523px;
+    text-align: center;
+    padding: 30px;
+    margin:0;
+    border: 1px solid black;
+    background-color: white;
+    z-index:101;
+    overflow: auto;
+}
+
+.box2 table
+{
+    width: 600px;
+}
+
+.box2 table td
+{
+    padding-bottom: 15px;
+    width: 600px;
+}
+
+.box2 form input
+{
+    width: 250px;
+}
+
+.boxtitle
+{
+    position:absolute;
+    float:center;
+    top:0;
+    left:0;
+    width:598px;
+    height:45px;
+    padding:0;
+    padding-top:4px;
+    left-padding:8px;
+    margin:0;
+    border-bottom:4px solid #3CF;
+    background-color: #09c;
+    color:white;
+    text-align:center;
+}
+
+.boxtitle2
+{
+    position:absolute;
+    float:center;
+    top:0;
+    left:0;
+    width:648px;
+    height:45px;
+    padding:0;
+    padding-top:4px;
+    left-padding:8px;
+    margin:0;
+    border-bottom:4px solid #79ff4d;
+    background-color: #2db300;
+    color:white;
+    text-align:center;
+}
+
+
