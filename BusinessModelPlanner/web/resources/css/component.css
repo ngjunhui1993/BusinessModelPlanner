@@ -1,7 +1,7 @@
 /* General styles for all menus */
 .cbp-spmenu {
-	background: #47a3da;
-	position: fixed;
+	background: #7099bf;
+        position: fixed;
 }
 
 .cbp-spmenu h3 {
@@ -10,7 +10,7 @@
 	padding: 20px;
 	margin: 0;
 	font-weight: 300;
-	background: #0d77b6;
+	background: #2f4d6a;
 }
 
 
