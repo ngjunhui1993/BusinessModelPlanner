@@ -55,13 +55,23 @@ public class MainValidation extends HttpServlet {
                 productId = 1;
             }
             
-            String Save = request.getParameter("Save");
+            String save = request.getParameter("Save");
             boolean savefunction = false;
             //Checks which button was clicked
-            if(Save!=null){
+            if(save != null && save.equals("Save")){
                 savefunction=true;
+                System.out.println("Test");
+            }else if(save != null && save.equals("New / Load Project")){
+                request.getSession().setAttribute("productName", null);
+                request.getSession().setAttribute("projectName", null);
+                request.getSession().setAttribute("operator1", new ArrayList<String>());
+                request.getSession().setAttribute("operator2", new ArrayList<String>());
+                request.getSession().setAttribute("operator3", new ArrayList<String>());
+                request.getSession().setAttribute("operator4", new ArrayList<String>());
+                System.out.println("LOL");
+                response.sendRedirect("QADIM.jsp");
+                return;
             }
-            
             if(savefunction){
                 ArrayList<Operator> oList = new ArrayList<>();
                 

@@ -42,6 +42,22 @@ function openStep1Box(fadin)
   }  	
 }
 
+function openLoadProjectBox(fadin)
+{
+  var box = document.getElementById('loadProject');
+  document.getElementById('shadowing').style.display='block';
+  
+  if(fadin)
+  {
+	 gradient("loadProject", 0);
+	 fadein("loadProject");
+  }
+  else
+  { 	
+    box.style.display='block';
+  }  	
+}
+
 
 function openEditProductBox(fadin)
 {
@@ -153,6 +169,7 @@ function openAddOperatorBox(fadin)
 function closebox()
 {
    document.getElementById('addOperator').style.display='none';
+   document.getElementById('loadProject').style.display='none';
    document.getElementById('step1').style.display='none';
    document.getElementById('editProduct').style.display='none';
    document.getElementById('shadowing').style.display='none';

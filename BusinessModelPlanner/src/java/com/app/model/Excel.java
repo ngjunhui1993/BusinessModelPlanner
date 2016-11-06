@@ -27,7 +27,7 @@ public class Excel {
             try{
                 if(!oList.isEmpty()){
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
-                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
+                String localDir = new String("C:/Users/farkill/Desktop/" + userId +".xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
@@ -178,7 +178,7 @@ public class Excel {
          try{
                 if(!oList.isEmpty()){
                 String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR")+ userId +".xls");
-                String localDir = new String("C:/Users/jiaohui.lee.2014/Desktop/" + userId +".xls");
+                String localDir = new String("C:/Users/farkill/Desktop/" + userId +".xls");
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file= null ;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){

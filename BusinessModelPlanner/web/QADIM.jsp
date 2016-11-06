@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%
+    String error = (String) request.getAttribute("errorMsg");
     String productName = null;
     String projectName = null;
     ArrayList<String> operator1 = new ArrayList<String>();
@@ -131,7 +132,7 @@
         <!--END ABOUT SECTION-->
         <div class="shadowing" id="shadowing"></div>
         <div class="box" id="step1">
-            <span class="boxtitle" >QADIM: Step 1</span>
+            <span class="boxtitle" >QADIM: New Project</span>
             <form method="GET" action="QADIMPageUpdate" target="_parent">
 
                 <p>What is your Project Name?
@@ -143,7 +144,35 @@
                     <input type="submit" name="submit"><BR>
                     
         <%
-            String error = (String) request.getAttribute("errorMsg");
+
+            if (error != null) {
+                out.println("<font color='red'>" + error + "</br><br> </font>");
+            }
+
+        %>
+                    <input type="button" name="cancel" value="Cancel" onClick="closebox()">
+                </p>
+            </form>
+        </div>
+        <div class="box" id="loadProject">
+            <span class="boxtitle" >QADIM: Load Project</span>
+            <form method="GET" action="QADIMPageUpdate" target="_parent">
+
+                <p>Choose your project to load
+                    <select class="projectList" name="projectList">
+                        <option selected> Apples</option>
+                        <option> Bananas</option>
+                        <option> Oranges</option>
+                        <option> Watermelon</option>
+                        <option> Kiwi</option>
+                        <option> Cantaloupe</option>
+                        <option> Strawberries</option>
+                    </select>
+                </p>
+                <p> 
+                    <input type="submit" name="submit" value="Load"><BR>
+                    
+        <%
 
             if (error != null) {
                 out.println("<font color='red'>" + error + "</br><br> </font>");
@@ -530,12 +559,13 @@
                     <h3><%=projectName%></h3>
                     <form action="MainValidation" >
                         <!--<button class="QADIMSaveButton" >Save</button>-->
+                        <input type="submit" value="New / Load Project" name="Save"/>
                         <input type="submit" value="Save" name="Save"/>
                     </form>
                     <button class="QADIMAddOperatorButton" onClick="openAddOperatorBox(1)">Add Operator</button>
                     <!--<button class="QADIMExportButton" >Export</button>-->
                     <br>
-                    <a href="FileDownload">File Download </a> <br />
+                    <a class="downloadButton" href="FileDownload"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a> <br />
                     <table class="QADIM-Table">
                         <tr>
                             <td id="operator1">
@@ -647,8 +677,8 @@
                     </table>
                     <% } else { %>
 
-                    <button class="QADIMStartButton" onClick="openStep1Box(1)">Click Here To Begin</button>
-
+                    <button class="QADIMStartButton" onClick="openStep1Box(1)">New Project</button>
+                    <button class="QADIMLoadButton" onClick="openLoadProjectBox(1)">Load Project</button>
                     <% }%>
                 </div>
             </div>
