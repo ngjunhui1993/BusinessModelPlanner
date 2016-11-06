@@ -79,7 +79,7 @@ public class Excel {
                 SpecificPhraseheader.setCellValue("Specific Phrase");
                 Cell Dimensionheader = row3.createCell(5);
                 Dimensionheader.setCellValue("Dimension");
-                
+                int operatorid = 1;
                 if(oList!=null){
                     for (int i = 0; i<oList.size(); i++){
 
@@ -89,7 +89,6 @@ public class Excel {
                         String generalPhrase = operator.getGeneralPhrase();
                         String specificPhrase = operator.getSpecificPhrase();
                         String dimensions = operator.getDimensions();
-                        int operatorid = operator.getOperatorId();
                         int columnCounter = 0;
                         int rowCounter = 4;
                         Row rowTable = sheet1.createRow(i+rowCounter);
@@ -99,8 +98,9 @@ public class Excel {
                             columnCounter++;
                         }else{
                             Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                            operatorNumberTable.setCellValue("Operator"+operatorid+"'");
+                            operatorNumberTable.setCellValue("Operator"+operatorid+" Compliment");
                             columnCounter++;
+                            operatorid++;
                         }
                         Cell operatorNameTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                         operatorNameTable.setCellValue(operatorName);
@@ -117,7 +117,6 @@ public class Excel {
                         Cell dimensionHeader= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                         dimensionHeader.setCellValue(dimensions);
                         columnCounter++;
-
                         }
                 }
                 workbook.write(output);
@@ -232,7 +231,7 @@ public class Excel {
                 Cell Dimensionheader = row3.createCell(5);
                 Dimensionheader.setCellValue("Dimension");
                 
-                
+                int operatorid = 1;
                 for (int i = 0; i<oList.size(); i++){
                     
                     Operator operator = oList.get(i);
@@ -241,7 +240,6 @@ public class Excel {
                     String generalPhrase = operator.getGeneralPhrase();
                     String specificPhrase = operator.getSpecificPhrase();
                     String dimensions = operator.getDimensions();
-                    int operatorid = operator.getOperatorId();
                     int columnCounter = 0;
                     int rowCounter = 4;
                     Row rowTable = sheet1.createRow(i+rowCounter);
@@ -251,8 +249,9 @@ public class Excel {
                         columnCounter++;
                     }else{
                         Cell operatorNumberTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                        operatorNumberTable.setCellValue("Operator"+operatorid+"'");
+                        operatorNumberTable.setCellValue("Operator"+operatorid+" Compliment");
                         columnCounter++;
+                        operatorid++;
                     }
                     Cell operatorNameTable= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     operatorNameTable.setCellValue(operatorName);
@@ -269,7 +268,6 @@ public class Excel {
                     Cell dimensionHeader= rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     dimensionHeader.setCellValue(dimensions);
                     columnCounter++;
-                    
                 
                 }
                 workbook.write(output);
