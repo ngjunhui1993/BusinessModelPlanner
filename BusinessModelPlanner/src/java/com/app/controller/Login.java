@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
            String password = request.getParameter("password");
            String admin = "admin";
            //retrieve username
+           request.getSession().invalidate();
            Demographics user = DemographicsDAO.retrieveByUsername(username);
             if(user != null && user.authenticate(password)){
                 request.getSession().setAttribute("user", user);
