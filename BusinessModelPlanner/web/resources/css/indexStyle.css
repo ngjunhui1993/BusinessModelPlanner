@@ -38,6 +38,10 @@ margin: auto;
 left: 0;
 right: -150px;
 }
+
+.webapplogo{
+    width: 200px;
+}
 .pad-adjust {
     padding-top: 5px; 
     padding-bottom: 5px;

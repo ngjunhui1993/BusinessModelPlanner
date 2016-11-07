@@ -1,4 +1,4 @@
-<%@page import="com.app.model.entity.Demographics"%>
+<%@page import="com.app.model.entity.Demographics" %>
 <%
     Demographics user = (Demographics)session.getAttribute("user");
     if(user== null ){

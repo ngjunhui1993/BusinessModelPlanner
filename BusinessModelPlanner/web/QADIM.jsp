@@ -2,6 +2,7 @@
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page import="java.util.ArrayList"%>
+<%@include file="Protect.jsp"%>
 <%
     String error = (String) request.getAttribute("errorMsg");
     String productName = null;
@@ -45,7 +46,7 @@
         <!--[if IE]>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <![endif]-->
-        <title>Happy6Friends - FYP</title>
+        <title>SIMHA - Business Model Planner Tool</title>
         <!--REQUIRED STYLE SHEETS-->
         <!-- BOOTSTRAP CORE STYLE CSS -->
         <link href="resources/css/bootstrap.css" rel="stylesheet" />
@@ -78,7 +79,7 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-8 col-md-offset-2 ">
-                        <h1 class="pad-adjust"><i class="fa fa-plus faa-pulse animated"></i>FYP</h1>
+                        <h1 class="pad-adjust"><a href="index.jsp"><img class="webapplogo" src="resources/image/webapplogo.png" alt="SIMHA"></a></h1>
                     </div>
                 </div>
             </div>
@@ -102,12 +103,10 @@
 
         <!--RIGHT SLIDE MENU-->
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-            <h3>SOCIAL</h3>
-            <a href="#">MY SOCIAL PRESENCE</a>
-            <a href="#"><i class="fa fa-facebook fa-3x"></i>Facebook</a>
-            <a href="#"><i class="fa fa-twitter fa-3x"></i>Twitter</a>
-            <a href="#"><i class="fa fa-linkedin fa-3x"></i>Linked In</a>
-            <a href="#"><i class="fa fa-google-plus fa-3x"></i>Google Plus</a>
+            <h3>Settings</h3>
+            <a href="#">Profile Options :</a>
+            <a href="#"><i class="fa fa-pencil fa-2x"></i>Edit Profile</a>
+            <a href="Logout"> <i class="fa fa-sign-out fa-2x"></i>Log Out</a>
         </nav>
 
         <div class="row" id="icon-right">
@@ -161,7 +160,6 @@
             <span class="boxtitle" >QADIM: Load Project</span>
             
             <%
-                Demographics user = (Demographics)session.getAttribute("user");
                 String userid = user.getUserid();
                 ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
             %>
@@ -561,16 +559,16 @@
                     <%
                         if (productName != null) {
                     %>
-                    <h3><%=projectName%></h3>
+                    <h3><b><%=projectName%></b></h3>
                     <form action="MainValidation" >
                         <!--<button class="QADIMSaveButton" >Save</button>-->
-                        <input type="submit" value="New / Load Project" name="Save"/>
-                        <input type="submit" value="Save" name="Save"/>
+                        <input class="newLoadButton" type="submit" value="New / Load Project" name="Save"/>
+                        <input class="saveButton" type="submit" value="Save" name="Save"/>
                     </form>
                     <button class="QADIMAddOperatorButton" onClick="openAddOperatorBox(1)">Add Operator</button>
                     <!--<button class="QADIMExportButton" >Export</button>-->
                     <br>
-                    <a class="downloadButton" href="FileDownload"><i class="fa fa-download fa-3x" aria-hidden="true"></i></a> <br />
+                    <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br />
                     <table class="QADIM-Table">
                         <tr>
                             <td id="operator1">
@@ -692,7 +690,7 @@
 
         <!--FOOTER SECTION -->
         <div class="for-full-back color-bg-one" id="footer">
-            2014 www.yourdomain.com | All Right Reserved | Terms | Policies | Licenses 
+            SIMHA Business Model Planner Tool | All Right Reserved
 
         </div>
         <!-- END FOOTER SECTION -->

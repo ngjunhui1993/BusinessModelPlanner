@@ -5565,6 +5565,10 @@ button.close {
 .carousel-caption .btn {
   text-shadow: none;
 }
+
+.allBody {
+    min-height: 310px;
+}
 @media screen and (min-width: 768px) {
   .carousel-control .glyphicon-chevron-left,
   .carousel-control .glyphicon-chevron-right,

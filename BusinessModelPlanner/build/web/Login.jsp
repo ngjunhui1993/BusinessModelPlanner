@@ -13,13 +13,16 @@
 %>
 <html>
     <head>
-        <title>FYP</title>
+        <title>SIMHA - Business Model Planner Tool</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <link rel="stylesheet" href="resources/css/style.css">
     </head>
 
     <body>
         <div class="login-page">
+            <div class="companylogo">
+                <img class="webapplogo" src="resources/image/webapplogo.png" alt="SIMHA">
+            </div>
             <div class="form">
               <form class="register-form" method="post" action="Register">
                 <input type="text" placeholder="name" name="name"/>
