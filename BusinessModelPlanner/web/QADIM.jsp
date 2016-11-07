@@ -565,9 +565,15 @@
                         <input class="newLoadButton" type="submit" value="New / Load Project" name="Save"/>
                         <input class="saveButton" type="submit" value="Save" name="Save"/>
                     </form>
+                    <%
+                    if (operator1.isEmpty() || operator2.isEmpty() || operator3.isEmpty() || operator4.isEmpty()) {
+                    %>
                     <button class="QADIMAddOperatorButton" onClick="openAddOperatorBox(1)">Add Operator</button>
                     <!--<button class="QADIMExportButton" >Export</button>-->
                     <br>
+                    <%
+                    }
+                    %>
                     <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br />
                     <table class="QADIM-Table">
                         <tr>
