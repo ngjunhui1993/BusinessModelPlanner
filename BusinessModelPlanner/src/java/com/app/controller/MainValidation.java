@@ -176,7 +176,7 @@ public class MainValidation extends HttpServlet {
                     } 
                         
                 }
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("QADIM.jsp");
 
             }
 
