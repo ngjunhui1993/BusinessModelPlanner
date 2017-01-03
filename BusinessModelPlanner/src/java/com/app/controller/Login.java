@@ -7,6 +7,7 @@ package com.app.controller;
 
 import com.app.model.entity.Demographics;
 import com.app.model.DemographicsDAO;
+import com.app.model.Encryption;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -49,10 +50,14 @@ public class Login extends HttpServlet {
            //retrieve the password sent from the form
            String password = request.getParameter("password");
            String admin = "admin";
-           //retrieve username
+           //invalidates the previous session objects
            request.getSession().invalidate();
+           //retrieve username from DB
            Demographics user = DemographicsDAO.retrieveByUsername(username);
-            if(user != null && user.authenticate(password)){
+           //Encrypts password with SHA1
+           Encryption encryption = new Encryption();
+           String encryptedPassword = encryption.SHA1(password);
+            if(user != null && user.authenticate(encryptedPassword)){
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("index.jsp");
                 return;
