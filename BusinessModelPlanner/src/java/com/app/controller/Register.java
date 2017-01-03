@@ -8,6 +8,7 @@ package com.app.controller;
 import com.app.model.ConnectionManager;
 import com.app.model.entity.Demographics;
 import com.app.model.DemographicsDAO;
+import com.app.model.Encryption;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -94,8 +95,10 @@ public class Register extends HttpServlet {
                 return;
             }
             
+            Encryption encryption = new Encryption();
             String userid = email;
-            String success = demoDAO.register(name, password, email, userid);
+            String encryptedPassword = encryption.SHA1(password);
+            String success = demoDAO.register(name, encryptedPassword, email, userid);
             request.setAttribute("successMsg", success);
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);
