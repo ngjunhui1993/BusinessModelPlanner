@@ -15,13 +15,23 @@ public class BOSProduct {
     private int productID ;
     private String productName;
     private String type;
+    private Double budget;
 
-    public BOSProduct(String userID, String projectName, int productID, String productName, String type) {
+    public BOSProduct(String userID, String projectName, int productID, String productName, String type, Double budget) {
         this.userID = userID;
         this.projectName = projectName;
         this.productID = productID;
         this.productName = productName;
         this.type = type;
+        this.budget = budget;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
 
     public String getUserID() {

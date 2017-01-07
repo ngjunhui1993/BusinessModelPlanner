@@ -27,9 +27,11 @@
                 </select>
                 Please Enter Name
                 <input type="text" name="productName" maxlength="60" size="60">
+                Budget of Product/Service:
+                <input type="text" name="budget" maxlength="60" size="60">
             </p>
             <p> 
-                <input type="submit" name="submit"><BR>
+                <input type="submit" name="createProject" value="Create New Project!"><BR>
         </form>
 
         <%

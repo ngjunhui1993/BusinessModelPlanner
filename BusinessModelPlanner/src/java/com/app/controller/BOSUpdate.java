@@ -39,39 +39,68 @@ public class BOSUpdate extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         BOSDAO bosDAO = new BOSDAO();
-        String projectName = request.getParameter("projectName");
-        String productName = request.getParameter("productName");
-        HttpSession session = request.getSession(true);
-        Demographics loggedIn = (Demographics) session.getAttribute("user");
-       // System.out.println(loggedIn.getUserid());
-        String loggedInUser = loggedIn.getUserid();
+        if (request.getParameter("createProject") != null) {
+            String projectName = request.getParameter("projectName");
+            String productName = request.getParameter("productName");
+            String budget = request.getParameter("budget");
+            Double budgetDouble = 0.0;
+            HttpSession session = request.getSession(true);
+            Demographics loggedIn = (Demographics) session.getAttribute("user");
+            // System.out.println(loggedIn.getUserid());
+            String loggedInUser = loggedIn.getUserid();
 
-        if (projectName == null || projectName.equals("") || productName == null || productName.equals("")) {
-            request.setAttribute("errorMsg", "Please do not leave any blanks.");
-            RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategy.jsp");
-            rd.forward(request, response);
-            return;
-        }
+            if (projectName == null || projectName.equals("") || productName == null || productName.equals("") || budget == null || budget.equals("")) {
+                request.setAttribute("errorMsg", "Please do not leave any blanks.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategy.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            try {
+                budgetDouble = Double.parseDouble(budget);
+            } catch (NumberFormatException ex) {
+                request.setAttribute("errorMsg", "Budget should be digit.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategy.jsp");
+                rd.forward(request, response);
+                return;
+            }
 
 //if project name exists, prompt user to input another name.
-        if (bosDAO.retrieveProjectByUser(projectName, loggedInUser) != null) {
-            request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
-            RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategy.jsp");
-            rd.forward(request, response);
-            return;
-        } else {
-            int noOfProj = bosDAO.retrieveNoOfProjects(loggedInUser);
-            int productID = noOfProj + 1;
-            String prodOrServ = request.getParameter("type");
-            if(prodOrServ.equals("typeProduct")) {
-                prodOrServ = "product";
+            if (bosDAO.retrieveProjectByUser(projectName, loggedInUser) != null) {
+                request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategy.jsp");
+                rd.forward(request, response);
+                return;
             } else {
-                prodOrServ = "service";
+                int noOfProj = bosDAO.retrieveNoOfProjects(loggedInUser);
+                int productID = noOfProj + 1;
+                String prodOrServ = request.getParameter("type");
+                if (prodOrServ.equals("typeProduct")) {
+                    prodOrServ = "product";
+                } else {
+                    prodOrServ = "service";
+                }
+                bosDAO.createProject(loggedInUser, projectName, productID, productName, prodOrServ, budgetDouble);
+                session.setAttribute("bosProjectName", projectName);
+                response.sendRedirect("BlueOceanStrategyObject.jsp?projectName=" + projectName + "&productID=" + productID + "&productName=" + productName + "&type=" + prodOrServ + "&budget=" + budgetDouble);
+
             }
-            bosDAO.createProject(loggedInUser, projectName, productID, productName, prodOrServ);
-            response.sendRedirect("BlueOceanStrategyObject.jsp");
-            
         }
+        
+        if(request.getParameter("addOperator") != null) {
+            String operatorName = request.getParameter("operatorName");
+            String weight = request.getParameter("weight");
+            String maxValue = request.getParameter("maxValue");
+            String costPerUnit = request.getParameter("costPerUnit");
+            
+            if(operatorName == null || operatorName.equals("") || weight == null || weight.equals("") || maxValue == null || maxValue.equals("") || costPerUnit == null || costPerUnit.equals("")) {
+                request.setAttribute("errorMsg", "Please do not leave any blanks.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                rd.forward(request, response);
+                return;
+            }
+        }
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
