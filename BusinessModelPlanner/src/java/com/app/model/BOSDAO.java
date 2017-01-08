@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -54,7 +55,7 @@ public class BOSDAO {
             pstmt.setInt(3, productID);
             pstmt.setString(4, productName);
             pstmt.setString(5, type);
-            pstmt.setDouble(6,budget);
+            pstmt.setDouble(6, budget);
             pstmt.execute();
             conn.commit();
 
@@ -88,10 +89,10 @@ public class BOSDAO {
         }
         return count;
     }
-    
-    public static BOSProduct retrieveProject (String projectName){
-        BOSProduct product= null;
-       // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
+
+    public static BOSProduct retrieveProject(String projectName) {
+        BOSProduct product = null;
+        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
         Connection conn = null;
         PreparedStatement preStmt = null;
         ResultSet rs = null;
@@ -111,5 +112,59 @@ public class BOSDAO {
         }
         return product;
     }
-    
+
+    public static ArrayList<String> retrieveOperators(String projectName, String userid) {
+        ArrayList<String> operatorList = new ArrayList<String>();
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select operator_name from blueoceanstrategy_operator where project_name = ? & userid = ?;";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, projectName);
+            preStmt.setString(2, userid);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                operatorList.add(rs.getString("operator_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return operatorList;
+    }
+
+    public static void createOperator(String userid, String projectName, int productID, int operatorID, String operatorName, int maxValue, int weight, int perUnitValue, int originalValue, int newValue, String originalProductName) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "INSERT into blueoceanstrategy_operator(userid, project_name, product_id, operator_id, operator_name, weight, max_value, per_unit_value, original_value, new_value, original_product_name) values(? , ? , ? , ?, ?, ?, ?, ?, ?, ?, ?); ";
+        try {
+            conn = ConnectionManager.getConnection();
+            conn.setAutoCommit(false);
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userid);
+            pstmt.setString(2, projectName);
+            pstmt.setInt(3, productID);
+            pstmt.setInt(4, operatorID);
+            pstmt.setString(5, operatorName);
+            pstmt.setInt(6, weight);
+            pstmt.setInt(7, maxValue);
+            pstmt.setInt(8, perUnitValue);
+            pstmt.setInt(9, originalValue);
+            pstmt.setInt(10, newValue);
+            pstmt.setString(11, originalProductName);
+            pstmt.execute();
+            conn.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, pstmt, rs);
+
+        }
+    }
+
 }

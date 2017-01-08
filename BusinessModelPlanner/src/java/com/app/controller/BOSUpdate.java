@@ -6,9 +6,11 @@
 package com.app.controller;
 
 import com.app.model.BOSDAO;
+import com.app.model.entity.BOSProduct;
 import com.app.model.entity.Demographics;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +39,10 @@ public class BOSUpdate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(true);
+        Demographics loggedIn = (Demographics) session.getAttribute("user");
+        // System.out.println(loggedIn.getUserid());
+        String loggedInUser = loggedIn.getUserid();
 
         BOSDAO bosDAO = new BOSDAO();
         if (request.getParameter("createProject") != null) {
@@ -44,10 +50,6 @@ public class BOSUpdate extends HttpServlet {
             String productName = request.getParameter("productName");
             String budget = request.getParameter("budget");
             Double budgetDouble = 0.0;
-            HttpSession session = request.getSession(true);
-            Demographics loggedIn = (Demographics) session.getAttribute("user");
-            // System.out.println(loggedIn.getUserid());
-            String loggedInUser = loggedIn.getUserid();
 
             if (projectName == null || projectName.equals("") || productName == null || productName.equals("") || budget == null || budget.equals("")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
@@ -86,19 +88,67 @@ public class BOSUpdate extends HttpServlet {
 
             }
         }
-        
-        if(request.getParameter("addOperator") != null) {
+
+        if (request.getParameter("addOperator") != null) {
+            String projectName = (String) session.getAttribute("bosProjectName");
             String operatorName = request.getParameter("operatorName");
             String weight = request.getParameter("weight");
             String maxValue = request.getParameter("maxValue");
             String costPerUnit = request.getParameter("costPerUnit");
-            
-            if(operatorName == null || operatorName.equals("") || weight == null || weight.equals("") || maxValue == null || maxValue.equals("") || costPerUnit == null || costPerUnit.equals("")) {
+            int weightInt = 0;
+            int maxValueInt = 0;
+            int costPerUnitInt = 0;
+
+            if (operatorName == null || operatorName.equals("") || weight == null || weight.equals("") || maxValue == null || maxValue.equals("") || costPerUnit == null || costPerUnit.equals("")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
                 RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
                 rd.forward(request, response);
                 return;
             }
+
+            //check if operator already exists.
+            ArrayList<String> operators = bosDAO.retrieveOperators(projectName, loggedInUser);
+            boolean operatorExist = false;
+            for (String op : operators) {
+                if (op.equals(operatorName)) {
+                    operatorExist = true;
+                }
+            }
+
+            if (operatorExist) {
+                request.setAttribute("errorMsg", "Operator exists.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            try {
+                weightInt = Integer.parseInt(weight);
+                maxValueInt = Integer.parseInt(maxValue);
+                costPerUnitInt = Integer.parseInt(costPerUnit);
+            } catch (NumberFormatException ex) {
+                request.setAttribute("errorMsg", "Please only input Integer digit for weight, max value and cost per unit increase.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            BOSProduct product = bosDAO.retrieveProjectByUser(projectName, loggedInUser);
+            int numOfOperators = 0;
+            if (operators != null) {
+                numOfOperators = operators.size();
+            }
+            int operatorID = numOfOperators + 1;
+            try {
+                bosDAO.createOperator(loggedInUser, projectName, product.getProductID(), operatorID, operatorName, weightInt, maxValueInt, costPerUnitInt, 0, 0, "");
+            } catch (Exception ex) {
+                request.setAttribute("errorMsg", "Database error. Please try again.");
+                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            response.sendRedirect("BlueOceanStrategyObject.jsp");
+            
         }
 
     }
