@@ -101,7 +101,7 @@ public class BOSUpdate extends HttpServlet {
 
             if (operatorName == null || operatorName.equals("") || weight == null || weight.equals("") || maxValue == null || maxValue.equals("") || costPerUnit == null || costPerUnit.equals("")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
-                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("AddingBosOperator.jsp");
                 rd.forward(request, response);
                 return;
             }
@@ -117,7 +117,7 @@ public class BOSUpdate extends HttpServlet {
 
             if (operatorExist) {
                 request.setAttribute("errorMsg", "Operator exists.");
-                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("AddingBosOperator.jsp");
                 rd.forward(request, response);
                 return;
             }
@@ -128,10 +128,31 @@ public class BOSUpdate extends HttpServlet {
                 costPerUnitInt = Integer.parseInt(costPerUnit);
             } catch (NumberFormatException ex) {
                 request.setAttribute("errorMsg", "Please only input Integer digit for weight, max value and cost per unit increase.");
-                RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("AddingBosOperator.jsp");
                 rd.forward(request, response);
                 return;
             }
+            
+            if(weightInt < 0 || weightInt > 5) {
+                request.setAttribute("errorMsg", "Weight should be within 0 to 5.");
+                RequestDispatcher rd = request.getRequestDispatcher("AddingBosOperator.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            if(maxValueInt < costPerUnitInt) {
+                request.setAttribute("errorMsg", "Cost per unit value should not be more than max value.");
+                RequestDispatcher rd = request.getRequestDispatcher("AddingBosOperator.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            if(maxValueInt % costPerUnitInt != 0) {
+                while(maxValueInt % costPerUnitInt != 0) {
+                    costPerUnitInt++;
+                }
+            }
+            
             BOSProduct product = bosDAO.retrieveProjectByUser(projectName, loggedInUser);
             int numOfOperators = 0;
             if (operators != null) {

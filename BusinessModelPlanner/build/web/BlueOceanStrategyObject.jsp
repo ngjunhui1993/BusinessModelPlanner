@@ -4,6 +4,9 @@
     Author     : Dell
 --%>
 
+<%@page import="com.app.model.entity.BOSOperator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.app.model.entity.Demographics"%>
 <%@page import="com.app.model.entity.BOSProduct"%>
 <%@page import="com.app.model.BOSDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,29 +19,33 @@
     <body>
         <%
             BOSDAO bosDAO = new BOSDAO();
-            String projectName = (String)session.getAttribute("bosProjectName");
+            String projectName = (String) session.getAttribute("bosProjectName");
+            Demographics loggedIn = (Demographics) session.getAttribute("user");
+            // System.out.println(loggedIn.getUserid());
+            String loggedInUser = loggedIn.getUserid();
             BOSProduct product = bosDAO.retrieveProject(projectName);
-            String error = (String)request.getAttribute("errorMsg");
         %>
-        <form action="BOSUpdate">
-            <p>
-                Project Name: <%=product.getProjectName()%><BR>
-                Product Name: <%=product.getProductName()%><BR>
-                Type: <%=product.getType()%><BR>
-                Budget: <%=product.getBudget()%><BR>
-            </p>
-            <p>
-                Operator Name: <input type="text" name="operatorName"><BR>
-                Weight (0-5): <input type="text" name="weight"><BR>
-                Maximum Value: <input type="text" name="maxValue"><BR>
-                Incremental Cost Per Unit Increase: <input type="text" name="costPerUnit"><BR>                  
-                <input type="submit" name="addOperator" value="Add An Operator">
-            </p>
-        </form>
+        <p>
+            Project Name: <%=product.getProjectName()%><BR>
+            Product Name: <%=product.getProductName()%><BR>
+            Type: <%=product.getType()%><BR>
+            Budget: <%=product.getBudget()%><BR>
+        </p>
+        <p>
+
+            <a href="AddingBosOperator.jsp">Add an Operator</a><BR>
+            current num of operators: <%=bosDAO.retrieveOperators(projectName, loggedInUser).size()%>
+        </p>
         <%
-            
-            if (error != null) {
-                out.println("<font color='red'>" + error + "</br><br> </font>");
+
+            ArrayList<BOSOperator> currentOperatorsAccordingToWeight = bosDAO.getAllOperatorsAccordingToWeight(projectName, loggedInUser);
+            if (currentOperatorsAccordingToWeight != null) {
+                out.println("Current Operators: <BR>");
+                for (BOSOperator op : currentOperatorsAccordingToWeight) {
+                    out.println(op.getOperatorID() + ". " + op.getOperatorName() + ", " + op.getWeight());
+                }
+            } else {
+                out.println("no record leh.");
             }
 
         %>
