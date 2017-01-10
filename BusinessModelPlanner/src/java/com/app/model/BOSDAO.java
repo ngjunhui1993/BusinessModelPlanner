@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  *
@@ -164,7 +166,7 @@ public class BOSDAO {
 
     
     
-    public void createOperator(String userid, String projectName, int productID, int operatorID, String operatorName, int maxValue, int weight, int perUnitValue, int originalValue, int newValue, String originalProductName) {
+    public void createOperator(String userid, String projectName, int productID, int operatorID, String operatorName, int weight, int maxValue, int perUnitValue, int originalValue, int newValue, String originalProductName) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -195,15 +197,15 @@ public class BOSDAO {
         }
     }
     
-    public ArrayList<BOSOperator> getAllOperatorsAccordingToWeight(String userid, String projectName) {
-        ArrayList<BOSOperator> operatorList= new ArrayList<BOSOperator>();
+    public HashMap<Integer, ArrayList<BOSOperator>> getAllOperators(String userid, String projectName) {
+        HashMap<Integer, ArrayList<BOSOperator>> operatorMap= new HashMap<>();
        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
         Connection conn = null;
         PreparedStatement preStmt = null;
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from blueoceanstrategy_operator where userid = ? and project_name =? ORDER by weight DESC";
+            String sql = "select * from blueoceanstrategy_operator where userid = ? and project_name =?";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, userid);
             preStmt.setString(2, projectName);
@@ -221,14 +223,27 @@ public class BOSDAO {
                 int newValue = rs.getInt("new_value");
                 String originalName = rs.getString("original_product_name");
                 BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, maxValue, weight, perUnitValue, originalValue, newValue, originalName);
-                operatorList.add(operator);
+                //see weight take out value add in put back 
+                
+                if(operatorMap.containsKey(weight)) {
+                    ArrayList<BOSOperator> update = operatorMap.get(weight);
+                    update.add(operator);
+                    operatorMap.put(weight, update);
+                } else {
+                    ArrayList<BOSOperator> newList = new ArrayList<>();
+                    newList.add(operator);
+                    operatorMap.put(weight, newList);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionManager.close(conn, preStmt, rs);
         }
-        return operatorList;
-    }
+        return operatorMap;
+    } 
+    
+
+    
 
 }
