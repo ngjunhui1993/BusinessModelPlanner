@@ -124,5 +124,9 @@ public class BOSOperator {
         this.originalProductName = originalProductName;
     }
     
+    public int getNumberOfUnits() {
+        int units = maxValue/perUnitValue;
+        return units;
+    }
     
 }

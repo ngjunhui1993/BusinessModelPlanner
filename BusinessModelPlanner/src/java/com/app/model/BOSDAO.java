@@ -267,6 +267,29 @@ public class BOSDAO {
         return operatorMap;
     } 
     
+    //add original value
+    
+    public void addOriginalValue(String projectName, int operatorID, String userID, int originalValue) {
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "update blueoceanstrategy_operator set original_value = ? where project_name = ? and operator_id = ? and userid = ?;";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, originalValue);
+            preStmt.setString(2, projectName);
+            preStmt.setInt(3, operatorID);
+            preStmt.setString(4, userID);
+            
+            preStmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+    }
 
     
 
