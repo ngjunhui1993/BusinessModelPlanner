@@ -22,7 +22,7 @@ public class BOSOperator {
     private int newValue;
     private String originalProductName;
 
-    public BOSOperator(String userid, String projectName, int productID, int operatorID, String operatorName, int maxValue, int weight, int perUnitValue, int originalValue, int newValue, String originalProductName) {
+    public BOSOperator(String userid, String projectName, int productID, int operatorID, String operatorName, int weight, int maxValue, int perUnitValue, int originalValue, int newValue, String originalProductName) {
         this.userid = userid;
         this.projectName = projectName;
         this.productID = productID;

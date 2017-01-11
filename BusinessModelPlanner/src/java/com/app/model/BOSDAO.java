@@ -43,6 +43,30 @@ public class BOSDAO {
         }
         return bosProduct;
     }
+    
+        public static ArrayList<BOSProduct> retrieveAllProjectsByUser(String userid) {
+        BOSProduct bosProduct = null;
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        ArrayList<BOSProduct> projectList = new ArrayList<>();
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from blueoceanstrategy_product where userid = ?";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, userid);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                bosProduct = new BOSProduct(rs.getString("userid"), rs.getString("project_name"), Integer.parseInt(rs.getString("product_id")), rs.getString("product_name"), rs.getString("type"), rs.getDouble("budget"));
+                projectList.add(bosProduct);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return projectList;
+    }
 
     public static void createProject(String userID, String projectName, Integer productID, String productName, String type, Double budget) {
         Connection conn = null;
@@ -222,7 +246,7 @@ public class BOSDAO {
                 int originalValue = rs.getInt("original_value");
                 int newValue = rs.getInt("new_value");
                 String originalName = rs.getString("original_product_name");
-                BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, maxValue, weight, perUnitValue, originalValue, newValue, originalName);
+                BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, weight, maxValue, perUnitValue, originalValue, newValue, originalName);
                 //see weight take out value add in put back 
                 
                 if(operatorMap.containsKey(weight)) {

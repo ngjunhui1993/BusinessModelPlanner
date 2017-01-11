@@ -41,10 +41,11 @@ public class BOSUpdate extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(true);
         Demographics loggedIn = (Demographics) session.getAttribute("user");
-        // System.out.println(loggedIn.getUserid());
         String loggedInUser = loggedIn.getUserid();
 
         BOSDAO bosDAO = new BOSDAO();
+        
+        //create new project
         if (request.getParameter("createProject") != null) {
             String projectName = request.getParameter("projectName");
             String productName = request.getParameter("productName");
@@ -88,7 +89,17 @@ public class BOSUpdate extends HttpServlet {
 
             }
         }
-
+        
+        //load project
+        if(request.getParameter("loadProject") != null) {
+            String projectName = request.getParameter("existingProject");
+            BOSProduct proj = BOSDAO.retrieveProjectByUser(projectName, loggedInUser);
+            session.setAttribute("bosProjectName", projectName);
+            response.sendRedirect("BlueOceanStrategyObject.jsp");
+        }
+        
+        
+// add operator
         if (request.getParameter("addOperator") != null) {
             String projectName = (String) session.getAttribute("bosProjectName");
             String operatorName = request.getParameter("operatorName");

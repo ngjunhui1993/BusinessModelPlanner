@@ -53,6 +53,7 @@
         
           HashMap<Integer, ArrayList<BOSOperator>> operatorMap = bosDAO.getAllOperators(loggedInUser, projectName);
           if(operatorMap != null & !operatorMap.isEmpty()) {
+            //  out.println(operatorMap.keySet().iterator().next());
               out.println("<u>current operators:</u><br>");
               //out.println(operatorMap.values());
               if(operatorMap.containsKey(5)) {
