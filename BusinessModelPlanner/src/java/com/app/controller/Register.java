@@ -57,6 +57,8 @@ public class Register extends HttpServlet {
             String email = request.getParameter("email");
             //retrieve the password sent from the form
             String password = request.getParameter("password");
+            //retrieve the user type from the form
+            String type = request.getParameter("type");
             
             if(name == null || email == null || password == null) {
                 request.setAttribute("errorMsg", "Please do not leave any fields blank");
@@ -98,7 +100,7 @@ public class Register extends HttpServlet {
             Encryption encryption = new Encryption();
             String userid = email;
             String encryptedPassword = encryption.SHA1(password);
-            String success = demoDAO.register(name, encryptedPassword, email, userid);
+            String success = demoDAO.register(name, encryptedPassword, email, userid,type);
             request.setAttribute("successMsg", success);
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);
