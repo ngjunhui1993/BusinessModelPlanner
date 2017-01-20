@@ -125,7 +125,15 @@
                     </p>
                 </div>
             </div>
-
+            <%
+                if(user.getType().equals("administrator")){
+                    %>
+                    <form action="Admin.jsp">
+                        <input type="submit" value="Access Admin Page"/>
+                    </form>
+            <%
+                }
+            %>
         </div>
     </section>
     <!--END ABOUT SECTION-->
