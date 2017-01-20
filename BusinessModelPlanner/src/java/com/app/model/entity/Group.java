@@ -13,11 +13,17 @@ public class Group {
     private String course;
     private String section;
     private String instructorEmail;
+    private String password;
 
-    public Group(String course, String section, String instructorEmail) {
+    public Group(String course, String section, String instructorEmail, String password) {
         this.course = course;
         this.section = section;
         this.instructorEmail = instructorEmail;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getCourse() {
@@ -42,6 +48,10 @@ public class Group {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
