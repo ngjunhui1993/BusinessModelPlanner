@@ -39,7 +39,7 @@
               </form>
                 
               <form class="login-form" method="post" action="Login">
-                <input type="text" placeholder="username" name="username"/>
+                <input type="text" placeholder="email address" name="username"/>
                 <input type="password" placeholder="password" name="password"/>
                 <input class="btn" type="submit" id="login" value="Login »" name="submit">
                 <p class="message">
