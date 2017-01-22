@@ -62,14 +62,9 @@ public class QADIMPageUpdate extends HttpServlet {
 
             String operatorName = request.getParameter("operatorName");
             String comOperatorName = request.getParameter("comOperatorName");
-            String verb = request.getParameter("verb");
-            String comVerb = request.getParameter("comVerb");
-            String generalPhrase = request.getParameter("generalPhrase");
-            String comGeneralPhrase = request.getParameter("comGeneralPhrase");
-            String specificPhrase = request.getParameter("specificPhrase");
-            String comSpecificPhrase = request.getParameter("comSpecificPhrase");
-            String dimension = request.getParameter("dimension");
-            String comDimension = request.getParameter("comDimension");
+            String comments = request.getParameter("comments");
+            String comComments = request.getParameter("comComments");
+            
             String operator1 = request.getParameter("operator1");
             String operator2 = request.getParameter("operator2");
             String operator3 = request.getParameter("operator3");
@@ -106,14 +101,8 @@ public class QADIMPageUpdate extends HttpServlet {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 for (int i = 1; i <= 4; i++) {
                     String operatorNum = "operator" + i;
                     if (request.getSession().getAttribute(operatorNum) == null) {
@@ -125,53 +114,29 @@ public class QADIMPageUpdate extends HttpServlet {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator1", list);
             } else if (operator2 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator2", list);
             } else if (operator3 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator3", list);
             } else if (operator4 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator4", list);
             }
 

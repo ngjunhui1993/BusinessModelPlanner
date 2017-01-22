@@ -125,10 +125,7 @@ CREATE TABLE IF NOT EXISTS `qadim_operator` (
   `operator_name` varchar(100) NOT NULL,
   `product_id` int(11) NOT NULL,
   `operator_id` int(11) NOT NULL,
-  `verb` varchar(50) NOT NULL,
-  `general_phrase` varchar(100) NOT NULL,
-  `specific_phrase` varchar(100) NOT NULL,
-  `dimension` varchar(100) NOT NULL,
+  `comments` varchar(200) NOT NULL,
   PRIMARY KEY (`userid`, `product_id`, `operator_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -136,8 +133,7 @@ CREATE TABLE IF NOT EXISTS `qadim_operator` (
 -- Dumping data for table `qadim_operator`
 --
 
-INSERT INTO `qadim_operator` (`userid`, `operator_name`, `product_id`, `operator_id`, `verb`, `general_phrase`, `specific_phrase`, `dimension`) VALUES
-('gary','increase', 1, 1, 'size', 'size of shoe', 'by 50 ', 'cm');
+
 
 -- --------------------------------------------------------
 
