@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 21, 2017, 6:22:35 PM
+    Author     : KARENNZX
+*/
+
+body {
+    font-family: sans-serif;
+    font-size: 11pt;
+}
+.draggable {
+    width: 200px;
+    height: 50px;
+    background-color: #ff7373;
+    border: 1px solid #fffbd7;
+    margin-bottom:0.5em;
+    padding: 4px;
+    cursor: default;
+}
+
+.draggablee {
+    width: 200px;
+    height: 50px;
+    background-color: #ff7373;
+    border: 1px solid #fffbd7;
+    margin-bottom:0.5em;
+    padding: 4px;
+    cursor: default;
+}
+
+.active {
+    border: 2px solid #6699ff;
+}
+#droppable {
+    font-size: 14pt;
+    width: 220px;
+    height: 50px;
+}
+#droppablee {
+    font-size: 14pt;
+    width: 220px;
+    height: 50px;
+}
+#droppableHolder {
+    margin-top: 3em;
+}
+
+
