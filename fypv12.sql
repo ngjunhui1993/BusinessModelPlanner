@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `qadim_operator` (
   `operator_name` varchar(100) NOT NULL,
   `product_id` int(11) NOT NULL,
   `operator_id` int(11) NOT NULL,
-  `comments` varchar(200) NOT NULL,
+  `comments` text(1000) NOT NULL,
   PRIMARY KEY (`userid`, `product_id`, `operator_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
