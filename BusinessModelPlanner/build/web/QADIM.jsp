@@ -3,7 +3,8 @@
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="Protect.jsp"%>
-<%    String error = (String) request.getAttribute("errorMsg");
+<%    
+    String error = (String) request.getAttribute("errorMsg");
     String productName = null;
     String projectName = null;
     ArrayList<String> operator1 = new ArrayList<String>();
@@ -132,26 +133,20 @@
             </div>
         </section>
         <!--END ABOUT SECTION-->
+        
         <div class="shadowing" id="shadowing"></div>
         <div class="box" id="step1">
             <span class="boxtitle" >QADIM: New Project</span>
             <form method="GET" action="QADIMPageUpdate" target="_parent">
-
                 <p>What is your Project Name?
-                    <input type="text" name="projectName" maxlength="60" size="60">
+                    <input type="text" name="projectName" maxlength="60" size="60" required>
                     Please Enter Product Name
-                    <input type="text" name="productName" maxlength="60" size="60">
+                    <input type="text" name="productName" maxlength="60" size="60" required>
                 </p>
                 <p> 
-                    <input type="submit" name="submit"><BR>
+                    <input type="submit" name="submit">
+                    <input type="button" name="cancel" value="Cancel" onClick="closebox()"><br>
 
-                    <%
-                        if (error != null) {
-                            out.println("<font color='red'>" + error + "</br><br> </font>");
-                        }
-
-                    %>
-                    <input type="button" name="cancel" value="Cancel" onClick="closebox()">
                 </p>
             </form>
         </div>
