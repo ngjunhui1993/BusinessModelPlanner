@@ -41,9 +41,13 @@ public class QADIMPageUpdate extends HttpServlet {
             Demographics loggedIn = (Demographics) session.getAttribute("user");
             String loggedInUserID = loggedIn.getUserid();            
             String productName = request.getParameter("productName");
+            String operatorName = request.getParameter("operatorName");
+            String comOperatorName = request.getParameter("comOperatorName");
+            String comments = request.getParameter("comments");
+            String comComments = request.getParameter("comComments");
 
             //if there's any empty fields
-            if (projectName == null || projectName.equals("") || productName == null || productName.equals("")) {
+            if ((projectName == null || projectName.equals("") || productName == null || productName.equals("")) && operatorName == null) {
                 request.setAttribute("errorMsg", "Empty field(s).");
                 RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
                 rd.forward(request, response);
@@ -58,12 +62,6 @@ public class QADIMPageUpdate extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-
-
-            String operatorName = request.getParameter("operatorName");
-            String comOperatorName = request.getParameter("comOperatorName");
-            String comments = request.getParameter("comments");
-            String comComments = request.getParameter("comComments");
             
             String operator1 = request.getParameter("operator1");
             String operator2 = request.getParameter("operator2");

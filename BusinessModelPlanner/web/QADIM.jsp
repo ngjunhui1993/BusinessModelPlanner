@@ -143,7 +143,7 @@
                     <input type="text" name="productName" maxlength="60" size="60">
                 </p>
                 <p> 
-                    <input type="submit" name="newProject" value="Submit"><BR>
+                    <input type="submit" name="submit"><BR>
 
                     <%
                         if (error != null) {
@@ -283,11 +283,11 @@
                     <tr>
                         <td>
                             Comments<br/>
-                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(4)%>">
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
                             Complementary Comments<br/>
-                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(5)%>">
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>
@@ -324,11 +324,11 @@
                     <tr>
                         <td>
                             Comments<br/>
-                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(4)%>">
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
                             Complementary Comments<br/>
-                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(5)%>">
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
 
@@ -366,11 +366,11 @@
                     <tr>
                         <td>
                             Comments<br/>
-                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(4)%>">
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
                             Complementary Comments<br/>
-                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(5)%>">
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>
@@ -406,11 +406,11 @@
                     <tr>
                         <td>
                             Comments<br/>
-                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(4)%>">
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
                             Complementary Comments<br/>
-                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(5)%>">
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>

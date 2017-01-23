@@ -95,20 +95,10 @@ public class Excel {
             
             Verbheader.setCellStyle(cs);
             
-            Cell GeneralPhraseheader = row3.createCell(3);
-            GeneralPhraseheader.setCellValue("General Phrase");
+            Cell Commentsheader = row3.createCell(3);
+            Commentsheader.setCellValue("Comments");
             
-            GeneralPhraseheader.setCellStyle(cs);
-            
-            Cell SpecificPhraseheader = row3.createCell(4);
-            SpecificPhraseheader.setCellValue("Specific Phrase");
-            
-            SpecificPhraseheader.setCellStyle(cs);
-            
-            Cell Dimensionheader = row3.createCell(5);
-            Dimensionheader.setCellValue("Dimension");
-            
-            Dimensionheader.setCellStyle(cs);
+            Commentsheader.setCellStyle(cs);
             
             int operatorid = 1;
             if (oList != null) {
@@ -116,10 +106,7 @@ public class Excel {
 
                     Operator operator = oList.get(i);
                     String operatorName = operator.getOperatorName();
-                    String verb = operator.getVerb();
-                    String generalPhrase = operator.getGeneralPhrase();
-                    String specificPhrase = operator.getSpecificPhrase();
-                    String dimensions = operator.getDimensions();
+                    String comments = operator.getComments();
                     int columnCounter = 0;
                     int rowCounter = 4;
                     Row rowTable = sheet1.createRow(i + rowCounter);
@@ -143,28 +130,13 @@ public class Excel {
                     operatorNameTable.setCellStyle(cs);
                     
                     columnCounter++;
-                    Cell verbTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    verbTable.setCellValue(verb);
-                    
-                    verbTable.setCellStyle(cs);
                     
                     columnCounter++;
                     Cell generalPhraseTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    generalPhraseTable.setCellValue(generalPhrase);
+                    generalPhraseTable.setCellValue(comments);
                     
                     generalPhraseTable.setCellStyle(cs);
                     
-                    columnCounter++;
-                    Cell specificPhraseTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    specificPhraseTable.setCellValue(specificPhrase);
-                    
-                    specificPhraseTable.setCellStyle(cs);
-                    
-                    columnCounter++;
-                    Cell dimensionHeader = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    dimensionHeader.setCellValue(dimensions);
-                    
-                    dimensionHeader.setCellStyle(cs);
                     
                     columnCounter++;
                 }
@@ -273,22 +245,15 @@ public class Excel {
                 Operatorheader.setCellValue("Operator");
                 Cell Verbheader = row3.createCell(2);
                 Verbheader.setCellValue("Verb");
-                Cell GeneralPhraseheader = row3.createCell(3);
-                GeneralPhraseheader.setCellValue("General Phrase");
-                Cell SpecificPhraseheader = row3.createCell(4);
-                SpecificPhraseheader.setCellValue("Specific Phrase");
-                Cell Dimensionheader = row3.createCell(5);
-                Dimensionheader.setCellValue("Dimension");
+                Cell Commentsheader = row3.createCell(3);
+                Commentsheader.setCellValue("Comments");
 
                 int operatorid = 1;
                 for (int i = 0; i < oList.size(); i++) {
 
                     Operator operator = oList.get(i);
                     String operatorName = operator.getOperatorName();
-                    String verb = operator.getVerb();
-                    String generalPhrase = operator.getGeneralPhrase();
-                    String specificPhrase = operator.getSpecificPhrase();
-                    String dimensions = operator.getDimensions();
+                    String comments = operator.getComments();
                     int columnCounter = 0;
                     int rowCounter = 4;
                     Row rowTable = sheet1.createRow(i + rowCounter);
@@ -305,17 +270,8 @@ public class Excel {
                     Cell operatorNameTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     operatorNameTable.setCellValue(operatorName);
                     columnCounter++;
-                    Cell verbTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    verbTable.setCellValue(verb);
-                    columnCounter++;
-                    Cell generalPhraseTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    generalPhraseTable.setCellValue(generalPhrase);
-                    columnCounter++;
-                    Cell specificPhraseTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    specificPhraseTable.setCellValue(specificPhrase);
-                    columnCounter++;
-                    Cell dimensionHeader = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                    dimensionHeader.setCellValue(dimensions);
+                    Cell commentsTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                    commentsTable.setCellValue(comments);
                     columnCounter++;
 
                 }
