@@ -90,12 +90,8 @@ public class Excel {
             
             Operatorheader.setCellStyle(cs);
             
-            Cell Verbheader = row3.createCell(2);
-            Verbheader.setCellValue("Verb");
             
-            Verbheader.setCellStyle(cs);
-            
-            Cell Commentsheader = row3.createCell(3);
+            Cell Commentsheader = row3.createCell(2);
             Commentsheader.setCellValue("Comments");
             
             Commentsheader.setCellStyle(cs);
@@ -130,8 +126,7 @@ public class Excel {
                     operatorNameTable.setCellStyle(cs);
                     
                     columnCounter++;
-                    
-                    columnCounter++;
+
                     Cell generalPhraseTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     generalPhraseTable.setCellValue(comments);
                     
