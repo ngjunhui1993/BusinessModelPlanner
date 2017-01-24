@@ -1,0 +1,153 @@
+.legendContainer {
+    width: 862px;
+    height: 50px;
+    float: bottom;
+    margin: auto;
+}
+.topLabel{
+    width: 61px;
+    height: 50px;
+    float: left;
+}
+
+.legendNames{
+    width: 700px;
+    height: 50px;
+    float: left;
+    text-align: center;
+}
+
+#labels {
+    width: 61px;
+    height: 300px;
+    float:left;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#topLabel{
+    vertical-align: top;
+}
+
+#bottomLabel{
+    line-height: 545px;
+}
+
+#container {
+    width: 862px;
+    height: 302px;
+    margin: auto;
+}
+
+.factorContainer{
+    width: 862px;
+    height: 50px;
+    float: top;
+    margin: auto;
+}
+.factorName{
+    width: 50%;
+    height: 50px;
+    float: left;
+    position:relative;
+    background-color: white;
+    text-align: center;
+}
+.draggable 
+{
+    position: relative;
+    left: 50%;
+}
+
+.labelBottom{
+    width: 61px;
+    height: 50px;
+    float: left;
+}
+.factorsNames{
+    width: 700px;
+    height: 50px;
+    float: left;
+}
+#factors{
+    width: 700px;
+    border: 1px solid black;
+    height: 300px;
+    float: left;
+    overflow: hidden;
+}
+
+.box
+{
+    width:50%;
+    height:100%;
+    float:left;
+}
+
+.boxEven {
+    background:lightgray;
+    
+}
+
+.boxOdd{
+    background:#fcfdff;
+}
+
+#addBox
+{
+    width:100px;
+    height:300px;
+    float:right;
+    background:#e0e0e0;
+    position: relative;
+    cursor: hand;
+}
+
+
+#addLogo{
+    margin: 0;
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.dotA{
+    color: blue;
+    position:relative;
+    z-index: 200;
+}
+
+.dotB{
+    color: green;
+    position:relative;
+    z-index: 200;
+}
+
+
+.line {
+     position: absolute;
+    width: 3px;
+    z-index: 100;
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -o-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left;
+}
+
+.lineA {
+    background-color: blue;
+}
+
+.lineB {
+    background-color: green;
+}
+
+#sortable{
+    margin: 0;
+    padding: 0;
+    
+}

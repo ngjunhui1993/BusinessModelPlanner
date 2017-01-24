@@ -138,9 +138,9 @@
             <form method="GET" action="QADIMPageUpdate" target="_parent">
 
                 <p>What is your Project Name?
-                    <input type="text" name="projectName" maxlength="60" size="60">
+                    <input type="text" name="projectName" maxlength="60" size="60" required>
                     Please Enter Product Name
-                    <input type="text" name="productName" maxlength="60" size="60">
+                    <input type="text" name="productName" maxlength="60" size="60" required>
                 </p>
                 <p> 
                     <input type="submit" name="submit"><BR>
