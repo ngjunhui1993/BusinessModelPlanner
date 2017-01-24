@@ -62,8 +62,8 @@
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
         <h3>Models</h3>
         <a href="#">Select Model:</a>
-        <a href="#QADIM.jsp"></i>QADIM</a>
-        <a href="#BOSC.jsp"></i>Blue Ocean Strategy</a>
+        <a href="QADIM.jsp"></i>QADIM</a>
+        <a href="BOSC.jsp"></i>Blue Ocean Strategy</a>
         <a href="#services-sec"></i>Business Model Canvas</a>
     </nav>
 

@@ -16,7 +16,7 @@
                             <a href="QADIM.jsp" class="btn btn-danger btn-lg head-btn-one">QADIM</a> 
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-6">
-                            <a href="BlueOceanStrategy.jsp" class="btn btn-primary btn-lg">Blue Ocean Strategy</a>
+                            <a href="BOSC.jsp" class="btn btn-primary btn-lg">Blue Ocean Strategy</a>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-6">
                             <a href="BusinessModelCanvas" class="btn btn-success btn-lg">Business Model Canvas</a>
