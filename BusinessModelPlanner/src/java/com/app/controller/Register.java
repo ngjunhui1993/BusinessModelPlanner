@@ -58,7 +58,8 @@ public class Register extends HttpServlet {
             //retrieve the password sent from the form
             String password = request.getParameter("password");
             //retrieve the user type from the form
-            String type = request.getParameter("type");
+            //String type = request.getParameter("type");
+            String type = "student";
             
             if(name == null || email == null || password == null) {
                 request.setAttribute("errorMsg", "Please do not leave any fields blank");
