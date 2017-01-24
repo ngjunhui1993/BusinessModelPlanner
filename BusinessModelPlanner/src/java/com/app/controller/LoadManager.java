@@ -57,76 +57,40 @@ public class LoadManager extends HttpServlet {
             int noOfOperator = oList.size();
             
             String OperatorName = null;
-            String verb = null;
-            String GeneralPhrase = null;
-            String SpecificPhrase = null;
-            String Dimension = null;
+            String comments = null;
             String comOperatorName = null;
-            String comVerb = null;
-            String comGeneralPhrase = null;
-            String comSpecificPhrase = null;
-            String comDimension = null;;
+            String comComments = null;
 
             for (int i=0; i <noOfOperator; i++){
                 if(i%2==0){
                     OperatorName = oList.get(i).getOperatorName();
-                    verb = oList.get(i).getVerb();
-                    GeneralPhrase = oList.get(i).getGeneralPhrase();
-                    SpecificPhrase = oList.get(i).getSpecificPhrase();
-                    Dimension = oList.get(i).getDimensions();
+                    comments = oList.get(i).getComments();
                 }else{
                     comOperatorName = oList.get(i).getOperatorName();
-                    comVerb = oList.get(i).getVerb();
-                    comGeneralPhrase = oList.get(i).getGeneralPhrase();
-                    comSpecificPhrase = oList.get(i).getGeneralPhrase();
-                    comDimension =oList.get(i).getDimensions();
+                    comComments = oList.get(i).getComments();
                     if(i == 1){
                         operator1.add(OperatorName);
                         operator1.add(comOperatorName);
-                        operator1.add(verb);
-                        operator1.add(comVerb);
-                        operator1.add(GeneralPhrase);
-                        operator1.add(comGeneralPhrase);
-                        operator1.add(SpecificPhrase);
-                        operator1.add(comSpecificPhrase);
-                        operator1.add(Dimension);
-                        operator1.add(comDimension);
+                        operator1.add(comments);
+                        operator1.add(comComments);
                         request.getSession().setAttribute("operator1", operator1);
                     }else if (i ==3){
                         operator2.add(OperatorName);
                         operator2.add(comOperatorName);
-                        operator2.add(verb);
-                        operator2.add(comVerb);
-                        operator2.add(GeneralPhrase);
-                        operator2.add(comGeneralPhrase);
-                        operator2.add(SpecificPhrase);
-                        operator2.add(comSpecificPhrase);
-                        operator2.add(Dimension);
-                        operator2.add(comDimension);
+                        operator2.add(comments);
+                        operator2.add(comComments);
                         request.getSession().setAttribute("operator2", operator2);
                     }else if (i == 5){
                         operator3.add(OperatorName);
                         operator3.add(comOperatorName);
-                        operator3.add(verb);
-                        operator3.add(comVerb);
-                        operator3.add(GeneralPhrase);
-                        operator3.add(comGeneralPhrase);
-                        operator3.add(SpecificPhrase);
-                        operator3.add(comSpecificPhrase);
-                        operator3.add(Dimension);
-                        operator3.add(comDimension);
+                        operator3.add(comments);
+                        operator3.add(comComments);
                         request.getSession().setAttribute("operator3", operator3);
                     }else if(i== 7){
                         operator4.add(OperatorName);
                         operator4.add(comOperatorName);
-                        operator4.add(verb);
-                        operator4.add(comVerb);
-                        operator4.add(GeneralPhrase);
-                        operator4.add(comGeneralPhrase);
-                        operator4.add(SpecificPhrase);
-                        operator4.add(comSpecificPhrase);
-                        operator4.add(Dimension);
-                        operator4.add(comDimension);
+                        operator4.add(comments);
+                        operator4.add(comComments);
                         request.getSession().setAttribute("operator4", operator4);
                     }
                 }

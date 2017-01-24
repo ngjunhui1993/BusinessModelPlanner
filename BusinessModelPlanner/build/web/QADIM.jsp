@@ -3,8 +3,7 @@
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="Protect.jsp"%>
-<%
-    String error = (String) request.getAttribute("errorMsg");
+<%    String error = (String) request.getAttribute("errorMsg");
     String productName = null;
     String projectName = null;
     ArrayList<String> operator1 = new ArrayList<String>();
@@ -71,6 +70,7 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        <link href="resources/css/dragndrop.css" rel="stylesheet" />
     </head>
     <body class="cbp-spmenu-push">
 
@@ -144,44 +144,43 @@
                 </p>
                 <p> 
                     <input type="submit" name="submit"><BR>
-                    
-        <%
 
-            if (error != null) {
-                out.println("<font color='red'>" + error + "</br><br> </font>");
-            }
+                    <%
+                        if (error != null) {
+                            out.println("<font color='red'>" + error + "</br><br> </font>");
+                        }
 
-        %>
+                    %>
                     <input type="button" name="cancel" value="Cancel" onClick="closebox()">
                 </p>
             </form>
         </div>
+
         <div class="box" id="loadProject">
             <span class="boxtitle" >QADIM: Load Project</span>
-            
-            <%
-                String userid = user.getUserid();
+
+            <%                String userid = user.getUserid();
                 ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
             %>
             <form method="GET" action="LoadManager" target="_parent">
 
                 <p>Choose your project to load
                     <select class="projectList" name="projectList">
-                        <%for(QadimProduct q: product){%>
-                            <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
+                        <%for (QadimProduct q : product) {%>
+                        <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
                         <% }%>  
                     </select>
                 </p>
                 <p> 
-            <input type="submit" name="submit" value="Load"><BR>
-                    
-        <%
+                    <input type="submit" name="submit" value="Load"><BR>
 
-            if (error != null) {
-                out.println("<font color='red'>" + error + "</br><br> </font>");
-            }
+                    <%
 
-        %>
+                        if (error != null) {
+                            out.println("<font color='red'>" + error + "</br><br> </font>");
+                        }
+
+                    %>
                     <input type="button" name="cancel" value="Cancel" onClick="closebox()">
                 </p>
             </form>
@@ -211,57 +210,50 @@
                 <table>
                     <tr>
                         <td>
-                            Operator Name<br/>
-                            <input type="text" name="operatorName" maxlength="60" size="60">
+                            <div class="draggable">Add</div>
+                            <div class="draggable">Remove</div>
+                            <div class="draggable">Raise</div>
+                            <div class="draggable">Reduce</div>
+                            <div class="draggable">Combine</div>
+                            <div class="draggable">Separate</div>
                         </td>
                         <td>
-                            Complementary Operator Name<br/>
-                            <input type="text" name="comOperatorName" maxlength="60" size="60">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Enter Verb<br/>
-                            <input type="text" name="verb" maxlength="60" size="60">
-                        </td>
-                        <td>
-                            Enter Complementary Verb<br/>
-                            <input type="text" name="comVerb" maxlength="60" size="60">
+                            <div class="draggablee">Add</div>
+                            <div class="draggablee">Remove</div>
+                            <div class="draggablee">Raise</div>
+                            <div class="draggablee">Reduce</div>
+                            <div class="draggablee">Combine</div>
+                            <div class="draggablee">Separate</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            General Phrase<br/>
-                            <input type="text" name="generalPhrase" maxlength="60" size="60">
+                            <div id="droppableHolder">
+                                Drag desired operator here:<br />
+                                <br />
+                                <input type="text" name="operatorName" id="droppable" />
+                            </div>
                         </td>
                         <td>
-                            Complementary General Phrase<br/>
-                            <input type="text" name="comGeneralPhrase" maxlength="60" size="60">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Specific Phrase<br/>
-                            <input type="text" name="specificPhrase" maxlength="60" size="60">
-                        </td>
-                        <td>
-                            Complementary Specific Phrase<br/>
-                            <input type="text" name="comSpecificPhrase" maxlength="60" size="60">
+                            <div id="droppableHolder">
+                                Drag desired operator here:<br />
+                                <br />
+                                <input type="text" name="comOperatorName" id="droppablee" />
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Dimension<br/>
-                            <input type="text" name="dimension" maxlength="60" size="60">
+                            Comments<br/>
+                            <input type="text" name="comments" maxlength="60" size="60">
                         </td>
                         <td>
-                            Complementary Dimension<br/>
-                            <input type="text" name="comDimension" maxlength="60" size="60">
+                            Comments<br/>
+                            <input type="text" name="comComments" maxlength="60" size="60">
                         </td>
                     </tr>
                     <input type="hidden" name="addOperatorCheck" value="">
                 </table>
-                </p>
                 <p> 
                     <input type="submit" name="submit">
                     <input type="button" name="cancel" value="Cancel" onClick="closebox()">
@@ -290,42 +282,12 @@
                     </tr>
                     <tr>
                         <td>
-                            Enter Verb<br/>
-                            <input type="text" name="verb" maxlength="60" size="60" value="<%=operator1.get(2)%>">
+                            Comments<br/>
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
-                            Enter Complementary Verb<br/>
-                            <input type="text" name="comVerb" maxlength="60" size="60" value="<%=operator1.get(3)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            General Phrase<br/>
-                            <input type="text" name="generalPhrase" maxlength="60" size="60" value="<%=operator1.get(4)%>">
-                        </td>
-                        <td>
-                            Complementary General Phrase<br/>
-                            <input type="text" name="comGeneralPhrase" maxlength="60" size="60" value="<%=operator1.get(5)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Specific Phrase<br/>
-                            <input type="text" name="specificPhrase" maxlength="60" size="60" value="<%=operator1.get(6)%>">
-                        </td>
-                        <td>
-                            Complementary Specific Phrase<br/>
-                            <input type="text" name="comSpecificPhrase" maxlength="60" size="60" value="<%=operator1.get(7)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dimension<br/>
-                            <input type="text" name="dimension" maxlength="60" size="60" value="<%=operator1.get(8)%>">
-                        </td>
-                        <td>
-                            Complementary Dimension<br/>
-                            <input type="text" name="comDimension" maxlength="60" size="60" value="<%=operator1.get(9)%>">
+                            Complementary Comments<br/>
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>
@@ -361,44 +323,15 @@
                     </tr>
                     <tr>
                         <td>
-                            Enter Verb<br/>
-                            <input type="text" name="verb" maxlength="60" size="60" value="<%=operator2.get(2)%>">
+                            Comments<br/>
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
-                            Enter Complementary Verb<br/>
-                            <input type="text" name="comVerb" maxlength="60" size="60" value="<%=operator2.get(3)%>">
+                            Complementary Comments<br/>
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            General Phrase<br/>
-                            <input type="text" name="generalPhrase" maxlength="60" size="60" value="<%=operator2.get(4)%>">
-                        </td>
-                        <td>
-                            Complementary General Phrase<br/>
-                            <input type="text" name="comGeneralPhrase" maxlength="60" size="60" value="<%=operator2.get(5)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Specific Phrase<br/>
-                            <input type="text" name="specificPhrase" maxlength="60" size="60" value="<%=operator2.get(6)%>">
-                        </td>
-                        <td>
-                            Complementary Specific Phrase<br/>
-                            <input type="text" name="comSpecificPhrase" maxlength="60" size="60" value="<%=operator2.get(7)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dimension<br/>
-                            <input type="text" name="dimension" maxlength="60" size="60" value="<%=operator2.get(8)%>">
-                        </td>
-                        <td>
-                            Complementary Dimension<br/>
-                            <input type="text" name="comDimension" maxlength="60" size="60" value="<%=operator2.get(9)%>">
-                        </td>
-                    </tr>
+
                 </table>
                 </p>
                 <p>
@@ -432,42 +365,12 @@
                     </tr>
                     <tr>
                         <td>
-                            Enter Verb<br/>
-                            <input type="text" name="verb" maxlength="60" size="60" value="<%=operator3.get(2)%>">
+                            Comments<br/>
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
-                            Enter Complementary Verb<br/>
-                            <input type="text" name="comVerb" maxlength="60" size="60" value="<%=operator3.get(3)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            General Phrase<br/>
-                            <input type="text" name="generalPhrase" maxlength="60" size="60" value="<%=operator3.get(4)%>">
-                        </td>
-                        <td>
-                            Complementary General Phrase<br/>
-                            <input type="text" name="comGeneralPhrase" maxlength="60" size="60" value="<%=operator3.get(5)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Specific Phrase<br/>
-                            <input type="text" name="specificPhrase" maxlength="60" size="60" value="<%=operator3.get(6)%>">
-                        </td>
-                        <td>
-                            Complementary Specific Phrase<br/>
-                            <input type="text" name="comSpecificPhrase" maxlength="60" size="60" value="<%=operator3.get(7)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dimension<br/>
-                            <input type="text" name="dimension" maxlength="60" size="60" value="<%=operator3.get(8)%>">
-                        </td>
-                        <td>
-                            Complementary Dimension<br/>
-                            <input type="text" name="comDimension" maxlength="60" size="60" value="<%=operator3.get(9)%>">
+                            Complementary Comments<br/>
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>
@@ -502,42 +405,12 @@
                     </tr>
                     <tr>
                         <td>
-                            Enter Verb<br/>
-                            <input type="text" name="verb" maxlength="60" size="60" value="<%=operator4.get(2)%>">
+                            Comments<br/>
+                            <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
                         </td>
                         <td>
-                            Enter Complementary Verb<br/>
-                            <input type="text" name="comVerb" maxlength="60" size="60" value="<%=operator4.get(3)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            General Phrase<br/>
-                            <input type="text" name="generalPhrase" maxlength="60" size="60" value="<%=operator4.get(4)%>">
-                        </td>
-                        <td>
-                            Complementary General Phrase<br/>
-                            <input type="text" name="comGeneralPhrase" maxlength="60" size="60" value="<%=operator4.get(5)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Specific Phrase<br/>
-                            <input type="text" name="specificPhrase" maxlength="60" size="60" value="<%=operator4.get(6)%>">
-                        </td>
-                        <td>
-                            Complementary Specific Phrase<br/>
-                            <input type="text" name="comSpecificPhrase" maxlength="60" size="60" value="<%=operator4.get(7)%>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dimension<br/>
-                            <input type="text" name="dimension" maxlength="60" size="60" value="<%=operator4.get(8)%>">
-                        </td>
-                        <td>
-                            Complementary Dimension<br/>
-                            <input type="text" name="comDimension" maxlength="60" size="60" value="<%=operator4.get(9)%>">
+                            Complementary Comments<br/>
+                            <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
                         </td>
                     </tr>
                 </table>
@@ -566,13 +439,13 @@
                         <input class="saveButton" type="submit" value="Save" name="Save"/>
                     </form>
                     <%
-                    if (operator1.isEmpty() || operator2.isEmpty() || operator3.isEmpty() || operator4.isEmpty()) {
+                        if (operator1.isEmpty() || operator2.isEmpty() || operator3.isEmpty() || operator4.isEmpty()) {
                     %>
                     <button class="QADIMAddOperatorButton" onClick="openAddOperatorBox(1)">Add Operator</button>
                     <!--<button class="QADIMExportButton" >Export</button>-->
                     <br>
                     <%
-                    }
+                        }
                     %>
                     <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br />
                     <table class="QADIM-Table">
@@ -715,6 +588,10 @@
         <script src="resources/js/custom.js"></script>
         <!-- LIGHTBOX SCRIPTS -->
         <script src="resources/js/lightbox-form.js" type="text/javascript"></script>
-        
+        <!--SCRIPTS FOR DRAGGABLE-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+        <script src="resources/js/dragndrop.js"></script>
+
     </body>
 </html>

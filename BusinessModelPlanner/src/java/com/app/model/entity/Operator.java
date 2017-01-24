@@ -13,48 +13,24 @@ package com.app.model.entity;
 public class Operator {
     private String userid;
     private String operatorName;
-    private String verb;
-    private String generalPhrase;
-    private String specificPhrase;
-    private String dimensions;
     private int productId;
     private int operatorId;
+    private String comments;
 
-    public Operator(String userid, String operatorName, String verb, String generalPhrase, String specificPhrase, String dimensions, int productId, int operatorId) {
+    public Operator(String userid, String operatorName, int productId, int operatorId, String comments) {
         this.userid = userid;
         this.operatorName = operatorName;
-        this.verb = verb;
-        this.generalPhrase = generalPhrase;
-        this.specificPhrase = specificPhrase;
-        this.dimensions = dimensions;
         this.productId = productId;
         this.operatorId = operatorId;
-    }
-
-
-
-    public String getOperatorName() {
-        return operatorName;
-    }
-
-    public String getVerb() {
-        return verb;
+        this.comments = comments;
     }
 
     public String getUserid() {
         return userid;
     }
 
-    public String getGeneralPhrase() {
-        return generalPhrase;
-    }
-
-    public String getSpecificPhrase() {
-        return specificPhrase;
-    }
-
-    public String getDimensions() {
-        return dimensions;
+    public String getOperatorName() {
+        return operatorName;
     }
 
     public int getProductId() {
@@ -65,20 +41,16 @@ public class Operator {
         return operatorId;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     public void setOperatorName(String operatorName) {
         this.operatorName = operatorName;
-    }
-
-    public void setVerb(String verb) {
-        this.verb = verb;
-    }
-
-    public void setSpecificPhrase(String specificPhrase) {
-        this.specificPhrase = specificPhrase;
-    }
-
-    public void setDimensions(String dimensions) {
-        this.dimensions = dimensions;
     }
 
     public void setProductId(int productId) {
@@ -89,12 +61,8 @@ public class Operator {
         this.operatorId = operatorId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
-    public void setGeneralPhrase(String generalPhrase) {
-        this.generalPhrase = generalPhrase;
-    }
-    
 }

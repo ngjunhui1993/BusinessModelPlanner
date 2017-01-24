@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet(name = "QADIMPageUpdate", urlPatterns = {"/QADIMPageUpdate"})
 public class QADIMPageUpdate extends HttpServlet {
 
@@ -39,132 +38,106 @@ public class QADIMPageUpdate extends HttpServlet {
             //Retrieve operator & complimentary operator
             String projectName = request.getParameter("projectName");
             HttpSession session = request.getSession(true);
-            Demographics loggedIn = (Demographics)session.getAttribute("user");
-            String loggedInUserID = loggedIn.getUserid();
+            Demographics loggedIn = (Demographics) session.getAttribute("user");
+            String loggedInUserID = loggedIn.getUserid();            
+            String productName = request.getParameter("productName");
+            String operatorName = request.getParameter("operatorName");
+            String comOperatorName = request.getParameter("comOperatorName");
+            String comments = request.getParameter("comments");
+            String comComments = request.getParameter("comComments");
+
+            //if there's any empty fields
+            if ((projectName == null || projectName.equals("") || productName == null || productName.equals("")) && operatorName == null) {
+                request.setAttribute("errorMsg", "Empty field(s).");
+                RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+
             //if project name exists, prompt user to input another name.
-            if(qadimDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
+            if (qadimDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
                 request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
                 RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
                 rd.forward(request, response);
                 return;
             }
-                
-            String productName = request.getParameter("productName");
-            String operatorName = request.getParameter("operatorName");
-            String comOperatorName = request.getParameter("comOperatorName");
-            String verb = request.getParameter("verb");
-            String comVerb = request.getParameter("comVerb");
-            String generalPhrase = request.getParameter("generalPhrase");
-            String comGeneralPhrase = request.getParameter("comGeneralPhrase");
-            String specificPhrase = request.getParameter("specificPhrase");
-            String comSpecificPhrase = request.getParameter("comSpecificPhrase");
-            String dimension = request.getParameter("dimension");
-            String comDimension = request.getParameter("comDimension");
+            
             String operator1 = request.getParameter("operator1");
             String operator2 = request.getParameter("operator2");
             String operator3 = request.getParameter("operator3");
             String operator4 = request.getParameter("operator4");
-            
+
             String addOperatorCheck = request.getParameter("addOperatorCheck");
             String submit = request.getParameter("submit");
             //Delete Function
-            if (submit != null && submit.equals("Delete")){
-                if(operator1 != null){
+            if (submit != null && submit.equals("Delete")) {
+                if (operator1 != null) {
                     request.getSession().setAttribute("operator1", null);
-                }else if(operator2 != null){
+                } else if (operator2 != null) {
                     request.getSession().setAttribute("operator2", null);
-                }else if(operator3 != null){
+                } else if (operator3 != null) {
                     request.getSession().setAttribute("operator3", null);
-                }else if(operator4 != null){
+                } else if (operator4 != null) {
                     request.getSession().setAttribute("operator4", null);
                 }
                 response.sendRedirect("QADIM.jsp");
                 return;
             }
-            if(projectName != null && productName != null){
+            if (projectName != null && productName != null) {
                 request.getSession().setAttribute("projectName", projectName);
                 request.getSession().setAttribute("productName", productName);
                 response.sendRedirect("QADIM.jsp");
                 return;
-            }else if(productName != null){
+            } else if (productName != null) {
                 request.getSession().setAttribute("productName", productName);
                 response.sendRedirect("QADIM.jsp");
                 return;
             }
             //Takes Operators & puts them into an Arraylist<String> to store to respective operator1/2/3/4
-            if(addOperatorCheck != null){
+            if (addOperatorCheck != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
-                for (int i = 1; i <= 4; i++){
-                    String operatorNum = "operator"+i;
-                    if(request.getSession().getAttribute(operatorNum)==null){
+                list.add(comments);
+                list.add(comComments);
+                for (int i = 1; i <= 4; i++) {
+                    String operatorNum = "operator" + i;
+                    if (request.getSession().getAttribute(operatorNum) == null) {
                         request.getSession().setAttribute(operatorNum, list);
                         break;
                     }
                 }
-            }else if(operator1 != null){
+            } else if (operator1 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator1", list);
-            }else if(operator2 != null){
+            } else if (operator2 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator2", list);
-            }else if(operator3 != null){
+            } else if (operator3 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator3", list);
-            }else if(operator4 != null){
+            } else if (operator4 != null) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(operatorName);
                 list.add(comOperatorName);
-                list.add(verb);
-                list.add(comVerb);
-                list.add(generalPhrase);
-                list.add(comGeneralPhrase);
-                list.add(specificPhrase);
-                list.add(comSpecificPhrase);
-                list.add(dimension);
-                list.add(comDimension);
+                list.add(comments);
+                list.add(comComments);
                 request.getSession().setAttribute("operator4", list);
             }
-            
+
             response.sendRedirect("QADIM.jsp");
             return;
         }

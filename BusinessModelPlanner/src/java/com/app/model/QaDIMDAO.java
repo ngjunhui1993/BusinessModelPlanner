@@ -23,7 +23,7 @@ public class QaDIMDAO {
         if (operator.isEmpty()) {
             //input error;
         } else {
-            String sql = "insert into `qadim_operator`(`userid`,`operator_name`, `product_id`, `operator_id`, `verb`, `general_phrase`, `specific_phrase`, `dimension`) values (?,?,?,?,?,?,?,?);"; //insert base on table
+            String sql = "insert into `qadim_operator`(`userid`,`operator_name`, `product_id`, `operator_id`, `comments`) values (?,?,?,?,?);"; //insert base on table
             Connection conn = null;
             PreparedStatement preStmt = null;
             ResultSet rs = null;
@@ -36,10 +36,7 @@ public class QaDIMDAO {
                     preStmt.setString(2, op.getOperatorName());
                     preStmt.setInt(3, op.getProductId());
                     preStmt.setInt(4, op.getOperatorId());
-                    preStmt.setString(5, op.getVerb());
-                    preStmt.setString(6, op.getGeneralPhrase());
-                    preStmt.setString(7, op.getSpecificPhrase());
-                    preStmt.setString(8, op.getDimensions());
+                    preStmt.setString(5, op.getComments());
                     preStmt.execute();
                 }
                 conn.commit();
@@ -139,13 +136,10 @@ public class QaDIMDAO {
             while (rs.next()) {
                 String userid = rs.getString("userid");
                 String operatorName = rs.getString("operator_name");
-                String verb = rs.getString("verb");
-                String generalPhrase = rs.getString("general_phrase");
-                String specificPhrase = rs.getString("specific_phrase");
-                String dimension = rs.getString("dimension");
                 int productid = Integer.parseInt(rs.getString("product_id"));
                 int operatorid = Integer.parseInt(rs.getString("operator_id"));
-                Operator operator = new Operator(userid ,operatorName, verb,generalPhrase ,specificPhrase ,dimension ,productid ,operatorid );
+                String comments = rs.getString("comments");
+                Operator operator = new Operator(userid ,operatorName, productid ,operatorid, comments );
                 oList.add(operator);
             }
         } catch (SQLException e) {
@@ -222,7 +216,7 @@ public class QaDIMDAO {
     }
     
     public static void update(ArrayList<Operator> oList, String userid){
-            String sql = "update qadim_operator set operator_name=?,verb=?,general_phrase=?,specific_phrase=?,dimension=? where userid=? and product_id=? and operator_id=?;";  
+            String sql = "update qadim_operator set operator_name=?, comments=? where userid=? and product_id=? and operator_id=?;";  
             Connection conn = null;
             PreparedStatement preStmt = null;
             ResultSet rs = null;
@@ -232,13 +226,10 @@ public class QaDIMDAO {
                 preStmt = conn.prepareStatement(sql);
                 for (Operator op: oList) {
                     preStmt.setString(1, op.getOperatorName());
-                    preStmt.setString(2, op.getVerb());
-                    preStmt.setString(3, op.getGeneralPhrase());
-                    preStmt.setString(4, op.getSpecificPhrase());
-                    preStmt.setString(5, op.getDimensions());
-                    preStmt.setString(6, userid);
-                    preStmt.setInt(7, op.getProductId());
-                    preStmt.setInt(8, op.getOperatorId());
+                    preStmt.setString(2, op.getComments());
+                    preStmt.setString(3, userid);
+                    preStmt.setInt(4, op.getProductId());
+                    preStmt.setInt(5, op.getOperatorId());
                     
                   //   preStmt.addBatch();
                      System.out.println("edited 1 row of operator to db");

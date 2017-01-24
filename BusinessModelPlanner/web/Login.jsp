@@ -28,12 +28,18 @@
                 <input type="text" placeholder="name" name="name"/>
                 <input type="password" placeholder="password" name="password"/>
                 <input type="text" placeholder="email address" name="email"/>
+                <!--Please Change the Front End-->
+                Type: <select name="type">
+                    <option value="administrator">Administrator</option>
+                    <option value="student">Student</option>   
+                    <option value="corporate">Corporate</option>  
+                </select>
                 <input class="btn" type="submit" id="register" value="Register »" name="submit">
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
               </form>
                 
               <form class="login-form" method="post" action="Login">
-                <input type="text" placeholder="username" name="username"/>
+                <input type="text" placeholder="email address" name="username"/>
                 <input type="password" placeholder="password" name="password"/>
                 <input class="btn" type="submit" id="login" value="Login »" name="submit">
                 <p class="message">

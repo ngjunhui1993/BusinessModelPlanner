@@ -8,6 +8,7 @@ public class Demographics{
 	private String password;
 	private String email;
         private String userid;
+        private String type;
   /**
   *The default constructor
   */
@@ -15,18 +16,21 @@ public class Demographics{
             
         }
 
-    public Demographics(String name, String password, String email, String userid) {
+    public Demographics(String name, String password, String email, String userid, String type) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.userid = userid;
+        this.type=type;
     }
 
     public String getUserid() {
         return userid;
     }
 
-
+    public String getType() {
+        return type;
+    }
 
 /**
   * Gets the name of the user
