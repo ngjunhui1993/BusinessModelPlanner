@@ -1,7 +1,6 @@
 <%@include file="Protect.jsp"%>
 <html>
-    <%@include file="nav.jsp"%>
-    <body>
+    <%@include file="header.jsp"%>
         <section class="for-full-back color-white bodyStart" id="about-models">
             <div class="container">
                 <div class="row text-center g-pad-bottom allBody">
@@ -53,6 +52,6 @@
                 %>
             </div>
 
-    </body>
+     <%@include file="footer.jsp"%>
 
 </html>
