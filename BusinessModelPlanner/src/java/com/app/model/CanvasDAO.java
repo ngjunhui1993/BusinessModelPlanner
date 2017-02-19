@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -39,6 +40,37 @@ public class CanvasDAO {
             ConnectionManager.close(conn, preStmt, rs);
         }
         return companyList;
+    }
+    
+    public HashMap<String, ArrayList<String>> retrieveAll() {
+        HashMap<String, ArrayList<String>> allMap = new HashMap<>();
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from data"; //get all traits and details from first value driver. then repeat this for the rest.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if(allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return allMap;
     }
  
     
