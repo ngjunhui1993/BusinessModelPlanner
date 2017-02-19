@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package com.app.model;
+
 import com.app.model.entity.CanvasCompany;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -41,7 +44,7 @@ public class CanvasDAO {
         }
         return companyList;
     }
-    
+
     public HashMap<String, ArrayList<String>> retrieveAll() {
         HashMap<String, ArrayList<String>> allMap = new HashMap<>();
         Connection conn = null;
@@ -49,13 +52,13 @@ public class CanvasDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from data"; //get all traits and details from first value driver. then repeat this for the rest.
+            String sql = "Select * from data"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
                 String trait = rs.getString("choice");
                 String companyName = rs.getString("company");
-                if(allMap.containsKey(trait)) {
+                if (allMap.containsKey(trait)) {
                     ArrayList<String> traitCompanies = allMap.get(trait);
                     traitCompanies.add(companyName);
                     allMap.put(trait, traitCompanies);
@@ -72,8 +75,49 @@ public class CanvasDAO {
         }
         return allMap;
     }
- 
-    
-    
-    
+
+    public HashMap<String, Integer> resultsFromAllTraitsSelected(ArrayList<String> selectedTraits, HashMap<String, ArrayList<String>> allData) {
+        HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
+
+        for (String trait : selectedTraits) {
+            ArrayList<String> companiesWithTrait = allData.get(trait);
+
+            for (String company : companiesWithTrait) {
+                if (resultMap.containsKey(company)) {
+                    int count = resultMap.get(company);
+                    count++;
+                    resultMap.put(company, count);
+                } else {
+                    resultMap.put(company, 1);
+                }
+            }
+        }
+        return resultMap;
+    }
+
+    public HashMap<String, Integer> nearestSearchFromResults(HashMap<String, Integer> resultsFromAllTraitsSelected) {
+        HashMap<String, Integer> nearestResults = new HashMap<String, Integer>();
+        Iterator iter = resultsFromAllTraitsSelected.entrySet().iterator();
+        
+        /* while(iter.hasNext()) {
+            String company = (String) iter.next();
+            int sum = resultsFromAllTraitsSelected.get(company);
+            if(sum >= counter) {
+                nearestResults.put(company, sum);
+                counter = sum;
+            }
+        } */
+        
+        int maxValue = (Collections.max(resultsFromAllTraitsSelected.values()));
+        
+        while(iter.hasNext()) {
+            String company = (String) iter.next();
+            int count = resultsFromAllTraitsSelected.get(company);
+            if(count == maxValue) {
+                nearestResults.put(company, count);
+            }
+        }
+        return nearestResults;
+    }
+
 }

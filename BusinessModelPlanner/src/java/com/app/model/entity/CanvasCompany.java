@@ -5,6 +5,8 @@
  */
 package com.app.model.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dell
@@ -13,10 +15,17 @@ public class CanvasCompany {
     private String company;
     private String choice;
     private String description;
+    private ArrayList<String> choices;
 
     public CanvasCompany(String company, String choice, String description) {
         this.company = company;
         this.choice = choice;
+        this.description = description;
+    }
+    
+    public CanvasCompany(String company, ArrayList<String> choices, String description) {
+        this.company = company;
+        this.choices = choices;
         this.description = description;
     }
 
