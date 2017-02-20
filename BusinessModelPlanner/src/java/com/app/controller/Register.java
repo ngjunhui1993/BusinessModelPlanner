@@ -102,6 +102,14 @@ public class Register extends HttpServlet {
             String userid = email;
             String encryptedPassword = encryption.SHA1(password);
             String success = demoDAO.register(name, encryptedPassword, email, userid,type);
+            
+            //check if there were any exceptions thrown during the method, register, in the demoDAO.
+            if(success == null) {
+                request.setAttribute("errorMsg", "An error has occured in the database.");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }
             request.setAttribute("successMsg", success);
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);

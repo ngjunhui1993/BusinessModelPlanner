@@ -39,7 +39,7 @@ public class DemographicsDAO {
     }//end of method
       
     
-    public void loadData(){
+    public String loadData(){
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -60,11 +60,15 @@ public class DemographicsDAO {
                 userList.put(email,u);
             }	
         }catch(SQLException e){
-            System.out.println("Error Occured in DemographicsDAO.loadData");
+           // System.out.println("Error Occured in DemographicsDAO.loadData");
                 //e.printStackTrace();
+            String errorMsg = "Error occured in database.";
+            return errorMsg;
+            
         } finally {
             ConnectionManager.close(conn, pstmt, rs);
         }
+        return "";
     }//end of loadData method
 
 /**
@@ -94,7 +98,7 @@ public class DemographicsDAO {
               
             }
         }catch(SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }finally{
             ConnectionManager.close(conn, pstmt, rs);
         }
@@ -131,7 +135,8 @@ public class DemographicsDAO {
             }
 
             }catch(SQLException e){
-             e.printStackTrace();
+                //e.printStackTrace();
+                return null;
             } finally {
               ConnectionManager.close(conn, pstmt, rs);
             }
@@ -196,7 +201,8 @@ public class DemographicsDAO {
                     
             }catch(Exception e){
                 System.out.println("There is an error while adding new user");
-                e.printStackTrace();
+               // e.printStackTrace();
+                return null;
             }finally{
                 ConnectionManager.close(conn , pstmt , rs);
                 

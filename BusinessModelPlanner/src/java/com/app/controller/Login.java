@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 /**
- *Login controller process login username and password and redirects users to relevant page.
- * 
+ * Login controller process login username and password and redirects users to
+ * relevant page.
+ *
  */
-public class Login extends HttpServlet {  
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,30 +38,38 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             String login = request.getParameter("submit");
-            
-            if(login == null){
+
+            if (login == null) {
                 response.sendRedirect("Login.jsp");
                 return;
             }
-           //retrieve the email id sent from the form
-           String username = request.getParameter("username");
-           //retrieve the password sent from the form
-           String password = request.getParameter("password");
-           String admin = "admin";
-           //invalidates the previous session objects
-           request.getSession().invalidate();
-           //retrieve username from DB
-           Demographics user = DemographicsDAO.retrieveByUsername(username);
-           //Encrypts password with SHA1
-           Encryption encryption = new Encryption();
-           String encryptedPassword = encryption.SHA1(password);
-            if(user != null && user.authenticate(encryptedPassword)){
+            //retrieve the email id sent from the form
+            String username = request.getParameter("username");
+            //retrieve the password sent from the form
+            String password = request.getParameter("password");
+            String admin = "admin";
+            //invalidates the previous session objects
+            request.getSession().invalidate();
+            //retrieve username from DB
+            Demographics user = DemographicsDAO.retrieveByUsername(username);
+
+            if (user == null) {
+                request.setAttribute("errorMsg", "An error has occured in the database.");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            //Encrypts password with SHA1
+            Encryption encryption = new Encryption();
+            String encryptedPassword = encryption.SHA1(password);
+            if (user != null && user.authenticate(encryptedPassword)) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("index.jsp");
                 return;
-            }else{
+            } else {
                 request.setAttribute("errorMsg", "Wrong Email ID / Password Entered");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
