@@ -168,7 +168,8 @@ INSERT INTO `qadim_product` (`userid`, `project_name`, `product_id`, `product_na
 CREATE TABLE IF NOT EXISTS `data` (
   `choice` varchar(200) NOT NULL,
   `company` varchar(100) NOT NULL,
-  `description` varchar(1000) NOT NULL
+  `description` varchar(1000) NOT NULL,
+  PRIMARY KEY (`choice`, `company`, `description`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
