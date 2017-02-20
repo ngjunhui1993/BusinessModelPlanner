@@ -34,7 +34,7 @@ public class DemographicsDAO {
   * @return true if the user exists in the database , false if the user does not exist in the database.
   */
     public boolean userExist(String email){
-        if((Demographics)userList.get(email) != null) return true;
+        if((Demographics)userList.get(email.toLowerCase()) != null) return true;
         return false;
     }//end of method
       
