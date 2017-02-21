@@ -42,6 +42,7 @@
                         </p>
                     </div>
                 </div>
+  
                 <%                    if (user.getType().equals("administrator")) {
                 %>
                 <form action="Admin.jsp">

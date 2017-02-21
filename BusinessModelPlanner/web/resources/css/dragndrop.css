@@ -20,6 +20,17 @@ body {
     margin-bottom:0.5em;
     padding: 4px;
     cursor: default;
+
+}
+
+.draggablee {
+    width: 100px;
+    height: 50px;
+    background-color: #ff7373;
+    border: 1px solid #fffbd7;
+    margin-bottom:0.5em;
+    padding: 4px;
+    cursor: default;
 }
 
 .active {
@@ -30,6 +41,13 @@ body {
     width: 100px;
     height: 40px;
 }
+
+#droppablee {
+    font-size: 14pt;
+    width: 100px;
+    height: 40px;
+}
+
 #droppableHolder {
     margin-top: auto;
 }

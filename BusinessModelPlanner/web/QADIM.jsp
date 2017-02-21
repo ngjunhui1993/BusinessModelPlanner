@@ -75,7 +75,7 @@
             </p>
             <p> 
                 <input type="submit" name="submit"><BR>
-                <input type="button" name="cancel" value="Cancel" onClick="closebox()"><br>
+                <input type="button" name="cancel" value="Cancel" onClick="closebox()">
 
                 <%
                     if (error != null) {
@@ -312,7 +312,7 @@
                                     <i class="glyphicon glyphicon-file fa-2x"></i><br/>
                                     NEW/LOAD PROJECT
                                 </button>
-                                
+
                                 <button type="submit" class="btn btn-sq-sm btn-warning" value="Save" name="Save">
                                     <i class="glyphicon glyphicon-save fa-2x"></i><br/>
                                     SAVE
@@ -326,44 +326,54 @@
                     </div>
                 </form>
 
+                Instructions: Drag and drop desired operators into the placeholder and include the<br>
+                appropriate comments and submit!<br>
+                <div id="addOperator">
+                    <form method="GET" action="QADIMPageUpdate" target="_parent">
+                        <table align="center" border="0">
 
-                <table align="center">
-                    <tr>
-                        Instructions: Drag and drop desired operators into the placeholder and include the<br>
-                    appropriate comments and submit!<br>
-                    </tr>
-                    <tr>
-                    <div class="box2" id="addOperator" width="100%">
-                        <col style="width:30%">
-                        <col style="width:30%">
-                        <col style="width:30%">
-                        <form method="GET" action="QADIMPageUpdate" target="_parent">
-                            <tr class="noBorder">
-                                <td><center>
+                            <td>
+                            <td>
                                 <div class="draggable">Add</div>
                                 <div class="draggable">Remove</div>
                                 <div class="draggable">Raise</div>
-                            </center></td>
-                            <td><center>
+                            </td>
+                            <td>
                                 <div class="draggable">Reduce</div>
                                 <div class="draggable">Combine</div>
                                 <div class="draggable">Separate</div>
-                            </center></td>
-                            <td><center>
+                            </td>
+                            <td>
+                            <td>
                                 <div id="droppableHolder">
                                     Drag desired operator here:<br />    
                                     <input type="text" name="operatorName" id="droppable" placeholder="Drop Operator here" />
                                 </div>
+
                                 Comments<br/>
                                 <input type="text" name="comments" maxlength="60" size="25">
                                 <input type="hidden" name="addOperatorCheck" value=""><br>
-                                <input type="submit" name="submit">
-                            </center> </td>
+
+                                </center> </td>
+
+                            <td><center>
+                                <div id="droppableHolder">
+                                    Drag complimentory operator here:<br />
+                                    <input type="text" name="comOperatorName" id="droppablee" placeholder="Drop Complimentory here" />
+                                </div>
+                                Comments<br/>
+                                <input type="text" name="comComments" maxlength="60" size="25">
+
+                                </td></centeR>
                             </tr>
-                        </form>
-                    </div>
-                    </tr>
-                </table><br>
+                        </table>
+                        <table>
+                            <tr>
+                            <input type="submit" name="submit">
+                            </tr>
+                        </table>
+                    </form>
+                </div>
                 <table class="QADIM-Table">
                     <tr>
                         <td id="operator1">
