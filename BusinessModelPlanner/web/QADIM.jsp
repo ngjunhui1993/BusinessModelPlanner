@@ -305,17 +305,18 @@
                 %>
                 <h3><b><%=projectName%></b></h3>
                 <form action="MainValidation" >
-                                 <div class="row">
+                    <div class="row">
                         <div class="col-lg-12">
                             <p>
-                                <a href="#" class="btn btn-sq-sm btn-primary">
+                                <button type="submit" class="btn btn-sq-sm btn-primary" value="New / Load Project" name="Save">
                                     <i class="glyphicon glyphicon-file fa-2x"></i><br/>
                                     NEW/LOAD PROJECT
-                                </a>
-                                <a href="#" class="btn btn-sq-sm btn-warning">
+                                </button>
+                                
+                                <button type="submit" class="btn btn-sq-sm btn-warning" value="Save" name="Save">
                                     <i class="glyphicon glyphicon-save fa-2x"></i><br/>
                                     SAVE
-                                </a>
+                                </button>
                                 <a href="FileDownload" class="btn btn-sq-sm btn-danger">
                                     <i class="glyphicon glyphicon-download fa-2x"></i><br/>
                                     DOWNLOAD
@@ -323,43 +324,47 @@
                             </p>
                         </div>
                     </div>
-                    
-                    <input type="submit" value="New / Load Project" name="Save"/>
-                    <input class="saveButton" type="submit" value="Save" name="Save"/>
                 </form>
-    
-                <table class="QADIM-Table">
+
+
+                <table align="center">
+                    <tr>
+                        Instructions: Drag and drop desired operators into the placeholder and include the<br>
+                    appropriate comments and submit!<br>
+                    </tr>
                     <tr>
                     <div class="box2" id="addOperator" width="100%">
                         <col style="width:30%">
                         <col style="width:30%">
                         <col style="width:30%">
                         <form method="GET" action="QADIMPageUpdate" target="_parent">
-                            <tr border: none>
+                            <tr class="noBorder">
                                 <td><center>
                                 <div class="draggable">Add</div>
                                 <div class="draggable">Remove</div>
                                 <div class="draggable">Raise</div>
                             </center></td>
-                             <td><center>
+                            <td><center>
                                 <div class="draggable">Reduce</div>
                                 <div class="draggable">Combine</div>
                                 <div class="draggable">Separate</div>
                             </center></td>
-                            <td>
+                            <td><center>
                                 <div id="droppableHolder">
                                     Drag desired operator here:<br />    
-                                    <input type="text" name="operatorName" id="droppable" />
+                                    <input type="text" name="operatorName" id="droppable" placeholder="Drop Operator here" />
                                 </div>
                                 Comments<br/>
                                 <input type="text" name="comments" maxlength="60" size="25">
-                                <input type="hidden" name="addOperatorCheck" value="">
+                                <input type="hidden" name="addOperatorCheck" value=""><br>
                                 <input type="submit" name="submit">
-                            </td>
+                            </center> </td>
                             </tr>
                         </form>
                     </div>
                     </tr>
+                </table><br>
+                <table class="QADIM-Table">
                     <tr>
                         <td id="operator1">
                             <%

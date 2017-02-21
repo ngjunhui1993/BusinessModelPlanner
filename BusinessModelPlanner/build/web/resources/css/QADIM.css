@@ -1,4 +1,10 @@
 
+.button {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 10px;
+}
+
 p.small {
     line-height: 50%;
 }
@@ -46,8 +52,7 @@ p.small {
     top: 50%;
 }
 
-.QADIM-Table {
-    
+.QADIM-Table{
     text-align: center;
     margin: 0 auto;
     height: 100%;
@@ -56,11 +61,14 @@ p.small {
     width: 100%
 }
 
-
-.QADIM-Table td{
+.QADIM-Table,tr, td{
     height: 150px;
     width: 150px;
     border: 1px solid black;
+}
+
+tr.noBorder td{
+    border:0;
 }
 
 .productBtn {
