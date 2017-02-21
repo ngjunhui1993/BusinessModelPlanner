@@ -21,8 +21,8 @@
     <body>
         <div class="login-page">
             <div class="companylogo">
-                <img class="webapplogo" src="resources/image/webapplogo.png" alt="SIMHA">
-            </div>
+                <img class="webapplogo" src="resources/image/SIMHA.png" alt="SIMHA">
+            </div><br>
             <div class="form">
               <form class="register-form" method="post" action="Register">
                 <input type="text" placeholder="name" name="name"/>
