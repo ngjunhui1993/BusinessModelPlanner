@@ -13,17 +13,7 @@ body {
     font-size: 11pt;
 }
 .draggable {
-    width: 200px;
-    height: 50px;
-    background-color: #ff7373;
-    border: 1px solid #fffbd7;
-    margin-bottom:0.5em;
-    padding: 4px;
-    cursor: default;
-}
-
-.draggablee {
-    width: 200px;
+    width: 100px;
     height: 50px;
     background-color: #ff7373;
     border: 1px solid #fffbd7;
@@ -37,16 +27,11 @@ body {
 }
 #droppable {
     font-size: 14pt;
-    width: 220px;
-    height: 50px;
-}
-#droppablee {
-    font-size: 14pt;
-    width: 220px;
-    height: 50px;
+    width: 100px;
+    height: 40px;
 }
 #droppableHolder {
-    margin-top: 3em;
+    margin-top: auto;
 }
 
 
