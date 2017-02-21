@@ -2,16 +2,15 @@
 <html>
     <%@include file="header.jsp"%>
     <head>
-    <link href="resources/css/hover.css" rel="stylesheet">
-</head>
+        <link href="resources/css/hover.css" rel="stylesheet">
+    </head>
     <section class="for-full-back color-white bodyStart" id="about-models">
         <div class="container">
             <div class="row text-center g-pad-bottom allBody">
-                <div class="col-md-8 col-md-offset-2 ">
-                    <h3>Innovation Models<br>
-                        Please Select One of The Models to Work On
-                    </h3>
+                <div>
+                    <h4>SELECT YOUR BUSINESS INNOVATION MODEL</h4>
                 </div>
+
 
                 <div class="col-md-12 ">
                     <div class="col-md-4 col-sm-4 col-xs-6">
