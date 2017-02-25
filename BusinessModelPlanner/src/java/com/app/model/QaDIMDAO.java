@@ -243,6 +243,29 @@ public class QaDIMDAO {
             }
     }
     
+        public static void editProjectName(String projName, String userid, String newProjName){
+            String sql = "update qadim_product set project_name=? where userid=? and project_name=?;";  
+            Connection conn = null;
+            PreparedStatement preStmt = null;
+            ResultSet rs = null;
+            try {
+                conn = ConnectionManager.getConnection();
+                conn.setAutoCommit(false);
+                preStmt = conn.prepareStatement(sql);
+                preStmt.setString(1, newProjName);
+                preStmt.setString(2, userid);
+                preStmt.setString(3, projName);
+                
+                preStmt.executeUpdate();
+                
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                ConnectionManager.close(conn, preStmt, rs);
+            }
+    }
+    
     public static int retrieveNoOfProjects(String userId){
        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
         Connection conn = null;

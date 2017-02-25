@@ -54,6 +54,19 @@ public class QADIMPageUpdate extends HttpServlet {
                 return;
             }
             
+            if(request.getParameter("submitProjNameChange") != null) {
+                String newProjName = request.getParameter("newProjectName");
+                if(newProjName == null || newProjName.equals("")) {
+                    request.setAttribute("errorMsg", "Please key in your desired new name for project.");
+                    RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+                    rd.forward(request, response);
+                    return;
+                }
+                qadimDAO.editProjectName(projectName, loggedInUserID, newProjName);
+                request.getSession().setAttribute("projectName", newProjName);
+                response.sendRedirect("QADIM.jsp");
+            }
+            
 
             //if project name exists, prompt user to input another name.
             if (qadimDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {

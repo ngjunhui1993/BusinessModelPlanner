@@ -130,6 +130,8 @@
             </p>
         </form>
     </div>
+            
+
 
     <% if (!operator1.isEmpty()) {%>
     <div class="box2" id="editOperator1">
