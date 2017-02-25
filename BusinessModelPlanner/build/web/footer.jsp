@@ -1,5 +1,5 @@
      <!--FOOTER SECTION -->
-    <div class=" for-full-back color-bg-one navbar-fixed-bottom" id="footer">
+    <div class=" for-full-back color-bg-one navbar-fixed-bottom" style='padding:5px' id="footer">
         SIMHA Business Model Planner Tool | All Right Reserved     
     </div>
 
