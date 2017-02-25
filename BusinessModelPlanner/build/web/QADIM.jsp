@@ -117,7 +117,6 @@
         </form>
     </div>
 
-
     <div class="box" id="editProduct">
         <span class="boxtitle" >QADIM: Edit Product Name</span>
         <form method="GET" action="QADIMPageUpdate" target="_parent">

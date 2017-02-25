@@ -147,28 +147,11 @@ function openEditOperator4(operator, fadin)
   }
 }
 
-function openAddOperatorBox(fadin)
-{
-  var box = document.getElementById('addOperator');
-  document.getElementById('shadowing').style.display='block';
-  
-  if(fadin)
-  {
-	 gradient("addOperator", 0);
-	 fadein("addOperator");
-  }
-  else
-  { 	
-    box.style.display='block';
-  }  	
-}
-
 
 // Close the lightbox
 
 function closebox()
 {
-   document.getElementById('addOperator').style.display='none';
    document.getElementById('loadProject').style.display='none';
    document.getElementById('step1').style.display='none';
    document.getElementById('editProduct').style.display='none';
