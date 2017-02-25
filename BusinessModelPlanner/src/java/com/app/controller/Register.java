@@ -86,7 +86,7 @@ public class Register extends HttpServlet {
                 return;
             }
             if (!validEmail(email)) {
-                request.setAttribute("errorMsg", "The email address entered is invalid. Please Enter a valid email address!");
+                request.setAttribute("errorMsg", "The email address entered is invalid. Please enter a valid email address!");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;

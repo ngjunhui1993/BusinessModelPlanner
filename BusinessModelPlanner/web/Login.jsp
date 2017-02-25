@@ -25,8 +25,8 @@
             </div><br>
             <div class="form">
               <form class="register-form" method="post" action="Register">
-                <input type="text" placeholder="name" name="name"/>
-                <input type="password" placeholder="password" name="password"/>
+                <input type="text" placeholder="name (your first and last name)" name="name"/>
+                <input type="password" placeholder="password (at least 8 alphanumeric characters)" name="password"/>
                 <input type="text" placeholder="email address" name="email"/>
                 <!--Please Change the Front End-->
                 <%--
