@@ -60,6 +60,8 @@ public class Register extends HttpServlet {
             //retrieve the user type from the form
             //String type = request.getParameter("type");
             String type = "student";
+            //retrieve confirmed password from form.
+            String confirmPassword = request.getParameter("confirmPassword");
             
             if(name == null || email == null || password == null) {
                 request.setAttribute("errorMsg", "Please do not leave any fields blank");
@@ -93,6 +95,13 @@ public class Register extends HttpServlet {
             }
             if (password.length() < 8) {
                 request.setAttribute("errorMsg", "Please enter a password with at least 8 characters");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            if(!password.equals(confirmPassword)) {
+                request.setAttribute("errorMsg", "The passwords don't match. Please try again.");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
