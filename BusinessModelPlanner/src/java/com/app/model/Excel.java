@@ -31,7 +31,7 @@ public class Excel {
             System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
             File file = null;
             //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
-            file = new File(localDir);
+            file = new File(pathdir);
             //}else{
             //  file = new File(pathdir); 
             // }
@@ -151,7 +151,7 @@ public class Excel {
             System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
             File file = null;
             //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
-            file = new File(localDir);
+            file = new File(pathdir);
             //}else{
             //  file = new File(pathdir); 
             // }
@@ -196,7 +196,7 @@ public class Excel {
                 System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
                 File file = null;
                 //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
-                file = new File(localDir);
+                file = new File(pathdir);
                 //}else{
                 //  file = new File(pathdir); 
                 // }

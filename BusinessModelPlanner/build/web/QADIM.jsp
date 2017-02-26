@@ -359,8 +359,8 @@
 
                             <td><center>
                                 <div id="droppableHolder">
-                                    Drag complimentory operator here:<br />
-                                    <input type="text" name="comOperatorName" id="droppablee" placeholder="Drop Complimentory here" />
+                                    Drag complimentary operator here:<br />
+                                    <input type="text" name="comOperatorName" id="droppablee" placeholder="Drop Complimentary here" />
                                 </div>
                                 Comments<br/>
                                 <input type="text" name="comComments" maxlength="60" size="25">
