@@ -9,6 +9,7 @@ import com.app.model.entity.Demographics;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +40,7 @@ public class FileDownload extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FileDownload</title>");            
+            out.println("<title>Servlet FileDownload</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet FileDownload at " + request.getContextPath() + "</h1>");
@@ -60,30 +61,37 @@ public class FileDownload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-       // System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
-        Demographics user = (Demographics)request.getSession().getAttribute("user");
-        String userid = user.getUserid();
-        String fileName = userid+".xls";
-        String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
-       // String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
-        
-        response.setContentType("APPLICATION/OCTET-STREAM");
-        response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
-        // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
-        FileInputStream fi = null ;
-        //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
-         fi= new FileInputStream(filePath+fileName);
-        
-        //}else{
-         //     fi= new FileInputStream(pathdir+fileName);
-        //}
-        int i;
-        while((i=fi.read()) !=-1){
-            out.write(i);
+        try {
+            PrintWriter out = response.getWriter();
+            // System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
+            Demographics user = (Demographics) request.getSession().getAttribute("user");
+            String userid = user.getUserid();
+            String fileName = userid + ".xls";
+            String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
+            // String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
+
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+            // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
+            FileInputStream fi = null;
+            //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
+            fi = new FileInputStream(filePath + fileName);
+
+            //}else{
+            //     fi= new FileInputStream(pathdir+fileName);
+            //}
+            int i;
+            while ((i = fi.read()) != -1) {
+                out.write(i);
+            }
+            out.close();
+            fi.close();
+        } catch (Exception e) {
+            request.setAttribute("errorMsg", "Please save your project first before downloading.");
+            RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+            rd.forward(request, response);
+            return;
         }
-        out.close();
-        fi.close();
     }
 
     /**
