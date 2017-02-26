@@ -55,13 +55,6 @@ public class Login extends HttpServlet {
             //retrieve username from DB
             Demographics user = DemographicsDAO.retrieveByUsername(username);
 
-            if (user == null) {
-                request.setAttribute("errorMsg", "An error has occured in the database.");
-                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                rd.forward(request, response);
-                return;
-            }
-
             //Encrypts password with SHA1
             Encryption encryption = new Encryption();
             String encryptedPassword = encryption.SHA1(password);
