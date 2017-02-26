@@ -68,14 +68,14 @@ public class FileDownload extends HttpServlet {
             String userid = user.getUserid();
             String fileName = userid + ".xls";
             String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
-            // String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
+           String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
 
             response.setContentType("APPLICATION/OCTET-STREAM");
             response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
             // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
             FileInputStream fi = null;
             //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
-            fi = new FileInputStream(filePath + fileName);
+            fi = new FileInputStream(pathdir + fileName);
 
             //}else{
             //     fi= new FileInputStream(pathdir+fileName);
