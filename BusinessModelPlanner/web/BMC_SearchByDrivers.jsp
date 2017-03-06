@@ -26,7 +26,7 @@
                     <!--KEY PARTNERS-->
                     <li>
                         <figure>
-                            <div><img src="resources/image/5.png" alt="img05"></div>
+                            <div><img src="resources/image/keypartners.jpg" alt="img05"></div>
                             <figcaption>
                                 <h3>Key Partners</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -59,7 +59,7 @@
                     <!--KEY ACTIVITIES-->
                     <li>
                         <figure>
-                            <div><img src="resources/image/6.png" alt="img06"></div>
+                            <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
                             <figcaption>
                                 <h3>Key Activities</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -86,7 +86,7 @@
 
                     <li>
                         <figure>
-                            <div><img src="resources/image/2.png" alt="img02"></div>
+                            <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
                             <figcaption>
                                 <h3>Key Resources</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -112,7 +112,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/4.png" alt="img04"></div>
+                            <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
                             <figcaption>
                                 <h3>Value Proposition</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -138,7 +138,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/1.png" alt="img01"></div>
+                            <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
                             <figcaption>
                                 <h3>Customer Segments</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -163,7 +163,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Customer Relationship</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -188,7 +188,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/channels.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Channels</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -213,7 +213,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Cost Structure</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -238,7 +238,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Revenue Streams</h3>
                                 <span>SHORT DESCRIPTION</span>
