@@ -29,7 +29,71 @@ public class CanvasDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from data where company like '%' ? '%'";
+            String sql = "Select * from channel_strategy where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from cost_management where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from customer_acquisition where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from customer_relations where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from key_activities where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from key_partnerships where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from key_resources where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from revenues where company like '%' ? '%'";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, companyName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                companyList.add(company);
+            }
+            sql = "Select * from value_proposition where company like '%' ? '%'";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
@@ -44,6 +108,29 @@ public class CanvasDAO {
         }
         return companyList;
     }
+    
+    public ArrayList<String> retrieveTraitsByDriver(String driverName) {
+        ArrayList<String> traitsList = new ArrayList<String>();
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select choice from ?"; 
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, driverName);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                traitsList.add(trait);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return traitsList;
+    }
 
     public HashMap<String, ArrayList<String>> retrieveAll() {
         HashMap<String, ArrayList<String>> allMap = new HashMap<>();
@@ -52,7 +139,135 @@ public class CanvasDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select * from data"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            String sql = "Select * from channel_strategy"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from cost_management"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * customer_acquisition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from customer_relations"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from key_activities"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from key_partnerships"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from key_resources"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from revenues"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String trait = rs.getString("choice");
+                String companyName = rs.getString("company");
+                if (allMap.containsKey(trait)) {
+                    ArrayList<String> traitCompanies = allMap.get(trait);
+                    traitCompanies.add(companyName);
+                    allMap.put(trait, traitCompanies);
+                } else {
+                    ArrayList<String> newTraitCompanies = new ArrayList<>();
+                    newTraitCompanies.add(companyName);
+                    allMap.put(trait, newTraitCompanies);
+                }
+            }
+            sql = "Select * from value_proposition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
