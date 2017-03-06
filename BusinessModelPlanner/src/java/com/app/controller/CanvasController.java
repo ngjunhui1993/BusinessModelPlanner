@@ -10,6 +10,7 @@ import com.app.model.entity.CanvasCompany;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,20 +43,27 @@ public class CanvasController extends HttpServlet {
         CanvasDAO canvasDAO = new CanvasDAO();
         
         if(request.getParameter("searchCompany") != null) {
-            String companyName = request.getParameter("companyName");
+            String companyName = request.getParameter("companiesSearched");
             
-            if(companyName == null || companyName.equals("")) {
+            if(companyName == null || companyName.equals("") || companyName.equals("[]")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
-                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
                 rd.forward(request, response);
                 return;
             }
             
-            ArrayList<CanvasCompany> companies = (ArrayList<CanvasCompany>)canvasDAO.retrieveCompanyDetailsByName(companyName);
+            companyName = companyName.substring(2, companyName.length()-2);
+            String[] splitCompanyNames = companyName.split("\",\"");
+            request.setAttribute("companiesSearched", splitCompanyNames);
+            RequestDispatcher rd = request.getRequestDispatcher("BMC_Results_2.jsp");
+            rd.forward(request, response);
+            return;
+            
+    /*        ArrayList<CanvasCompany> companies = (ArrayList<CanvasCompany>)canvasDAO.retrieveCompanyDetailsByName(companyName);
                 request.setAttribute("companySearched", companies);
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
-                return;
+                return;*/
         }
     }
 

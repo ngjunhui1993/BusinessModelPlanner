@@ -1,3 +1,4 @@
+<%@page import="java.util.Scanner"%>
 <%@page import="com.app.model.entity.CanvasCompany"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.CanvasDAO"%>
@@ -37,10 +38,35 @@
                                 <input ng-model-control ng-model="typeaheadmodel" uib-typeahead="company for company in typeahead.availableCompanies | filter:$viewValue"></input>
                             </chips>
                             <!-- Printing controller value -->
-                            
+
                             <div class="printvalue">
                                 <b>Controller:</b>
                                 <div> typeahead.companies = {{typeahead.companies}}</div>
+
+                                <form action="CanvasController">
+                                    <input type="text" value={{typeahead.companies}} name="companiesSearched" hidden>
+                                    <input type="submit" name="searchCompany">
+                                </form>
+
+                                <%
+                                    String error = (String) request.getAttribute("errorMsg");
+                                    if (error != null) {
+                                        out.println("<font color='red'>" + error + "</br><br> </font>");
+                                    }
+                                %>
+
+                                <%
+                                    String input = "{{typeahead.companies}}";
+                                    //       out.println(input);
+                                    /*  if(input.length()==2) {
+                                        input = null;
+                                    } else {
+                                        input = input.substring(2, input.length()-2);
+                                        out.println(input);
+                                    } */
+
+
+                                %>
                             </div>
                         </div>
                         <br><br><br>
@@ -52,43 +78,42 @@
 
                                 <ul id="demoSix" class="demo imageList"> 
                                     <br>
-                                    
-                                    <%
-                                        CanvasDAO canvasDAO = new CanvasDAO();
+
+                                    <%                                        CanvasDAO canvasDAO = new CanvasDAO();
                                         ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
-                                        for(String name : companyList) {
-                                            out.println("<li><img src='resources/image/CompanyIcon.png' width='40' height='40'><a href='BMC_Results_2.jsp?companyName="+name+"'>"+name+"</a><p class='last-name'>"+name+"</p></li>");
+                                        for (String name : companyList) {
+                                            out.println("<li><img src='resources/image/CompanyIcon.png' width='40' height='40'><a href='BMC_Results_2.jsp?companyName=" + name + "'>" + name + "</a><p class='last-name'>" + name + "</p></li>");
                                         }
                                     %>
 
-                                    
 
-                            </td>
-                        </tr>
-        </table>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="resources/js/jquery-listnav.js"></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
-        <script src='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js'></script>
-        <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js'></script>
-        <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js'></script>
-        <script src="resources/js/autofill.js"></script>
-        <script>
-                                            $(function () {
 
-                                            $('#demoSix').listnav({
-                                            filterSelector: '.last-name',
-                                                    includeNums: false,
-                                                    removeDisabled: true,
-                                                    allText: 'All Companies',
-                                                    showCounts: false,
-                                                    noMatchText: 'No match found'
-                                            });
-                                                    $('.demo a').click(function (e) {
-                                            e.preventDefault();
-                                            });
-                                            });
-        </script>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+                                    <script src="resources/js/jquery-listnav.js"></script>
+                                    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
+                                    <script src='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js'></script>
+                                    <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js'></script>
+                                    <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js'></script>
+                                    <script src="resources/js/autofill.js"></script>
+                                    <script>
+                                                                $(function () {
 
-    </body>
-</html>
+                                                                    $('#demoSix').listnav({
+                                                                        filterSelector: '.last-name',
+                                                                        includeNums: false,
+                                                                        removeDisabled: true,
+                                                                        allText: 'All Companies',
+                                                                        showCounts: false,
+                                                                        noMatchText: 'No match found'
+                                                                    });
+                                                                    $('.demo a').click(function (e) {
+                                                                        e.preventDefault();
+                                                                    });
+                                                                });
+                                    </script>
+
+                                    </body>
+                                    </html>
