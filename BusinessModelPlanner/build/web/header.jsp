@@ -66,7 +66,6 @@
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
         <h3>Settings</h3>
         <a href="#">Profile Options :</a>
-        <a href="#"><i class="fa fa-pencil fa-2x"></i>Edit Profile</a>
         <a href="Logout"><i class="fa fa-sign-out fa-2x"></i>Log Out</a>
     </nav>
 

@@ -4,6 +4,56 @@
     float: bottom;
     margin: auto;
 }
+
+.valuesContainer {
+    width: 862px;
+    height: 10px;
+    float: bottom;
+    margin: auto;
+}
+.valueContainer{
+    width: 30%;
+    height: 50px;
+    float: left;
+    position:relative;
+    background-color: white;
+    text-align: center;
+}
+
+.indicatorCheckBoxContainer{
+    width: 40%;
+    height: 50px;
+    float: left;
+    position:relative;
+    text-align: center;
+}
+
+.value{
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 150px;
+}
+
+.original{
+    background-color: lightblue;
+}
+
+.new{
+    background-color: lightgreen;
+}
+
+.factorValue{
+    background-color: lightpink;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 150px;
+}
+
+.facebook{
+    border-width: 10px;
+    border-color: black;
+}
+
 .topLabel{
     width: 61px;
     height: 50px;
@@ -19,7 +69,7 @@
 
 #labels {
     width: 61px;
-    height: 300px;
+    height: 270px;
     float:left;
     text-align: right;
     padding-right: 10px;
@@ -30,12 +80,12 @@
 }
 
 #bottomLabel{
-    line-height: 545px;
+    line-height: 485px;
 }
 
 #container {
     width: 862px;
-    height: 302px;
+    height: 272px;
     margin: auto;
 }
 
@@ -45,7 +95,24 @@
     float: top;
     margin: auto;
 }
-.factorName{
+
+.indicationContainer{
+    width: 862px;
+    height: 20px;
+    float: bottom;
+    margin: auto;
+}
+
+.indicationBox{
+    width: 50%;
+    height: 20px;
+    float: left;
+    position:relative;
+    background-color: white;
+    text-align: center;
+}
+
+.factorBox{
     width: 50%;
     height: 50px;
     float: left;
@@ -64,15 +131,41 @@
     height: 50px;
     float: left;
 }
+
+.labelTop{
+    width: 61px;
+    height: 20px;
+    float: left; 
+}
+
+.saveButtonBOSC{
+    background-color: blue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.indicationNames{
+    width: 700px;
+    height: 20px;
+    float: left;
+}
+
 .factorsNames{
     width: 700px;
     height: 50px;
     float: left;
 }
+
+
 #factors{
     width: 700px;
     border: 1px solid black;
-    height: 300px;
+    height: 270px;
     float: left;
     overflow: hidden;
 }
@@ -96,7 +189,7 @@
 #addBox
 {
     width:100px;
-    height:300px;
+    height:270px;
     float:right;
     background:#e0e0e0;
     position: relative;
@@ -126,6 +219,10 @@
     z-index: 200;
 }
 
+.dotBottom{
+    position:relative;
+    top: 228px;
+}
 
 .line {
      position: absolute;

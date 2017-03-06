@@ -1,15 +1,20 @@
 $(function() {
     
+    
             var boxCount = 2;
             var linesCount = 2;
             var linkLine = $('<div class="line lineA" id="line1A"></div>');
             var lines = []
+            var dotAY = $('#dotA1').offset().top;
+            var dotBY = $('#dotB1').offset().top;
+            var difference = Math.abs(dotAY - dotBY);
             lines.push(linkLine);
             lines[0].appendTo('body');
             linkLine = $('<div class="line lineB" id="line1B"></div>');
             lines.push(linkLine);
             lines[1].appendTo('body');
             $("#addBox").click(function() {
+                removeIndication();
                 if (boxCount < 8){
                     linesCount += 2;
                     boxCount++;
@@ -19,10 +24,11 @@ $(function() {
                     }else{
                         box.className = 'box boxEven';
                     }
+                    box.id = 'box'+boxCount;
                     var drag1 = document.createElement("div");
-                    drag1.className = 'draggable';
+                    drag1.className = 'draggable draggable'+boxCount+'A draggable'+boxCount;
                     var drag2 = document.createElement("div");
-                    drag2.className = 'draggable';
+                    drag2.className = 'draggable dotBottom draggable'+boxCount+'B draggable'+boxCount;
                     var dot1 = document.createElement("div");
                     var dot2 = document.createElement("div");
                     dot1.className = 'fa fa-circle dotA';
@@ -34,13 +40,18 @@ $(function() {
                     drag2.appendChild(dot2);
                     box.appendChild(drag2);
                     document.getElementById('factors').appendChild(box);
-                    
                     var factorName = document.createElement("div");
-                    factorName.className = 'factorName';
+                    factorName.className = 'factorBox';
                     factorName.id = 'factor'+boxCount;
-                    factorName.innerHTML = '<span id="factor'+boxCount+'" contenteditable="true">Factor '+boxCount+'</span>';
+                    factorName.innerHTML = '<span class="factorName" id="factor'+boxCount+'" contenteditable="true">Factor '+boxCount+'</span><br/>Weight: <select class="weight" id="weight'+boxCount+'"> <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br/>Grid: <select id="grid'+boxCount+'"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8" selected="selected">8</option></select><br/>Value: <span class="factorValue" id="value'+boxCount+'" contenteditable="false">0</span>';
                     document.getElementById('factorsNames').appendChild(factorName);
-                    
+                    var indicatorName = document.createElement("div");
+                    indicatorName.className = 'indicationBox';
+                    indicatorName.id = 'indicationBox'+boxCount;
+                    indicatorName.innerHTML = '<span class="indication" id="indication'+boxCount+'" contenteditable="false"></span><br/>';
+                    document.getElementById('indicationNames').appendChild(indicatorName);
+                    spanActivate();
+
                     var myElement = document.getElementsByClassName("box");
                     
                     for(i=0; i<myElement.length; i++) {
@@ -54,13 +65,20 @@ $(function() {
                         myElement[i].style.left = 50+'%';
                     }
                     
-                    var myElement = document.getElementsByClassName("factorName");
+                    var myElement = document.getElementsByClassName("factorBox");
                     
                     for(i=0; i<myElement.length; i++) {
                         myElement[i].style.width = ((100.00/boxCount)+"%");
                     }
                     
-                
+                    var myElement = document.getElementsByClassName("indicationBox");
+                    
+                    for(i=0; i<myElement.length; i++) {
+                        myElement[i].style.width = ((100.00/boxCount)+"%");
+                    }
+                    $('.weight').change(function() {
+                            removeIndication();
+                    })
                     var temp = '<div class="line lineA" id="line'+(boxCount-1)+'A"></div>'
                     linkLine = $(temp);
                     lines[linesCount-2] = linkLine;
@@ -70,17 +88,166 @@ $(function() {
                     lines[linesCount-1] = linkLine;
                     lines[linesCount-1].appendTo('body');
                     lineAllign();
-                    $(".draggable").draggable({
+                    $(".draggable"+boxCount).draggable({
                         axis: "y",
-                        containment: ".box", 
+                        containment: ".box",
+                        grid: [difference/8,difference/8],
                         scroll: false,
-                        distance: 0
+                        distance: 0,
+
                       },{drag: function(event, ui){
                           lineAllign();
                           }
                     });
+                    $('.draggable'+boxCount+'A').css('top', difference+'px');
+                    $('.draggable'+boxCount+'B').css('top', difference+'px');
+                    var tempdotAY = $('#dotA'+boxCount).offset().top;
+                    var tempdotBY = $('#dotB'+boxCount).offset().top;
+                    var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                    $('.draggable'+boxCount+'B').css('top', (difference-tempDifference)+'px');
+                    lineAllign();
+                    
+
+                    document.getElementById("grid3").onchange=function() {
+                            $('.draggable3A').css('top', difference+'px');
+                            $('.draggable3B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA3').offset().top;
+                            var tempdotBY = $('#dotB3').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable3B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable3";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        document.getElementById("grid4").onchange=function() {
+                            $('.draggable4A').css('top', difference+'px');
+                            $('.draggable4B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA4').offset().top;
+                            var tempdotBY = $('#dotB4').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable4B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable4";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        document.getElementById("grid5").onchange=function() {
+                            $('.draggable5A').css('top', difference+'px');
+                            $('.draggable5B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA5').offset().top;
+                            var tempdotBY = $('#dotB5').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable5B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable5";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        document.getElementById("grid6").onchange=function() {
+                            $('.draggable6A').css('top', difference+'px');
+                            $('.draggable6B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA6').offset().top;
+                            var tempdotBY = $('#dotB6').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable6B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable6";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        document.getElementById("grid7").onchange=function() {
+                            $('.draggable7A').css('top', difference+'px');
+                            $('.draggable7B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA7').offset().top;
+                            var tempdotBY = $('#dotB7').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable7B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable7";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        document.getElementById("grid8").onchange=function() {
+                            $('.draggable8A').css('top', difference+'px');
+                            $('.draggable8B').css('top', difference+'px');
+                            var tempdotAY = $('#dotA8').offset().top;
+                            var tempdotBY = $('#dotB8').offset().top;
+                            var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                            $('.draggable8B').css('top', (difference-tempDifference)+'px');
+                            lineAllign();
+                            var className = ".draggable8";
+                            var number = difference/this.value;
+                            $(className).draggable({
+                                axis: "y",
+                                containment: ".box", 
+                                scroll: false,
+                                grid: [number,number],
+                                distance: 0,
+
+                            },{drag: function(event, ui){
+                                    lineAllign();
+                            }
+                            });
+
+                        }
+                        
                 }
-            
               });
         
 
@@ -142,6 +309,7 @@ $(function() {
                             .css('transform', 'rotate(' + angle + 'deg)');
                     }
                 }
+                calculateValue();
             }
             
             window.onresize = function(event) {
@@ -186,7 +354,8 @@ $(function() {
     
             $(".draggable").draggable({
               axis: "y",
-              containment: ".box", 
+              containment: ".box",
+              grid: [difference/8,difference/8],
               scroll: false,
               distance: 0
             },{drag: function(event, ui){
@@ -212,63 +381,321 @@ $(function() {
                 }
                   
             }
-            var factorsElement = document.getElementsByClassName("factorName");
-
-            for(i=0; i<factorsElement.length; i++) {
-                factorsElement[i].onclick = function(event) {
-                var span, input, text;
-
-                // Get the event (handle MS difference)
-                event = event || window.event;
-
-                // Get the root element of the event (handle MS difference)
-                span = event.target || event.srcElement;
-
-                // If it's a span...
-                if (span && span.tagName.toUpperCase() === "SPAN") {
-                  // Hide it
-                  span.style.display = "none";
-
-                  // Get its text
-                  text = span.innerHTML;
-
-                  // Create an input
-                  input = document.createElement("input");
-                  input.type = "text";
-                  input.size = Math.max(text.length / 4 * 3, 4);
-                  span.parentNode.insertBefore(input, span);
-                  // Focus it, hook blur to undo
-                  input.focus();
-                  input.onblur = function() {
-                    // Remove the input
-                    if(input.value == "" || input.value == null){
-                        input.value = 'REQUIRED!';
+            
+            function calculateValue(){
+                var sum = parseInt(document.getElementById("currentValue").textContent);
+                for(i = 1; i<=boxCount; i++){
+                    var tempDifference = Math.abs($('#dotA'+i).offset().top - $('#dotB'+i).offset().top);
+                    var gridValue = document.getElementById("grid"+i);
+                    var times = parseInt(gridValue.options[gridValue.selectedIndex].value);
+                    if($('#dotA'+i).offset().top > $('#dotB'+i).offset().top && tempDifference > 10){
+                        sum += parseInt(document.getElementById("value"+i).textContent)*Math.ceil(tempDifference/(Math.ceil(difference)/times));
+                    }else if(tempDifference > 10){
+                        sum -= parseInt(document.getElementById("value"+i).textContent)*Math.ceil(tempDifference/(Math.ceil(difference)/times));
                     }
-                    span.parentNode.removeChild(input);
-
-                    // Update the span
-                    span.innerHTML = input.value;
-
-                    // Show the span again
-                    span.style.display = "";
-                  };
                 }
-              };
+                document.getElementById("newValue").textContent = sum;
             }
             
-            function getYAxis(obj){
-                var left, top;
-                left = top = 0;
-                if (obj.offsetParent) {
-                    do {
-                        top  += obj.offsetTop;
-                    } while (obj = obj.offsetParent);
-                }
-                return {
-                    y : top
-                };
-            };
 
+                
+                    document.getElementById('indicationCheck').onclick = function() {
+                        // access properties using this keyword
+                        if ( this.checked ) {
+                            var first = 0;
+                            var second = 0;
+                            var third = 0;
+                            var forth = 0;
+
+                            for(j=5;j>0;j--){
+                                for(i = 1; i <= boxCount; i++){
+                                    var weightBox = document.getElementById("weight"+i);
+                                    var weight = parseInt(weightBox.options[weightBox.selectedIndex].value);
+                                    if (weight == j && first == 0 || first == weight){
+                                        first = weight;
+                                        document.getElementById("indication"+i).textContent = "1ST";
+                                    }else if(weight == j && second == 0 || second == weight){
+                                        second = weight;
+                                        document.getElementById("indication"+i).textContent = "2ND";
+                                    }else if(weight == j && third == 0 || third == weight){
+                                        third = weight;
+                                        document.getElementById("indication"+i).textContent = "3RD";
+                                    }else if(weight == j && forth == 0 || forth == weight){
+                                        forth = weight;
+                                        document.getElementById("indication"+i).textContent = "4TH";
+                                    }else{
+                                        document.getElementById("indication"+i).textContent = "5TH";
+                                    }
+
+                                }
+                            }
+
+                        } else {
+                            for(i = 1; i <= boxCount; i++){
+                                document.getElementById("indication"+i).textContent = "";
+                            }
+                        }
+                    };
+            
+            function removeIndication(){
+                document.getElementById("indicationCheck").checked = false;
+                for(i = 1; i <= boxCount; i++){
+                    document.getElementById("indication"+i).textContent = "";
+                }
+            }
+            function spanActivate(){
+                var factorsElement = document.getElementsByClassName("factorName");
+
+                for(i=0; i<factorsElement.length; i++) {
+                    factorsElement[i].onclick = function(event) {
+                    var span, input, text;
+
+                    // Get the event (handle MS difference)
+                    event = event || window.event;
+
+                    // Get the root element of the event (handle MS difference)
+                    span = event.target || event.srcElement;
+
+                    // If it's a span...
+                    if (span && span.tagName.toUpperCase() === "SPAN") {
+                      // Hide it
+                      span.style.display = "none";
+
+                      // Get its text
+                      text = span.innerHTML;
+
+                      // Create an input
+                      input = document.createElement("input");
+                      input.type = "text";
+                      input.size = Math.max(text.length / 4 * 3, 4);
+                      span.parentNode.insertBefore(input, span);
+                      // Focus it, hook blur to undo
+                      input.focus();
+                      input.onblur = function() {
+                        // Remove the input
+                        if(input.value == "" || input.value == null){
+                            input.value = 'REQUIRED!';
+                        }
+                        span.parentNode.removeChild(input);
+
+                        // Update the span
+                        span.innerHTML = input.value;
+
+                        // Show the span again
+                        span.style.display = "";
+                      };                  
+                    }
+                  };
+                }
+                
+                var title = document.getElementsByClassName("projectTitle");
+
+                for(i=0; i<title.length; i++) {
+                    title[i].onclick = function(event) {
+                    var span, input, text;
+
+                    // Get the event (handle MS difference)
+                    event = event || window.event;
+
+                    // Get the root element of the event (handle MS difference)
+                    span = event.target || event.srcElement;
+
+                    // If it's a span...
+                    if (span && span.tagName.toUpperCase() === "SPAN") {
+                      // Hide it
+                      span.style.display = "none";
+
+                      // Get its text
+                      text = span.innerHTML;
+
+                      // Create an input
+                      input = document.createElement("input");
+                      input.type = "text";
+                      input.size = Math.max(text.length / 4 * 3, 4);
+                      span.parentNode.insertBefore(input, span);
+                      // Focus it, hook blur to undo
+                      input.focus();
+                      input.onblur = function() {
+                        // Remove the input
+                        if(input.value == "" || input.value == null){
+                            input.value = 'TITLE REQUIRED!';
+                        }
+                        span.parentNode.removeChild(input);
+
+                        // Update the span
+                        span.innerHTML = input.value;
+
+                        // Show the span again
+                        span.style.display = "";
+                      };                  
+                    }
+                  };
+                }
+
+                //calculate
+                var valueElement = document.getElementsByClassName("factorValue");
+
+                for(i=0; i<valueElement.length; i++) {
+                    valueElement[i].onclick = function(event) {
+                    var span, input, text;
+
+                    // Get the event (handle MS difference)
+                    event = event || window.event;
+
+                    // Get the root element of the event (handle MS difference)
+                    span = event.target || event.srcElement;
+
+                    // If it's a span...
+                    if (span && span.tagName.toUpperCase() === "SPAN") {
+                      // Hide it
+                      span.style.display = "none";
+
+                      // Get its text
+                      text = span.innerHTML;
+
+                      // Create an input
+                      input = document.createElement("input");
+                      input.type = "text";
+                      input.size = Math.max(text.length / 4 * 3, 4);
+                      span.parentNode.insertBefore(input, span);
+                      // Focus it, hook blur to undo
+                      input.focus();
+                      input.onblur = function() {
+                        // Remove the input
+                        if(input.value == "" || input.value == null || input.value != parseInt(input.value, 10)){
+                            input.value = '0';
+                        }else{
+                            input.value = Math.abs(parseInt(input.value, 10));
+                        }
+                        span.parentNode.removeChild(input);
+
+                        // Update the span
+                        span.innerHTML = input.value;
+
+                        // Show the span again
+                        span.style.display = "";
+                        calculateValue();
+                      };
+                    }
+                  };
+                }
+            }
+            
+            
+
+            spanActivate();
+                    $('.draggable1A').css('top', difference+'px');
+                    $('.draggable1B').css('top', difference+'px');
+                    var tempdotAY = $('#dotA1').offset().top;
+                    var tempdotBY = $('#dotB1').offset().top;
+                    var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                    $('.draggable1B').css('top', (difference-tempDifference)+'px');
+                    lineAllign();
+            //change grid
+                document.getElementById("grid1").onchange=function() {
+                    $('.draggable1A').css('top', difference+'px');
+                    $('.draggable1B').css('top', difference+'px');
+                    var tempdotAY = $('#dotA1').offset().top;
+                    var tempdotBY = $('#dotB1').offset().top;
+                    var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                    $('.draggable1B').css('top', (difference-tempDifference)+'px');
+                    lineAllign();
+                    var className = ".draggable1";
+                    $('.draggable1').offset().top = dotAY;
+                    var number = difference/this.value;
+                    $(className).draggable({
+                        axis: "y",
+                        containment: ".box", 
+                        scroll: false,
+                        grid: [number,number],
+                        distance: 0,
+    
+                    },{drag: function(event, ui){
+                            lineAllign();
+                    }
+                    });
+                              
+                  }
+                  $('.draggable2A').css('top', difference+'px');
+                  $('.draggable2B').css('top', difference+'px');
+                  var tempdotAY = $('#dotA2').offset().top;
+                  var tempdotBY = $('#dotB2').offset().top;
+                  var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                  $('.draggable2B').css('top', (difference-tempDifference)+'px');
+                  lineAllign();
+                  
+                  $('.weight').change(function() {
+                     removeIndication();
+                  });
+                document.getElementById("grid2").onchange=function() {
+                    $('.draggable2A').css('top', difference+'px');
+                    $('.draggable2B').css('top', difference+'px');
+                    var tempdotAY = $('#dotA2').offset().top;
+                    var tempdotBY = $('#dotB2').offset().top;
+                    var tempDifference = Math.abs(tempdotAY - tempdotBY);
+                    $('.draggable2B').css('top', (difference-tempDifference)+'px');
+                    lineAllign();
+                    var className = ".draggable2";
+                    var number = difference/this.value;
+                    $(className).draggable({
+                        axis: "y",
+                        containment: ".box", 
+                        scroll: false,
+                        grid: [number,number],
+                        distance: 0,
+    
+                    },{drag: function(event, ui){
+                            lineAllign();
+                    }
+                    });
+                              
+                  }
+                  
+                $('#save').click(function(event){ 
+                     var savedFactors = [];
+                     var savedGrids = [] ;
+                     var dotA = [];
+                     var dotB = [];
+                     var projectName = document.getElementById('projectTitle');
+                     var savedWeight = [];
+                     var per_unit_value = [];
+                     var max_value = document.getElementById('currentValue');
+                     for(i = 1 ; i <= boxCount ; i ++){
+                         var factor = document.getElementById('factor'+ i ).value;
+                         // save the factors in an ascending order, but now i only have the ID, i need value.
+                         savedFactors.push(factor);
+                         var grid = document.getElementById("grid"+i).value;
+                         savedGrids.push(grid);
+                         // i cannot get values off these dots. i need offset.
+                         //tempdotAY = $('#dotA1').offset().top;
+                         var currentDotA = $('#dotA'+i).offset().top;
+                         dotA.push(currentDotA);
+                         var CurrentDotB = $('#dotB'+i).offset().top;
+                         dotB.push(CurrentDotB);
+                         var currentWeight = document.getElementById('weight'+i).value;
+                         savedWeight.push(currentWeight);
+                         var currentPerUnitValue = document.getElementById('value'+i).value;
+                         per_unit_value.push(currentPerUnitValue);
+                     }
+                     $.ajax({
+                        url:'/BusinessModelPlanner/BOSSaveManager',
+                        type: "get",
+                        dataType: "json",
+                        data:{
+                            "savedFactors": savedFactors, 
+                            "savedGrids" : savedGrids, 
+                            "dotA" : dotA, 
+                            "dotaB": dotB, 
+                            "projectName": projectName,
+                            "weight":savedWeight,
+                            "per_unit_value": per_unit_value,
+                            "max_value" :max_value,
+                        }, 
+                        cache : false,
+                        processData: false
+                     });
+                 });
+            
           });
           
           

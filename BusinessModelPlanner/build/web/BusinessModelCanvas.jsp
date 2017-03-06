@@ -34,7 +34,7 @@
         
             if(companyList != null) {
                 for(CanvasCompany c : companyList) {
-                    out.println(c.getCompany() + " | " + c.getChoice() + " | " + c.getDescription() + "<BR>");
+                    out.println(c.getCompany() + " | " + c.getChoice() + " | " + c.getDescription() + " | " + c.getValueDriver() +"<BR>");
                 }
             }
         %>

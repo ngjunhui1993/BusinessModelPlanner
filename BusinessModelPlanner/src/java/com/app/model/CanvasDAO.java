@@ -20,6 +20,174 @@ import java.util.Iterator;
  * @author Dell
  */
 public class CanvasDAO {
+    
+    public ArrayList<String> retrieveAllCompanies() {
+        ArrayList<String> companyList = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from channel_strategy";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from cost_management";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from customer_acquisition";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+           while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from customer_relations";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from key_activities";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from key_partnerships";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from key_resources";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from revenues";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+            sql = "Select * from value_proposition";
+            preStmt = conn.prepareStatement(sql);
+            rs = preStmt.executeQuery();
+           while (rs.next()) {
+                String companyName = rs.getString("company");
+                boolean check = false;
+                
+                for(String name : companyList) {
+                    if(name.equals(companyName)) {
+                        check = true;
+                    }
+                }
+                
+                if(!check) {
+                    companyList.add(companyName);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return companyList;
+    }
 
     public ArrayList<CanvasCompany> retrieveCompanyDetailsByName(String companyName) {
         ArrayList<CanvasCompany> companyList = new ArrayList<>();
@@ -34,7 +202,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Channel Strategy");
                 companyList.add(company);
             }
             sql = "Select * from cost_management where company like '%' ? '%'";
@@ -42,7 +210,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Cost Management");
                 companyList.add(company);
             }
             sql = "Select * from customer_acquisition where company like '%' ? '%'";
@@ -50,7 +218,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Customer Acquisition");
                 companyList.add(company);
             }
             sql = "Select * from customer_relations where company like '%' ? '%'";
@@ -58,7 +226,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Customer Relations");
                 companyList.add(company);
             }
             sql = "Select * from key_activities where company like '%' ? '%'";
@@ -66,7 +234,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Key Activities");
                 companyList.add(company);
             }
             sql = "Select * from key_partnerships where company like '%' ? '%'";
@@ -74,7 +242,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Key Partnerships");
                 companyList.add(company);
             }
             sql = "Select * from key_resources where company like '%' ? '%'";
@@ -82,7 +250,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Key Resources");
                 companyList.add(company);
             }
             sql = "Select * from revenues where company like '%' ? '%'";
@@ -90,7 +258,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Revenues");
                 companyList.add(company);
             }
             sql = "Select * from value_proposition where company like '%' ? '%'";
@@ -98,7 +266,7 @@ public class CanvasDAO {
             preStmt.setString(1, companyName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"));
+                company = new CanvasCompany(rs.getString("company"), rs.getString("choice"), rs.getString("description"), "Value Proposition");
                 companyList.add(company);
             }
         } catch (SQLException e) {
