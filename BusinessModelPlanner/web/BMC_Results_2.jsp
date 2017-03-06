@@ -26,7 +26,6 @@
         <!--COMPANIES RESULT INPUT-->
         <div id="rcorners2">
             <h3>Companies:</h3>
-
             <!---   <div class="chip">
                    <img src="resources/image/CompanyIcon.png" alt="Person" width="96" height="96">
                    Company ABC
@@ -43,22 +42,26 @@
                 String companyName = (String) request.getParameter("companyName");
                 String[] companies = (String[]) request.getAttribute("companiesSearched");
                 boolean singleCompany = true;
+                boolean multipleCompanies = true;
                 ArrayList<CanvasCompany> allCompaniesSelected = new ArrayList<>();
 
                 if (companyName == null || companyName.equals("")) {
                     singleCompany = false;
                     if (companies == null || companies.length == 0) {
-                        request.setAttribute("errorMsg", "Please do not leave any blanks.");
-                        RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
-                        rd.forward(request, response);
-                        return;
+                        multipleCompanies = false;
+                        if(request.getParameter("searchByTraits") == null) {
+                            request.setAttribute("errorMsg", "Please do not leave any blanks.");
+                            RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
+                            rd.forward(request, response);
+                            return;
+                        }
                     }
                 }
 
                 if (singleCompany) {
-                    out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='96' height='96'>" + companyName + "</div>");
+                    out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='50' height='50'>" + companyName + "</div>");
                     allCompaniesSelected = canvasDAO.retrieveCompanyDetailsByName(companyName);
-                } else {
+                } else if(multipleCompanies) {
                     for (String name : companies) {
                         out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='96' height='96'>" + name + "</div>");
                         companySelected = canvasDAO.retrieveCompanyDetailsByName(name);
@@ -66,6 +69,8 @@
                             allCompaniesSelected.add(c);
                         }
                     }
+                } else {
+                    
                 }
   //check:              
 //out.println(allCompaniesSelected.size());

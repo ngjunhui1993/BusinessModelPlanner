@@ -20,7 +20,7 @@ import java.util.Iterator;
  * @author Dell
  */
 public class CanvasDAO {
-    
+
     public ArrayList<String> retrieveAllCompanies() {
         ArrayList<String> companyList = new ArrayList<>();
         Connection conn = null;
@@ -34,14 +34,14 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -51,31 +51,31 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
             sql = "Select * from customer_acquisition";
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
-           while (rs.next()) {
+            while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -85,14 +85,14 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -102,14 +102,14 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -119,14 +119,14 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -136,14 +136,14 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -153,31 +153,31 @@ public class CanvasDAO {
             while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
             sql = "Select * from value_proposition";
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
-           while (rs.next()) {
+            while (rs.next()) {
                 String companyName = rs.getString("company");
                 boolean check = false;
-                
-                for(String name : companyList) {
-                    if(name.equals(companyName)) {
+
+                for (String name : companyList) {
+                    if (name.equals(companyName)) {
                         check = true;
                     }
                 }
-                
-                if(!check) {
+
+                if (!check) {
                     companyList.add(companyName);
                 }
             }
@@ -276,7 +276,7 @@ public class CanvasDAO {
         }
         return companyList;
     }
-    
+
     public ArrayList<String> retrieveTraitsByDriver(String driverName) {
         ArrayList<String> traitsList = new ArrayList<String>();
         Connection conn = null;
@@ -284,7 +284,7 @@ public class CanvasDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select choice from ?"; 
+            String sql = "Select choice from ?";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, driverName);
             rs = preStmt.executeQuery();
@@ -323,7 +323,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from cost_management"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from cost_management"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -339,7 +346,15 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * customer_acquisition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * customer_acquisition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -355,7 +370,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from customer_relations"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from customer_relations"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -371,7 +393,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from key_activities"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from key_activities"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -387,7 +416,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from key_partnerships"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from key_partnerships"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -403,7 +439,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from key_resources"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from key_resources"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -419,7 +462,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from revenues"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from revenues"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -435,7 +485,14 @@ public class CanvasDAO {
                     allMap.put(trait, newTraitCompanies);
                 }
             }
-            sql = "Select * from value_proposition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select * from value_proposition"; //get all traits and details from first value driver. then repeat this for the rest, to add all into allMap.
             preStmt = conn.prepareStatement(sql);
             rs = preStmt.executeQuery();
             while (rs.next()) {
@@ -461,17 +518,18 @@ public class CanvasDAO {
 
     public HashMap<String, Integer> resultsFromAllTraitsSelected(ArrayList<String> selectedTraits, HashMap<String, ArrayList<String>> allData) {
         HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
-
         for (String trait : selectedTraits) {
-            ArrayList<String> companiesWithTrait = allData.get(trait);
+            ArrayList<String> companiesWithTrait = allData.get(trait); //null pointer here. may be data doesn't tally.
+            if (companiesWithTrait != null || companiesWithTrait.size() != 0) {
 
-            for (String company : companiesWithTrait) {
-                if (resultMap.containsKey(company)) {
-                    int count = resultMap.get(company);
-                    count++;
-                    resultMap.put(company, count);
-                } else {
-                    resultMap.put(company, 1);
+                for (String company : companiesWithTrait) {
+                    if (resultMap.containsKey(company)) {
+                        int count = resultMap.get(company);
+                        count++;
+                        resultMap.put(company, count);
+                    } else {
+                        resultMap.put(company, 1);
+                    }
                 }
             }
         }
@@ -481,7 +539,7 @@ public class CanvasDAO {
     public HashMap<String, Integer> nearestSearchFromResults(HashMap<String, Integer> resultsFromAllTraitsSelected) {
         HashMap<String, Integer> nearestResults = new HashMap<String, Integer>();
         Iterator iter = resultsFromAllTraitsSelected.entrySet().iterator();
-        
+
         /* while(iter.hasNext()) {
             String company = (String) iter.next();
             int sum = resultsFromAllTraitsSelected.get(company);
@@ -490,13 +548,12 @@ public class CanvasDAO {
                 counter = sum;
             }
         } */
-        
         int maxValue = (Collections.max(resultsFromAllTraitsSelected.values()));
-        
-        while(iter.hasNext()) {
+
+        while (iter.hasNext()) {
             String company = (String) iter.next();
             int count = resultsFromAllTraitsSelected.get(company);
-            if(count == maxValue) {
+            if (count == maxValue) {
                 nearestResults.put(company, count);
             }
         }

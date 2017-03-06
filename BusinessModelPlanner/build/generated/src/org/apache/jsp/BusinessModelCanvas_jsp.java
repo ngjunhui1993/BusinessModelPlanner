@@ -81,6 +81,11 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
                     out.println(c.getCompany() + " | " + c.getChoice() + " | " + c.getDescription() + " | " + c.getValueDriver() +"<BR>");
                 }
             }
+            
+if (request.getAttribute("traits")!=null) {
+        out.println(request.getAttribute("traits"));
+        
+    }
         
       out.write("\r\n");
       out.write("\r\n");

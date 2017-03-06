@@ -8,8 +8,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="resources/css/demo.css">
-        <link rel="stylesheet" href="resources/css/listnav.css">
+        <link rel="stylesheet" href="resources/css/bmc-searchcom-style.css">
+        <link rel="stylesheet" href="resources/css/bmc-searchcom-listnav.css">
         <script src="resources/js/jquery-1.11.2.min.js"></script>
         <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/main.css'>
         <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-csp.css'>
@@ -59,11 +59,11 @@
                                     String input = "{{typeahead.companies}}";
                                     //       out.println(input);
                                     /*  if(input.length()==2) {
-                                        input = null;
-                                    } else {
-                                        input = input.substring(2, input.length()-2);
-                                        out.println(input);
-                                    } */
+                                     input = null;
+                                     } else {
+                                     input = input.substring(2, input.length()-2);
+                                     out.println(input);
+                                     } */
 
 
                                 %>
@@ -76,43 +76,46 @@
                             <td>
                                 <!--Company List-->
 
-                                <ul id="demoSix" class="demo imageList"> 
-                                    <br>
+                                <ul id="demoFour" class="demo"><br>
 
-                                    <%                                        CanvasDAO canvasDAO = new CanvasDAO();
+                                    <%                                        
+                                        CanvasDAO canvasDAO = new CanvasDAO();
                                         ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
                                         for (String name : companyList) {
-                                            out.println("<li><img src='resources/image/CompanyIcon.png' width='40' height='40'><a href='BMC_Results_2.jsp?companyName=" + name + "'>" + name + "</a><p class='last-name'>" + name + "</p></li>");
-                                        }
+                                            %>
+                                    <li><a href='BMC_Results_2.jsp?companyName=<%=name%>'><%=name%></a>
+                                    </li>
+                                    <%
+                                        
+                                            }
                                     %>
-
+                                </ul>
 
 
                                     </td>
                                     </tr>
                                     </table>
-                                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                    <script src="resources/js/jquery-listnav.js"></script>
+
                                     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
                                     <script src='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js'></script>
                                     <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js'></script>
                                     <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js'></script>
                                     <script src="resources/js/autofill.js"></script>
-                                    <script>
-                                                                $(function () {
+                                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+                                    <script src="resources/js/bmc-searchcom-listnav.js"></script>
 
-                                                                    $('#demoSix').listnav({
-                                                                        filterSelector: '.last-name',
-                                                                        includeNums: false,
-                                                                        removeDisabled: true,
-                                                                        allText: 'All Companies',
-                                                                        showCounts: false,
-                                                                        noMatchText: 'No match found'
-                                                                    });
-                                                                    $('.demo a').click(function (e) {
-                                                                        e.preventDefault();
-                                                                    });
-                                                                });
+                                    <script>
+                                            $(function () {
+                                            $('#demoFour').listnav({
+                                            includeAll: true,
+                                                    includeNums: true,
+                                                    showCounts: false,
+                                                    allText: 'All Companies',
+                                                    onClick: function (letter) {
+                                                    $(".myLastClicked").text(letter.toUpperCase());
+                                                    }
+                                            });
+                                            });
                                     </script>
 
                                     </body>

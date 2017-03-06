@@ -10,6 +10,7 @@ import com.app.model.entity.CanvasCompany;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,6 +65,148 @@ public class CanvasController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
                 return;*/
+        }
+        
+        if(request.getParameter("searchByTraits")!=null) {
+            String keyPartners = request.getParameter("keyPartners");
+            String keyActivities = request.getParameter("keyActivities");
+            String keyResources = request.getParameter("keyResources");
+            String valueProposition = request.getParameter("valueProposition");
+            String customerSegments = request.getParameter("customerSegments");
+            String customerRelationship = request.getParameter("customerRelationship");
+            String channels = request.getParameter("channels");
+            String costStructure = request.getParameter("costStructure");
+            String revenue = request.getParameter("revenue");
+            
+            ArrayList<String> allTraits = new ArrayList<String>();
+            
+            //need to edit the split again. may have errors. need to edit the excel file of data first.
+            
+            if(keyPartners != null && !keyPartners.equals("") && keyPartners.length()!=3) {
+                keyPartners = keyPartners.substring(4,keyPartners.length()-3);
+                String[] splitTraits = keyPartners.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(keyActivities != null && !keyActivities.equals("") && keyActivities.length()!=3) {
+                keyActivities = keyActivities.substring(4,keyActivities.length()-2);
+                String[] splitTraits = keyActivities.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(keyResources != null && !keyResources.equals("") && keyResources.length()!=3) {
+                keyResources = keyResources.substring(4,keyResources.length()-3);
+                String[] splitTraits = keyResources.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(valueProposition != null && !valueProposition.equals("") && valueProposition.length()!=3) {
+                valueProposition = valueProposition.substring(4,valueProposition.length()-2);
+                String[] splitTraits = valueProposition.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+           if(customerSegments != null && !customerSegments.equals("") && customerSegments.length()!=3) {
+                customerSegments = customerSegments.substring(4,customerSegments.length()-2);
+                String[] splitTraits = customerSegments.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+           
+            if(customerRelationship != null && !customerRelationship.equals("") && customerRelationship.length()!=3) {
+                customerRelationship = customerRelationship.substring(4,customerRelationship.length()-2);
+                String[] splitTraits = customerRelationship.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(channels != null && !channels.equals("") && channels.length()!=3) {
+                channels = channels.substring(4,channels.length()-2);
+                String[] splitTraits = channels.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(costStructure != null && !costStructure.equals("") && costStructure.length()!=3) {
+                costStructure = costStructure.substring(4,costStructure.length()-2);
+                String[] splitTraits = costStructure.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            }
+            
+            if(revenue != null && !revenue.equals("") && revenue.length()!=3) {
+                revenue = revenue.substring(4,revenue.length()-2);
+                String[] splitTraits = revenue.split("\",\\s+\"");
+                
+                if(splitTraits!=null && splitTraits.length!=0) {
+                    for(String trait : splitTraits) {
+                        allTraits.add(trait);
+                    }
+                }
+            } 
+    /*        
+            HashMap<String, ArrayList<String>> allData = canvasDAO.retrieveAll();
+            
+           request.setAttribute("allData", allData);
+                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                rd.forward(request, response);
+                return;
+            
+            
+            HashMap<String, Integer> countTraits = canvasDAO.resultsFromAllTraitsSelected(allTraits, allData);
+            HashMap<String, Integer> nearestCompanies = canvasDAO.nearestSearchFromResults(countTraits);
+            
+*/
+            
+            /*
+            request.setAttribute("nearestCompanies", nearestCompanies);
+                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                rd.forward(request, response);
+                return;
+            
+            */
+            /*
+            request.setAttribute("traits", allTraits);
+                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                rd.forward(request, response);
+                return; */
+            
         }
     }
 

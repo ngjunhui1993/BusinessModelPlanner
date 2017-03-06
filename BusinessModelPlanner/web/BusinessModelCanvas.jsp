@@ -4,6 +4,8 @@
     Author     : Dell
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="com.app.model.entity.CanvasCompany"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,6 +39,27 @@
                     out.println(c.getCompany() + " | " + c.getChoice() + " | " + c.getDescription() + " | " + c.getValueDriver() +"<BR>");
                 }
             }
+            
+if (request.getAttribute("traits")!=null) {
+        ArrayList<String> traits = (ArrayList<String>)request.getAttribute("traits");
+        for(String trait : traits) {
+            out.println(trait);
+            out.println("<BR>");
+        }
+        
+    }
+
+if(request.getAttribute("allData")!=null) {
+    HashMap<String, ArrayList<String>> allData = (HashMap<String,ArrayList<String>>)request.getAttribute("allData");
+    Iterator iter = allData.entrySet().iterator();
+    while(iter.hasNext()) {
+        out.println(iter.next());
+    }
+    out.println("<BR><BR>");
+    out.println(allData.size());
+}
+        
+    
         %>
 
 
