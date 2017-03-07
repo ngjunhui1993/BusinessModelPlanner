@@ -265,7 +265,8 @@
                     </li>
                     <br>
                     
-                    <input type="submit" name="searchByTraits">
+                    <input type="submit" name="searchByTraits"><br>
+                    <a href="BMCindex.jsp">BACK</a>
                  
 
                 </ul>   

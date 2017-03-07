@@ -17,11 +17,11 @@
             <tr>
                 <td>
                     <a href="BMC_SearchByCompanies.jsp" class="hvr-float-shadow">
-                        <img border="0" alt="Search Companies" src="img/BMC_Company.jpg">
+                        <img border="0" alt="Search Companies" src="resources/image/BMC_Company.jpg">
                         </td>
                         <td>
                             <a href="BMC_SearchByDrivers.jsp" class="hvr-float-shadow">
-                                <img border="0" alt="Search Drivers" src="img/BMC_Drivers.jpg">
+                                <img border="0" alt="Search Drivers" src="resources/image/BMC_Drivers.jpg">
                                 </td>
                                 </tr>
                                 </table>
