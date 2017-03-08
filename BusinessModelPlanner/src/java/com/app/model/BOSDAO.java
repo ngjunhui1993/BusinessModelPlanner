@@ -7,6 +7,7 @@ package com.app.model;
 
 import com.app.model.entity.BOSOperator;
 import com.app.model.entity.BOSProduct;
+import static java.lang.System.console;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -242,16 +243,16 @@ public class BOSDAO {
                 int originalValue = rs.getInt("original_value");
                 int newValue = rs.getInt("new_value");
                 String originalName = rs.getString("original_product_name");
-                BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, weight, maxValue, perUnitValue, originalValue, newValue, originalName);
+             //   BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, weight, maxValue, perUnitValue, originalValue, newValue, originalName);
                 //see weight take out value add in put back 
                 
                 if(operatorMap.containsKey(weight)) {
                     ArrayList<BOSOperator> update = operatorMap.get(weight);
-                    update.add(operator);
+                 //   update.add(operator);
                     operatorMap.put(weight, update);
                 } else {
                     ArrayList<BOSOperator> newList = new ArrayList<>();
-                    newList.add(operator);
+               //     newList.add(operator);
                     operatorMap.put(weight, newList);
                 }
             }
@@ -313,6 +314,7 @@ public class BOSDAO {
             ConnectionManager.close(conn, preStmt, rs);
         }
     }
+   
     
     public static boolean checkOperatorExist (String userid, String projectName,int factorid,String factorName,int weightNumber,int gridNumber,int perUnitValueNumber,int originalValue,int newValue){
         Connection conn = null;
@@ -344,5 +346,118 @@ public class BOSDAO {
         }finally{
             ConnectionManager.close(conn, preStmt, rs);
         }
+        return true ;// put this here to remove compile error only. remove this part if necessary
     }
+    // this method is created by JH. will take in all the arrays and values to be saved in the db.
+    // here are the arrays
+    // factors , grids , greendots , bluedots , pricepoints , weights 
+    // here are the values : projectName , userID , currentValue , newValue.
+    public static boolean saveProjectOperators(ArrayList<String> factors ,
+                                    ArrayList<String> grids , 
+                                    ArrayList<String> greenDots , 
+                                    ArrayList<String> blueDots , 
+                                    ArrayList<String> pricePoints , 
+                                    ArrayList<String> weights , 
+                                    String projectName , 
+                                    String userID , 
+                                   
+                                    int column,
+                                    int productID ){
+        
+   // this method is created by JH. will take in all the arrays and values to be saved in the db.
+    // here are the arrays
+    // factors , grids , greendots , bluedots , pricepoints , weights 
+    // here are the values : projectName , userID , currentValue , newValue , column
+        // establish connection
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql ;
+        boolean done = false ;
+      //  int numProjects = retrieveNoOfProjects(userID);
+      
+        // done establishing connection
+        // i think i will use the update sql statement
+        // note those suppose to be int must change to int.
+        // sequence also should be noted. not sure if based on the index is accurate. 
+        //checking should be done at BOSC.jsp script
+        try {
+            conn = ConnectionManager.getConnection();
+            // if projectID = 1 , i am a new user. go ahead and insert, no need to update.
+            // if projectID more than 1, then i have existing project, check to see if project name is existing. if yes, obtain its projectID.
+            sql = "insert into blueoceanstrategy_operator values(?,?,?,?,?,?,?,?,?,?);" ;
+            for(int i =1 ; i <=column  ; i ++){
+                pstmt = conn.prepareStatement(sql);
+                //select clause
+                
+                //where clause
+                pstmt.setString(1,userID );
+                pstmt.setString(2,projectName );
+                pstmt.setInt(3,productID );
+                pstmt.setInt(4,i );
+                pstmt.setString(5, factors.get(i-1));
+                pstmt.setInt(6,Integer.parseInt(weights.get(i-1)) );
+                pstmt.setInt(7 ,Integer.parseInt(grids.get(i-1)) );
+                pstmt.setInt(8 ,Integer.parseInt(pricePoints.get(i-1)) );
+                pstmt.setInt(9 ,Integer.parseInt(blueDots.get(i-1)) );
+                pstmt.setInt(10 ,Integer.parseInt(greenDots.get(i-1)) );
+                pstmt.executeUpdate();
+                
+                
+                
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            
+            System.out.println("error in saving to database in bosdao");
+            return false;
+            
+        }finally{
+            ConnectionManager.close(conn, pstmt, rs);
+            done = true ;
+        }
+        System.out.println("Saved BOSC operators.");
+        
+        return true ;// temporarily
+    }
+    
+    // this method saves the product table, the one above saves the product operators.
+    public static boolean saveProject(String userID , String projectName , int productID, double originalCost , double budget ){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql ;
+        try{
+            conn = ConnectionManager.getConnection();
+            sql = "INSERT INTO `blueoceanstrategy_product`(`userID`, `project_name`, `product_id`, `original_cost`, `budget_required`) VALUES (?,?,?,?,?); ";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userID);
+            pstmt.setString(2, projectName);
+            pstmt.setInt(3, productID);
+            pstmt.setDouble(4, originalCost);
+            pstmt.setDouble(5, budget);
+            pstmt.executeUpdate();
+            
+            
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println(userID);
+            System.out.println("Problem with saveProject method in bosdao");
+            
+            
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            System.out.println("Something is null");
+            
+        }
+        finally{
+            ConnectionManager.close(conn, pstmt, rs); 
+            
+        }
+        
+        return true; //temporarily
+    }
+    
+    
 }

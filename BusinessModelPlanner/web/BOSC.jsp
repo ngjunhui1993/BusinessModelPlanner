@@ -4,7 +4,9 @@
     <%@include file="header.jsp"%>
     <!-- BOSC CSS -->
     <link href="resources/css/BOSC.css" rel="stylesheet" />
+<%
 
+%>
         <!--ABOUT SECTION-->
         <section class="for-full-back color-white bodyStart" id="about-models">
             <div class="container">
@@ -13,8 +15,10 @@
                         <h3>Blue Ocean Strategic Canvas</h3>
                         <br/>
                         <h2><span class="projectTitle" id="projectTitle" contenteditable="true">Enter Project Title</span></h2>
-                        <button class="BOSCSaveButton" id="save" type="button">Save</button><br/>
-                        <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br />
+                        
+                        <button class="BOSCSaveButton" id="save" type="button" >Save</button><br/>
+                        
+                     <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br /> 
                     </div>
 
                 </div>
@@ -22,8 +26,23 @@
             </div>
         </section>
         <!--END ABOUT SECTION-->
+        <!-- this is the save function. upon clicking on the save button, the system must obtain all 
+        several values.
+        1. Project Name
+        2. All weights
+        3. All grids
+        4. All Blue and Green dots
+        5. Current Value
+        6. New Value
+        7. All increment Values
+        8. All factor Names
+        after obtaining these, the system must send information to database, and display ok alert
+        validate that all values goes through to db
+        validate that no values are changed
+        ajax possibly, to prevent refresh. upon refresh, all values will disappear, need to fix this issue.
+        loading will be a bitch, but see how it goes from here
+        -->
 
-         
 
         <!-- BOSC BODY SECTION-->
         <section>
@@ -67,14 +86,15 @@
                 </div>
                 <div id="container">
                     <div id="labels">
-                        <b><div id="topLabel">High - 8</div>
-                            <div id="bottomLabel">Low - 0</div></b>
+                        <b><div id="topLabel">High </div>
+                            <div id="bottomLabel">Low </div></b>
                     </div>
                     <div id="factors">
             <!--            <ul id="sortable">-->
                             <div id="box1" class="box boxOdd">
                                 <div class="draggable draggable1A draggable1 ">
                                   <i id="dotA1" class="fa fa-circle dotA"></i>
+                                  <i id="canvasBottom" class="canvasBottom"></i>
                                 </div>
                                 <div class="draggable draggable1B draggable1 dotBottom">
                                   <i id="dotB1" class="fa fa-circle dotB" ></i>
@@ -121,7 +141,9 @@
                                 <option value="8" selected="selected">8</option>
                             </select><br/>
                             Value: 
-                            <span class="factorValue" id="value1" contenteditable="false">0</span>
+                            <span class="factorValue" id="value1" contenteditable="false">0</span></br>
+                           <span class="GreenDotValue" id="greenDot1" hidden="">0</span><br>
+                              <span class="BlueDotValue" id="blueDot1" hidden="">0</span><br>
                         </div>
                         <div class="factorBox">
                             <span class="factorName" id="factor2" contenteditable="true">Factor 2</span><br/>
@@ -146,7 +168,13 @@
                                 <option value="8" selected="selected">8</option>
                             </select><br/>
                             Value: 
-                            <span class="factorValue" id="value2" contenteditable="false">0</span>
+                            <span class="factorValue" id="value2" contenteditable="false">0</span><br>
+                              <span class="GreenDotValue" id="greenDot2" hidden="" >0</span><br>
+                              <span class="BlueDotValue" id="blueDot2" hidden="">0</span><br>
+                              <span class="boxCount" id="boxCounter" >2</span><br>
+                             
+                            <!--hidden=""-->
+                            
                         </div>
                     </div>
 
@@ -167,5 +195,128 @@
         <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
         
         <!-- END FOOTER SECTION -->
+        <!-- BOSC Save and Download script-->
+        <script type = text/javascript>
+            $('#save').click( function parse() {
+              var boxCounter = parseInt(document.getElementById('boxCounter').innerHTML);
+                var blueDots = [];
+                var greenDots = [];
+                var factors = [] ;
+                var weights = [] ;
+                var pricePoints = [] ;
+                var grids = [] ;
+                var tempGrids;
+                var tempBlueDots ;
+                var tempGreenDots ;
+                var tempFactors ;
+                var tempWeights ;
+                var tempPricePoints ;
+                // temp variables are to store each element by id, to be pushed to arrays.
+                // i will iterate through all the columns to get all the values from all columns and save to 
+                //their respective arrays. array to be passed back.
+                //  i need $.serialize(array);
+                // green dots
+                //blue dots
+                // weights
+                // grids
+                // price points 
+                // factor names
+                
+                for(k=1; k<=boxCounter; k++) {
+                    tempGreenDots = document.getElementById("greenDot"+ k).innerHTML;
+                    tempBlueDots = document.getElementById("blueDot"+ k).innerHTML;
+                    tempWeights = parseInt(document.getElementById("weight"+ k).options[document.getElementById("weight"+ k).selectedIndex].value);
+                    tempGrids = parseInt(document.getElementById("grid"+k).options[document.getElementById("grid"+k).selectedIndex].value);
+                    tempPricePoints = document.getElementById("value" + k).innerHTML;
+                    tempFactors = document.getElementById("factor"+ k).innerHTML;
+                    // push to array
+                    blueDots.push(tempBlueDots);
+                    greenDots.push(tempGreenDots);
+                    factors.push(tempFactors);
+                    weights.push(tempWeights);
+                    pricePoints.push(tempPricePoints);
+                    grids.push(tempGrids);
+                    // by now all values should be in the array, can be parsed to jsp page via ajax.
+                    // jsp page to capture these values with request.getParameterValues()
+                    // the rest of the variables that are not dynamic can be captured with request.getParameter()
+                }
+                //  i need $.serialize(array);
+//                    blueDots =  $.serialize(blueDots);
+//                    greenDots = $.serialize(greenDots);
+//                    factors = $.serialize(factors);
+//                    weights = $.serialize(weights);
+//                    pricePoints = $.serialize(pricePoints);
+//                    grids = $.serialize(grids);
+// i need to var myJSON = JSON.stringify(obj); to convert the whole thing into json string. 
+                  var jsonBlueDots =  JSON.stringify(blueDots); 
+                  var jsonGreenDots =  JSON.stringify(greenDots); 
+                  var jsonFactors =  JSON.stringify(factors); 
+                  var jsonWeights =  JSON.stringify(weights); 
+                  var jsonPricePoints =  JSON.stringify(pricePoints);
+                  var jsonGrids =   JSON.stringify(grids); 
+                  
+                  
+//            if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+//            
+//                xmlhttp=new XMLHttpRequest();
+//            }
+//            else{// code for IE6, IE5
+//            
+//                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+//            }    
+         //   xmlhttp.onreadystatechange=function() {
+           // if (this.readyState==4 && this.status==200) { 
+           // this chunk is mostly irrelevant, i only need project name, current and new value and boxCounter(somewhere above)
+                var projectName = document.getElementById("projectTitle").innerHTML;
+//                var grid1 = parseInt(document.getElementById("grid1").options[document.getElementById("grid1").selectedIndex].value);
+//                var grid2 = parseInt(document.getElementById("grid2").options[document.getElementById("grid2").selectedIndex].value);
+//                var weight1 = parseInt(document.getElementById("weight1").options[document.getElementById("weight1").selectedIndex].value);
+//                var weight2 = parseInt(document.getElementById("weight2").options[document.getElementById("weight2").selectedIndex].value);
+//                var savedGreenDotValue1 = document.getElementById("greenDot1").innerHTML;
+//                var savedGreenDotValue2 = document.getElementById("greenDot2").innerHTML;
+//                var savedBlueDotValue1 = document.getElementById("blueDot1").innerHTML;
+//                var savedBlueDotValue2 = document.getElementById("blueDot2").innerHTML;
+               
+                var savedCurrent = document.getElementById("currentValue").innerHTML;
+                var savedNewValue = document.getElementById("newValue").innerHTML;
+//                var savedPricePoint1 = document.getElementById("value1").innerHTML;
+//                var savedPricePoint2 = document.getElementById("value2").innerHTML;
+//                var savedFactorName1 =  document.getElementById("factor1").innerHTML;
+//                var savedFactorName2 =  document.getElementById("factor2").innerHTML;
+                $.ajax
+                (
+                {
+                    url:'BOSCParser',
+            // only project name, current and new values is fixed number, the rest are dynamic.
+                    data:{  
+                            boxCounter: boxCounter,
+                            projectName: projectName,                            
+                            savedCurrent: savedCurrent,
+                            savedNewValue: savedNewValue, 
+                            blueDots: jsonBlueDots,
+                            greenDots: jsonGreenDots,
+                            factors: jsonFactors,
+                            weights: jsonWeights,
+                            pricePoints: jsonPricePoints,
+                            grids: jsonGrids
+                            
+                        },
+                    type:'GET',
+                    cache:false,
+                    success:function(){alert('Canvas saved!');},
+                    error:function(){alert('You have an existing project with the same title! Use a different project title');}
+                }
+                );
+                
+            //}
+      
+                
+           // }
+          //  xmlhttp.open("Post","/BOSCParser",true);
+         //   xmlhttp.send();
+            
+        }) ; 
+                
+        </script>
 
 </html>

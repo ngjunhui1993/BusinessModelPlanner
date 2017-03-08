@@ -83,7 +83,7 @@ public class BOSUpdate extends HttpServlet {
                 } else {
                     prodOrServ = "service";
                 }
-                bosDAO.createProject(loggedInUser, projectName, productID, productName, prodOrServ, budgetDouble);
+                //bosDAO.createProject(loggedInUser, projectName, productID, productName, prodOrServ, budgetDouble);
                 session.setAttribute("bosProjectName", projectName);
                 response.sendRedirect("BlueOceanStrategyObject.jsp?projectName=" + projectName + "&productID=" + productID + "&productName=" + productName + "&type=" + prodOrServ + "&budget=" + budgetDouble);
 
@@ -171,7 +171,7 @@ public class BOSUpdate extends HttpServlet {
             }
             int operatorID = numOfOperators + 1;
             try {
-                bosDAO.createOperator(loggedInUser, projectName, product.getProductID(), operatorID, operatorName, weightInt, maxValueInt, costPerUnitInt, 0, 0, "");
+             //   bosDAO.createOperator(loggedInUser, projectName, product.getProductID(), operatorID, operatorName, weightInt, maxValueInt, costPerUnitInt, 0, 0, "");
             } catch (Exception ex) {
                 request.setAttribute("errorMsg", "Database error. Please try again.");
                 RequestDispatcher rd = request.getRequestDispatcher("BlueOceanStrategyObject.jsp");

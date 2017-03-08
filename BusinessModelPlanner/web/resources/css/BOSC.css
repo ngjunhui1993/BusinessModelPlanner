@@ -248,3 +248,8 @@
     padding: 0;
     
 }
+.canvasBottom {
+    //visibility: hidden;
+    position:relative;
+    z-index: 200;
+}
