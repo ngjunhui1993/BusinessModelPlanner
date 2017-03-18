@@ -37,6 +37,10 @@
             <form action="Admin.jsp">
                 <input type="submit" value="Access Admin Page"/>
             </form>
+            
+            <form action="Bootstrap.jsp">
+                <input type="submit" value="Upload Data into Database"/>
+            </form>
             <%
                 }
             %>

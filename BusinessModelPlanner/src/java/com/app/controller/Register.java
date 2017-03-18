@@ -58,8 +58,8 @@ public class Register extends HttpServlet {
             //retrieve the password sent from the form
             String password = request.getParameter("password");
             //retrieve the user type from the form
-            //String type = request.getParameter("type");
-            String type = "student";
+            String type = request.getParameter("type");
+            //String type = "student";
             //retrieve confirmed password from form.
             String confirmPassword = request.getParameter("confirmPassword");
             
