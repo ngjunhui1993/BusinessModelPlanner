@@ -44,31 +44,35 @@ public class MainFileUpload extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         // HashMap for storing the individual contents of the CSV File in the zipped folder
-        HashMap<String, ArrayList<String[]>> fileContent = new HashMap<String, ArrayList<String[]>>();
+        HashMap<String, ArrayList<String[]>> fileContents = new HashMap<String, ArrayList<String[]>>();
         // For retrieving the File object submitted by the user
         Part filepart = request.getPart("upfile");
+        // Unzips the file if there are no errors such as no file uploaded, non-zipped file, no radio button selected or both
         InputStream is = filepart.getInputStream();
-
-
+        ZipInputStream zis = new ZipInputStream(/*new BufferedInputStream(*/is/*)*/);
+        ZipEntry ze = null;
         boolean hasContents = false;
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(is, "UTF-8"), ',', '"');
-            ArrayList<String[]> currentCSVFile = (ArrayList<String[]>) reader.readAll();
-            String fileName = filepart.getSubmittedFileName().substring(filepart.getSubmittedFileName().lastIndexOf('\\') + 1);
-            fileContent.put(fileName, currentCSVFile);
-            hasContents = true;
+            while ((ze = zis.getNextEntry()) != null) {
+                CSVReader reader = new CSVReader(new InputStreamReader(zis, "UTF-8"), ',', '"');
+                String fileName = ze.getName().substring(ze.getName().lastIndexOf("/")+1);//.substring(filepart.getSubmittedFileName().lastIndexOf("/") + 1);
+                ArrayList<String[]> currentCSVFile = (ArrayList<String[]>) reader.readAll();
+                fileContents.put(fileName, currentCSVFile);
+                hasContents = true;
+            }
         } catch (Throwable e) {
             
         }
-        is.close();
+        zis.close();
         // Redirects back to the admin page with the error message
         if (!hasContents) {
-            request.setAttribute("uploadError", "Please upload a valid file");
-            RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
+            request.setAttribute("uploadError", "Please upload a valid zipped file containing all of the necessary CSV files");
+            RequestDispatcher view = request.getRequestDispatcher("Bootstrap.jsp");
             view.forward(request, response);
         } else {
-            request.setAttribute("uploadFile", fileContent);
+            request.setAttribute("uploadFile", fileContents);
             // redirects to bootstrap servlet
             RequestDispatcher view = request.getRequestDispatcher("BootStrap");
             view.forward(request, response);

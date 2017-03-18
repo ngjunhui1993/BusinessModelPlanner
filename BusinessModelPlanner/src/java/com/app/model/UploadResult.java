@@ -15,30 +15,30 @@ import java.util.TreeMap;
  */
 public class UploadResult implements Comparable<UploadResult> {
     int numOfSuccess;
-    String fileName;
+    String workbookName;
     HashMap<String, String[]> validDataList;
     TreeMap<Integer, ArrayList<String>> errorList;
     String unknownFiles;
     int additionalBids;
 
-    public UploadResult(String fileName, HashMap<String, String[]> validDataList, TreeMap<Integer, ArrayList<String>> errorList) {
-        this.fileName = fileName;
+    public UploadResult(String workbookName, HashMap<String, String[]> validDataList, TreeMap<Integer, ArrayList<String>> errorList) {
+        this.workbookName = workbookName;
         this.validDataList = validDataList;
         this.errorList = errorList;
         numOfSuccess = 0;
         additionalBids = 0;
     }
     
-    public UploadResult(String fileName, HashMap<String, String[]> validDataList, TreeMap<Integer, ArrayList<String>> errorList,int additionalBids) {
-        this.fileName = fileName;
+    public UploadResult(String workbookName, HashMap<String, String[]> validDataList, TreeMap<Integer, ArrayList<String>> errorList,int additionalBids) {
+        this.workbookName = workbookName;
         this.validDataList = validDataList;
         this.errorList = errorList;
         numOfSuccess = 0;
         this.additionalBids = additionalBids;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getWorkbookName() {
+        return workbookName;
     }
 
     public int getNumOfSuccess() {
@@ -57,6 +57,10 @@ public class UploadResult implements Comparable<UploadResult> {
         return errorList;
     }
 
+    public void setWorkbookName(String workbookName) {
+        this.workbookName = workbookName;
+    }
+
     public String getUnknownFiles() {
         return unknownFiles;
     }
@@ -66,6 +70,6 @@ public class UploadResult implements Comparable<UploadResult> {
     }
     
     public int compareTo(UploadResult o){
-        return fileName.compareTo(o.getFileName());
+        return workbookName.compareTo(o.getWorkbookName());
     }
 }
