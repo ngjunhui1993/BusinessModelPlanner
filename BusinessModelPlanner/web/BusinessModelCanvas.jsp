@@ -1,67 +1,389 @@
-<%-- 
-    Document   : BusinessModelCanvas
-    Created on : 19 Feb, 2017, 4:20:22 PM
-    Author     : Dell
---%>
-
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Scanner"%>
 <%@page import="com.app.model.entity.CanvasCompany"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.app.model.CanvasDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%@include file="header.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Business Model Canvas</title>
+        <!--CSS FOR INDEX-->
+        <link rel="stylesheet" type="text/css" href="resources/css/bmc/bmc-component.css" />
+        <!--CSS FOR TOOLTIPS-->
+        <link rel="stylesheet" type="text/css" href="resources/css/tooltips.css" />
+        <!--CSS FOR COMPANY SEARCH-->
+        <link rel="stylesheet" href="resources/css/bmc/bmc-searchcom-style.css">
+        <link rel="stylesheet" href="resources/css/bmc/bmc-searchcom-listnav.css"> 
+        <!--CSS FOR COMPANY AUTOFILL-->
+        <!--CSS FOR DRIVERS SEARCH-->
+        <link rel="stylesheet" type="text/css" href="resources/css/bmc/bmc-searchdrivers-component.css" />
+        <!--CSS FOR DRIVERS SEARCH SELECT SCRIPTS-->
+        <link rel="stylesheet" href="resources/css/bmc/bmc-searchdrivers-valuedropdownlist.css">
     </head>
+
     <body>
-        <%
-        String error = (String) request.getAttribute("errorMsg");
-        ArrayList<CanvasCompany> companyList = (ArrayList<CanvasCompany>) request.getAttribute("companySearched");
-        %>
-        <h1>Find a Company by Name: </h1>
-        <br>
+        <div class="container">	
+            <div class="tooltipcontent">
+                <div class="dummy dummy-text">
 
-        <form action="CanvasController">
-            <input type="text" name="companyName">
-            <input type="submit" value="Search" name="searchCompany">
+                    <span class="tooltip-item" style="font-size:1.8em">BUSINESS MODEL BUFFET</span><br>
 
-        </form>
+                    allows users to source through an existing list of
+                    implementation choices across all 9 value drivers, and generate the closest matching company that fits your selection.
+                    You can also generate all the value drivers pertaining to a specific company, and gather inspiration for your own business model.
+                </div>
+            </div>
+            <div id="bl-main" class="bl-main">
+                <!--SECTION FOR SEARCH COMPANIES-->
+                <section>
+                    <div class="bl-box">
+                        <h2 class="bl-icon bl-icon-about">Search by Companies</h2>
+                    </div>
+                    <!--CONTENT-->
+                    <div class="bl-content">
+                        <!--Auto Search Function-->
+                        <br><br>
+                        <div>
+                            <ul id="demoFour" class="demoFourClass">
+                                <%                                        CanvasDAO canvasDAO = new CanvasDAO();
+                                    ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
+                                    for (String name : companyList) {
+                                %>
+                                <li><a href='BMC_Results_2.jsp?companyName=<%=name%>'><%=name%></a>
+                                </li>
+                                <%
 
-        <%            
-            if (error != null) {
-                out.println("<font color='red'>" + error + "</br><br> </font>");
-            }
-        
-            if(companyList != null) {
-                for(CanvasCompany c : companyList) {
-                    out.println(c.getCompany() + " | " + c.getChoice() + " | " + c.getDescription() + " | " + c.getValueDriver() +"<BR>");
-                }
-            }
-            
-if (request.getAttribute("traits")!=null) {
-        ArrayList<String> traits = (ArrayList<String>)request.getAttribute("traits");
-        for(String trait : traits) {
-            out.println(trait);
-            out.println("<BR>");
-        }
-        
-    }
+                                    }
+                                %>
 
-if(request.getAttribute("allData")!=null) {
-    HashMap<String, ArrayList<String>> allData = (HashMap<String,ArrayList<String>>)request.getAttribute("allData");
-    Iterator iter = allData.entrySet().iterator();
-    while(iter.hasNext()) {
-        out.println(iter.next());
-    }
-    out.println("<BR><BR>");
-    out.println(allData.size());
-}
-        
-    
-        %>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--CLOSE BUTTON-->
+                    <span class="bl-icon bl-icon-close"></span>
+                </section>
+                <!--SECTION CLOSED-->
 
+                <!--SECTION FOR SEARCH BY DRIVERS-->
+                <section id="bl-work-section">
+                    <div class="bl-box">
+                        <h2 class="bl-icon bl-icon-works">Search by Drivers</h2>
+                    </div>
+                    <div class="bl-content">
+                        <h2>SEARCH BY DRIVERS</h2>
+                        <div>
+                            <div class="container demo-3">
+                                <ul class="grid cs-style-4">
+                                    <!--KEY PARTNERS-->
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/keypartners.jpg" alt="keypartners"></div>
+                                            <figcaption>
+                                                <h3>Key Partners</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="keyPartners()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="keyPartners">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+
+                                    <!--KEY ACTIVITIES-->
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
+                                            <figcaption>
+                                                <h3>Key Activities</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="keyactivities()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="keyactivities">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
+                                            <figcaption>
+                                                <h3>Key Resources</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="keyresources()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="keyresources">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
+                                            <figcaption>
+                                                <h3>Value Proposition</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="valueproposition()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="valueproposition">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
+                                            <figcaption>
+                                                <h3>Customer Segments</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <div class="multiselect">
+                                                    <div class="selectBox" onclick="customersegments()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
+                                                    </div>
+                                                    <div class="checkboxes" id="customersegments">
+                                                        <!--LOAD DATA HERE-->
+                                                        <label for="one">
+                                                            <input type="checkbox" id="one" />First checkbox</label>
+                                                        <label for="two">
+                                                            <input type="checkbox" id="two" />Second checkbox</label>
+                                                        <label for="three">
+                                                            <input type="checkbox" id="three" />Third checkbox</label>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
+                                            <figcaption>
+                                                <h3>Customer Relationship</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="customerrelationship()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="customerrelationship">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/channels.jpg" alt="img03"></div>
+                                            <figcaption>
+                                                <h3>Channels</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="channels()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="channels">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
+                                            <figcaption>
+                                                <h3>Cost Structure</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="coststructure()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="coststructure">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
+                                            <figcaption>
+                                                <h3>Revenue Streams</h3>
+                                                <span>SHORT DESCRIPTION</span>
+                                                <!--SEARCH OPTIONS-->
+                                                <DIV>
+                                                    <div class="multiselect">
+                                                        <div class="selectBox" onclick="revenuestreams()">
+                                                            <select>
+                                                                <option>Select an option</option>
+                                                            </select>
+                                                            <div class="overSelect"></div>
+                                                        </div>
+                                                        <div class="checkboxes" id="revenuestreams">
+                                                            <!--LOAD DATA HERE-->
+                                                            <label for="one">
+                                                                <input type="checkbox" id="one" />First checkbox</label>
+                                                            <label for="two">
+                                                                <input type="checkbox" id="two" />Second checkbox</label>
+                                                            <label for="three">
+                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                        </div>
+                                                    </div>
+                                                </DIV>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="submit" value="Submit"> 
+
+                        <span class="bl-icon bl-icon-close"></span>
+                </section>
+            </div>
+        </div>
+
+        <!-- SCRIPT FOR MAIN INDEX -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="resources/js/bmc/bmc-modernizr.custom.js"></script>
+        <script src="resources/js/bmc/bmc-boxlayout.js"></script>
+        <script>
+                                                            $(function () {
+                                                                Boxlayout.init();
+                                                            });
+        </SCRIPT>                                                                                                                
+
+        <!--SCRIPT FOR COMPANY SEARCH-->
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="resources/js/bmc/bmc-searchcom-listnav.js"></script>
+        <script>
+                                                            $(function () {
+                                                                $('#demoFour').listnav({
+                                                                    includeAll: true,
+                                                                    includeNums: true,
+                                                                    showCounts: false,
+                                                                    allText: 'All Companies',
+                                                                    onClick: function (letter) {
+                                                                        $(".myLastClicked").text(letter.toUpperCase());
+                                                                    }
+                                                                });
+                                                            });
+        </script>
+
+
+        <!--SCRIPT FOR COMPANY SEARCH AUTOFILL-->
+
+        <!--SCRIPT FOR DRIVERS SEARCH-->
+        <script src="resources/js/bmc/bmc-searchdrivers-dropdown.js"></script>
 
     </body>
 </html>

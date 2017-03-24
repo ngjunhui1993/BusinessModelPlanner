@@ -1,0 +1,20 @@
+SMAP
+BusinessModelCanvas_jsp.java
+JSP
+*S JSP
+*F
++ 0 BusinessModelCanvas.jsp
+BusinessModelCanvas.jsp
++ 1 header.jsp
+header.jsp
+*L
+1,9:53
+1#1,81:62
+9#0,42:143
+50,4:185
+53:189
+54:190,6
+55,2:196
+58,2:200
+59,331:202
+*E

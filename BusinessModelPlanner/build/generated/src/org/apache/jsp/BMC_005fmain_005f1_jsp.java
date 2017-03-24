@@ -3,12 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.util.Scanner;
-import com.app.model.entity.CanvasCompany;
-import java.util.ArrayList;
-import com.app.model.CanvasDAO;
 
-public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class BMC_005fmain_005f1_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -50,9 +46,6 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -145,8 +138,6 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       out.write("        <title>Business Model Canvas</title>\n");
       out.write("        <!--CSS FOR INDEX-->\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/bmc/bmc-component.css\" />\n");
-      out.write("        <!--CSS FOR TOOLTIPS-->\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/tooltips.css\" />\n");
       out.write("        <!--CSS FOR COMPANY SEARCH-->\n");
       out.write("        <link rel=\"stylesheet\" href=\"resources/css/bmc/bmc-searchcom-style.css\">\n");
       out.write("        <link rel=\"stylesheet\" href=\"resources/css/bmc/bmc-searchcom-listnav.css\"> \n");
@@ -159,16 +150,6 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       out.write("\n");
       out.write("    <body>\n");
       out.write("        <div class=\"container\">\t\n");
-      out.write("            <div class=\"tooltipcontent\">\n");
-      out.write("                <div class=\"dummy dummy-text\">\n");
-      out.write("\n");
-      out.write("                    <span class=\"tooltip-item\" style=\"font-size:1.8em\">BUSINESS MODEL BUFFET</span><br>\n");
-      out.write("\n");
-      out.write("                    allows users to source through an existing list of\n");
-      out.write("                    implementation choices across all 9 value drivers, and generate the closest matching company that fits your selection.\n");
-      out.write("                    You can also generate all the value drivers pertaining to a specific company, and gather inspiration for your own business model.\n");
-      out.write("                </div>\n");
-      out.write("            </div>\n");
       out.write("            <div id=\"bl-main\" class=\"bl-main\">\n");
       out.write("                <!--SECTION FOR SEARCH COMPANIES-->\n");
       out.write("                <section>\n");
@@ -180,25 +161,8 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       out.write("                        <!--Auto Search Function-->\n");
       out.write("                        <br><br>\n");
       out.write("                        <div>\n");
+      out.write("                            <!--BACKEND TO POPULATE COMPANY LIST HERE-->\n");
       out.write("                            <ul id=\"demoFour\" class=\"demoFourClass\">\n");
-      out.write("                                ");
-                                        CanvasDAO canvasDAO = new CanvasDAO();
-                                    ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
-                                    for (String name : companyList) {
-                                
-      out.write("\n");
-      out.write("                                <li><a href='BMC_Results_2.jsp?companyName=");
-      out.print(name);
-      out.write('\'');
-      out.write('>');
-      out.print(name);
-      out.write("</a>\n");
-      out.write("                                </li>\n");
-      out.write("                                ");
-
-
-                                    }
-                                
       out.write("\n");
       out.write("\n");
       out.write("                            </ul>\n");
@@ -529,7 +493,8 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       out.write("        <script src=\"resources/js/bmc/bmc-searchdrivers-dropdown.js\"></script>\n");
       out.write("\n");
       out.write("    </body>\n");
-      out.write("</html>");
+      out.write("</html>\n");
+      out.write("bmc/");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

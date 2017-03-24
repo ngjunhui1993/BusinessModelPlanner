@@ -8,7 +8,7 @@ import com.app.model.entity.CanvasCompany;
 import java.util.ArrayList;
 import com.app.model.CanvasDAO;
 
-public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class BMC_005fIndex_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
