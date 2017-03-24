@@ -30,13 +30,11 @@
                 <input type="password" placeholder="confirm your password" name="confirmPassword"/>
                 <input type="text" placeholder="email address" name="email"/>
                 <!--Please Change the Front End-->
-                <%--
                 Type: <select name="type">
                     <option value="administrator">Administrator</option>
                     <option value="student">Student</option>   
                     <option value="corporate">Corporate</option>  
                 </select> 
-                --%>
                 <input class="btn" type="submit" id="register" value="Register »" name="submit">
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
               </form>

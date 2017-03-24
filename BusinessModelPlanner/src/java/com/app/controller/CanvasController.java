@@ -60,6 +60,8 @@ public class CanvasController extends HttpServlet {
             rd.forward(request, response);
             return;
             
+            
+            
     /*        ArrayList<CanvasCompany> companies = (ArrayList<CanvasCompany>)canvasDAO.retrieveCompanyDetailsByName(companyName);
                 request.setAttribute("companySearched", companies);
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
@@ -67,7 +69,16 @@ public class CanvasController extends HttpServlet {
                 return;*/
         }
         
-        if(request.getParameter("searchByTraits")!=null) {
+        //testing for canvas traits
+        
+        if(request.getParameter("traitsSearch")!=null) {
+            String[] allTraits = request.getParameterValues("allTheTraits");
+            request.setAttribute("traitsSelected", allTraits);
+            RequestDispatcher rd = request.getRequestDispatcher("testDisplay.jsp");
+            rd.forward(request, response);
+        }
+        
+    /*    if(request.getParameter("searchByTraits")!=null) {
             String keyPartners = request.getParameter("keyPartners");
             String keyActivities = request.getParameter("keyActivities");
             String keyResources = request.getParameter("keyResources");
@@ -179,7 +190,7 @@ public class CanvasController extends HttpServlet {
                         allTraits.add(trait);
                     }
                 }
-            } 
+            } */
     /*        
             HashMap<String, ArrayList<String>> allData = canvasDAO.retrieveAll();
             
@@ -208,7 +219,8 @@ public class CanvasController extends HttpServlet {
                 return; */
             
         }
-    }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

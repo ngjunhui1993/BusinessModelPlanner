@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.Iterator;
+import java.util.HashMap;
 import com.app.model.entity.CanvasCompany;
 import java.util.ArrayList;
 
@@ -48,6 +50,8 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
@@ -83,9 +87,25 @@ public final class BusinessModelCanvas_jsp extends org.apache.jasper.runtime.Htt
             }
             
 if (request.getAttribute("traits")!=null) {
-        out.println(request.getAttribute("traits"));
+        ArrayList<String> traits = (ArrayList<String>)request.getAttribute("traits");
+        for(String trait : traits) {
+            out.println(trait);
+            out.println("<BR>");
+        }
         
     }
+
+if(request.getAttribute("allData")!=null) {
+    HashMap<String, ArrayList<String>> allData = (HashMap<String,ArrayList<String>>)request.getAttribute("allData");
+    Iterator iter = allData.entrySet().iterator();
+    while(iter.hasNext()) {
+        out.println(iter.next());
+    }
+    out.println("<BR><BR>");
+    out.println(allData.size());
+}
+        
+    
         
       out.write("\r\n");
       out.write("\r\n");

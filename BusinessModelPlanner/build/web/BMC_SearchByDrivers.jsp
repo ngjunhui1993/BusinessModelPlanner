@@ -5,15 +5,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="shortcut icon" href="../favicon.ico"> 
-        <link rel="stylesheet" type="text/css" href="resources/css/default.css" />
-        <link rel="stylesheet" type="text/css" href="resources/css/component.css" />
-        <script src="resources/js/modernizr.custom.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/bmc-searchdrivers-component.css" />
         <!--SELECT SCRIPTS-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
         <link rel='stylesheet prefetch' href='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.3/angular-material.css'>
         <link rel='stylesheet prefetch' href='https://material.angularjs.org/1.1.3/docs.css'>
-        <link rel="stylesheet" href="resources/css/selectstyle.css">
+        <link rel="stylesheet" href="resources/css/bmc-searchdrivers-selectstyle.css">
     </head>
 
     <body>
@@ -26,7 +23,7 @@
                     <!--KEY PARTNERS-->
                     <li>
                         <figure>
-                            <div><img src="resources/image/5.png" alt="img05"></div>
+                            <div><img src="resources/image/keypartners.jpg" alt="img05"></div>
                             <figcaption>
                                 <h3>Key Partners</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -59,7 +56,7 @@
                     <!--KEY ACTIVITIES-->
                     <li>
                         <figure>
-                            <div><img src="resources/image/6.png" alt="img06"></div>
+                            <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
                             <figcaption>
                                 <h3>Key Activities</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -86,7 +83,7 @@
 
                     <li>
                         <figure>
-                            <div><img src="resources/image/2.png" alt="img02"></div>
+                            <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
                             <figcaption>
                                 <h3>Key Resources</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -112,7 +109,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/4.png" alt="img04"></div>
+                            <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
                             <figcaption>
                                 <h3>Value Proposition</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -138,7 +135,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/1.png" alt="img01"></div>
+                            <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
                             <figcaption>
                                 <h3>Customer Segments</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -163,7 +160,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Customer Relationship</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -188,7 +185,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/channels.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Channels</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -213,7 +210,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Cost Structure</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -238,7 +235,7 @@
                     </li>
                     <li>
                         <figure>
-                            <div><img src="resources/image/3.png" alt="img03"></div>
+                            <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
                             <figcaption>
                                 <h3>Revenue Streams</h3>
                                 <span>SHORT DESCRIPTION</span>
@@ -265,14 +262,16 @@
                             </figcaption>
                         </figure>
                     </li>
+                    <br>
                     
-                    <input type="submit" name="searchByTraits">
+                    <input type="submit" name="searchByTraits"><br>
+                    <a href="BMCindex.jsp">BACK</a>
                  
 
                 </ul>   
             </div>
         </div></form>
-        <script src="resources/js/toucheffects.js"></script>
+        
         <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js'></script>
@@ -280,6 +279,8 @@
         <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js'></script>
         <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js'></script>
         <script src='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.3/angular-material.js'></script>
-        <script src="resources/js/select.js"></script>
+         <script src="resources/js/bmc-searchdrivers-toucheffects.js"></script>
+        <script src="resources/js/bmc-searchdrivers-select.js"></script>
+        <script src="resources/js/bmc-searchdrivers-modernizr.custom.js"></script>
     </body>
 </html>

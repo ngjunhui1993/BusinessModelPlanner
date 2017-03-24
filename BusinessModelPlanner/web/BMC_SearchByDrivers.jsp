@@ -5,7 +5,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="resources/css/bmc-searchdrivers-default.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/bmc-searchdrivers-component.css" />
         <!--SELECT SCRIPTS-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">

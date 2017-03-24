@@ -78,33 +78,33 @@
 
                                 <ul id="demoFour" class="demo"><br>
 
-                                    <%                                        
-                                        CanvasDAO canvasDAO = new CanvasDAO();
+                                    <%                                        CanvasDAO canvasDAO = new CanvasDAO();
                                         ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
                                         for (String name : companyList) {
-                                            %>
+                                    %>
                                     <li><a href='BMC_Results_2.jsp?companyName=<%=name%>'><%=name%></a>
                                     </li>
                                     <%
-                                        
-                                            }
+
+                                        }
                                     %>
                                 </ul>
 
 
-                                    </td>
-                                    </tr>
-                                    </table>
+                            </td>
+                        </tr>
+        </table>
+        <a href="BMCindex.jsp">BACK</a>
 
-                                    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
-                                    <script src='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js'></script>
-                                    <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js'></script>
-                                    <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js'></script>
-                                    <script src="resources/js/autofill.js"></script>
-                                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                    <script src="resources/js/bmc-searchcom-listnav.js"></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
+        <script src='https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js'></script>
+        <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js'></script>
+        <script src='https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js'></script>
+        <script src="resources/js/autofill.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="resources/js/bmc-searchcom-listnav.js"></script>
 
-                                    <script>
+        <script>
                                             $(function () {
                                             $('#demoFour').listnav({
                                             includeAll: true,
@@ -116,7 +116,7 @@
                                                     }
                                             });
                                             });
-                                    </script>
+        </script>
 
-                                    </body>
-                                    </html>
+    </body>
+</html>
