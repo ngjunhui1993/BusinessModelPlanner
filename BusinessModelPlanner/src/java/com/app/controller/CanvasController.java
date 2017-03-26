@@ -58,7 +58,7 @@ public class CanvasController extends HttpServlet {
             companyName = companyName.substring(2, companyName.length() - 2);
             String[] splitCompanyNames = companyName.split("\",\"");
             request.setAttribute("companiesSearched", splitCompanyNames);
-            RequestDispatcher rd = request.getRequestDispatcher("BMC_Results_2.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("BMC_Results.jsp");
             rd.forward(request, response);
             return;
 
@@ -121,7 +121,7 @@ public class CanvasController extends HttpServlet {
             
             request.setAttribute("companiesMatched", companiesMatched);
             request.setAttribute("maxValue", maxNumberOfTraitsMatched);
-            RequestDispatcher rd = request.getRequestDispatcher("BMCTest2.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("BMC_Results.jsp");
             rd.forward(request, response); 
         }
 

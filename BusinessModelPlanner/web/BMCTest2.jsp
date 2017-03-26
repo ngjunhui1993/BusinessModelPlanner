@@ -228,6 +228,10 @@
         }
     }
     
+    if(request.getAttribute("companiesMatched") == null) {
+        out.println("no value");
+    }
+    
     out.println("<BR><BR><B><U>LAST BIT</U></B><BR><BR>" + companiesMatched.get(0) + ", " + number);
 %>
     

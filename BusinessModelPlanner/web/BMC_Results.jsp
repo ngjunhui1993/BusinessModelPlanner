@@ -39,40 +39,59 @@
             <%
                 CanvasDAO canvasDAO = new CanvasDAO();
                 ArrayList<CanvasCompany> companySelected = new ArrayList<>();
-                String companyName = (String) request.getParameter("companyName");
-                String[] companies = (String[]) request.getAttribute("companiesSearched");
-                boolean singleCompany = true;
-                boolean multipleCompanies = true;
                 ArrayList<CanvasCompany> allCompaniesSelected = new ArrayList<>();
-
-                if (companyName == null || companyName.equals("")) {
-                    singleCompany = false;
-                    if (companies == null || companies.length == 0) {
-                        multipleCompanies = false;
-                        if(request.getParameter("searchByTraits") == null) {
-                            request.setAttribute("errorMsg", "Please do not leave any blanks.");
-                            RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
-                            rd.forward(request, response);
-                            return;
-                        }
+                //if it was redirected from searching of traits:
+                ArrayList<String> companiesMatched = new ArrayList<>();
+                int number = 0;
+                if (request.getAttribute("companiesMatched") != null) {
+                    companiesMatched = (ArrayList<String>) request.getAttribute("companiesMatched");
+                    if (request.getAttribute("maxValue") != null) {
+                        number = (Integer) request.getAttribute("maxValue");
                     }
-                }
-
-                if (singleCompany) {
-                    out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='50' height='50'>" + companyName + "</div>");
-                    allCompaniesSelected = canvasDAO.retrieveCompanyDetailsByName(companyName);
-                } else if(multipleCompanies) {
-                    for (String name : companies) {
-                        out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='96' height='96'>" + name + "</div>");
-                        companySelected = canvasDAO.retrieveCompanyDetailsByName(name);
-                        for(CanvasCompany c : companySelected) {
-                            allCompaniesSelected.add(c);
-                        }
+                    for (String name : companiesMatched) {
+                            out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='96' height='96'>" + name + "</div>");
+                            out.println("<BR><B>Number of Traits Matched: </B>" + number);
+                            companySelected = canvasDAO.retrieveCompanyDetailsByName(name);
+                            for (CanvasCompany c : companySelected) {
+                                allCompaniesSelected.add(c);
+                            }
                     }
-                } else {
                     
+                } else {
+                    String companyName = (String) request.getParameter("companyName");
+                    String[] companies = (String[]) request.getAttribute("companiesSearched");
+                    boolean singleCompany = true;
+                    boolean multipleCompanies = true;
+
+                    if (companyName == null || companyName.equals("")) {
+                        singleCompany = false;
+                        if (companies == null || companies.length == 0) {
+                            multipleCompanies = false;
+                            if (request.getParameter("searchByTraits") == null) {
+                                request.setAttribute("errorMsg", "Please do not leave any blanks.");
+                                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                                rd.forward(request, response);
+                                return;
+                            }
+                        }
+                    }
+
+                    if (singleCompany) {
+                        out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='50' height='50'>" + companyName + "</div>");
+                        allCompaniesSelected = canvasDAO.retrieveCompanyDetailsByName(companyName);
+                    } else if (multipleCompanies) {
+                        for (String name : companies) {
+                            out.println("<div class='chip'><img src='resources/image/CompanyIcon.png' alt='Person' width='96' height='96'>" + name + "</div>");
+                            companySelected = canvasDAO.retrieveCompanyDetailsByName(name);
+                            for (CanvasCompany c : companySelected) {
+                                allCompaniesSelected.add(c);
+                            }
+                        }
+                    } else {
+
+                    }
                 }
-  //check:              
+                //check:              
 //out.println(allCompaniesSelected.size());
             %>
             <br>
