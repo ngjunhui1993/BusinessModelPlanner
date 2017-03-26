@@ -51,7 +51,7 @@
                                     ArrayList<String> companyList = canvasDAO.retrieveAllCompanies();
                                     for (String name : companyList) {
                                 %>
-                                <li><a href='BMC_Results_2.jsp?companyName=<%=name%>'><%=name%></a>
+                                <li><a href='BMC_Results.jsp?companyName=<%=name%>'><%=name%></a>
                                 </li>
                                 <%
 
