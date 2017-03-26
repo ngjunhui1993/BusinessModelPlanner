@@ -217,5 +217,18 @@
                                                                    
 
 %>
+
+<%
+    ArrayList<String> companiesMatched = new ArrayList<>();
+    int number = 0;
+    if(request.getAttribute("companiesMatched") != null) {
+        companiesMatched = (ArrayList<String>)request.getAttribute("companiesMatched");
+        if(request.getAttribute("maxValue") != null) {
+            number = (Integer) request.getAttribute("maxValue");
+        }
+    }
+    
+    out.println("<BR><BR><B><U>LAST BIT</U></B><BR><BR>" + companiesMatched.get(0) + ", " + number);
+%>
     
 </html>

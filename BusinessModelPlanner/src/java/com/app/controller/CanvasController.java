@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,47 +41,91 @@ public class CanvasController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter(); 
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(true);
         CanvasDAO canvasDAO = new CanvasDAO();
-        
-        if(request.getParameter("searchCompany") != null) {
+
+        if (request.getParameter("searchCompany") != null) {
             String companyName = request.getParameter("companiesSearched");
-            
-            if(companyName == null || companyName.equals("") || companyName.equals("[]")) {
+
+            if (companyName == null || companyName.equals("") || companyName.equals("[]")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
                 RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
                 rd.forward(request, response);
                 return;
             }
-            
-            companyName = companyName.substring(2, companyName.length()-2);
+
+            companyName = companyName.substring(2, companyName.length() - 2);
             String[] splitCompanyNames = companyName.split("\",\"");
             request.setAttribute("companiesSearched", splitCompanyNames);
             RequestDispatcher rd = request.getRequestDispatcher("BMC_Results_2.jsp");
             rd.forward(request, response);
             return;
-            
-            
-            
-    /*        ArrayList<CanvasCompany> companies = (ArrayList<CanvasCompany>)canvasDAO.retrieveCompanyDetailsByName(companyName);
+
+            /*        ArrayList<CanvasCompany> companies = (ArrayList<CanvasCompany>)canvasDAO.retrieveCompanyDetailsByName(companyName);
                 request.setAttribute("companySearched", companies);
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
                 return;*/
         }
-        
+
         //testing for canvas traits
-        
-        if(request.getParameter("traitsSearch")!=null) {
+        if (request.getParameter("traitsSearch") != null) {
             String[] allTraits = request.getParameterValues("allTheTraits");
-            request.setAttribute("traitsSelected", allTraits);
+        //    request.setAttribute("traitsSelected", allTraits);
+            /*    RequestDispatcher rd = request.getRequestDispatcher("BMCTest2.jsp");
+            rd.forward(request, response); */
+
+            //retrieving all the values from sql and storing them into hashmap format of K: trait, V: arraylist of companies' names.
+            CanvasDAO cDAO = new CanvasDAO();
+            //   ArrayList<String> companyList = cDAO.retrieveAllCompanies();
+            HashMap<String, ArrayList<String>> all = cDAO.retrieveAll();
+            out.println(all.size() + "<BR>");
+            Iterator iter = all.entrySet().iterator();
+
+            // hashmap values directly retrieved from sql may have diff hashcode, hence, manually sorting them out again.
+            HashMap<String, ArrayList<String>> allAll = new HashMap<String, ArrayList<String>>();
+
+            while (iter.hasNext()) {
+                Map.Entry pair = (Map.Entry) iter.next();
+                out.println(pair.getKey() + ", " + pair.getValue() + "<BR>");
+                allAll.put((String) pair.getKey(), (ArrayList<String>) pair.getValue());
+                iter.remove();
+            }
+
+            //sorting the array values retrieved from user's selection to arraylist to parse into method
+            ArrayList<String> traitsList = new ArrayList<>();
+            for (String trait : allTraits) {
+                traitsList.add(trait);
+            }
+
+            //filtering out to leave only the selected traits
+            HashMap<String, Integer> resultsSelected = cDAO.resultsFromAllTraitsSelected(traitsList, allAll);
+
+            //find out the nearest companies with highest count of selected values. K: company, V: number of traits tally
+            HashMap<String, Integer> nearestResult = cDAO.nearestSearchFromResults(resultsSelected);
+
+            //to save the companies' names and the number of traits tallied into another object so to prevent hashmap error.
+            ArrayList<String> companiesMatched = new ArrayList<>();
+            int maxNumberOfTraitsMatched = 0;
+            Iterator iter2 = nearestResult.entrySet().iterator();
+            while (iter2.hasNext()) {
+                Map.Entry pair = (Map.Entry) iter2.next();
+                companiesMatched.add((String) pair.getKey());
+                maxNumberOfTraitsMatched = (Integer) pair.getValue();
+             //   out.println((String) pair.getKey() + ", " + (Integer) pair.getValue());
+                iter2.remove();
+            }
+            
+            //sending results to display
+            
+            request.setAttribute("companiesMatched", companiesMatched);
+            request.setAttribute("maxValue", maxNumberOfTraitsMatched);
             RequestDispatcher rd = request.getRequestDispatcher("BMCTest2.jsp");
             rd.forward(request, response); 
-            
         }
-        
-    /*    if(request.getParameter("searchByTraits")!=null) {
+
+        /*    if(request.getParameter("searchByTraits")!=null) {
             String keyPartners = request.getParameter("keyPartners");
             String keyActivities = request.getParameter("keyActivities");
             String keyResources = request.getParameter("keyResources");
@@ -192,7 +238,7 @@ public class CanvasController extends HttpServlet {
                     }
                 }
             } */
-    /*        
+ /*        
             HashMap<String, ArrayList<String>> allData = canvasDAO.retrieveAll();
             
            request.setAttribute("allData", allData);
@@ -204,24 +250,20 @@ public class CanvasController extends HttpServlet {
             HashMap<String, Integer> countTraits = canvasDAO.resultsFromAllTraitsSelected(allTraits, allData);
             HashMap<String, Integer> nearestCompanies = canvasDAO.nearestSearchFromResults(countTraits);
             
-*/
-            
-            /*
+         */
+ /*
             request.setAttribute("nearestCompanies", nearestCompanies);
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
                 return;
             
-            */
-            /*
+         */
+ /*
             request.setAttribute("traits", allTraits);
                 RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
                 return; */
-            
-        }
-    
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
