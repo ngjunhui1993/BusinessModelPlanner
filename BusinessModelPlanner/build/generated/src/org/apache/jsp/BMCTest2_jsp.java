@@ -46,22 +46,22 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
-      out.write("    </head>\n");
-      out.write("    \n");
-      out.write("        \n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
+      out.write("        <title>JSP Page</title>\r\n");
+      out.write("    </head>\r\n");
+      out.write("    \r\n");
+      out.write("        \r\n");
       out.write("        ");
 
             CanvasDAO cDAO = new CanvasDAO();
@@ -132,31 +132,31 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
             }
         }*/
         
-      out.write("\n");
-      out.write("        \n");
-      out.write("        <BR><BR>\n");
-      out.write("        <form action=\"CanvasController\">\n");
-      out.write("         <h3>Key Partners</h3>\n");
-      out.write("                                                        <span>SHORT DESCRIPTION</span>\n");
-      out.write("                                                        <!--SEARCH OPTIONS-->\n");
-      out.write("                                                        \n");
+      out.write("\r\n");
+      out.write("        \r\n");
+      out.write("        <BR><BR>\r\n");
+      out.write("        <form action=\"CanvasController\">\r\n");
+      out.write("         <h3>Key Partners</h3>\r\n");
+      out.write("                                                        <span>SHORT DESCRIPTION</span>\r\n");
+      out.write("                                                        <!--SEARCH OPTIONS-->\r\n");
+      out.write("                                                        \r\n");
       out.write("                                                        ");
 
                                                             ArrayList<String> traits = cDAO.retrieveTraitsByDriver("key_partnerships");
                                                             out.println(traits.size());
                                                         
-      out.write("\n");
-      out.write("                                                        <DIV>\n");
-      out.write("                                                            \n");
-      out.write("                                                                <div class=\"multiselect\">\n");
-      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\n");
-      out.write("                                                                        <select>\n");
-      out.write("                                                                            <option>Select an option</option>\n");
-      out.write("                                                                        </select>\n");
-      out.write("                                                                        <div class=\"overSelect\"></div>\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                    <div id=\"checkboxes\">\n");
-      out.write("                                                                        <!--LOAD DATA HERE-->\n");
+      out.write("\r\n");
+      out.write("                                                        <DIV>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                                <div class=\"multiselect\">\r\n");
+      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\r\n");
+      out.write("                                                                        <select>\r\n");
+      out.write("                                                                            <option>Select an option</option>\r\n");
+      out.write("                                                                        </select>\r\n");
+      out.write("                                                                        <div class=\"overSelect\"></div>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <div id=\"checkboxes\">\r\n");
+      out.write("                                                                        <!--LOAD DATA HERE-->\r\n");
       out.write("                                                                        ");
 
                                                                             int count = 1;
@@ -165,38 +165,38 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
                                                                                 count++;
                                                                             }
                                                                         
-      out.write("\n");
-      out.write("                                                                   <!--     <label for=\"one\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\n");
-      out.write("                                                                        <label for=\"two\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\n");
-      out.write("                                                                        <label for=\"three\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                </div>\n");
-      out.write("                                                            \n");
-      out.write("                                                        </DIV>\n");
-      out.write("                                                                   <h3>Key Activities</h3>\n");
-      out.write("                                                        <span>SHORT DESCRIPTION</span>\n");
-      out.write("                                                        <!--SEARCH OPTIONS-->\n");
+      out.write("\r\n");
+      out.write("                                                                   <!--     <label for=\"one\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"two\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"three\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                        </DIV>\r\n");
+      out.write("                                                                   <h3>Key Activities</h3>\r\n");
+      out.write("                                                        <span>SHORT DESCRIPTION</span>\r\n");
+      out.write("                                                        <!--SEARCH OPTIONS-->\r\n");
       out.write("                                                         ");
 
                                                             cDAO = new CanvasDAO();
                                                             traits = cDAO.retrieveTraitsByDriver("key_activities");
                                                             out.println(traits.size());
                                                         
-      out.write("\n");
-      out.write("                                                        <DIV>\n");
-      out.write("                                                            \n");
-      out.write("                                                                <div class=\"multiselect\">\n");
-      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\n");
-      out.write("                                                                        <select>\n");
-      out.write("                                                                            <option>Select an option</option>\n");
-      out.write("                                                                        </select>\n");
-      out.write("                                                                        <div class=\"overSelect\"></div>\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                    <div id=\"checkboxes\">\n");
-      out.write("                                                                        <!--LOAD DATA HERE-->\n");
+      out.write("\r\n");
+      out.write("                                                        <DIV>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                                <div class=\"multiselect\">\r\n");
+      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\r\n");
+      out.write("                                                                        <select>\r\n");
+      out.write("                                                                            <option>Select an option</option>\r\n");
+      out.write("                                                                        </select>\r\n");
+      out.write("                                                                        <div class=\"overSelect\"></div>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <div id=\"checkboxes\">\r\n");
+      out.write("                                                                        <!--LOAD DATA HERE-->\r\n");
       out.write("                                                                        ");
 
                                                                             count = 1;
@@ -205,39 +205,39 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
                                                                                 count++;
                                                                             }
                                                                         
-      out.write("\n");
-      out.write("                                                                   <!--     <label for=\"one\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\n");
-      out.write("                                                                        <label for=\"two\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\n");
-      out.write("                                                                        <label for=\"three\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                </div>\n");
-      out.write("                                                            \n");
-      out.write("                                                        </DIV>\n");
-      out.write("                                                                   \n");
-      out.write("                                                                    <h3>Key Resources</h3>\n");
-      out.write("                                                        <span>SHORT DESCRIPTION</span>\n");
-      out.write("                                                        <!--SEARCH OPTIONS-->\n");
+      out.write("\r\n");
+      out.write("                                                                   <!--     <label for=\"one\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"two\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"three\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                        </DIV>\r\n");
+      out.write("                                                                   \r\n");
+      out.write("                                                                    <h3>Key Resources</h3>\r\n");
+      out.write("                                                        <span>SHORT DESCRIPTION</span>\r\n");
+      out.write("                                                        <!--SEARCH OPTIONS-->\r\n");
       out.write("                                                        ");
 
                                                             cDAO = new CanvasDAO();
                                                             traits = cDAO.retrieveTraitsByDriver("key_resources");
                                                             out.println(traits.size());
                                                         
-      out.write("\n");
-      out.write("                                                        <DIV>\n");
-      out.write("                                                            \n");
-      out.write("                                                                <div class=\"multiselect\">\n");
-      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\n");
-      out.write("                                                                        <select>\n");
-      out.write("                                                                            <option>Select an option</option>\n");
-      out.write("                                                                        </select>\n");
-      out.write("                                                                        <div class=\"overSelect\"></div>\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                    <div id=\"checkboxes\">\n");
-      out.write("                                                                        <!--LOAD DATA HERE-->\n");
+      out.write("\r\n");
+      out.write("                                                        <DIV>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                                <div class=\"multiselect\">\r\n");
+      out.write("                                                                    <div class=\"selectBox\" onclick=\"checkBoxValues()\">\r\n");
+      out.write("                                                                        <select>\r\n");
+      out.write("                                                                            <option>Select an option</option>\r\n");
+      out.write("                                                                        </select>\r\n");
+      out.write("                                                                        <div class=\"overSelect\"></div>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <div id=\"checkboxes\">\r\n");
+      out.write("                                                                        <!--LOAD DATA HERE-->\r\n");
       out.write("                                                                        ");
 
                                                                             count = 1;
@@ -246,22 +246,22 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
                                                                                 count++;
                                                                             }
                                                                         
-      out.write("\n");
-      out.write("                                                                   <!--     <label for=\"one\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\n");
-      out.write("                                                                        <label for=\"two\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\n");
-      out.write("                                                                        <label for=\"three\">\n");
-      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\n");
-      out.write("                                                                    </div>\n");
-      out.write("                                                                </div>\n");
-      out.write("                                                            \n");
-      out.write("                                                        </DIV>\n");
-      out.write("                                                                      <input type=\"submit\" value=\"submit\" name=\"traitsSearch\">\n");
-      out.write("    </form>\n");
-      out.write("                                            \n");
-      out.write("                                                                \n");
-      out.write("                                                                   <BR><BR>\n");
+      out.write("\r\n");
+      out.write("                                                                   <!--     <label for=\"one\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"one\" />First checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"two\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"two\" />Second checkbox</label>\r\n");
+      out.write("                                                                        <label for=\"three\">\r\n");
+      out.write("                                                                            <input type=\"checkbox\" id=\"three\" />Third checkbox</label>-->\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                            \r\n");
+      out.write("                                                        </DIV>\r\n");
+      out.write("                                                                      <input type=\"submit\" value=\"submit\" name=\"traitsSearch\">\r\n");
+      out.write("    </form>\r\n");
+      out.write("                                            \r\n");
+      out.write("                                                                \r\n");
+      out.write("                                                                   <BR><BR>\r\n");
       out.write("                                                                   ");
 
                                                                    if(request.getAttribute("traitsSelected")!=null) {
@@ -276,9 +276,9 @@ public final class BMCTest2_jsp extends org.apache.jasper.runtime.HttpJspBase
                                                                    
 
 
-      out.write("\n");
-      out.write("    \n");
-      out.write("</html>\n");
+      out.write("\r\n");
+      out.write("    \r\n");
+      out.write("</html>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

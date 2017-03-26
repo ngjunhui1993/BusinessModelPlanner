@@ -72,281 +72,330 @@
                         <h2 class="bl-icon bl-icon-works">Search by Drivers</h2>
                     </div>
                     <div class="bl-content">
-                        <h2>SEARCH BY DRIVERS</h2>
-                        <div>
-                            <div class="container demo-3">
-                                <ul class="grid cs-style-4">
-                                    <!--KEY PARTNERS-->
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/keypartners.jpg" alt="keypartners"></div>
-                                            <figcaption>
-                                                <h3>Key Partners</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="keyPartners()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="keyPartners">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
-                                                        </div>
-                                                    </div>
-                                                </DIV>
+                        <form action="CanvasController">
+                            <h2>SEARCH BY DRIVERS</h2>
+                            <div>
+                                <div class="container demo-3">
+                                    <ul class="grid cs-style-4">
+                                        <!--KEY PARTNERS-->
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/keypartners.jpg" alt="keypartners"></div>
+                                                <figcaption>
 
-                                            </figcaption>
-                                        </figure>
-                                    </li>
+                                                    <h3>Key Partners</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        CanvasDAO cDAO = new CanvasDAO();
+                                                        ArrayList<String> traits = cDAO.retrieveTraitsByDriver("key_partnerships");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="keyPartners()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="keyPartners">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    int count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </DIV>
 
-                                    <!--KEY ACTIVITIES-->
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
-                                            <figcaption>
-                                                <h3>Key Activities</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="keyactivities()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="keyactivities">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
-                                                        </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
 
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
-                                            <figcaption>
-                                                <h3>Key Resources</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
+                                        <!--KEY ACTIVITIES-->
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
+                                                <figcaption>
+                                                    <h3>Key Activities</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("key_activities");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="keyactivities()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="keyactivities">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
+                                                        </div>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
+                                                <figcaption>
+                                                    <h3>Key Resources</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("key_resources");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="keyresources()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="keyresources">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
+                                                        </div>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
+                                                <figcaption>
+                                                    <h3>Value Proposition</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("value_proposition");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="valueproposition()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="valueproposition">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
+                                                        </div>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
+                                                <figcaption>
+                                                    <h3>Customer Segments</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("customer_acquisition");
+                                                        //      out.println(traits.size());
+                                                    %>
                                                     <div class="multiselect">
-                                                        <div class="selectBox" onclick="keyresources()">
+                                                        <div class="selectBox" onclick="customersegments()">
                                                             <select>
                                                                 <option>Select an option</option>
                                                             </select>
                                                             <div class="overSelect"></div>
                                                         </div>
-                                                        <div class="checkboxes" id="keyresources">
+                                                        <div class="checkboxes" id="customersegments">
                                                             <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                            <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
                                                         </div>
                                                     </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
-                                            <figcaption>
-                                                <h3>Value Proposition</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="valueproposition()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
+                                                <figcaption>
+                                                    <h3>Customer Relationship</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("customer_relations");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="customerrelationship()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="customerrelationship">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
                                                         </div>
-                                                        <div class="checkboxes" id="valueproposition">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/channels.jpg" alt="img03"></div>
+                                                <figcaption>
+                                                    <h3>Channels</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("channel_strategy");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="channels()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="channels">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
-                                            <figcaption>
-                                                <h3>Customer Segments</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <div class="multiselect">
-                                                    <div class="selectBox" onclick="customersegments()">
-                                                        <select>
-                                                            <option>Select an option</option>
-                                                        </select>
-                                                        <div class="overSelect"></div>
-                                                    </div>
-                                                    <div class="checkboxes" id="customersegments">
-                                                        <!--LOAD DATA HERE-->
-                                                        <label for="one">
-                                                            <input type="checkbox" id="one" />First checkbox</label>
-                                                        <label for="two">
-                                                            <input type="checkbox" id="two" />Second checkbox</label>
-                                                        <label for="three">
-                                                            <input type="checkbox" id="three" />Third checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
-                                            <figcaption>
-                                                <h3>Customer Relationship</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="customerrelationship()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
+                                                <figcaption>
+                                                    <h3>Cost Structure</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("cost_management");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="coststructure()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="coststructure">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
                                                         </div>
-                                                        <div class="checkboxes" id="customerrelationship">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
+                                                <figcaption>
+                                                    <h3>Revenue Streams</h3>
+                                                    <span>SHORT DESCRIPTION</span>
+                                                    <!--SEARCH OPTIONS-->
+                                                    <%
+                                                        traits = cDAO.retrieveTraitsByDriver("revenues");
+                                                        //      out.println(traits.size());
+                                                    %>
+                                                    <DIV>
+                                                        <div class="multiselect">
+                                                            <div class="selectBox" onclick="revenuestreams()">
+                                                                <select>
+                                                                    <option>Select an option</option>
+                                                                </select>
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div class="checkboxes" id="revenuestreams">
+                                                                <!--LOAD DATA HERE-->
+                                                                <%
+                                                                    count = 1;
+                                                                    for (String trait : traits) {
+                                                                        out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
+                                                                        count++;
+                                                                    }
+                                                                %>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/channels.jpg" alt="img03"></div>
-                                            <figcaption>
-                                                <h3>Channels</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="channels()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="channels">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
-                                                        </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
-                                            <figcaption>
-                                                <h3>Cost Structure</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="coststructure()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="coststructure">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
-                                                        </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
-                                            <figcaption>
-                                                <h3>Revenue Streams</h3>
-                                                <span>SHORT DESCRIPTION</span>
-                                                <!--SEARCH OPTIONS-->
-                                                <DIV>
-                                                    <div class="multiselect">
-                                                        <div class="selectBox" onclick="revenuestreams()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="revenuestreams">
-                                                            <!--LOAD DATA HERE-->
-                                                            <label for="one">
-                                                                <input type="checkbox" id="one" />First checkbox</label>
-                                                            <label for="two">
-                                                                <input type="checkbox" id="two" />Second checkbox</label>
-                                                            <label for="three">
-                                                                <input type="checkbox" id="three" />Third checkbox</label>
-                                                        </div>
-                                                    </div>
-                                                </DIV>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
+                                                    </DIV>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
 
 
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <input type="submit" value="Submit"> 
-
+                            <input type="submit" value="submit" name="traitsSearch">
+                        </form>
                         <span class="bl-icon bl-icon-close"></span>
                 </section>
             </div>
@@ -357,26 +406,26 @@
         <script src="resources/js/bmc/bmc-modernizr.custom.js"></script>
         <script src="resources/js/bmc/bmc-boxlayout.js"></script>
         <script>
-                                                            $(function () {
-                                                                Boxlayout.init();
-                                                            });
+                                                                $(function () {
+                                                                    Boxlayout.init();
+                                                                });
         </SCRIPT>                                                                                                                
 
         <!--SCRIPT FOR COMPANY SEARCH-->
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="resources/js/bmc/bmc-searchcom-listnav.js"></script>
         <script>
-                                                            $(function () {
-                                                                $('#demoFour').listnav({
-                                                                    includeAll: true,
-                                                                    includeNums: true,
-                                                                    showCounts: false,
-                                                                    allText: 'All Companies',
-                                                                    onClick: function (letter) {
-                                                                        $(".myLastClicked").text(letter.toUpperCase());
-                                                                    }
+                                                                $(function () {
+                                                                    $('#demoFour').listnav({
+                                                                        includeAll: true,
+                                                                        includeNums: true,
+                                                                        showCounts: false,
+                                                                        allText: 'All Companies',
+                                                                        onClick: function (letter) {
+                                                                            $(".myLastClicked").text(letter.toUpperCase());
+                                                                        }
+                                                                    });
                                                                 });
-                                                            });
         </script>
 
 

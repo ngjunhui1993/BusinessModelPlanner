@@ -130,7 +130,6 @@
                                                         <span>SHORT DESCRIPTION</span>
                                                         <!--SEARCH OPTIONS-->
                                                          <%
-                                                            cDAO = new CanvasDAO();
                                                             traits = cDAO.retrieveTraitsByDriver("key_activities");
                                                             out.println(traits.size());
                                                         %>
@@ -207,8 +206,9 @@
                                                                    <%
                                                                    if(request.getAttribute("traitsSelected")!=null) {
                                                                     String[] tr = (String[])request.getAttribute("traitsSelected");
+                                                                    int countT = 1;
                                                                     for(String t : tr) {
-                                                                        out.println(t);
+                                                                        out.println(countT++ + t);
                                                                     } 
                                                                    }else {
                                                                             out.println("nothing");

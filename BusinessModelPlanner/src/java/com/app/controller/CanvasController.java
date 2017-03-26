@@ -74,8 +74,9 @@ public class CanvasController extends HttpServlet {
         if(request.getParameter("traitsSearch")!=null) {
             String[] allTraits = request.getParameterValues("allTheTraits");
             request.setAttribute("traitsSelected", allTraits);
-            RequestDispatcher rd = request.getRequestDispatcher("testDisplay.jsp");
-            rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("BMCTest2.jsp");
+            rd.forward(request, response); 
+            
         }
         
     /*    if(request.getParameter("searchByTraits")!=null) {
