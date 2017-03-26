@@ -285,9 +285,9 @@ public class CanvasDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "Select choice from ?";
+            String sql = "Select choice from `" + driverName + "`";
             preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, driverName);
+       //     preStmt.setString(1, driverName);
             rs = preStmt.executeQuery();
             while (rs.next()) {
                 String trait = rs.getString("choice");
