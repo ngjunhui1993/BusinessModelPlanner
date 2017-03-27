@@ -25,7 +25,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <a href="BusinessModelCanvas" class="hvr-float-shadow">
+                        <a href="BusinessModelCanvas.jsp" class="hvr-float-shadow">
                             <img border="0" class="hvr-float-shadow" alt="BMC" src="resources/image/BMC.png" width="250" height="300">
                         </a>
                     </div>
