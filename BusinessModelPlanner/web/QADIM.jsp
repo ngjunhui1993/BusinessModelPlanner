@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimTooltip.css" />
         <!--CSS FOR BUTTONS-->
         <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimDownloadButton.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimButton.css" />
         <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
     <body>

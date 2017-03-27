@@ -52,7 +52,7 @@ public final class QADIM_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadimTooltip.css\" />\n");
       out.write("        <!--CSS FOR BUTTONS-->\n");
       out.write("        <link rel=\"shortcut icon\" href=\"../favicon.ico\">\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadimDownloadButton.css\" />\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadimButton.css\" />\n");
       out.write("        <script src=\"resources/js/qadim/qadimmodernizr.custom.js\"></script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");

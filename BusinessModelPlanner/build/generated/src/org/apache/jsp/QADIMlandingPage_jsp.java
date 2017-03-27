@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class QADIMmain_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class QADIMlandingPage_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -56,7 +56,7 @@ public final class QADIMmain_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadim-cs-select.css\" />\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadim-cs-skin-elastic.css\" />\n");
       out.write("        <!--CSS FOR NEW PROJECT BUTTON-->\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadimDownloadButton.css\" />\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"resources/css/qadim/qadimButton.css\" />\n");
       out.write("        <script src=\"resources/js/qadim/qadimmodernizr.custom.js\"></script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");

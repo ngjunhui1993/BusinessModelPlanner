@@ -12,6 +12,9 @@
         <!--CSS FOR LOADING PROJECT-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-select.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-skin-elastic.css" />
+        <!--CSS FOR NEW PROJECT BUTTON-->
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimButton.css" />
+        <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
     <body>
     <CENTER>
@@ -37,20 +40,21 @@
                 <tr>
                     <td>
                         <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->
-                        <a href='QADIMnewProject.jsp'><h1>CREATE NEW PROJECT</h1></a>
-                    </td>
-                    <td><h1> | </h1></td>
+                <center>
+                    <button class="btn btn-2 btn-2a"  onclick="window.location.href='QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
+                </center>
+                </td>
+                </tr>
+                <tr><td><center><h1>OR</h1></center></td></tr>
+                <tr>
                     <td>
                         <!--LOAD EXISTING PROJECT-->
-                        <div class="container">
-                            <section>
-                                <select class="cs-select cs-skin-elastic">
-                                    <option value="" disabled selected>Load Existing Project</option>
-                                    <option value="france" >France</option>
-
-                                </select>
-                            </section>
-                        </div><!-- /container -->
+                <center>
+                        <select class="cs-select cs-skin-elastic">
+                            <option value="" disabled selected>Load Existing Project</option>
+                            <option value="france" >France</option>
+                        </select>
+                </center>
 
                     </td>
                 </tr>
