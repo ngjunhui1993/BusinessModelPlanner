@@ -85,7 +85,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="thumbnail" contenteditable="true" id="projectName"  >
+                                            <div class="thumbnail" contenteditable="true" id="projectName" >
                                                 <h1>
                                                     Product / Service
                                                 </h1>

@@ -37,38 +37,34 @@
             <br><br>
             <!--END OF EXPLANATION-->          
             <table>
-                <tr>
-                    <td>
+                <tr><td>
                         <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->
                 <center>
-                    <button class="btn btn-2 btn-2a"  onclick="window.location.href='QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
+                    <button class="btn btn-2 btn-2a"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
                 </center>
-                </td>
-                </tr>
+                </td></tr>
                 <tr><td><center><h1>OR</h1></center></td></tr>
-                <tr>
-                    <td>
+                <tr><td>
                         <!--LOAD EXISTING PROJECT-->
-                <center>
-                        <select class="cs-select cs-skin-elastic">
-                            <option value="" disabled selected>Load Existing Project</option>
-                            <option value="france" >France</option>
-                        </select>
-                </center>
-
-                    </td>
-                </tr>
+                <center><select class="cs-select cs-skin-elastic">
+                        <option value="" disabled selected>Load Existing Project</option>
+                        <option value="france" >France</option>
+                    </select></center>
+                </td> </tr>
+                <tr><td><center>
+                    <button class="btn btn-2 btn-2i" onclick="window.location.href = 'QADIM.jsp'">LOAD</button>
+                </center></td></tr>
             </table>
     </CENTER>
     <!--SCRIPT FOR DROPDOWN-->
     <script src="resources/js/qadim/qadimClassie.js"></script>
     <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
     <script>
-        (function () {
-            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                new SelectFx(el);
-            });
-        })();
+                        (function () {
+                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                new SelectFx(el);
+                            });
+                        })();
     </script>
 </body>
 </html>
