@@ -1,0 +1,59 @@
+body {
+    background: #505F71;
+    font-weight: 500;
+    font-size: 1em;
+    font-family: 'Raleway', Arial, sans-serif;
+    padding-top: -5px;
+}
+#maincontent {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -80px;
+
+}
+#tooltipcontent {
+    margin-top: 0px;
+}
+#qadimcontent {
+    width: 800px;
+    margin: -20px -100px 0px -25px;
+
+}
+table {
+    border-spacing: 0px 0px;
+}
+h1{
+    font-size: 120%;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    padding-top: 30%;
+}
+.thumbnail {
+    height: 185px;
+    width: 190px;
+    border-bottom:8px solid #000;
+    text-align: center;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    cursor: default;
+    background: #fff;
+    margin: -5px auto auto 4px;
+
+}
+
+li {
+    height: 200px;
+    width: 205px;
+    line-height: 30px;
+    border: none;
+    background: #1c232d;
+    padding: 3px;
+    list-style-type: none;
+    vertical-align : middle;
+    float:left;
+}
+

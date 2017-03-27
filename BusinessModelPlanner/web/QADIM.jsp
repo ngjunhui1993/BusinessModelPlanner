@@ -1,506 +1,204 @@
-<%@page import="com.app.model.QaDIMDAO"%>
-<%@page import="com.app.model.entity.QadimProduct"%>
-<%@page import="com.app.model.entity.Demographics"%>
-<%@page import="java.util.ArrayList"%>
-<%@include file="Protect.jsp"%>
-<%    String error = (String) request.getAttribute("errorMsg");
-    String productName = null;
-    String projectName = null;
-    ArrayList<String> operator1 = new ArrayList<String>();
-    ArrayList<String> operator2 = new ArrayList<String>();
-    ArrayList<String> operator3 = new ArrayList<String>();
-    ArrayList<String> operator4 = new ArrayList<String>();
-
-    if (session.getAttribute("productName") != null) {
-        productName = (String) session.getAttribute("productName");
-    }
-    if (session.getAttribute("projectName") != null) {
-        projectName = (String) session.getAttribute("projectName");
-    }
-    if (session.getAttribute("operator1") != null) {
-        operator1 = (ArrayList<String>) session.getAttribute("operator1");
-    }
-    if (session.getAttribute("operator2") != null) {
-        operator2 = (ArrayList<String>) session.getAttribute("operator2");
-    }
-    if (session.getAttribute("operator3") != null) {
-        operator3 = (ArrayList<String>) session.getAttribute("operator3");
-    }
-    if (session.getAttribute("operator4") != null) {
-        operator4 = (ArrayList<String>) session.getAttribute("operator4");
-    }
-%>
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
-    <!--Include header-->
-    <%@include file="header.jsp"%>
-    <!-- QADIM CSS -->
-    <link href='resources/css/QADIM.css' rel='stylesheet' type='text/css'>
-    <!-- LIGHTBOX CSS -->
-    <link href="resources/css/lightbox-form.css" type="text/css" rel="stylesheet">
-    <!--DRAG AND DROP CSS-->
-    <link href="resources/css/dragndrop.css" rel="stylesheet" />
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<html ng-app="drag-and-drop">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <!--CSS FOR DRAGGABLE ELEMENTS-->
+        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimDraggable.css" />
+        <!--CSS FOR TOOLTIPS-->
+        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimTooltip.css" />
+        <!--CSS FOR BUTTONS-->
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimDownloadButton.css" />
+        <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
+    </head>
+    <body>
+        <!--
+        CONTENT
+        1. EXPLANATION (TOOLTIPS)
+        2. QADIM MODEL
+        3. SIDE PANEL (PROJECT NAME AND BUTTONS)
+        -->
 
+        <!--EXPLANATION-->
+        <div id="maincontent">
+            <div class="tooltipcontent">
+                <div class="dummy dummy-text">
+                    <br><br><br>
+                    <span class="tooltip tooltip-effect-3">
+                        <span class="tooltip-item" style="font-size:1.8em">QaDIM</span>
+                        <span class="tooltip-content clearfix">
+                            <span class="tooltip-text" style="padding-left:15px">
+                                An innovation framework, also known as the THE QUICK AND DIRTY INNOVATION MODEL.<br>
+                            </span></span></span> enable 
+                    users to <b><u>identify incremental innovation opportunities</u></b> for 
+                    existing or new products or services. The model works on a 3 by 3 framework that allows users to enter desired
+                    <span class="tooltip tooltip-effect-3"><span class="tooltip-item">Operators</span> 
+                        <span class="tooltip-content clearfix"><span class="tooltip-text" style="padding-left:15px">
+                                <strong>Operators</strong> are meaningful verbs or phrases that indicate the incremental innovation opportunities. <br>
+                                Drag the operators around and change the operators to any values you desire.<br>
 
-    <!--ABOUT SECTION-->
-    <section class="for-full-back color-white bodyStart" id="about-models">
-        <div class="container">
-            <div class="row text-center g-pad-bottom">
-                <div class="col-md-8 col-md-offset-2 ">
-                    <h3>QADIM - Quick and Dirty Innovation Model</h3>
-                    <h4>
-                        Quick and Dirty Innovation Model
-                    </h4>
+                            </span></span></span> around the product/service. Look out for the 
+                    <span class="tooltip tooltip-effect-3">
+                        <span class="tooltip-item">Tools</span> 
+                        <span class="tooltip-content clearfix">
+                            <span class="tooltip-text" style="padding-left:15px">
+                                The <strong>Tools</strong> are developed to help you in the following:<br><br>
+                                1. <strong>Save</strong> your current project.<br>
+                                2. <Strong>Create</strong> a new project or <Strong>load</Strong> previous projects.<br>
+                                3. <Strong>Download</Strong> your project in excel format.<br>
+                            </span></span></span> on the right to perform more functions. If you are unsure of what to do, you can always <b>click here</b> for help.
                 </div>
-
             </div>
 
-        </div>
-    </section>
-    <!--END ABOUT SECTION-->
-    <div class="shadowing" id="shadowing"></div>
-    <div class="box" id="step1">
-        <span class="boxtitle" >QADIM: New Project</span>
-        <form method="GET" name="QADIMbasicform" action="QADIMPageUpdate" target="_parent"  data-toggle="lightbox" onsubmit="return checkRepeat()">
+            <!--END OF EXPLANATION-->
 
-            <p>What is your Project Name?
-                <input type="text" name="projectName" maxlength="60" size="60" required>
-                Please Enter Product Name
-                <input type="text" name="productName" maxlength="60" size="60" required>
-            </p>
-            <p> 
-                <input type="submit" name="submit"><BR>
-                <input type="button" name="cancel" value="Cancel" onClick="closebox()">
-
-                <%
-                    if (error != null) {
-                        out.println("<font color='red'>" + error + "</br><br> </font>");
-                    }
-
-                %>
-            </p>
-        </form>
-    </div>
-
-    <div class="box" id="loadProject">
-        <span class="boxtitle" >QADIM: Load Project</span>
-
-        <%                String userid = user.getUserid();
-            ArrayList<QadimProduct> product = QaDIMDAO.retrieveAllProjects(userid);
-        %>
-        <form method="GET" action="LoadManager" target="_parent">
-
-            <p>Choose your project to load
-                <select class="projectList" name="projectList">
-                    <%for (QadimProduct q : product) {%>
-                    <option value="<%=q.getProjectName()%>"><%=q.getProjectName()%></option>    
-                    <% }%>  
-                </select>
-            </p>
-            <p> 
-                <input type="submit" name="submit" value="Load"><BR>
-
-                <%
-
-                    if (error != null) {
-                        out.println("<font color='red'>" + error + "</br><br> </font>");
-                    }
-
-                %>
-                <input type="button" name="cancel" value="Cancel" onClick="closebox()">
-            </p>
-        </form>
-    </div>
-
-    <div class="box" id="editProduct">
-        <span class="boxtitle" >QADIM: Edit Product Name</span>
-        <form method="GET" action="QADIMPageUpdate" target="_parent">
-            <p>
-                Please Enter Product Name
-                <input type="text" name="productName" maxlength="60" size="60" value="<%=productName%>">
-            </p>
-            <p> 
-                <input type="submit" name="submit">
-                <input type="button" name="cancel" value="Cancel" onClick="closebox()">
-            </p>
-        </form>
-    </div>
-            
-
-
-    <% if (!operator1.isEmpty()) {%>
-    <div class="box2" id="editOperator1">
-        <span class="boxtitle2" >QADIM: Edit Operator 1</span>
-        <form method="GET" action="QADIMPageUpdate" target="_parent">
-            <br/>
-            <input type="hidden" name="operator1" id="operator1">
-
-            <p>
+            <!--QADIM MODEL-->
             <table>
-                <tr>
-                    <td>
-                        Operator Name<br/>
-                        <input type="text" name="operatorName" maxlength="60" size="60" value="<%=operator1.get(0)%>">
-                    </td>
-                    <td>
-                        Complementary Operator Name<br/>
-                        <input type="text" name="comOperatorName" maxlength="60" size="60" value="<%=operator1.get(1)%>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Comments<br/>
-                        <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
-                    </td>
-                    <td>
-                        Complementary Comments<br/>
-                        <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
-                    </td>
-                </tr>
-            </table>
-            </p>
-            <p>
-                <input type="submit" name="submit" value="Delete">
-                <input type="submit" name="submit">
-                <input type="button" name="cancel" value="Cancel" onClick="closeOpBox1()">
-            </p>
-        </form>
-    </div>
-    <%}%>            
+                <tr><td>
+                        <!--PROJECT CONTENT-->
+                        <div id="qadimcontent">
+                            <div ng-controller="oneCtrl as loki">
+                                <div class='contentWrapper ng-cloak'>
+                                    <ul class="thumbnails">
+                                        <li ng-repeat="item in list1" data-drop="true" ng-model='list1' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
 
-    <% if (!operator2.isEmpty()) {%>
-    <div class="box2" id="editOperator2">
-        <span class="boxtitle2" >QADIM: Edit Operator 2</span>
-        <form method="GET" action="QADIMPageUpdate" target="_parent">
-            <br/>
-            <input type="hidden" name="operator2" id="operator2">
+                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <h1>{{item.title}}</h1>
 
+                                            </div>
 
-            <p>
-            <table>
-                <tr>
-                    <td>
-                        Operator Name<br/>
-                        <input type="text" name="operatorName" maxlength="60" size="60" value="<%=operator2.get(0)%>">
-                    </td>
-                    <td>
-                        Complementary Operator Name<br/>
-                        <input type="text" name="comOperatorName" maxlength="60" size="60" value="<%=operator2.get(1)%>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Comments<br/>
-                        <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
-                    </td>
-                    <td>
-                        Complementary Comments<br/>
-                        <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
-                    </td>
-                </tr>
+                                        </li>
+                                    </ul>
 
-            </table>
-            </p>
-            <p>
-                <input type="submit" name="submit" value="Delete">
-                <input type="submit" name="submit">
-                <input type="button" name="cancel" value="Cancel" onClick="closeOpBox2()">
-            </p>
-        </form>
-    </div>
-    <% } %>
+                                </div>
+                            </div>
 
-    <% if (!operator3.isEmpty()) {%>
-    <div class="box2" id="editOperator3">
-        <span class="boxtitle2" >QADIM: Edit Operator 3</span>
-        <form method="GET" action="QADIMPageUpdate" target="_parent">
-            <br/>
-            <input type="hidden" name="operator3" id="operator3">
-
-
-            <p>
-            <table>
-                <tr>
-                    <td>
-                        Operator Name<br/>
-                        <input type="text" name="operatorName" maxlength="60" size="60" value="<%=operator3.get(0)%>">
-                    </td>
-                    <td>
-                        Complementary Operator Name<br/>
-                        <input type="text" name="comOperatorName" maxlength="60" size="60" value="<%=operator3.get(1)%>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Comments<br/>
-                        <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
-                    </td>
-                    <td>
-                        Complementary Comments<br/>
-                        <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
-                    </td>
-                </tr>
-            </table>
-            </p>
-            <p>
-                <input type="submit" name="submit" value="Delete">
-                <input type="submit" name="submit">
-                <input type="button" name="cancel" value="Cancel" onClick="closeOpBox3()">
-            </p>
-        </form>
-    </div>
-    <% } %> 
-
-    <% if (!operator4.isEmpty()) {%>
-    <div class="box2" id="editOperator4">
-        <span class="boxtitle2" >QADIM: Edit Operator 4</span>
-        <form method="GET" action="QADIMPageUpdate" target="_parent">
-            <br/>
-            <input type="hidden" name="operator4" id="operator4">
-
-            <p>
-            <table>
-                <tr>
-                    <td>
-                        Operator Name<br/>
-                        <input type="text" name="operatorName" maxlength="60" size="60" value="<%=operator4.get(0)%>">
-                    </td>
-                    <td>
-                        Complementary Operator Name<br/>
-                        <input type="text" name="comOperatorName" maxlength="60" size="60" value="<%=operator4.get(1)%>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Comments<br/>
-                        <input type="text" name="comments" maxlength="60" size="60" value="<%=operator1.get(2)%>">
-                    </td>
-                    <td>
-                        Complementary Comments<br/>
-                        <input type="text" name="comComments" maxlength="60" size="60" value="<%=operator1.get(3)%>">
-                    </td>
-                </tr>
-            </table>
-            </p>
-            <p>
-                <input type="submit" name="submit" value="Delete">
-                <input type="submit" name="submit">
-                <input type="button" name="cancel" value="Cancel" onClick="closeOpBox4()">
-            </p>
-        </form>
-    </div>
-    <% } %>
-
-    <!-- QADIM BODY SECTION-->
-    <section>
-        <div class="container">
-            <div class="row g-pad-bottom QADIM-Body">
-
-                <%
-                    if (productName != null) {
-                %>
-                <h3><b><%=projectName%></b></h3>
-                <form action="MainValidation" >
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p>
-                                <button type="submit" class="btn btn-sq-sm btn-primary" value="New / Load Project" name="Save">
-                                    <i class="glyphicon glyphicon-file fa-2x"></i><br/>
-                                    NEW/LOAD PROJECT
-                                </button>
-
-                                <button type="submit" class="btn btn-sq-sm btn-warning" value="Save" name="Save">
-                                    <i class="glyphicon glyphicon-save fa-2x"></i><br/>
-                                    SAVE
-                                </button>
-                                <a href="FileDownload" class="btn btn-sq-sm btn-danger">
-                                    <i class="glyphicon glyphicon-download fa-2x"></i><br/>
-                                    DOWNLOAD
-                                </a> 
-                            </p>
+                            <div ng-controller="oneCtrl as loki">
+                                <div class='contentWrapper ng-cloak'>
+                                    <ul class="thumbnails">
+                                        <li ng-repeat="item in list2A" data-drop="true" ng-model='list2A' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2A" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <h1>
+                                                    {{item.title}}   
+                                                </h1>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumbnail" contenteditable="true" id="projectName"  >
+                                                <h1>
+                                                    Product / Service
+                                                </h1>
+                                            </div>
+                                        </li>
+                                        <li ng-repeat="item in list2B" data-drop="true" ng-model='list2B' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <h1>
+                                                    {{item.title}}   
+                                                </h1>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div ng-controller="oneCtrl as loki">
+                                <div class='contentWrapper ng-cloak'>
+                                    <ul class="thumbnails">
+                                        <li ng-repeat="item in list3" data-drop="true" ng-model='list3' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list3" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <h1>
+                                                    {{item.title}}
+                                                </h1>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </form>
 
-                Instructions: Drag and drop desired operators into the placeholder and include the<br>
-                appropriate comments and submit!<br>
-                <div id="addOperator">
-                    <form method="GET" action="QADIMPageUpdate" target="_parent">
-                        <table align="center" border="0">
+                        <!--END OF QADIM MODEL-->
+                    </td>
+                    <!--QADIM TOOLS-->
+                    <td>
+                        <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
+                            YOU ARE MODIFYING PROJECT<br></p>
+                        <p style="font-size:40px; color:#fff;margin-bottom:-.02em">
+                            <b>PROJECT NAME</b>
+                        </p>
 
-                            <td>
-                            <td>
-                                <div class="draggable">Add</div>
-                                <div class="draggable">Remove</div>
-                                <div class="draggable">Raise</div>
-                            </td>
-                            <td>
-                                <div class="draggable">Reduce</div>
-                                <div class="draggable">Combine</div>
-                                <div class="draggable">Separate</div>
-                            </td>
-                            <td>
-                            <td>
-                                <div id="droppableHolder">
-                                    Drag desired operator here:<br />    
-                                    <input type="text" name="operatorName" id="droppable" placeholder="Drop Operator here" />
-                                </div>
-
-                                Comments<br/>
-                                <input type="text" name="comments" maxlength="60" size="25">
-                                <input type="hidden" name="addOperatorCheck" value=""><br>
-
-                                </center> </td>
-
-                            <td><center>
-                                <div id="droppableHolder">
-                                    Drag complimentary operator here:<br />
-                                    <input type="text" name="comOperatorName" id="droppablee" placeholder="Drop Complimentary here" />
-                                </div>
-                                Comments<br/>
-                                <input type="text" name="comComments" maxlength="60" size="25">
-
-                                </td></centeR>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                            <input type="submit" name="submit">
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-                <table class="QADIM-Table">
-                    <tr>
-                        <td id="operator1">
-                            <%
-                                if (!operator1.isEmpty()) {
-                            %>
-                            <button class="operator1" onClick="openEditOperator1('1', 1)">
-                                <%=operator1.get(0)%><br/>
-                                <%=operator1.get(2)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td id="operator2">
-                            <%
-                                if (!operator2.isEmpty()) {
-                            %>
-                            <button class="operator2" onClick="openEditOperator2('2', 1)">
-                                <%=operator2.get(0)%><br/>
-                                <%=operator2.get(2)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td id="operator3">
-                            <%
-                                if (!operator3.isEmpty()) {
-                            %>
-                            <button class="operator3" onClick="openEditOperator3('3', 1)">
-                                <%=operator3.get(0)%><br/>
-                                <%=operator3.get(2)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="operator4">
-                            <%
-                                if (!operator4.isEmpty()) {
-                            %>
-                            <button class="operator4" onClick="openEditOperator4('4', 1)">
-                                <%=operator4.get(0)%><br/>
-                                <%=operator4.get(2)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td id="product">
-                            <button class="productBtn" onClick="openEditProductBox(1)">
-                                <%=productName%>
-                            </button>
-                        </td>
-                        <td id="complimentary4">
-                            <%
-                                if (!operator4.isEmpty()) {
-                            %>
-                            <button class="operator4" onClick="openEditOperator4('4', 1)">
-                                <%=operator4.get(1)%><br/>
-                                <%=operator4.get(3)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="complimentary3">
-                            <%
-                                if (!operator3.isEmpty()) {
-                            %>
-                            <button class="operator3" onClick="openEditOperator3('3', 1)">
-                                <%=operator3.get(1)%><br/>
-                                <%=operator3.get(3)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td id="complimentary2">
-                            <%
-                                if (!operator2.isEmpty()) {
-                            %>
-                            <button class="operator2" onClick="openEditOperator2('2', 1)">
-                                <%=operator2.get(1)%><br/>
-                                <%=operator2.get(3)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td id="complimentary1">
-                            <%
-                                if (!operator1.isEmpty()) {
-                            %>
-                            <button class="operator1" onClick="openEditOperator1('1', 1)">
-                                <%=operator1.get(1)%><br/>
-                                <%=operator1.get(3)%>
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                </table>
-                <% } else { %>
-
-                <button class="QADIMStartButton" onClick="openStep1Box(1)">New Project</button>
-                <button class="QADIMLoadButton" onClick="openLoadProjectBox(1)">Load Project</button>
-                <% }%>
-            </div>
+                        <button class="progress-button" data-style="flip-open" data-perspective data-horizontal>New/Load</button><br><br>
+                        <button class="progress-button" data-style="fill" data-horizontal id="QaDIMSave">Save</button><br><br>
+                        <button class="progress-button" data-style="shrink" data-horizontal>Download</button>
+                    </td>
+                    <!--END OF QADIM TOOLS-->
+                </tr>
+            </table>
+            <br><br>
         </div>
-    </section>
-    <!-- END QADIM BODY SECTION-->
 
-    <!--INCLUDE FOOTER AND JAVASCRIPT -->
-    <%@include file="footer.jsp"%>
+        <!--SCRIPTS FOR QADIM DRAGGABLE-->
 
-    <!-- JAVASCRIPT FOR QADIM  -->
-    <!-- LIGHTBOX SCRIPTS -->
-    <script src="resources/js/lightbox-form.js" type="text/javascript"></script>
-    <!--SCRIPTS FOR DRAG AND DROP-->
-    <script src="resources/js/dragndrop.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+        <script src="resources/js/qadim/qadimDragDrop.js"></script>
+        <script src="resources/js/qadim/qadimApp.js"></script>
 
+        <!--SCRIPT FOR TEXT FUNCTION-->
+        <script>
+                                                                changetext = function (e) {
+                                                                src = (e.parentNode);
+                                                                        src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                                                }
+        </script>
+        <!--SCRIPTS FOR BUTTON-->
+        <script src="resources/js/qadimClassie.js"></script>
+        <script src="resources/js/qadimProgressButton.js"></script>
+        <script>
+                                                                [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
+                                                        new ProgressButton(bttn, {
+                                                        callback: function (instance) {
+                                                        var progress = 0,
+                                                                interval = setInterval(function () {
+                                                                progress = Math.min(progress + Math.random() * 0.1, 1);
+                                                                        instance._setProgress(progress);
+                                                                        if (progress === 1) {
+                                                                instance._stop(1);
+                                                                        clearInterval(interval);
+                                                                }
+                                                                }, 200);
+                                                        }
+                                                        });
+                                                        });
+        </script>
+        <!--This is the script for save functionality, i use ajax. getElementByID(the element ID), and get its inner html-->
+        <!--after which, the data should be parsed to a servlet. The servlet handles changes the json into normal objects-->
+        <!--The parser servlet will then pass the data to the qadimdao. validations required. -->
+        <script type="text/javascript">
+           $('#QaDIMSave').click( function parse() {
+                var saveQADIMProjectName = document.getElementById("projectName").innerHTML;
+                console.log(saveQADIMProjectName);
+                
+                $.ajax
+                   (
+                   {
+                    //testing   
+                    //console.log(saveQADIMProjectName);
+                       url:'QADIMParser',
+                       data:{ 
+                           saveQADIMProjectName : saveQADIMProjectName
+
+                       },
+
+                       type:'GET',
+                       cache:false,
+                       success:function(){alert(saveQADIMProjectName);},
+                       error:function(){alert('You have an existing project with the same title! Use a different project title');}
+                   }
+                   );  
+        
+            }) ; 
+        </script>
+
+    </body>
 </html>
