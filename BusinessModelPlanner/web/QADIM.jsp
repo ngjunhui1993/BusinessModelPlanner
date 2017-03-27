@@ -4,12 +4,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!--CSS FOR DRAGGABLE ELEMENTS-->
-        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimDraggable.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimDraggable.css" />
         <!--CSS FOR TOOLTIPS-->
-        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimTooltip.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimTooltip.css" />
         <!--CSS FOR BUTTONS-->
         <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="resources/qadim/css/qadimDownloadButton.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimDownloadButton.css" />
         <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
     <body>
@@ -152,8 +152,8 @@
                                                                 }
         </script>
         <!--SCRIPTS FOR BUTTON-->
-        <script src="resources/js/qadimClassie.js"></script>
-        <script src="resources/js/qadimProgressButton.js"></script>
+        <script src="resources/js/qadim/qadimClassie.js"></script>
+        <script src="resources/js/qadim/qadimProgressButton.js"></script>
         <script>
                                                                 [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
                                                         new ProgressButton(bttn, {

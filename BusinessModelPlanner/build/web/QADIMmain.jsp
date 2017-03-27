@@ -39,6 +39,7 @@
                         <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->
                         <a href='QADIMnewProject.jsp'><h1>CREATE NEW PROJECT</h1></a>
                     </td>
+                    <td><h1> | </h1></td>
                     <td>
                         <!--LOAD EXISTING PROJECT-->
                         <div class="container">

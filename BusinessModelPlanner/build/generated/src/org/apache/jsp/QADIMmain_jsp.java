@@ -82,6 +82,7 @@ public final class QADIMmain_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->\n");
       out.write("                        <a href='QADIMnewProject.jsp'><h1>CREATE NEW PROJECT</h1></a>\n");
       out.write("                    </td>\n");
+      out.write("                    <td><h1> | </h1></td>\n");
       out.write("                    <td>\n");
       out.write("                        <!--LOAD EXISTING PROJECT-->\n");
       out.write("                        <div class=\"container\">\n");
