@@ -34,26 +34,49 @@ public class QADIMPageUpdate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            QaDIMDAO qadimDAO = new QaDIMDAO();
-            //Retrieve operator & complimentary operator
-            String projectName = request.getParameter("projectName");
+            //Retrieve projectname, productname, productdescription from QADIMnewProject.jsp
+            String projectName = request.getParameter("projectName");       
+            String productName = request.getParameter("productName");
+            String productDescription = request.getParameter("productDescription");
+            //Retrieve current userid from the session
             HttpSession session = request.getSession(true);
             Demographics loggedIn = (Demographics) session.getAttribute("user");
-            String loggedInUserID = loggedIn.getUserid();            
-            String productName = request.getParameter("productName");
-            String operatorName = request.getParameter("operatorName");
-            String comOperatorName = request.getParameter("comOperatorName");
-            String comments = request.getParameter("comments");
-            String comComments = request.getParameter("comComments");
-
-            //if there's any empty fields
-            if ((projectName == null || projectName.equals("") || productName == null || productName.equals("")) && operatorName == null) {
+            String loggedInUserID = loggedIn.getUserid();  
+            
+            
+            //-------------------- Start of Validation for New Project --------------------
+            
+            //Check if objects from QADIMNewProject.jsp is valid
+                //PS: Destination of errormsgs unclear
+            if(projectName == null || productName == null || productDescription == null ){
                 request.setAttribute("errorMsg", "Empty field(s).");
-                RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
+                rd.forward(request, response);
+                return;
+            //prevents nullpointerexception  
+                //PS: Destination of errormsgs unclear
+            }else if(projectName.trim().equals("")|| productName.trim().equals("")|| productDescription.trim().equals("")){
+                request.setAttribute("errorMsg", "Empty field(s).");
+                RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
                 rd.forward(request, response);
                 return;
             }
+            //if project name exists, prompt user to input another name.
+                //PS: Destination of errormsgs unclear
+            if (QaDIMDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
+                request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
+                RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
+                rd.forward(request, response);
+                return;
+            }else{
+                request.setAttribute("projectName", projectName);
+                request.setAttribute("productName", productName);
+                
+            }
             
+            //-------------------- End of Validation for newly created Projects --------------------
+            
+            //When user accesses a current project and changes the projectName
             if(request.getParameter("submitProjNameChange") != null) {
                 String newProjName = request.getParameter("newProjectName");
                 if(newProjName == null || newProjName.equals("")) {
@@ -62,20 +85,19 @@ public class QADIMPageUpdate extends HttpServlet {
                     rd.forward(request, response);
                     return;
                 }
-                qadimDAO.editProjectName(projectName, loggedInUserID, newProjName);
+                QaDIMDAO.editProjectName(projectName, loggedInUserID, newProjName);
                 request.getSession().setAttribute("projectName", newProjName);
                 response.sendRedirect("QADIM.jsp");
             }
-            
 
-            //if project name exists, prompt user to input another name.
-            if (qadimDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
-                request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
-                RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
-                rd.forward(request, response);
-                return;
-            }
             
+            //Obtaining Operators
+            String operatorName = request.getParameter("operatorName");
+            String comOperatorName = request.getParameter("comOperatorName");
+            String comments = request.getParameter("comments");
+            String comComments = request.getParameter("comComments");
+            
+            /*
             String operator1 = request.getParameter("operator1");
             String operator2 = request.getParameter("operator2");
             String operator3 = request.getParameter("operator3");
@@ -152,7 +174,7 @@ public class QADIMPageUpdate extends HttpServlet {
             }
 
             response.sendRedirect("QADIM.jsp");
-            return;
+            return;*/
         }
     }
 
