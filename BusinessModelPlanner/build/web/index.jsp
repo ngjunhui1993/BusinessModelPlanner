@@ -14,7 +14,7 @@
 
                 <div class="col-md-12 ">
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <a href="QADIM.jsp" class="hvr-float-shadow">
+                        <a href="QADIMindex.jsp" class="hvr-float-shadow">
                             <img border="0" class="hvr-float-shadow" alt="QADIM" src="resources/image/QADIM.png" width="250" height="300">
                         </a>
                     </div>
