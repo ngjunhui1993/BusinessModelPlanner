@@ -16,22 +16,22 @@
                     <h1>Create New Project</h1>
                 </div>
                 <!--START OF FORM-->
-                <form id="myform" class="fs-form fs-form-full" autocomplete="off">
+                <form id="myform" class="fs-form fs-form-full" autocomplete="off" action="QADIMPageUpdate">
                     <ol class="fs-fields">
                         <!--PROJECT NAME FIELD-->
                         <li>
                             <label class="fs-field-label fs-anim-upper" for="q1" data-info="Tell us about your project">What's your project name?</label>
-                            <input class="fs-anim-lower" id="q1" name="q1" type="text" placeholder="e.g. HAPPY PROJECT" required/>
+                            <input class="fs-anim-lower" id="q1" name="projectName" type="text" placeholder="e.g. HAPPY PROJECT" required/>
                         </li>
                         <!--PRODUCT NAME FIELD-->
                         <li>
                             <label class="fs-field-label fs-anim-upper" for="q2" data-info="What is your product?">What's your product name?</label>
-                            <input class="fs-anim-lower" id="q2" name="q2" type="text" placeholder="COOLERBOX" required/>
+                            <input class="fs-anim-lower" id="q2" name="productName" type="text" placeholder="COOLERBOX" required/>
                         </li>
                         <!--PRODUCT DESCRIPTION FIELD-->
                         <li>
                             <label class="fs-field-label fs-anim-upper" for="q4">Describe your product</label>
-                            <textarea class="fs-anim-lower" id="q4" name="q4" placeholder="Describe here"></textarea>
+                            <textarea class="fs-anim-lower" id="q4" name="productDescription" placeholder="Describe here"></textarea>
                         </li>
 
                     </ol>

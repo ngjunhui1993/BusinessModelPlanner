@@ -86,8 +86,11 @@
                                         </li>
                                         <li>
                                             <div class="thumbnail" contenteditable="true" id="projectName" >
+                                                <%
+                                                String productName = (String)request.getSession().getAttribute("productName");
+                                                %>
                                                 <h1>
-                                                    Product / Service
+                                                    <%=productName%>
                                                 </h1>
                                             </div>
                                         </li>
@@ -123,7 +126,10 @@
                         <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
                             YOU ARE MODIFYING PROJECT<br></p>
                         <p style="font-size:40px; color:#fff;margin-bottom:-.02em">
-                            <b>PROJECT NAME</b>
+                            <%
+                                String projectName = (String)request.getSession().getAttribute("projectName");
+                            %>
+                            <b><%=projectName%></b>
                         </p>
 
                         <button class="progress-button" data-style="flip-open" data-perspective data-horizontal>New/Load</button><br><br>
