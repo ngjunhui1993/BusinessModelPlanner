@@ -16,7 +16,6 @@
         <!--CSS FOR LOADING PROJECT-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-select.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-skin-elastic.css" />
-
     </head>
     <body>
         <!--
@@ -59,7 +58,6 @@
             </div>
 
             <!--END OF EXPLANATION-->
-
             <!--QADIM MODEL-->
             <table>
                 <tr><td>
@@ -70,15 +68,14 @@
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
                                         <li ng-repeat="item in list1" data-drop="true" ng-model='list1' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}">
 
-                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <input ng-model="item.title" variableinput placeholder="Edit Operator"><br>
+                                                {{item.title}}
 
-                                                <h1>
-                                                    <input ng-model="item.title" variableinput><br>
-                                                    {{item.title}}
-                                                </h1>
-                                                <input ng-model="item.comment" variableinput><br>
+                                                <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
                                                 {{item.comment}}
+
                                             </div>
                                         </li>
                                     </ul>
@@ -90,31 +87,32 @@
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
                                         <li ng-repeat="item in list2A" data-drop="true" ng-model='list2A' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2A" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <h1>
-                                                    <input ng-model="item.title" variableinput><br>
-                                                    {{item.title}} 
-                                                </h1>
+                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2A" jqyoui-draggable="{index: {{$index}},animate:true}">
+
+                                                <input ng-model="item.title" variableinput><br>
+                                                {{item.title}} 
+
                                                 <input ng-model="item.comment" variableinput><br>
                                                 {{item.comment}}
                                             </div>
                                         </li>
                                         <!--PRODUCT NAME-->
                                         <li ng-repeat="item in list2C" data-drop="false" ng-model='list2C' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <h1>
-                                                    <input ng-model="item.title" variableinput><br>
-                                                    {{item.title}}   
-                                                </h1>
+                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
+
+                                                <input ng-model="item.title" variableinput><br>
+                                                {{item.title}}   
+
                                             </div>
                                         </li>
+
                                         <!--END PRODUCT NAME-->
                                         <li ng-repeat="item in list2B" data-drop="true" ng-model='list2B' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <h1>
-                                                    <input ng-model="item.title" variableinput><br>
-                                                    {{item.title}}   
-                                                </h1>
+                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
+
+                                                <input ng-model="item.title" variableinput><br>
+                                                {{item.title}}   
+
                                                 <input ng-model="item.comment" variableinput><br>
                                                 {{item.comment}}
                                             </div>
@@ -128,11 +126,11 @@
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
                                         <li ng-repeat="item in list3" data-drop="true" ng-model='list3' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list3" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <h1>
-                                                    <input ng-model="item.title" variableinput><br>
-                                                    {{item.title}}
-                                                </h1>
+                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list3" jqyoui-draggable="{index: {{$index}},animate:true}">
+
+                                                <input ng-model="item.title" variableinput><br>
+                                                {{item.title}}
+
                                                 <input ng-model="item.comment" variableinput><br>
                                                 {{item.comment}}
                                             </div>
@@ -162,13 +160,10 @@
 
                         <button class="progress-button" data-style="flip-open" data-perspective data-horizontal id="newLoadProject">New/Load</button><br><br>
                         <!-- NEW / LOAD PROJECT MODAL -->
-
                         <div id="myProjectForm" class="formModal">
-
                             <!-- Modal content -->
                             <div class="formModal-content">
-                                <span class="close">x</span>
-
+                                <span class="closeProjectForm">x</span>
                                 <p>
                                     New or Load Project<br>
                                     Do you want to create a new project or load an existing project?<br>
@@ -177,8 +172,8 @@
                                     --
                                 </p>
                             </div>
-
                         </div>
+                        <!-- END NEW / LOAD PROJECT MODAL -->
                         <button class="progress-button" data-style="fill" data-horizontal id="QaDIMSave">Save</button><br><br>
                         <button class="progress-button" data-style="shrink" data-horizontal>Download</button>
                     </td>
@@ -248,5 +243,6 @@
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
         <script src="resources/js/qadim/qadimFormModal.js"></script>
         <script src="resources/js/qadim/qadimClassie.js"></script>
+
     </body>
 </html>
