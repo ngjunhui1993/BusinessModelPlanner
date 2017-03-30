@@ -16,6 +16,9 @@
         <!--CSS FOR LOADING PROJECT-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-select.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadim-cs-skin-elastic.css" />
+        <!--TEST-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!--
@@ -24,7 +27,6 @@
         2. QADIM MODEL
         3. SIDE PANEL (PROJECT NAME AND BUTTONS)
         -->
-
         <!--EXPLANATION-->
         <div id="maincontent">
             <div class="tooltipcontent">
@@ -56,90 +58,201 @@
                             </span></span></span> on the right to perform more functions. If you are unsure of what to do, you can always <b>click here</b> for help.
                 </div>
             </div>
-
             <!--END OF EXPLANATION-->
             <!--QADIM MODEL-->
             <table>
                 <tr><td>
                         <!--PROJECT CONTENT-->
                         <div id="qadimcontent">
-                            <!--FIRST ROW OPERATORS-->
+                            <!--FIRST ROW-->
                             <div ng-controller="oneCtrl as loki">
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
-                                        <li ng-repeat="item in list1" data-drop="true" ng-model='list1' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}">
-
-                                                <input ng-model="item.title" variableinput placeholder="Edit Operator"><br>
+                                        <!--OPERATOR ONE-->
+                                        <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR ONE FORM-->
+                                                <div class="formModal" id="operatorOneModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorOneName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorOneComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR ONE DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR TWO-->
+                                        <li ng-repeat="item in operatorTwo" data-drop="true" ng-model='operatorTwo' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorTwoModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorTwo" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR TWO FORM-->
+                                                <div class="formModal" id="operatorTwoModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorTwoName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorTwoComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR TWO DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR THREE-->
+                                        <li ng-repeat="item in operatorThree" data-drop="true" ng-model='operatorThree' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorThreeModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorThree" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR THREE FORM-->
+                                                <div class="formModal" id="operatorThreeModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorThreeName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorThreeComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR THREE DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR FOUR-->
+                                        <li ng-repeat="item in operatorFour" data-drop="true" ng-model='operatorFour' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorFourModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFour" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR FOUR FORM-->
+                                                <div class="formModal" id="operatorFourModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorFourName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorFourComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR FOUR DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--PROJECT NAME-->
+                                        <li ng-repeat="item in currentProjectName" data-drop="false" ng-model='currentProjectName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#currentProjectNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProjectName" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT PROJECT NAME FORM-->
+                                                <div class="formModal" id="currentProjectNameModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Project Name" id="currentProjectName"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--PROJECT NAME DISPLAY-->
                                                 {{item.title}}
-
-                                                <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
-                                                {{item.comment}}
-
                                             </div>
                                         </li>
+                                        <!--OPERATOR FIVE-->
+                                        <li ng-repeat="item in operatorFive" data-drop="true" ng-model='operatorFive' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorFiveModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFive" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR FIVE FORM-->
+                                                <div class="formModal" id="operatorFiveModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorFiveName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorFiveComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR FIVE DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR SIX-->
+                                        <li ng-repeat="item in operatorSix" data-drop="true" ng-model='operatorSix' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorSixModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSix" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR SIX FORM-->
+                                                <div class="formModal" id="operatorSixModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorSixName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorSixComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR SIX DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR SEVEN-->
+                                        <li ng-repeat="item in operatorSeven" data-drop="true" ng-model='operatorSeven' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorSevenModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSeven" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR SEVEN FORM-->
+                                                <div class="formModal" id="operatorSevenModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorSevenName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorSevenComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR SEVEN DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--OPERATOR EIGHT-->
+                                        <li ng-repeat="item in operatorEight" data-drop="true" ng-model='operatorEight' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorEightModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorEight" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--EDIT OPERATOR EIGHT FORM-->
+                                                <div class="formModal" id="operatorEightModal">
+                                                    <div class="formModal-content">
+                                                        <div class="modal-content">
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorEightName"><br>
+                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorEightComment"><br>
+                                                            <div class="modal-footer">
+                                                                <span class="closeProjectForm">x</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--OPERATOR SEVEN DISPLAY-->
+                                                {{item.title}}<br>
+                                                {{item.comment}}
+                                            </div>
+                                        </li>
+                                        <!--CLOSE HERE-->
                                     </ul>
                                 </div>
                             </div>
-                            <!--END FIRST ROW OPERATORS-->
-                            <!--SECOND ROW OPERATORS-->
-                            <div ng-controller="oneCtrl as loki">
-                                <div class='contentWrapper ng-cloak'>
-                                    <ul class="thumbnails">
-                                        <li ng-repeat="item in list2A" data-drop="true" ng-model='list2A' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2A" jqyoui-draggable="{index: {{$index}},animate:true}">
 
-                                                <input ng-model="item.title" variableinput><br>
-                                                {{item.title}} 
-
-                                                <input ng-model="item.comment" variableinput><br>
-                                                {{item.comment}}
-                                            </div>
-                                        </li>
-                                        <!--PRODUCT NAME-->
-                                        <li ng-repeat="item in list2C" data-drop="false" ng-model='list2C' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
-
-                                                <input ng-model="item.title" variableinput><br>
-                                                {{item.title}}   
-
-                                            </div>
-                                        </li>
-
-                                        <!--END PRODUCT NAME-->
-                                        <li ng-repeat="item in list2B" data-drop="true" ng-model='list2B' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2B" jqyoui-draggable="{index: {{$index}},animate:true}">
-
-                                                <input ng-model="item.title" variableinput><br>
-                                                {{item.title}}   
-
-                                                <input ng-model="item.comment" variableinput><br>
-                                                {{item.comment}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--END SECOND ROW OPERATORS-->
-                            <!--LAST ROW OPERATORS-->
-                            <div ng-controller="oneCtrl as loki">
-                                <div class='contentWrapper ng-cloak'>
-                                    <ul class="thumbnails">
-                                        <li ng-repeat="item in list3" data-drop="true" ng-model='list3' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div id="{{item.id}}" class="thumbnail" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list3" jqyoui-draggable="{index: {{$index}},animate:true}">
-
-                                                <input ng-model="item.title" variableinput><br>
-                                                {{item.title}}
-
-                                                <input ng-model="item.comment" variableinput><br>
-                                                {{item.comment}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
-                        <!--END SECOND ROW OPERATORS-->
+
                         <!--END OF QADIM MODEL-->
                     </td>
                     <!--
@@ -243,6 +356,5 @@
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
         <script src="resources/js/qadim/qadimFormModal.js"></script>
         <script src="resources/js/qadim/qadimClassie.js"></script>
-
     </body>
 </html>

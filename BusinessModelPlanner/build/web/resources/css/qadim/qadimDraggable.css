@@ -9,7 +9,7 @@ body {
     width: 900px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -80px;
+    margin-top: -40px;
 
 }
 #tooltipcontent {
@@ -17,7 +17,7 @@ body {
 }
 #qadimcontent {
     width: 800px;
-    margin: -20px -100px 0px -25px;
+    margin: 20px -100px 0px -25px;
 
 }
 table {
@@ -41,8 +41,7 @@ h1{
     -o-transition: none;
     cursor: default;
     background: #fff;
-    margin: -5px auto auto 4px;
-
+    margin: 10px auto auto 4px;
 }
 
 li {
