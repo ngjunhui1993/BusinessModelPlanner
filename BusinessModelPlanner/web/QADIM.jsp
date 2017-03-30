@@ -70,9 +70,6 @@
                                         <!--OPERATOR ONE-->
                                         <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--OPERATOR ONE DISPLAY-->
-                                                <div id="opOneName">{{item.title}}</div><br>
-                                                <div id="opOneComment">{{item.comment}}</div>
                                                 <!--EDIT OPERATOR ONE FORM-->
                                                 <div class="formModal" id="operatorOneModal">
                                                     <div class="formModal-content">
@@ -85,6 +82,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--OPERATOR ONE DISPLAY-->
+                                                <div id="opOneName">{{item.title}}</div><br>
+                                                <div id="opOneComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR TWO-->
@@ -328,54 +328,8 @@
                                         }
                                         });
                                         });</script>
-        <!--This is the script for save functionality, i use ajax. getElementByID(the element ID), and get its inner html-->
-        <!--after which, the data should be parsed to a servlet. The servlet handles changes the json into normal objects-->
-        <!--The parser servlet will then pass the data to the qadimdao. validations required. -->
-        <script type="text/javascript">
-                    $('#QaDIMSave').click(function parse() {
-            var saveQADIMProjectName = document.getElementById("curProjectName").innerHTML;
-                    var savedItem1 = document.getElementById("opOneName").innerHTML;
-                    var savedItem2 = document.getElementById("opTwoName").innerHTML;
-                    var savedItem3 = document.getElementById("opThreeName").innerHTML;
-                    var savedItem4 = document.getElementById("opFourName").innerHTML;
-                    var savedItem5 = document.getElementById("opFiveName").innerHTML;
-                    var savedItem6 = document.getElementById("opSixName").innerHTML;
-                    var savedItem7 = document.getElementById("opSevenName").innerHTML;
-                    var savedItem8 = document.getElementById("opEightName").innerHTML;
-                    // the console.log is for me to do testing only, can remove one
-                    console.log(saveQADIMProjectName);
-                    console.log(savedItem1);
-                    console.log(savedItem2);
-                    console.log(savedItem3);
-                    console.log(savedItem4);
-                    console.log(savedItem5);
-                    console.log(savedItem6);
-                    console.log(savedItem7);
-                    console.log(savedItem8);
-                    $.ajax
-                    (
-                    {
-                    //testing using console log
-                    //console.log(saveQADIMProjectName);
-                    url:'QADIMParser',
-                            data:{
-                            saveQADIMProjectName : saveQADIMProjectName,
-                                    savedItem1 : savedItem1,
-                                    savedItem2 : savedItem2,
-                                    savedItem3 : savedItem3,
-                                    savedItem4 : savedItem4,
-                                    savedItem5 : savedItem5,
-                                    savedItem6 : savedItem6,
-                                    savedItem7 : savedItem7,
-                                    savedItem8 : savedItem8
-                            },
-                            type:'GET',
-                            cache:false,
-                            success:function(){alert(saveQADIMProjectName); },
-                            error:function(){alert('You have an existing project with the same title! Use a different project title'); }
-                    }
-                    );
-            });                    </script>
+        <!--SCRIPT FOR QADIM SAVE FUNCTION-->
+        <script src ="resources/js/qadim/qadimSave.js"></script>
 
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
         <script src ="resources/js/qadim/qadimFormModal.js"></script>
