@@ -44,7 +44,6 @@
                         <span class="tooltip-content clearfix"><span class="tooltip-text" style="padding-left:15px">
                                 <strong>Operators</strong> are meaningful verbs or phrases that indicate the incremental innovation opportunities. <br>
                                 Drag the operators around and change the operators to any values you desire.<br>
-                                We have pre-defined some default operators for you to get you started! <br>
 
                             </span></span></span> around the product/service. Look out for the 
                     <span class="tooltip tooltip-effect-3">
@@ -55,7 +54,7 @@
                                 1. <strong>Save</strong> your current project.<br>
                                 2. <Strong>Create</strong> a new project or <Strong>load</Strong> previous projects.<br>
                                 3. <Strong>Download</Strong> your project in excel format.<br>
-                            </span></span></span> on the right to perform more functions. If you are unsure of what to do, you can always <b>click here</b> for help.
+                            </span></span></span> on the right to perform more functions. Our model have pre-defined some examples for you to get you started. To change the values, simply click on the operator boxes.<br>
                 </div>
             </div>
             <!--END OF EXPLANATION-->
@@ -71,6 +70,9 @@
                                         <!--OPERATOR ONE-->
                                         <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                                <!--OPERATOR ONE DISPLAY-->
+                                                <div id="opOneName">{{item.title}}</div><br>
+                                                <div id="opOneComment">{{item.comment}}</div>
                                                 <!--EDIT OPERATOR ONE FORM-->
                                                 <div class="formModal" id="operatorOneModal">
                                                     <div class="formModal-content">
@@ -83,9 +85,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--OPERATOR ONE DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
                                             </div>
                                         </li>
                                         <!--OPERATOR TWO-->
@@ -104,8 +103,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR TWO DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opTwoName">{{item.title}}</div><br>
+                                                <div id="opTwoComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR THREE-->
@@ -124,8 +123,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR THREE DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opThreeName">{{item.title}}</div><br>
+                                                <div id="opThreeComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR FOUR-->
@@ -144,8 +143,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR FOUR DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opFourName">{{item.title}}</div><br>
+                                                <div id="opFourComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--PROJECT NAME-->
@@ -163,7 +162,7 @@
                                                     </div>
                                                 </div>
                                                 <!--PROJECT NAME DISPLAY-->
-                                                {{item.title}}
+                                                <div id="curProjectName">{{item.title}}</div><br>
                                             </div>
                                         </li>
                                         <!--OPERATOR FIVE-->
@@ -182,8 +181,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR FIVE DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opFiveName">{{item.title}}</div><br>
+                                                <div id="opFiveComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR SIX-->
@@ -202,8 +201,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR SIX DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opSixName">{{item.title}}</div><br>
+                                                <div id="opSixComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR SEVEN-->
@@ -222,8 +221,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR SEVEN DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opSevenName">{{item.title}}</div><br>
+                                                <div id="opSevenComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR EIGHT-->
@@ -242,8 +241,8 @@
                                                     </div>
                                                 </div>
                                                 <!--OPERATOR SEVEN DISPLAY-->
-                                                {{item.title}}<br>
-                                                {{item.comment}}
+                                                <div id="opEightName">{{item.title}}</div><br>
+                                                <div id="opEightComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--CLOSE HERE-->
@@ -334,17 +333,41 @@
         <!--The parser servlet will then pass the data to the qadimdao. validations required. -->
         <script type="text/javascript">
                     $('#QaDIMSave').click(function parse() {
-            var saveQADIMProjectName = document.getElementById("projectName").innerHTML;
+            var saveQADIMProjectName = document.getElementById("curProjectName").innerHTML;
+                    var savedItem1 = document.getElementById("opOneName").innerHTML;
+                    var savedItem2 = document.getElementById("opTwoName").innerHTML;
+                    var savedItem3 = document.getElementById("opThreeName").innerHTML;
+                    var savedItem4 = document.getElementById("opFourName").innerHTML;
+                    var savedItem5 = document.getElementById("opFiveName").innerHTML;
+                    var savedItem6 = document.getElementById("opSixName").innerHTML;
+                    var savedItem7 = document.getElementById("opSevenName").innerHTML;
+                    var savedItem8 = document.getElementById("opEightName").innerHTML;
+                    // the console.log is for me to do testing only, can remove one
                     console.log(saveQADIMProjectName);
+                    console.log(savedItem1);
+                    console.log(savedItem2);
+                    console.log(savedItem3);
+                    console.log(savedItem4);
+                    console.log(savedItem5);
+                    console.log(savedItem6);
+                    console.log(savedItem7);
+                    console.log(savedItem8);
                     $.ajax
                     (
                     {
-                    //testing   
+                    //testing using console log
                     //console.log(saveQADIMProjectName);
                     url:'QADIMParser',
                             data:{
-                            saveQADIMProjectName : saveQADIMProjectName
-
+                            saveQADIMProjectName : saveQADIMProjectName,
+                                    savedItem1 : savedItem1,
+                                    savedItem2 : savedItem2,
+                                    savedItem3 : savedItem3,
+                                    savedItem4 : savedItem4,
+                                    savedItem5 : savedItem5,
+                                    savedItem6 : savedItem6,
+                                    savedItem7 : savedItem7,
+                                    savedItem8 : savedItem8
                             },
                             type:'GET',
                             cache:false,
@@ -352,9 +375,10 @@
                             error:function(){alert('You have an existing project with the same title! Use a different project title'); }
                     }
                     );
-            });</script>
+            });                    </script>
+
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
-        <script src="resources/js/qadim/qadimFormModal.js"></script>
+        <script src ="resources/js/qadim/qadimFormModal.js"></script>
         <script src="resources/js/qadim/qadimClassie.js"></script>
     </body>
 </html>

@@ -95,7 +95,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="keyPartnerSelect">
                                                         <div class="selectBox" onclick="keyPartners()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -133,7 +133,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="keyActivitiesSelect">
                                                         <div class="selectBox" onclick="keyactivities()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -168,7 +168,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="keyResourcesSelect">
                                                         <div class="selectBox" onclick="keyresources()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -202,7 +202,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="valuePropositionSelect">
                                                         <div class="selectBox" onclick="valueproposition()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -235,7 +235,7 @@
                                                     traits = cDAO.retrieveTraitsByDriver("customer_acquisition");
                                                     //      out.println(traits.size());
                                                 %>
-                                                <div class="multiselect">
+                                                <div class="multiselect" id="customerSegmentSelect">
                                                     <div class="selectBox" onclick="customersegments()">
                                                         <select>
                                                             <option>Select an option</option>
@@ -268,7 +268,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="customerRelationshipSelect">
                                                         <div class="selectBox" onclick="customerrelationship()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -302,7 +302,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="channelSelect">
                                                         <div class="selectBox" onclick="channels()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -336,7 +336,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="costStructureSelect">
                                                         <div class="selectBox" onclick="coststructure()">
                                                             <select>
                                                                 <option>Select an option</option>
@@ -370,7 +370,7 @@
                                                     //      out.println(traits.size());
                                                 %>
                                                 <DIV>
-                                                    <div class="multiselect">
+                                                    <div class="multiselect" id="revenueStreamSelect">
                                                         <div class="selectBox" onclick="revenuestreams()">
                                                             <select>
                                                                 <option>Select an option</option>
