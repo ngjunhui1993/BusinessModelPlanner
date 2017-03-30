@@ -1,9 +1,11 @@
+<%@include file="Protect.jsp"%>
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.QaDIMDAO"%>
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -1,4 +1,11 @@
+<%@include file="Protect.jsp"%>
+<%@page import="com.app.model.entity.QadimProduct"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.app.model.QaDIMDAO"%>
+<%@page import="com.app.model.entity.Demographics"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,12 +53,25 @@
                 <tr><td><center><h1>OR</h1></center></td></tr>
                 <tr><td>
                         <!--LOAD EXISTING PROJECT-->
-                <center><select class="cs-select cs-skin-elastic">
+                    <%
+                        Demographics user = (Demographics)request.getSession().getAttribute("user");
+                        String userid = user.getUserid();
+                        ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                        if (loadedProjects!=null){
+                    %>
+                <center><select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                        <%
+                            for(QadimProduct project :loadedProjects){
+                        %>
                         <option value="" disabled selected>Load Existing Project</option>
-                        <option value="france" >France</option>
+                        <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                        <%}%>
                     </select></center>
                 </td> </tr>
                 <tr><td><center>
+                    <%
+                        }
+                    %>
                     <button class="btn btn-2 btn-2i" onclick="window.location.href = 'QADIM.jsp'">LOAD</button>
                 </center></td></tr>
             </table>
