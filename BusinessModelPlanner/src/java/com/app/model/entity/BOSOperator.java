@@ -12,6 +12,7 @@ package com.app.model.entity;
 public class BOSOperator {
     private String userid;
     private String projectName;
+    private int productid;
     private int factorid;
     private String factorName;
     private int weight;
@@ -20,9 +21,10 @@ public class BOSOperator {
     private int originalValue;
     private int newValue;
 
-    public BOSOperator(String userid, String projectName, int factorid, String factorName, int weight, int grid, int perUnitValue, int originalValue, int newValue) {
+    public BOSOperator(String userid, String projectName, int productid, int factorid, String factorName, int weight, int grid, int perUnitValue, int originalValue, int newValue) {
         this.userid = userid;
         this.projectName = projectName;
+        this.productid = productid;
         this.factorid = factorid;
         this.factorName = factorName;
         this.weight = weight;
@@ -38,6 +40,10 @@ public class BOSOperator {
 
     public String getProjectName() {
         return projectName;
+    }
+
+    public int getProductid() {
+        return productid;
     }
 
     public int getFactorid() {

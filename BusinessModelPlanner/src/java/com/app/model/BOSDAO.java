@@ -35,7 +35,7 @@ public class BOSDAO {
             preStmt.setString(2, userid);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                 bosProduct = new BOSProduct(rs.getString("userid"), rs.getString("project_name"),Integer.parseInt(rs.getString("product_id")));
+                 bosProduct = new BOSProduct(rs.getString("userID"), rs.getString("project_name"),Integer.parseInt(rs.getString("product_id")),Integer.parseInt(rs.getString("original_cost")),Integer.parseInt(rs.getString("budget_required")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,7 +45,30 @@ public class BOSDAO {
         return bosProduct;
     }
     
-        public static ArrayList<BOSProduct> retrieveAllProjectsByUser(String userid) {
+        public static ArrayList<String> retrieveOperators(String projectName, String userid) {
+        ArrayList<String> operatorList = new ArrayList<String>();
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "Select operator_name from blueoceanstrategy_operator where project_name = ? and userid = ?;";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, projectName);
+            preStmt.setString(2, userid);
+            rs = preStmt.executeQuery();
+            while (rs.next()) {
+                operatorList.add(rs.getString("operator_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return operatorList;
+    }
+    
+    public static ArrayList<BOSProduct> retrieveAllProjectsByUser(String userid) {
         BOSProduct bosProduct = null;
         Connection conn = null;
         PreparedStatement preStmt = null;
@@ -58,7 +81,7 @@ public class BOSDAO {
             preStmt.setString(1, userid);
             rs = preStmt.executeQuery();
             while (rs.next()) {
-                bosProduct = new BOSProduct(rs.getString("userid"), rs.getString("project_name"),Integer.parseInt(rs.getString("product_id")));
+                bosProduct = new BOSProduct(rs.getString("userID"), rs.getString("project_name"),Integer.parseInt(rs.getString("product_id")),Integer.parseInt(rs.getString("original_cost")),Integer.parseInt(rs.getString("budget_required")));
                 projectList.add(bosProduct);
             }
         } catch (SQLException e) {
@@ -114,80 +137,7 @@ public class BOSDAO {
         }
         return count;
     }
-    
-    /*
-        public static int retrieveNoOfOperators(String userId, String projectName) {
-        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
-        Connection conn = null;
-        PreparedStatement preStmt = null;
-        ResultSet rs = null;
-        int count = 0;
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "Select * from blueoceanstrategy_product where userid = ? and project_name = ?;";
-            preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, userId);
-            preStmt.setString(2, projectName);
-            rs = preStmt.executeQuery();
-            while (rs.next()) {
-                count++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, preStmt, rs);
-        }
-        return count;
-    }
-*/
-    public static BOSProduct retrieveProject(String projectName) {
-        BOSProduct product = null;
-        // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
-        Connection conn = null;
-        PreparedStatement preStmt = null;
-        ResultSet rs = null;
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "Select * from blueoceanstrategy_product where project_name = ?;";
-            preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, projectName);
-            rs = preStmt.executeQuery();
-            while (rs.next()) {
-                product = new BOSProduct(rs.getString("userid"), rs.getString("project_name"),Integer.parseInt(rs.getString("product_id")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, preStmt, rs);
-        }
-        return product;
-    }
 
-    public static ArrayList<String> retrieveOperators(String projectName, String userid) {
-        ArrayList<String> operatorList = new ArrayList<String>();
-        Connection conn = null;
-        PreparedStatement preStmt = null;
-        ResultSet rs = null;
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "Select operator_name from blueoceanstrategy_operator where project_name = ? and userid = ?;";
-            preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, projectName);
-            preStmt.setString(2, userid);
-            rs = preStmt.executeQuery();
-            while (rs.next()) {
-                operatorList.add(rs.getString("operator_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, preStmt, rs);
-        }
-        return operatorList;
-    }
-
-    
-    
     public static void createOperator(String userid, String projectName, int factorid, String factorName,int weightNumber, int gridNumber,int perUnitValueNumber,int originalValue,int newValue) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -218,9 +168,8 @@ public class BOSDAO {
         }
     }
     
-    public HashMap<Integer, ArrayList<BOSOperator>> getAllOperators(String userid, String projectName) {
-        HashMap<Integer, ArrayList<BOSOperator>> operatorMap= new HashMap<>();
-       // String email = userId.getEmail().substring(0,user.getEmail().indexOf("@"));
+    public static ArrayList<BOSOperator> getAllOperators(String userid, String projectName) {
+        ArrayList<BOSOperator> operatorList= new ArrayList<>();
         Connection conn = null;
         PreparedStatement preStmt = null;
         ResultSet rs = null;
@@ -235,37 +184,25 @@ public class BOSDAO {
                 String userID = rs.getString("userid");
                 String projName = rs.getString("project_name");
                 int productID = rs.getInt("product_id");
-                int operatorID = rs.getInt("operator_id");
-                String operatorName = rs.getString("operator_name");
+                int factorID = rs.getInt("factor_id");
+                String factorName = rs.getString("factor_name");
                 int weight = rs.getInt("weight");
-                int maxValue = rs.getInt("max_value");
+                int grid = rs.getInt("grid");
                 int perUnitValue = rs.getInt("per_unit_value");
                 int originalValue = rs.getInt("original_value");
                 int newValue = rs.getInt("new_value");
-                String originalName = rs.getString("original_product_name");
-             //   BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, weight, maxValue, perUnitValue, originalValue, newValue, originalName);
-                //see weight take out value add in put back 
-                
-                if(operatorMap.containsKey(weight)) {
-                    ArrayList<BOSOperator> update = operatorMap.get(weight);
-                 //   update.add(operator);
-                    operatorMap.put(weight, update);
-                } else {
-                    ArrayList<BOSOperator> newList = new ArrayList<>();
-               //     newList.add(operator);
-                    operatorMap.put(weight, newList);
-                }
+                BOSOperator operator = new BOSOperator(userID, projName, productID, factorID, factorName, weight, grid, perUnitValue, originalValue, newValue);
+                operatorList.add(operator);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionManager.close(conn, preStmt, rs);
         }
-        return operatorMap;
+        return operatorList;
     } 
     
     //add original value
-    
     public void addOriginalValue(String projectName, int operatorID, String userID, int originalValue) {
         Connection conn = null;
         PreparedStatement preStmt = null;
@@ -314,8 +251,7 @@ public class BOSDAO {
             ConnectionManager.close(conn, preStmt, rs);
         }
     }
-   
-    
+
     public static boolean checkOperatorExist (String userid, String projectName,int factorid,String factorName,int weightNumber,int gridNumber,int perUnitValueNumber,int originalValue,int newValue){
         Connection conn = null;
         PreparedStatement preStmt = null;
@@ -352,17 +288,9 @@ public class BOSDAO {
     // here are the arrays
     // factors , grids , greendots , bluedots , pricepoints , weights 
     // here are the values : projectName , userID , currentValue , newValue.
-    public static boolean saveProjectOperators(ArrayList<String> factors ,
-                                    ArrayList<String> grids , 
-                                    ArrayList<String> greenDots , 
-                                    ArrayList<String> blueDots , 
-                                    ArrayList<String> pricePoints , 
-                                    ArrayList<String> weights , 
-                                    String projectName , 
-                                    String userID , 
-                                   
-                                    int column,
-                                    int productID ){
+    public static boolean saveProjectOperators(ArrayList<String> factors , ArrayList<String> grids , ArrayList<String> greenDots , 
+                                    ArrayList<String> blueDots , ArrayList<String> pricePoints , ArrayList<String> weights , String projectName , 
+                                    String userID , int column, int productID ){
         
    // this method is created by JH. will take in all the arrays and values to be saved in the db.
     // here are the arrays
@@ -385,7 +313,7 @@ public class BOSDAO {
             conn = ConnectionManager.getConnection();
             // if projectID = 1 , i am a new user. go ahead and insert, no need to update.
             // if projectID more than 1, then i have existing project, check to see if project name is existing. if yes, obtain its projectID.
-            sql = "insert into blueoceanstrategy_operator values(?,?,?,?,?,?,?,?,?,?);" ;
+            sql = "insert into blueoceanstrategy_operator(userid, project_name, product_id, factor_id, factor_name, weight, grid, per_unit_value, original_value, new_value) values (?,?,?,?,?,?,?,?,?,?);" ;
             for(int i =1 ; i <=column  ; i ++){
                 pstmt = conn.prepareStatement(sql);
                 //select clause

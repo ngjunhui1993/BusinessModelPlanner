@@ -1,31 +1,20 @@
-$(function() {
-    
-    
-            var boxCount = 2;
-            var linesCount = 2;
-            var linkLine = $('<div class="line lineA" id="line1A"></div>');
-            var lines = []
             var dotAY = $('#dotA1').offset().top;
             var dotBY = $('#dotB1').offset().top;
+            var difference = Math.abs(dotAY - dotBY)+10;
+$(function() {
+            var linkLine = $('<div class="line lineA" id="line1A"></div>');
             var topOfCanvas = $('#topLabel').offset().top;
             var bottomOfCanvas = topOfCanvas + $('#container').outerHeight();
             var canvasHeight = Math.abs(topOfCanvas - bottomOfCanvas) ;
-//            var bottomDifferenceA = document.getElementByID('#topLabel').offset.top - 
-//                    document.getElementByID('#bottomLabel').offset.top ;
-            //var bottomDifferenceB = Math.abs(dotBY - bottomOfCanvas);
-            var difference = Math.abs(dotAY - dotBY);
+            difference = Math.abs(dotAY - dotBY)+10;
             console.log("Bottom of canvas for A = " +canvasHeight );
-//            console.log(" var difference = " + difference);
             
-            lines.push(linkLine);
-            lines[0].appendTo('body');
-            linkLine = $('<div class="line lineB" id="line1B"></div>');
-            lines.push(linkLine);
-            lines[1].appendTo('body');
+
+
             $("#addBox").click(function() {
                 removeIndication();
                 if (boxCount < 8){
-                    linesCount += 2;
+                    
                     boxCount++;
                     
                     var box = document.createElement("div");
@@ -52,7 +41,7 @@ $(function() {
                     document.getElementById('factors').appendChild(box);
                     var factorName = document.createElement("div");
                     factorName.className = 'factorBox';
-                    factorName.innerHTML = '<span class="factorName" id="factor' + boxCount + '" contenteditable="true">\n\
+                    factorName.innerHTML = '<span class="factorName" id="factor'+boxCount+'" contenteditable="true">\n\
                     Factor ' + boxCount + '</span><br/>Weight: <select class="weight" id="weight' + boxCount + '"> \n\
                     <option value="1">1</option>\n\
                     <option value="2">2</option>\n\
@@ -105,26 +94,27 @@ $(function() {
                     $('.weight').change(function() {
                             removeIndication();
                     })
-                    var temp = '<div class="line lineA" id="line'+(boxCount-1)+'A"></div>'
-                    linkLine = $(temp);
-                    lines[linesCount-2] = linkLine;
-                    lines[linesCount-2].appendTo('body');
-                    temp = '<div class="line lineB" id="line'+(boxCount-1)+'B"></div>'
-                    linkLine = $(temp);
-                    lines[linesCount-1] = linkLine;
-                    lines[linesCount-1].appendTo('body');
+                    linkLine = $('<div class="line lineA" id="line'+(boxCount-1)+'A"></div>');
+                    lines.push(linkLine);
+                    lines[lines.length-1].appendTo('body');
+                    linkLine = $('<div class="line lineB" id="line'+(boxCount-1)+'B"></div>');
+                    lines.push(linkLine);
+                    lines[lines.length-1].appendTo('body');
+                    linesCount++;
                     lineAllign();
                     $(".draggable"+boxCount).draggable({
                         axis: "y",
                         containment: ".box",
-                        grid: [difference/8,difference/8],
+                        grid: [(difference-10)/8,(difference-10)/8],
                         scroll: false,
                         distance: 0,
 
                       },{drag: function(event, ui){
                           lineAllign();
                           }
-                    });
+                    },{stop: function(event, ui){
+                          lineAllign();
+                          }});
                     $('.draggable'+boxCount+'A').css('top', difference+'px');
                     $('.draggable'+boxCount+'B').css('top', difference+'px');
                     var tempdotAY = $('#dotA'+boxCount).offset().top;
@@ -143,7 +133,7 @@ $(function() {
                             $('.draggable3B').css('top', (difference-tempDifference)+'px');
                             lineAllign();
                             var className = ".draggable3";
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -154,7 +144,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         document.getElementById("grid4").onchange=function() {
@@ -166,7 +158,7 @@ $(function() {
                             $('.draggable4B').css('top', (difference-tempDifference)+'px');
                             lineAllign();
                             var className = ".draggable4";
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -177,7 +169,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         document.getElementById("grid5").onchange=function() {
@@ -189,7 +183,7 @@ $(function() {
                             $('.draggable5B').css('top', (difference-tempDifference)+'px');
                             lineAllign();
                             var className = ".draggable5";
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -200,7 +194,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         document.getElementById("grid6").onchange=function() {
@@ -212,7 +208,7 @@ $(function() {
                             $('.draggable6B').css('top', (difference-tempDifference)+'px');
                             lineAllign();
                             var className = ".draggable6";
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -223,7 +219,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         document.getElementById("grid7").onchange=function() {
@@ -235,7 +233,7 @@ $(function() {
                             $('.draggable7B').css('top', (difference-tempDifference)+'px');
                             lineAllign();
                             var className = ".draggable7";
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -246,7 +244,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         document.getElementById("grid8").onchange=function() {
@@ -259,7 +259,7 @@ $(function() {
                             lineAllign();
                             var className = ".draggable8";
                             //this.value refers to the 8
-                            var number = difference/this.value;
+                            var number = (difference-10)/this.value;
                             $(className).draggable({
                                 axis: "y",
                                 containment: ".box", 
@@ -270,7 +270,9 @@ $(function() {
                             },{drag: function(event, ui){
                                     lineAllign();
                             }
-                            });
+                            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
 
                         }
                         
@@ -278,11 +280,11 @@ $(function() {
               });
         
 
-                lineAllign();
-               
+
                $(document).mousemove(linkMouseMoveEvent);
 
-
+               
+           
            function linkMouseMoveEvent(event) {
                 for(i=1;i<boxCount;i++){
                     var lineName = '#line'+i+'A';
@@ -342,6 +344,8 @@ $(function() {
             window.onresize = function(event) {
                 lineAllign();
             };
+            
+
 
            function endLinkMode() {
                $('#line1A').remove();
@@ -351,44 +355,19 @@ $(function() {
     
             var boxCenterXOffset = 5;
             var boxCenterYOffset = 5;
-            $( "#sortable" ).sortable(
-            {
-              axis: "x",
-              containment: "#factors", 
-              scroll: false,
-              distance: 0
-            },{sort: function(event, ui){
-                lines[0]
-                   .css("visibility", "hidden");
-                lines[1]
-                   .css("visibility", "hidden");
-                }
-                
-            },
-            {stop: function(event, ui){
-                lines[0]
-                   .css("visibility", "visible")
-                   .css('top', $('#dotA1').offset().top + $('#dotA1').outerWidth() / 2)
-                   .css('left', $('#dotA1').offset().left + $('#dotA1').outerHeight() / 2);
-                lines[1]
-                   .css("visibility", "visible")
-                   .css('top', $('#dotB1').offset().top + $('#dotB1').outerWidth() / 2)
-                   .css('left', $('#dotB1').offset().left + $('#dotB1').outerHeight() / 2);
-                }
-            }       
-            );
-            $( "#sortable" ).disableSelection();
     
             $(".draggable").draggable({
               axis: "y",
               containment: ".box",
-              grid: [difference/8,difference/8],
+              grid: [(difference-10)/8,(difference-10)/8],
               scroll: false,
               distance: 0
             },{drag: function(event, ui){
                 lineAllign();
                 }
-            });
+            },{stop: function(event, ui){
+                          lineAllign();
+                          }});
             
             
             function lineAllign(){
@@ -404,6 +383,7 @@ $(function() {
                        .css('top', $(dot2Name).offset().top + $(dot2Name).outerWidth() / 2)
                        .css('left', $(dot2Name).offset().left + $(dot2Name).outerHeight() / 2);
                     count++;
+                    
                     
                 }
                   
@@ -824,12 +804,6 @@ $(function() {
             
 
             spanActivate();
-                    $('.draggable1A').css('top', difference+'px');
-                    $('.draggable1B').css('top', difference+'px');
-                    var tempdotAY = $('#dotA1').offset().top;
-                    var tempdotBY = $('#dotB1').offset().top;
-                    var tempDifference = Math.abs(tempdotAY - tempdotBY);
-                    $('.draggable1B').css('top', (difference-tempDifference)+'px');
                     lineAllign();
             //change grid
                 document.getElementById("grid1").onchange=function() {
@@ -842,7 +816,7 @@ $(function() {
                     lineAllign();
                     var className = ".draggable1";
                     $('.draggable1').offset().top = dotAY;
-                    var number = difference/this.value;
+                    var number = (difference-10)/this.value;
                     $(className).draggable({
                         axis: "y",
                         containment: ".box", 
@@ -853,15 +827,12 @@ $(function() {
                     },{drag: function(event, ui){
                             lineAllign();
                     }
-                    });
+                    },{stop: function(event, ui){
+                          lineAllign();
+                          }});
                               
                   }
-                  $('.draggable2A').css('top', difference+'px');
-                  $('.draggable2B').css('top', difference+'px');
-                  var tempdotAY = $('#dotA2').offset().top;
-                  var tempdotBY = $('#dotB2').offset().top;
-                  var tempDifference = Math.abs(tempdotAY - tempdotBY);
-                  $('.draggable2B').css('top', (difference-tempDifference)+'px');
+
                   lineAllign();
                   
                   $('.weight').change(function() {
@@ -876,7 +847,7 @@ $(function() {
                     $('.draggable2B').css('top', (difference-tempDifference)+'px');
                     lineAllign();
                     var className = ".draggable2";
-                    var number = difference/this.value;
+                    var number = (difference-10)/this.value;
                     $(className).draggable({
                         axis: "y",
                         containment: ".box", 
@@ -887,10 +858,13 @@ $(function() {
                     },{drag: function(event, ui){
                             lineAllign();
                     }
-                    });
+                    },{stop: function(event, ui){
+                          lineAllign();
+                          }});
                               
                   }
-                  
+                
+                
                 $('#save').onclick = function(event){
                    var request;
                    var url = '/BusinessModelPlanner/BOSCParser';// the url that i want to get my information from

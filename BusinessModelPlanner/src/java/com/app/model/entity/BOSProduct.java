@@ -13,34 +13,36 @@ public class BOSProduct {
     private String  userID ;
     private String projectName;
     private int productID ;
+    private int originalCost;
+    private int budgetRequired;
 
-    public BOSProduct(String userID, String projectName, int productID) {
+    public BOSProduct(String userID, String projectName, int productID, int originalCost, int budgetRequired) {
         this.userID = userID;
         this.projectName = projectName;
         this.productID = productID;
-    }
-    public String getUserID() {
-        return userID;
+        this.originalCost = originalCost;
+        this.budgetRequired = budgetRequired;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public String getUserID() {
+        return userID;
     }
 
     public String getProjectName() {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
     public int getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public int getOriginalCost() {
+        return originalCost;
     }
 
+    public int getBudgetRequired() {
+        return budgetRequired;
+    }
+
+    
 }
