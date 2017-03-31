@@ -54,7 +54,6 @@
                 <tr><td>
                         <!--LOAD EXISTING PROJECT-->
                     <%
-                        Demographics user = (Demographics)request.getSession().getAttribute("user");
                         String userid = user.getUserid();
                         ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
                         if (loadedProjects!=null){
@@ -63,7 +62,7 @@
                         <%
                             for(QadimProduct project :loadedProjects){
                         %>
-                        <option value="" disabled selected>Load Existing Project</option>
+                        <!--<option value="" disabled selected>Load Existing Project</option>-->
                         <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
                         <%}%>
                     </select></center>
