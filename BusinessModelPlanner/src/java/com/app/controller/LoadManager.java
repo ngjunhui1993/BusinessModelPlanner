@@ -38,63 +38,38 @@ public class LoadManager extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             Demographics user = (Demographics)request.getSession().getAttribute("user");
             String userid = user.getUserid();
-            String projectName = request.getParameter("projectList");
-            request.getSession().setAttribute("projectName", projectName);
-            QadimProduct project=QaDIMDAO.retrieveProject(projectName);
+            String projecttoLoad = request.getParameter("toLoadQadim");
+            
+            // ------------- Sets editCheck to check if project is loaded but not newly created -------------
+            request.getSession().setAttribute("editCheck", projecttoLoad);
+            
+            
+            // ------------- Retrieve from Database -------------
+            QadimProduct project=QaDIMDAO.retrieveProject(projecttoLoad);
             String productName = project.getProductName();
             request.getSession().setAttribute("productName", productName);
             int productId = project.getProductID();
             ArrayList<Operator> oList = QaDIMDAO.retrieveOperators(productId, userid);
             
-            ArrayList<String> operator1 = new ArrayList<String>();
-            ArrayList<String> operator2 = new ArrayList<String>();
-            ArrayList<String> operator3 = new ArrayList<String>();
-            ArrayList<String> operator4 = new ArrayList<String>();
-            
             int noOfOperator = oList.size();
             
-            String OperatorName = null;
-            String comments = null;
-            String comOperatorName = null;
-            String comComments = null;
-
-            for (int i=0; i <noOfOperator; i++){
-                if(i%2==0){
-                    OperatorName = oList.get(i).getOperatorName();
-                    comments = oList.get(i).getComments();
-                }else{
-                    comOperatorName = oList.get(i).getOperatorName();
-                    comComments = oList.get(i).getComments();
-                    if(i == 1){
-                        operator1.add(OperatorName);
-                        operator1.add(comOperatorName);
-                        operator1.add(comments);
-                        operator1.add(comComments);
-                        request.getSession().setAttribute("operator1", operator1);
-                    }else if (i ==3){
-                        operator2.add(OperatorName);
-                        operator2.add(comOperatorName);
-                        operator2.add(comments);
-                        operator2.add(comComments);
-                        request.getSession().setAttribute("operator2", operator2);
-                    }else if (i == 5){
-                        operator3.add(OperatorName);
-                        operator3.add(comOperatorName);
-                        operator3.add(comments);
-                        operator3.add(comComments);
-                        request.getSession().setAttribute("operator3", operator3);
-                    }else if(i== 7){
-                        operator4.add(OperatorName);
-                        operator4.add(comOperatorName);
-                        operator4.add(comments);
-                        operator4.add(comComments);
-                        request.getSession().setAttribute("operator4", operator4);
-                    }
-                }
+            String operatorName = null;
+            String operatorComments = null;
+            Operator currentOperator = null;
+            
+            //---------- Unpacks all the operators retrieved from database ----------
+            for(int i = 0; i< noOfOperator; i++){
+                currentOperator = oList.get(i);
+                operatorName = currentOperator.getOperatorName();
+                operatorComments = currentOperator.getComments();
+                int numbering = 1;
+                //---------- Sets all the operators back to the same naming convention for UI ----------
+                request.getSession().setAttribute("opName"+numbering,operatorName);
+                request.getSession().setAttribute("opComment"+numbering,operatorComments);
             }
+
             response.sendRedirect("QADIM.jsp");
             return;
             //request.getRequestDispatcher("QADIM.jsp").forward(request,response);
