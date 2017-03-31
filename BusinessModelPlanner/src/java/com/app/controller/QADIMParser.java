@@ -38,7 +38,7 @@ public class QADIMParser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String projectName = (String) request.getParameter("saveQADIMProjectName");
+        String projectName = (String) request.getSession().getAttribute("projectName");
         Demographics user = (Demographics)request.getSession().getAttribute("user");
         String userid = user.getUserid();
         String productName = (String) request.getSession().getAttribute("productName");
@@ -66,7 +66,7 @@ public class QADIMParser extends HttpServlet {
                 }
             }
         // ----------------------- If User is starting a NEW Project -----------------------
-        if(!(editCheck.equals(projectName))){
+        if(editCheck == null||!(editCheck.equals(projectName))){
         
             // ----------------------- Saving onto Database -----------------------
             QaDIMDAO.createQadimProduct(userid , projectName , productid , productName);

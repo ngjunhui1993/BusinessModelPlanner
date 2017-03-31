@@ -147,22 +147,22 @@
                                                 <div id="opFourComment">{{item.comment}}</div>
                                             </div>
                                         </li>
-                                        <!--PROJECT NAME-->
-                                        <li ng-repeat="item in currentProjectName" data-drop="false" ng-model='currentProjectName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-toggle="modal" data-target="#currentProjectNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProjectName" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                        <!--PRODUCT NAME-->
+                                        <li ng-repeat="item in currentProductName" data-drop="false" ng-model='currentProductName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#currentProductNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProductName" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--EDIT PROJECT NAME FORM-->
-                                                <div class="formModal" id="currentProjectNameModal">
+                                                <div class="formModal" id="currentProductNameModal">
                                                     <div class="formModal-content">
                                                         <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Project Name" id="currentProjectName"><br>
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Product Name" id="currentProductName"><br>
                                                             <div class="modal-footer">
                                                                 <span class="closeProjectForm">x</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--PROJECT NAME DISPLAY-->
-                                                <div id="curProjectName">{{item.title}}</div><br>
+                                                <!--PRODUCT NAME DISPLAY-->
+                                                <div id="curProductName">{{item.title}}</div><br>
                                             </div>
                                         </li>
                                         <!--OPERATOR FIVE-->
@@ -249,9 +249,7 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-
                         <!--END OF QADIM MODEL-->
                     </td>
                     <!--
@@ -267,7 +265,7 @@
                             <%
                                 String projectName = (String) request.getSession().getAttribute("projectName");
                             %>
-                            <b><%=projectName%></b>
+                        <div id="curProjectName"><%=projectName%></div>
                         </p>
 
                         <button class="progress-button" data-style="flip-open" data-perspective data-horizontal id="newLoadProject">New/Load</button><br><br>

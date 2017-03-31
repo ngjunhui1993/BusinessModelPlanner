@@ -5,7 +5,10 @@
  */
 
 $('#QaDIMSave').click(function parse() {
-    var saveQADIMProjectName = document.getElementById("curProjectName").innerHTML;
+    //Obtain Project name
+    var saveProjectName = document.getElementById("curProjectName").innerHTML;
+    //Obtain Product Name
+    var saveProductName = document.getElementById("curProductName").innerHTML;
     //Get Operators Name and Comments
     var opName1 = document.getElementById("opOneName").innerHTML;
     var opComment1 = document.getElementById("opOneComment").innerHTML;
@@ -40,7 +43,9 @@ $('#QaDIMSave').click(function parse() {
                         //console.log(saveQADIMProjectName);
                         url: 'QADIMParser',
                         data: {
-                            saveQADIMProjectName: saveQADIMProjectName,
+                            saveProjectName: saveProjectName,
+                            saveProductName: saveProductName,
+                            
                             opName1: opName1,
                             opComment1: opComment1,
                             
@@ -68,7 +73,7 @@ $('#QaDIMSave').click(function parse() {
                         type: 'GET',
                         cache: false,
                         success: function () {
-                            alert(saveQADIMProjectName);
+                            alert( 'Product: ' + saveProductName+ 'for Project: '+saveProjectName + ' has been saved!');
                         },
                         error: function () {
                             alert('You have an existing project with the same title! Use a different project title');

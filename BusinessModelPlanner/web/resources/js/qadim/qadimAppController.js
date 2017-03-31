@@ -13,7 +13,7 @@ App.controller('oneCtrl', function ($scope) {
     $scope.operatorFour = [
         {'title': 'Factor 1', 'drag': true, 'comment': 'i.e. Comment for Factor 1'},
     ];
-    $scope.currentProjectName = [
+    $scope.currentProductName = [
         {'title': 'Product Name', 'drag': false, 'id': 'productName'},
     ];
     $scope.operatorFive = [

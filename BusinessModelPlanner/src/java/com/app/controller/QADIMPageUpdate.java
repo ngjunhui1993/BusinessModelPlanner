@@ -61,25 +61,30 @@ public class QADIMPageUpdate extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-            //if project name exists, prompt user to input another name.
-                //PS: Destination of errormsgs unclear
-            if (QaDIMDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
-                request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
-                RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
-                rd.forward(request, response);
-                return;
-            }else{
-                request.setAttribute("projectName", projectName);
-                request.setAttribute("productName", productName);
-                
-            }
+            
+            if(request.getParameter("submitProjNameChange") == null) {
+                //if project name exists, prompt user to input another name.
+                    //PS: Destination of errormsgs unclear
+                if (QaDIMDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
+                    request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
+                    RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
+                    rd.forward(request, response);
+                    return;
+                }else{
+                    request.getSession().setAttribute("projectName", projectName);
+                    request.getSession().setAttribute("productName", productName);
+                    request.getSession().setAttribute("productDescription", productDescription);
+                    response.sendRedirect("QADIM.jsp");
+                    return;
+                }
             
             //-------------------- End of Validation for newly created Projects --------------------
             
             //When user accesses a current project and changes the projectName
-            if(request.getParameter("submitProjNameChange") != null) {
-                String newProjName = request.getParameter("newProjectName");
-                if(newProjName == null || newProjName.equals("")) {
+            
+            }else{   
+                    String newProjName = request.getParameter("newProjectName");
+                    if(newProjName == null || newProjName.equals("")) {
                     request.setAttribute("errorMsg", "Please key in your desired new name for project.");
                     RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
                     rd.forward(request, response);
@@ -90,13 +95,6 @@ public class QADIMPageUpdate extends HttpServlet {
                 response.sendRedirect("QADIM.jsp");
             }
 
-            
-            //Obtaining Operators
-            String operatorName = request.getParameter("operatorName");
-            String comOperatorName = request.getParameter("comOperatorName");
-            String comments = request.getParameter("comments");
-            String comComments = request.getParameter("comComments");
-            
             /*
             String operator1 = request.getParameter("operator1");
             String operator2 = request.getParameter("operator2");
