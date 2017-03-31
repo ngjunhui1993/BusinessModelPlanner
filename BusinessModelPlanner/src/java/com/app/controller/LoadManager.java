@@ -49,7 +49,9 @@ public class LoadManager extends HttpServlet {
             // ------------- Retrieve from Database -------------
             QadimProduct project=QaDIMDAO.retrieveProject(projecttoLoad);
             String productName = project.getProductName();
+            String projectName = project.getProjectName();
             request.getSession().setAttribute("productName", productName);
+            request.getSession().setAttribute("projectName", projectName);
             int productId = project.getProductID();
             ArrayList<Operator> oList = QaDIMDAO.retrieveOperators(productId, userid);
             

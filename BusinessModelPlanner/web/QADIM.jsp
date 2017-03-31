@@ -285,7 +285,10 @@
                         </div>
                         <!-- END NEW / LOAD PROJECT MODAL -->
                         <button class="progress-button" data-style="fill" data-horizontal id="QaDIMSave">Save</button><br><br>
-                        <button class="progress-button" data-style="shrink" data-horizontal>Download</button>
+                        <a href="FileDownload" class="btn btn-sq-sm btn-danger">                                     
+                            <i class="glyphicon glyphicon-download fa-2x">
+                            </i><br/>DOWNLOAD</a>
+                        
                     </td>
                     <!--END OF QADIM TOOLS-->
                 </tr>

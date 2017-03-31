@@ -67,7 +67,7 @@ public class FileDownload extends HttpServlet {
             Demographics user = (Demographics) request.getSession().getAttribute("user");
             String userid = user.getUserid();
             String fileName = userid + ".xls";
-            String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
+            String filePath = "C:\\Users\\jiaohui.lee.2014\\Desktop\\Excel\\";// tells the server where to find
            String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
 
             response.setContentType("APPLICATION/OCTET-STREAM");
