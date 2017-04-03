@@ -1,3 +1,9 @@
+<%@include file="Protect.jsp"%>
+<%@page import="com.app.model.entity.QadimProduct"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.app.model.QaDIMDAO"%>
+<%@page import="com.app.model.entity.Demographics"%>
 <!DOCTYPE html>
 <html ng-app="drag-and-drop">
     <head>
@@ -21,13 +27,84 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <%//PROJECT NAME & PRODUCT NAME
+            String projectName = (String) request.getSession().getAttribute("projectName");
+            String productName = (String) request.getSession().getAttribute("productName");
+            //Retrieve Operators and Values from Load
+            String opName1 = (String) request.getSession().getAttribute("opName1");
+            String opComment1 = (String) request.getSession().getAttribute("opComment1");
+            String opName2 = (String) request.getSession().getAttribute("opName2");
+            String opComment2 = (String) request.getSession().getAttribute("opComment2");
+            String opName3 = (String) request.getSession().getAttribute("opName3");
+            String opComment3 = (String) request.getSession().getAttribute("opComment3");
+            String opName4 = (String) request.getSession().getAttribute("opName4");
+            String opComment4 = (String) request.getSession().getAttribute("opComment4");
+            String opName5 = (String) request.getSession().getAttribute("opName5");
+            String opComment5 = (String) request.getSession().getAttribute("opComment5");
+            String opName6 = (String) request.getSession().getAttribute("opName6");
+            String opComment6 = (String) request.getSession().getAttribute("opComment6");
+            String opName7 = (String) request.getSession().getAttribute("opName7");
+            String opComment7 = (String) request.getSession().getAttribute("opComment7");
+            String opName8 = (String) request.getSession().getAttribute("opName8");
+            String opComment8 = (String) request.getSession().getAttribute("opComment8");
+        %>
+        <script>
+            <%if (productName != null && !productName.equals("")) {%>
+            document.getElementById('curProductName').innerHTML = <%=productName%>;
+            <%};%>
+            //Retrieve Operators from Load
+            //Operator 1
+            <%if (opName1 != null && !opName1.equals("")) {%>
+            document.getElementById('opName1').innerHTML = <%=opName1%>;
+                    document.getElementById('opComment1').innerHTML = <%=opComment1%>;
+            <%};%>
+            //Operator 2
+            <%if (opName2 != null && !opName2.equals("")) {%>
+
+            document.getElementById('opName2').innerHTML = <%=opName2%>;
+                    document.getElementById('opComment2').innerHTML = <%=opComment2%>;
+            <%};%>
+            //Operator 3
+            <%if (opName3 != null && !opName3.equals("")) {%>
+
+            document.getElementById('opName3').innerHTML = <%=opName3%>;
+                    document.getElementById('opComment3').innerHTML = <%=opComment3%>;
+            <%};%>
+            //Operator 4
+            <%if (opName4 != null && !opName4.equals("")) {%>
+
+            document.getElementById('opName4').innerHTML = <%=opName4%>;
+                    document.getElementById('opComment4').innerHTML = <%=opComment4%>;
+            <%};%>
+            //Operator 5
+            <%if (opName5 != null && !opName5.equals("")) {%>
+
+            document.getElementById('opName5').innerHTML = <%=opName5%>;
+                    document.getElementById('opComment5').innerHTML = <%=opComment5%>;
+            <%};%>
+            //Operator 6
+            <%if (opName6 != null && !opName6.equals("")) {%>
+            document.getElementById('opName6').innerHTML = <%=opName6%>;
+                    document.getElementById('opComment6').innerHTML = <%=opComment6%>;
+            <%};%>
+            //Operator 7
+            <%if (opName7 != null && !opName7.equals("")) {%>
+            document.getElementById('opName7').innerHTML = <%=opName7%>;
+                    document.getElementById('opComment7').innerHTML = <%=opComment7%>;
+            <%};%>
+            //Operator 8
+            <%if (opName8 != null && !opName8.equals("")) {%>
+            document.getElementById('opName8').innerHTML = <%=opName8%>;
+                    document.getElementById('opComment8').innerHTML = <%=opComment8%>;
+            <%};%>
+        </script>
         <!--
         CONTENT
         1. EXPLANATION (TOOLTIPS)
         2. QADIM MODEL
         3. SIDE PANEL (PROJECT NAME AND BUTTONS)
         -->
-        <!--EXPLANATION-->
+        <!--TOOLTIPS-->
         <div id="maincontent">
             <div class="tooltipcontent">
                 <div class="dummy dummy-text">
@@ -57,8 +134,13 @@
                             </span></span></span> on the right to perform more functions. Our model have pre-defined some examples for you to get you started. To change the values, simply click on the operator boxes.<br>
                 </div>
             </div>
-            <!--END OF EXPLANATION-->
-            <!--QADIM MODEL-->
+            <!--END OF TOOLTIPS-->
+            <!--
+            QADIM MODEL
+            - Operators 1 - 8
+            - Project Name
+            - This section allows users to edit the operators and comments
+            -->
             <table>
                 <tr><td>
                         <!--PROJECT CONTENT-->
@@ -70,21 +152,24 @@
                                         <!--OPERATOR ONE-->
                                         <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--OPERATOR ONE DISPLAY-->
-                                                <div id="opOneName">{{item.title}}</div><br>
-                                                <div id="opOneComment">{{item.comment}}</div>
                                                 <!--EDIT OPERATOR ONE FORM-->
-                                                <div class="formModal" id="operatorOneModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorOneName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorOneComment"><br>
+                                                <div>
+                                                    <div class="formModal" id="operatorOneModal">
+                                                        <div class="formModal-content">
+                                                            <div class="modal-content">
+                                                                <input ng-model="item.title" variableinput placeholder="Edit Operator"><br>
+                                                                <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <span class="closeProjectForm">x</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--OPERATOR ONE DISPLAY-->
+                                                <!--OPERATOR TWO DISPLAY-->
+                                                <div id="opOneName">{{item.title}}</div><br>
+                                                <div id="opOneComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR TWO-->
@@ -147,22 +232,23 @@
                                                 <div id="opFourComment">{{item.comment}}</div>
                                             </div>
                                         </li>
-                                        <!--PROJECT NAME-->
-                                        <li ng-repeat="item in currentProjectName" data-drop="false" ng-model='currentProjectName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-toggle="modal" data-target="#currentProjectNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProjectName" jqyoui-draggable="{index: {{$index}},animate:true}">
+                                        <!--PRODUCT NAME-->
+                                        <li ng-repeat="item in currentProductName" data-drop="false" ng-model='currentProductName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
+                                            <div class="thumbnail" data-toggle="modal" data-target="#currentProductNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProductName" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--EDIT PROJECT NAME FORM-->
-                                                <div class="formModal" id="currentProjectNameModal">
+                                                <div class="formModal" id="currentProductNameModal">
                                                     <div class="formModal-content">
                                                         <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Project Name" id="currentProjectName"><br>
+                                                            <input ng-model="item.title" variableinput placeholder="Edit Product Name" id="currentProductName"><br>
                                                             <div class="modal-footer">
                                                                 <span class="closeProjectForm">x</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--PROJECT NAME DISPLAY-->
-                                                <div id="curProjectName">{{item.title}}</div><br>
+
+                                                <!--PRODUCT NAME DISPLAY-->
+                                                <div id="curProductName">{{item.title}}</div><br>
                                             </div>
                                         </li>
                                         <!--OPERATOR FIVE-->
@@ -249,14 +335,12 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-
                         <!--END OF QADIM MODEL-->
                     </td>
                     <!--
                     QADIM SIDE TOOLS
-                        - PROJECT NAME
+                        - PROJECT NAME (Non modifiable / current project)
                         - SAVE BUTTON
                         - DOWNLOAD BUTTON
                     -->
@@ -264,12 +348,7 @@
                         <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
                             YOU ARE MODIFYING PROJECT<br></p>
                         <p style="font-size:40px; color:#fff;margin-bottom:-.02em">
-                            <%
-                                String projectName = (String) request.getSession().getAttribute("projectName");
-                            %>
-                            <b><%=projectName%></b>
-                        </p>
-
+                        <div id="curProjectName"><%=projectName%></div>
                         <button class="progress-button" data-style="flip-open" data-perspective data-horizontal id="newLoadProject">New/Load</button><br><br>
                         <!-- NEW / LOAD PROJECT MODAL -->
                         <div id="myProjectForm" class="formModal">
@@ -281,20 +360,59 @@
                                     Do you want to create a new project or load an existing project?<br>
                                     CREATE NEW PROJECT <br>
                                     <button class="btn btn-2 btn-2a"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
-                                    --
                                 </p>
+                                <!--LOAD EXISTING PROJECT-->
+                                <%
+                                    String userid = user.getUserid();
+                                    ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                    if (loadedProjects != null) {
+                                %>
+                                <form action="LoadManager" target="_parent" method="GET">
+                                    <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                                        <%for (QadimProduct project : loadedProjects) {%>
+                                        <option value="" disabled selected>Load Existing Project</option>
+                                        <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                                        <%=project.getProjectName()%>                            
+                                        <%}%>
+                                    </select>
+                                    <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
+                                </form>
+                                </p>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
+
                         <!-- END NEW / LOAD PROJECT MODAL -->
                         <button class="progress-button" data-style="fill" data-horizontal id="QaDIMSave">Save</button><br><br>
-                        <button class="progress-button" data-style="shrink" data-horizontal>Download</button>
+                        <a href="FileDownload" class="btn btn-sq-sm btn-danger">                                     
+                            <i class="glyphicon glyphicon-download fa-2x">
+                            </i><br/>DOWNLOAD</a>
+
                     </td>
                     <!--END OF QADIM TOOLS-->
                 </tr>
             </table>
             <br><br>
+            <div hidden id="productNameHidden"><%=productName%></div>
+            <div hidden id="opName1hidden"><%=opName1%></div>
+            <div hidden id="opComment1hidden"><%=opComment1%></div>
+            <div hidden id="opName2hidden"><%=opName2%></div>
+            <div hidden id="opComment2hidden"><%=opComment2%></div>
+            <div hidden id="opName3hidden"><%=session.getAttribute("opName3")%></div>
+            <div hidden id="opComment3hidden"><%=session.getAttribute("opComment3")%></div>
+            <div hidden id="opName4hidden"><%=session.getAttribute("opName4")%></div>
+            <div hidden id="opComment4hidden"><%=session.getAttribute("opComment4")%></div>
+            <div hidden id="opName5hidden"><%=session.getAttribute("opName5")%></div>
+            <div hidden id="opComment5hidden"><%=session.getAttribute("opComment5")%></div>
+            <div hidden id="opName6hidden"><%=session.getAttribute("opName6")%></div>
+            <div hidden id="opComment6hidden"><%=session.getAttribute("opComment6")%></div>
+            <div hidden id="opName7hidden"><%=session.getAttribute("opName7")%></div>
+            <div hidden id="opComment7hidden"><%=session.getAttribute("opComment7")%></div>
+            <div hidden id="opName8hidden"><%=session.getAttribute("opName8")%></div>
+            <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
         </div>
-
         <!--SCRIPTS FOR QADIM DRAGGABLE-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
@@ -328,57 +446,12 @@
                                         }
                                         });
                                         });</script>
-        <!--This is the script for save functionality, i use ajax. getElementByID(the element ID), and get its inner html-->
-        <!--after which, the data should be parsed to a servlet. The servlet handles changes the json into normal objects-->
-        <!--The parser servlet will then pass the data to the qadimdao. validations required. -->
-        <script type="text/javascript">
-                    $('#QaDIMSave').click(function parse() {
-            var saveQADIMProjectName = document.getElementById("curProjectName").innerHTML;
-                    var savedItem1 = document.getElementById("opOneName").innerHTML;
-                    var savedItem2 = document.getElementById("opTwoName").innerHTML;
-                    var savedItem3 = document.getElementById("opThreeName").innerHTML;
-                    var savedItem4 = document.getElementById("opFourName").innerHTML;
-                    var savedItem5 = document.getElementById("opFiveName").innerHTML;
-                    var savedItem6 = document.getElementById("opSixName").innerHTML;
-                    var savedItem7 = document.getElementById("opSevenName").innerHTML;
-                    var savedItem8 = document.getElementById("opEightName").innerHTML;
-                    // the console.log is for me to do testing only, can remove one
-                    console.log(saveQADIMProjectName);
-                    console.log(savedItem1);
-                    console.log(savedItem2);
-                    console.log(savedItem3);
-                    console.log(savedItem4);
-                    console.log(savedItem5);
-                    console.log(savedItem6);
-                    console.log(savedItem7);
-                    console.log(savedItem8);
-                    $.ajax
-                    (
-                    {
-                    //testing using console log
-                    //console.log(saveQADIMProjectName);
-                    url:'QADIMParser',
-                            data:{
-                            saveQADIMProjectName : saveQADIMProjectName,
-                                    savedItem1 : savedItem1,
-                                    savedItem2 : savedItem2,
-                                    savedItem3 : savedItem3,
-                                    savedItem4 : savedItem4,
-                                    savedItem5 : savedItem5,
-                                    savedItem6 : savedItem6,
-                                    savedItem7 : savedItem7,
-                                    savedItem8 : savedItem8
-                            },
-                            type:'GET',
-                            cache:false,
-                            success:function(){alert(saveQADIMProjectName); },
-                            error:function(){alert('You have an existing project with the same title! Use a different project title'); }
-                    }
-                    );
-            });                    </script>
-
+        <!--SCRIPT FOR QADIM SAVE FUNCTION-->
+        <script src ="resources/js/qadim/qadimSave.js"></script>
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
         <script src ="resources/js/qadim/qadimFormModal.js"></script>
         <script src="resources/js/qadim/qadimClassie.js"></script>
+
+
     </body>
 </html>

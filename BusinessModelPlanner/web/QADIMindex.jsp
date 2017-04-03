@@ -59,14 +59,12 @@
                             if (loadedProjects != null) {
                         %>
                 <center>
-                    THERE ARE PROJECTS
                     <form action="LoadManager" target="_parent" method="GET">
                         <select name="toLoadQadim" class="cs-select cs-skin-elastic">
                             <%for (QadimProduct project : loadedProjects) {%>
                             <option value="" disabled selected>Load Existing Project</option>
                             <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                            <%=project.getProjectName()%>
-                            
+                            <%=project.getProjectName()%>                            
                             <%}%>
                         </select>
                         <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">

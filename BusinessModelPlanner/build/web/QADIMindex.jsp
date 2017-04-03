@@ -53,38 +53,43 @@
                 <tr><td><center><h1>OR</h1></center></td></tr>
                 <tr><td>
                         <!--LOAD EXISTING PROJECT-->
-                    <%
-                        Demographics user = (Demographics)request.getSession().getAttribute("user");
+                        <%                            
                         String userid = user.getUserid();
-                        ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                        if (loadedProjects!=null){
-                    %>
-                <center><select name="toLoadQadim" class="cs-select cs-skin-elastic">
-                        <%
-                            for(QadimProduct project :loadedProjects){
+                            ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                            if (loadedProjects != null) {
                         %>
-                        <option value="" disabled selected>Load Existing Project</option>
-                        <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                        <%}%>
-                    </select></center>
+                <center>
+                    <form action="LoadManager" target="_parent" method="GET">
+                        <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                            <%for (QadimProduct project : loadedProjects) {%>
+                            <option value="" disabled selected>Load Existing Project</option>
+                            <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                            <%=project.getProjectName()%>                            
+                            <%}%>
+                        </select>
+                        <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
+                    </form>
+                </center>
                 </td> </tr>
-                <tr><td><center>
-                    <%
-                        }
-                    %>
-                    <button class="btn btn-2 btn-2i" onclick="window.location.href = 'QADIM.jsp'">LOAD</button>
-                </center></td></tr>
+                <%
+                } else {
+                %>
+                NO PROJECTS<br>
+                <%
+                    }
+                %>
+
             </table>
     </CENTER>
     <!--SCRIPT FOR DROPDOWN-->
     <script src="resources/js/qadim/qadimClassie.js"></script>
     <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
     <script>
-                        (function () {
-                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                new SelectFx(el);
-                            });
-                        })();
+                            (function () {
+                                [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                    new SelectFx(el);
+                                });
+                            })();
     </script>
 </body>
 </html>

@@ -66,10 +66,11 @@ public class LoadManager extends HttpServlet {
                 currentOperator = oList.get(i);
                 operatorName = currentOperator.getOperatorName();
                 operatorComments = currentOperator.getComments();
-                int numbering = 1;
+                int numbering = i+1;//THIS IS NOT CONFIRMED
                 //---------- Sets all the operators back to the same naming convention for UI ----------
                 request.getSession().setAttribute("opName"+numbering,operatorName);
                 request.getSession().setAttribute("opComment"+numbering,operatorComments);
+                
             }
 
             response.sendRedirect("QADIM.jsp");

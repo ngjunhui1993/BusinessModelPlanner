@@ -37,7 +37,6 @@ public class QADIMPageUpdate extends HttpServlet {
             //Retrieve projectname, productname, productdescription from QADIMnewProject.jsp
             String projectName = request.getParameter("projectName");       
             String productName = request.getParameter("productName");
-            String productDescription = request.getParameter("productDescription");
             //Retrieve current userid from the session
             HttpSession session = request.getSession(true);
             Demographics loggedIn = (Demographics) session.getAttribute("user");
@@ -48,14 +47,14 @@ public class QADIMPageUpdate extends HttpServlet {
             
             //Check if objects from QADIMNewProject.jsp is valid
                 //PS: Destination of errormsgs unclear
-            if(projectName == null || productName == null || productDescription == null ){
+            if(projectName == null || productName == null ){
                 request.setAttribute("errorMsg", "Empty field(s).");
                 RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
                 rd.forward(request, response);
                 return;
             //prevents nullpointerexception  
                 //PS: Destination of errormsgs unclear
-            }else if(projectName.trim().equals("")|| productName.trim().equals("")|| productDescription.trim().equals("")){
+            }else if(projectName.trim().equals("")|| productName.trim().equals("")){
                 request.setAttribute("errorMsg", "Empty field(s).");
                 RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
                 rd.forward(request, response);
@@ -73,7 +72,6 @@ public class QADIMPageUpdate extends HttpServlet {
                 }else{
                     request.getSession().setAttribute("projectName", projectName);
                     request.getSession().setAttribute("productName", productName);
-                    request.getSession().setAttribute("productDescription", productDescription);
                     response.sendRedirect("QADIM.jsp");
                     return;
                 }

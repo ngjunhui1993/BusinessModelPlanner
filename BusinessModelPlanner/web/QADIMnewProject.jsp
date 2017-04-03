@@ -28,12 +28,6 @@
                             <label class="fs-field-label fs-anim-upper" for="q2" data-info="What is your product?">What's your product name?</label>
                             <input class="fs-anim-lower" id="q2" name="productName" type="text" placeholder="COOLERBOX" required/>
                         </li>
-                        <!--PRODUCT DESCRIPTION FIELD-->
-                        <li>
-                            <label class="fs-field-label fs-anim-upper" for="q4">Describe your product</label>
-                            <textarea class="fs-anim-lower" id="q4" name="productDescription" placeholder="Describe here"></textarea>
-                        </li>
-
                     </ol>
                     
                     <!--POPULATE TO QADIM PAGE: PROJECT NAME AND PRODUCT NAME-->
