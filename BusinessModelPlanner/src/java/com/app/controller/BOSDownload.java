@@ -5,10 +5,15 @@
  */
 package com.app.controller;
 
+import com.app.model.BOSDAO;
+import com.app.model.Excel;
+import com.app.model.entity.BOSOperator;
+import com.app.model.entity.BOSProduct;
 import com.app.model.entity.Demographics;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,10 +45,10 @@ public class BOSDownload extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BOSCDownload</title>");            
+            out.println("<title>Servlet FileDownload</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BOSCDownload at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FileDownload at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,14 +66,13 @@ public class BOSDownload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    try {
+        try {
             PrintWriter out = response.getWriter();
             // System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
             Demographics user = (Demographics) request.getSession().getAttribute("user");
             String userid = user.getUserid();
             String fileName = userid + "BOSC.xls";
-            String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
+            String filePath = "C:\\Users\\jiaohui.lee.2014\\Desktop\\Excel\\";// tells the server where to find
            String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
 
             response.setContentType("APPLICATION/OCTET-STREAM");
@@ -89,7 +93,7 @@ public class BOSDownload extends HttpServlet {
             fi.close();
         } catch (Exception e) {
             request.setAttribute("errorMsg", "Please save your project first before downloading.");
-            RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("BOSC.jsp");
             rd.forward(request, response);
             return;
         }

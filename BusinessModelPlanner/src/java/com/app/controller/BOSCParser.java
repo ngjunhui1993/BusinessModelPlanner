@@ -6,6 +6,9 @@
 package com.app.controller;
 
 import com.app.model.BOSDAO;
+import com.app.model.Excel;
+import com.app.model.entity.BOSOperator;
+import com.app.model.entity.BOSProduct;
 import com.app.model.entity.Demographics;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,80 +45,84 @@ public class BOSCParser extends HttpServlet {
         String userId = user.getUserid();
       // String weight = (String)request.getParameter("weight1");
        String projectName = (String)request.getParameter("projectName");
-       Double savedCurrent = Double.parseDouble((String)request.getParameter("savedCurrent"));
-       Double savedNewValue = Double.parseDouble((String)request.getParameter("savedNewValue"));
-       Integer boxCount = Integer.parseInt((String)request.getParameter("boxCounter"));
-       // below are the arrays captured from bosc.jsp
-       String blueDots = request.getParameter("blueDots");
-       String greenDots = request.getParameter("greenDots");
-       String factors = request.getParameter("factors");
-       String weights = request.getParameter("weights");
-       String pricePoints = request.getParameter("pricePoints");
-       String grids = request.getParameter("grids");
-       System.out.println(grids);
-       System.out.println(weights);
-               
-      System.out.println(blueDots + " Json format");
-        ArrayList<String> blueArray = getBlueArray(blueDots);
-        ArrayList<String> greenArray = getGreenArray(greenDots);
-        ArrayList<String> factorsArray = getFactorsArray(factors);
-        
-        ArrayList<String> weightsArray = getWeightsArray(weights);
-        ArrayList<String> pricePointsArray = getPricePointsArray(pricePoints);
-        ArrayList<String> gridsArray = getGridsArray(grids);
-        for (String factorsArray1 : factorsArray) {
-            System.out.println(factorsArray1);
-        }
-          for (String factorsArray1 : weightsArray) {
-            System.out.println(factorsArray1);
-        }
-         for (String factorsArray1 : pricePointsArray) {
-            System.out.println(factorsArray1);
-        } 
-         for (String factorsArray1 : blueArray) {
-            System.out.println(factorsArray1);
-        }
-      // all data is properly put into array.
-      // time to send to dao.
-        /*
-        
-        ArrayList<String> factors ,
-                                    ArrayList<String> grids , 
-                                    ArrayList<String> greenDots , 
-                                    ArrayList<String> blueDots , 
-                                    ArrayList<String> pricePoints , 
-                                    ArrayList<String> weights , 
-                                    String projectName , 
-                                    String userID , 
-                                    String currentValue , 
-                                    String newValue,
-                                    int column 
-                                    int productID
-        */
-      int productID = BOSDAO.retrieveNoOfProjects(userId);
-      // still not catered for multiple saves.
-      if(productID > 0){
-          productID += 1 ;
-          
-      }else{
-          productID =1 ;
-          
-      }
-       System.out.println(userId + "  before saving operators");
-      boolean save = BOSDAO.saveProjectOperators(factorsArray,gridsArray , greenArray , blueArray , pricePointsArray  , weightsArray,
-              projectName , userId  ,boxCount , productID );
-      System.out.println(userId + " after saving operators, before saving project");
-      boolean saveProj= BOSDAO.saveProject(userId ,  projectName ,  productID,  savedCurrent ,  savedNewValue );
-      if(save){
-          System.out.println("BOSCParser detects that save operators is successful");
-          
-      }else{
-          System.out.println("BOSCParser detects that save operators has failed");
-          
-      }
-      
-       System.out.println(projectName);
-      System.out.println( 1+ " got from the getParameter(weight1)");
+       
+       String BOSCEditChecker = (String)request.getSession().getAttribute("BOSCEditChecker");
+       
+       //----------- Validation of Project ----------
+       BOSProduct projectChecker = BOSDAO.retrieveProjectByUser(projectName, userId);
+        Double savedCurrent = Double.parseDouble((String)request.getParameter("savedCurrent"));
+        Double savedNewValue = Double.parseDouble((String)request.getParameter("savedNewValue"));
+        Integer boxCount = Integer.parseInt((String)request.getParameter("boxCounter"));
+        // below are the arrays captured from bosc.jsp
+        String blueDots = request.getParameter("blueDots");
+        String greenDots = request.getParameter("greenDots");
+        String factors = request.getParameter("factors");
+        String weights = request.getParameter("weights");
+        String pricePoints = request.getParameter("pricePoints");
+        String grids = request.getParameter("grids");
+
+
+
+         ArrayList<String> blueArray = getBlueArray(blueDots);
+         ArrayList<String> greenArray = getGreenArray(greenDots);
+         ArrayList<String> factorsArray = getFactorsArray(factors);
+
+         ArrayList<String> weightsArray = getWeightsArray(weights);
+         ArrayList<String> pricePointsArray = getPricePointsArray(pricePoints);
+         ArrayList<String> gridsArray = getGridsArray(grids);
+
+           // all data is properly put into array.
+           // time to send to dao.
+             /*
+
+             ArrayList<String> factors ,
+                                         ArrayList<String> grids , 
+                                         ArrayList<String> greenDots , 
+                                         ArrayList<String> blueDots , 
+                                         ArrayList<String> pricePoints , 
+                                         ArrayList<String> weights , 
+                                         String projectName , 
+                                         String userID , 
+                                         String currentValue , 
+                                         String newValue,
+                                         int column 
+                                         int productID
+             */
+           int productID = BOSDAO.retrieveNoOfProjects(userId);
+           // still not catered for multiple saves.
+           if(productID > 0){
+               productID += 1 ;
+
+           }else{
+               productID =1 ;
+
+           }
+        if(projectChecker==null){
+           boolean save = BOSDAO.saveProjectOperators(factorsArray,gridsArray , greenArray , blueArray , pricePointsArray  , weightsArray,
+                   projectName , userId  ,boxCount , productID );
+
+           boolean saveProj= BOSDAO.saveProject(userId ,  projectName ,  productID,  savedCurrent ,  savedNewValue );
+
+           // ------------ Creation of Excel ----------
+             BOSProduct project = BOSDAO.retrieveProjectByUser(projectName, userId);
+             int prodid = project.getProductID();
+             ArrayList<BOSOperator> operatorList = BOSDAO.getAllOperators(userId, projectName);
+             Excel.BOSExport (userId, operatorList, project);
+        // ---------- If project exist in database & was loaded ----------
+       }else if (projectChecker!=null && BOSCEditChecker.equals(projectName)){
+           BOSProduct project = BOSDAO.retrieveProjectByUser(projectName, userId);
+             int prodid = project.getProductID();
+           BOSDAO.deleteProject(projectName, userId, prodid);
+           BOSDAO.deleteOperator(projectName, userId, prodid);
+           boolean save = BOSDAO.saveProjectOperators(factorsArray,gridsArray , greenArray , blueArray , pricePointsArray  , weightsArray,
+                   projectName , userId  ,boxCount , productID );
+
+           boolean saveProj= BOSDAO.saveProject(userId ,  projectName ,  productID,  savedCurrent ,  savedNewValue );
+           // ------------ Creation of Excel ----------
+             ArrayList<BOSOperator> operatorList = BOSDAO.getAllOperators(userId, projectName);
+             Excel.BOSDelete(userId, projectName);
+             Excel.BOSExport (userId, operatorList, project);
+       }
        
        //String weightVar = (String)request.getParameter("currentWeight");
        //System.out.println(weightVar + " got from the getParameter(currentWeight)");
@@ -132,7 +139,7 @@ public class BOSCParser extends HttpServlet {
         for(int i = 0 ; i <jsonArray.length() ; i ++){
             output.add(jsonArray.getString(i));
         }
-        System.out.println(output.get(0));
+        
         return output ;
     }
     public ArrayList<String> getGreenArray(String jsonGreenDots){
@@ -142,7 +149,7 @@ public class BOSCParser extends HttpServlet {
         for(int i = 0 ; i <jsonArray.length() ; i ++){
             output.add(jsonArray.getString(i));
         }
-        System.out.println(output.get(0));
+       
         return output ;
     }
     
@@ -153,7 +160,7 @@ public class BOSCParser extends HttpServlet {
         for(int i = 0 ; i <jsonArray.length() ; i ++){
             output.add(jsonArray.getString(i));
         }
-        System.out.println(output.get(0)+" i am testing this.");
+       
         return output ;
     }
     public ArrayList<String> getPricePointsArray(String jsonPricePoints){
@@ -163,7 +170,7 @@ public class BOSCParser extends HttpServlet {
         for(int i = 0 ; i <jsonArray.length() ; i ++){
             output.add(jsonArray.getString(i));
         }
-        System.out.println(output.get(0));
+        
         return output ;
     }
     // [1,1] it looks like this, which is different form the usual ["1","1"]. json fails here.
@@ -177,7 +184,7 @@ public class BOSCParser extends HttpServlet {
             output.add(jsonWeights.charAt(i)+ "");
             
         }
-        System.out.println(output.get(0));
+        
         return output ;
     }
     
@@ -192,7 +199,7 @@ public class BOSCParser extends HttpServlet {
             output.add(jsonGrids.charAt(i)+ "");
             
         }
-        System.out.println(output.get(0));
+        
         return output ;
     }
     
