@@ -6,27 +6,26 @@
 package com.app.controller;
 
 import com.app.model.BOSDAO;
-import com.app.model.Excel;
 import com.app.model.entity.BOSOperator;
 import com.app.model.entity.BOSProduct;
 import com.app.model.entity.Demographics;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author jiaohui.lee.2014
+ * @author farkill
  */
-@WebServlet(name = "BOSCDownload", urlPatterns = {"/BOSCDownload"})
-public class BOSDownload extends HttpServlet {
+@WebServlet(name = "BOSCPageUpdate", urlPatterns = {"/BOSCPageUpdate"})
+public class BOSCPageUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,15 +41,40 @@ public class BOSDownload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FileDownload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FileDownload at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+            String checkNewProject = request.getParameter("newProject");
+            String startNewProject = request.getParameter("startNewProject");
+            String projectToLoad = request.getParameter("projectToLoad");
+            if(checkNewProject != null){
+                request.getSession().setAttribute("BOSCNewProject", "false");
+                response.sendRedirect("BOSC.jsp");
+                return;
+            }
+            
+            if (startNewProject != null){
+                request.getSession().setAttribute("BOSCNewProject", "true");
+                request.getSession().setAttribute("currentValue", null);
+                request.getSession().setAttribute("operatorList", null);
+                response.sendRedirect("BOSC.jsp");
+                return;
+            }
+            
+            if (projectToLoad!=null){
+                Demographics user = (Demographics)request.getSession().getAttribute("user");
+                String username = user.getUserid();
+                BOSProduct projectLoaded= BOSDAO.retrieveProjectByUser(projectToLoad, username);
+                //Verify that project is on DataBase
+                if (projectLoaded!=null){
+                    //All operators are in here for the project you are retrieving
+                    ArrayList<BOSOperator> operatorList =  BOSDAO.getAllOperators(username,projectToLoad);
+                    request.getSession().setAttribute("currentValue", projectLoaded.getOriginalCost());
+                    request.getSession().setAttribute("operatorList", operatorList);
+                    
+                }
+                request.getSession().setAttribute("BOSCNewProject", "false");
+                response.sendRedirect("BOSC.jsp");
+                return;
+            }
         }
     }
 
@@ -66,37 +90,7 @@ public class BOSDownload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            PrintWriter out = response.getWriter();
-            // System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
-            Demographics user = (Demographics) request.getSession().getAttribute("user");
-            String userid = user.getUserid();
-            String fileName = userid + "BOSC.xls";
-            String filePath = "C:\\Users\\jiaohui.lee.2014\\Desktop\\Excel\\";// tells the server where to find
-           String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
-
-            response.setContentType("APPLICATION/OCTET-STREAM");
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-            // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
-            FileInputStream fi = null;
-            //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
-            fi = new FileInputStream(pathdir + fileName);
-
-            //}else{
-            //     fi= new FileInputStream(pathdir+fileName);
-            //}
-            int i;
-            while ((i = fi.read()) != -1) {
-                out.write(i);
-            }
-            out.close();
-            fi.close();
-        } catch (Exception e) {
-            request.setAttribute("errorMsg", "Please save your project first before downloading.");
-            RequestDispatcher rd = request.getRequestDispatcher("BOSC.jsp");
-            rd.forward(request, response);
-            return;
-        }
+        processRequest(request, response);
     }
 
     /**

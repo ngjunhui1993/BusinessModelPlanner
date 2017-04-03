@@ -45,29 +45,6 @@ public class BOSDAO {
         return bosProduct;
     }
     
-        public static ArrayList<String> retrieveOperators(String projectName, String userid) {
-        ArrayList<String> operatorList = new ArrayList<String>();
-        Connection conn = null;
-        PreparedStatement preStmt = null;
-        ResultSet rs = null;
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "Select operator_name from blueoceanstrategy_operator where project_name = ? and userid = ?;";
-            preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, projectName);
-            preStmt.setString(2, userid);
-            rs = preStmt.executeQuery();
-            while (rs.next()) {
-                operatorList.add(rs.getString("operator_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, preStmt, rs);
-        }
-        return operatorList;
-    }
-    
     public static ArrayList<BOSProduct> retrieveAllProjectsByUser(String userid) {
         BOSProduct bosProduct = null;
         Connection conn = null;
@@ -184,14 +161,14 @@ public class BOSDAO {
                 String userID = rs.getString("userid");
                 String projName = rs.getString("project_name");
                 int productID = rs.getInt("product_id");
-                int factorID = rs.getInt("factor_id");
-                String factorName = rs.getString("factor_name");
+                int operatorID = rs.getInt("factor_id");
+                String operatorName = rs.getString("factor_name");
                 int weight = rs.getInt("weight");
                 int grid = rs.getInt("grid");
                 int perUnitValue = rs.getInt("per_unit_value");
                 int originalValue = rs.getInt("original_value");
                 int newValue = rs.getInt("new_value");
-                BOSOperator operator = new BOSOperator(userID, projName, productID, factorID, factorName, weight, grid, perUnitValue, originalValue, newValue);
+                BOSOperator operator = new BOSOperator(userID, projName, productID, operatorID, operatorName, weight, grid, perUnitValue, originalValue, newValue);
                 operatorList.add(operator);
             }
         } catch (SQLException e) {
@@ -303,12 +280,7 @@ public class BOSDAO {
         String sql ;
         boolean done = false ;
       //  int numProjects = retrieveNoOfProjects(userID);
-      
-        // done establishing connection
-        // i think i will use the update sql statement
-        // note those suppose to be int must change to int.
-        // sequence also should be noted. not sure if based on the index is accurate. 
-        //checking should be done at BOSC.jsp script
+
         try {
             conn = ConnectionManager.getConnection();
             // if projectID = 1 , i am a new user. go ahead and insert, no need to update.
@@ -387,5 +359,42 @@ public class BOSDAO {
         return true; //temporarily
     }
     
-    
+    public static void deleteProject(String projectName, String userId, int prodid){
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "TRUNCATE * from blueoceanstrategy_product where project_name = ? and userID = ? and product_id = ?";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, projectName);
+            preStmt.setString(2, userId);
+            preStmt.setInt(3, prodid);
+            rs = preStmt.executeQuery();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+    }
+    public static void deleteOperator(String projectName, String userId, int prodid){
+        Connection conn = null;
+        PreparedStatement preStmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "TRUNCATE * from blueoceanstrategy_operator where project_name = ? and userID = ? and product_id = ?";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, projectName);
+            preStmt.setString(2, userId);
+            preStmt.setInt(3, prodid);
+            rs = preStmt.executeQuery();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+    }
 }
