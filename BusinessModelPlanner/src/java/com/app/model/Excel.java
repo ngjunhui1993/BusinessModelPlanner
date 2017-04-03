@@ -5,6 +5,7 @@
  */
 package com.app.model;
 
+import com.app.model.entity.BOSOperator;
 import com.app.model.entity.Operator;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +28,7 @@ public class Excel {
     public static void Export(String userId, ArrayList<Operator> oList, String projectName, String prodName, int prodId) {
         try {
             String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR") + userId + ".xls");
-            String localDir = new String("C:\\Users\\jiaohui.lee.2014\\Desktop\\Excel\\" + userId + ".xls");
+            String localDir = new String("C:/Users/Dell/Desktop/" + userId + ".xls");
             System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
             File file = null;
             //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
@@ -106,14 +107,20 @@ public class Excel {
                     int columnCounter = 0;
                     int rowCounter = 4;
                     Row rowTable = sheet1.createRow(i + rowCounter);
-                    
+                    if (i % 2 == 0) {
                         Cell operatorNumberTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                         operatorNumberTable.setCellValue("Operator" + operatorid);
+                        
                         operatorNumberTable.setCellStyle(cs);
                         columnCounter++;
+                    } else {
+                        Cell operatorNumberTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
+                        operatorNumberTable.setCellValue("Operator" + operatorid + " Compliment");
                         
+                        operatorNumberTable.setCellStyle(cs);
+                        columnCounter++;
                         operatorid++;
-
+                    }
                     Cell operatorNameTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     operatorNameTable.setCellValue(operatorName);
                     
@@ -267,6 +274,170 @@ public class Excel {
                 workbook.write(output);
                 output.close();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void BOSExport (String userId, ArrayList<BOSOperator> bList, String projectName, int prodId){
+        try{
+            String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR") + userId + "BOSC.xls");
+            String localDir = new String("C:/Users/Dell/Desktop/" + userId + "BOSC.xls");
+            System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
+            File file = null;
+            //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
+            file = new File(pathdir);
+            //}else{
+            //  file = new File(pathdir); 
+            // }
+            FileInputStream fsIP = null;
+            FileOutputStream output = null;
+            Workbook workbook = null;
+            //Checks if the file at Directory Exists
+            if (file.isFile()) {
+                fsIP = new FileInputStream(file);
+                file.setWritable(true);
+                //Access Existing Workbook
+                workbook = new HSSFWorkbook(fsIP);
+                //Open OutputStream to write updates
+                output = new FileOutputStream(file);
+            } else {
+                output = new FileOutputStream(file);
+                //Creates a new Workbook
+                file.setWritable(true);
+                workbook = new HSSFWorkbook();
+            }
+            // Creates an Excel Sheet with the projectName.
+            Sheet sheet1 = workbook.createSheet(projectName); //Create a Excel sheet with sheetname of the Product
+            
+            CellStyle cs = workbook.createCellStyle();
+            sheet1.setColumnWidth(0, 5000); //set column width to accommodate longer words
+            cs.setWrapText(true); //set wrap text
+            
+            //Creates Top portion
+            Row row = sheet1.createRow(1);
+            Cell productID = row.createCell(1);
+            productID.setCellValue("Product ID");
+            
+            productID.setCellStyle(cs); //set wrap text
+            
+            Cell id = row.createCell(2);
+            id.setCellValue(Integer.toString(prodId));
+            
+            id.setCellStyle(cs); //set wrap text
+            
+            
+            //Creates Table Headers
+            Row row3 = sheet1.createRow(2);
+            for (int columnNumber = 1; columnNumber<=7;columnNumber++){
+                Cell header = row3.createCell(columnNumber);
+                switch(columnNumber){
+                    case 1:
+                        header.setCellValue("Factor Name");
+                    case 2:
+                       header.setCellValue("Factor ID");
+                    case 3:
+                        header.setCellValue("Weight");
+                    case 4:
+                        header.setCellValue("Grid");
+                    case 5:
+                        header.setCellValue("Per Unit Value");
+                    case 6:
+                        header.setCellValue("Original Value");
+                    default:
+                        header.setCellValue("New Value");                        
+                }
+                header.setCellStyle(cs);
+            }
+            
+            
+            if (bList != null) {
+                for (int i = 0; i < bList.size(); i++) {
+
+                    BOSOperator operator = bList.get(i);
+                    String factorName = operator.getFactorName();
+                    int operatorid = operator.getFactorid();
+                    int weight = operator.getWeight();
+                    int grid = operator.getGrid();
+                    int perUnitValue = operator.getPerUnitValue();
+                    int originalValue = operator.getOriginalValue();
+                    int newValue = operator.getNewValue();
+                    
+                    int columnCounter = 1;
+                    int rowCounter = 3;
+                    Row rowTable= sheet1.createRow(i+rowCounter);
+                    Cell operatorNumberTable = rowTable.createCell(columnCounter);
+                    operatorNumberTable.setCellValue("Factor: " + operatorid);
+                    operatorNumberTable.setCellStyle(cs);
+                    columnCounter++;
+
+                    Cell operatorNameTable = rowTable.createCell(columnCounter);
+                    operatorNameTable.setCellValue(factorName);   
+                    operatorNameTable.setCellStyle(cs);
+                    columnCounter++;
+                            
+                    Cell weightTable = rowTable.createCell(columnCounter);
+                    weightTable.setCellValue(weight);
+                    weightTable.setCellStyle(cs);             
+                    columnCounter++;
+                    
+                    Cell gridTable = rowTable.createCell(columnCounter);
+                    weightTable.setCellValue(grid);
+                    weightTable.setCellStyle(cs);             
+                    columnCounter++;
+                    
+                    Cell perUnitValueTable = rowTable.createCell(columnCounter);
+                    weightTable.setCellValue(perUnitValue);
+                    weightTable.setCellStyle(cs);             
+                    columnCounter++;
+                }
+            }
+            workbook.write(output);
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void BOSDelete(String userId, String projectName) {
+        try {
+            String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR") + userId + "BOSC.xls");
+            String localDir = new String("C:/Users/Dell/Desktop/" + userId + "BOSC.xls");
+            System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
+            File file = null;
+            //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
+            file = new File(pathdir);
+            //}else{
+            //  file = new File(pathdir); 
+            // }
+            FileInputStream fsIP = null;
+            POIFSFileSystem fsPoi = null;
+            FileOutputStream output = null;
+            Workbook workbook = null;
+            //Checks if the file at Directory Exists
+            if (file.isFile()) {
+                fsIP = new FileInputStream(file);
+                fsPoi = new POIFSFileSystem(fsIP);
+                //Access Existing Workbook
+                workbook = new HSSFWorkbook(fsPoi);
+                //Open OutputStream to write updates
+                output = new FileOutputStream(file);
+            }
+
+            Sheet sheet = workbook.getSheet(projectName);
+            int index = 0;
+            if (sheet != null) {
+                index = workbook.getSheetIndex(sheet);
+                int noOfSheets = workbook.getNumberOfSheets();
+                if (index == 0 && noOfSheets == 1) {
+                    boolean delete = file.delete();
+                } else {
+                    workbook.removeSheetAt(index);
+                    workbook.write(output);
+                    output.close();
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
