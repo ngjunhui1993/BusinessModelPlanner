@@ -28,7 +28,7 @@ public class Excel {
     public static void Export(String userId, ArrayList<Operator> oList, String projectName, String prodName, int prodId) {
         try {
             String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR") + userId + ".xls");
-            String localDir = new String("C:/Users/Dell/Desktop/" + userId + ".xls");
+            String localDir = new String("C:\\Users\\jiaohui.lee.2014\\Desktop\\Excel\\" + userId + ".xls");
             System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
             File file = null;
             //if(System.getenv("OPENSHIFT_DATA_DIR")== null){
@@ -107,20 +107,14 @@ public class Excel {
                     int columnCounter = 0;
                     int rowCounter = 4;
                     Row rowTable = sheet1.createRow(i + rowCounter);
-                    if (i % 2 == 0) {
+                    
                         Cell operatorNumberTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                         operatorNumberTable.setCellValue("Operator" + operatorid);
-                        
                         operatorNumberTable.setCellStyle(cs);
                         columnCounter++;
-                    } else {
-                        Cell operatorNumberTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
-                        operatorNumberTable.setCellValue("Operator" + operatorid + " Compliment");
                         
-                        operatorNumberTable.setCellStyle(cs);
-                        columnCounter++;
                         operatorid++;
-                    }
+
                     Cell operatorNameTable = rowTable.createCell(columnCounter); //A column == 0, B == 1, C ==2, D==3
                     operatorNameTable.setCellValue(operatorName);
                     
