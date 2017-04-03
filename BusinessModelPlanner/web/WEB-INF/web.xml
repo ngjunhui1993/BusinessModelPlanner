@@ -14,6 +14,15 @@
         <url-pattern>/BOSCParser</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>BOSDownload</servlet-name>
+        <servlet-class>com.app.controller.BOSDownload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BOSDownload</servlet-name>
+        <url-pattern>/BOSDownload</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
