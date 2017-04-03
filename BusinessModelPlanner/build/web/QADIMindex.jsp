@@ -5,7 +5,6 @@
 <%@page import="com.app.model.QaDIMDAO"%>
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,17 +53,19 @@
                 <tr><td>
                         <!--LOAD EXISTING PROJECT-->
                         <%                            
-                        String userid = user.getUserid();
+                            String userid = user.getUserid();
                             ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                            if (loadedProjects != null) {
+                            if (loadedProjects.size() != 0) {
                         %>
                 <center>
+                    THERE ARE PROJECTS
                     <form action="LoadManager" target="_parent" method="GET">
                         <select name="toLoadQadim" class="cs-select cs-skin-elastic">
                             <%for (QadimProduct project : loadedProjects) {%>
                             <option value="" disabled selected>Load Existing Project</option>
                             <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                            <%=project.getProjectName()%>                            
+                            <%=project.getProjectName()%>
+
                             <%}%>
                         </select>
                         <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
@@ -78,18 +79,17 @@
                 <%
                     }
                 %>
-
             </table>
     </CENTER>
     <!--SCRIPT FOR DROPDOWN-->
     <script src="resources/js/qadim/qadimClassie.js"></script>
     <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
     <script>
-                            (function () {
-                                [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                    new SelectFx(el);
-                                });
-                            })();
+                        (function () {
+                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                new SelectFx(el);
+                            });
+                        })();
     </script>
 </body>
 </html>

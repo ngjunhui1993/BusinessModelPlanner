@@ -346,55 +346,58 @@
                     -->
                     <td>
                         <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
-                            YOU ARE MODIFYING PROJECT<br></p>
-                        <p style="font-size:40px; color:#fff;margin-bottom:-.02em">
-                        <div id="curProjectName"><%=projectName%></div>
-                        <button class="progress-button" data-style="flip-open" data-perspective data-horizontal id="newLoadProject">New/Load</button><br><br>
+                            YOU ARE MODIFYING PROJECT<br></p><br>
+                        <div id="curProjectName" style="font-size:40px; color:#fff;margin-top:0.5em;text-transform: uppercase;font-weight: bold;"><%=projectName%></div>
+
+                        <button class="QADIMbtn QadimNewLoadbtn" id="newLoadProject">NEW / LOAD PROJECT </button>
+                        <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
+                        <a href="FileDownload">
+                            <button class="QADIMbtn QADIMDownloadbtn" id="QaDIMSave">DOWNLOAD </button></a>
+
                         <!-- NEW / LOAD PROJECT MODAL -->
                         <div id="myProjectForm" class="formModal">
                             <!-- Modal content -->
                             <div class="formModal-content">
-                                <span class="closeProjectForm">x</span>
+                                <span class="close">&times;</span>
+                                <h2>New or Load Project</h2>
                                 <p>
-                                    New or Load Project<br>
-                                    Do you want to create a new project or load an existing project?<br>
-                                    CREATE NEW PROJECT <br>
-                                    <button class="btn btn-2 btn-2a"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
+                                    Create a New Project or Load an Existing Project<br>
                                 </p>
-                                <!--LOAD EXISTING PROJECT-->
-                                <%
-                                    String userid = user.getUserid();
-                                    ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                    if (loadedProjects != null) {
-                                %>
-                                <form action="LoadManager" target="_parent" method="GET">
-                                    <select name="toLoadQadim" class="cs-select cs-skin-elastic">
-                                        <%for (QadimProduct project : loadedProjects) {%>
-                                        <option value="" disabled selected>Load Existing Project</option>
-                                        <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                                        <%=project.getProjectName()%>                            
-                                        <%}%>
-                                    </select>
-                                    <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
-                                </form>
-                                </p>
-                                <%
-                                    }
-                                %>
+                                <center>
+                                    <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
+                                    <h2>OR</h2>
+                                    <!--LOAD EXISTING PROJECT-->
+                                    <%
+                                        String userid = user.getUserid();
+                                        ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                        if (loadedProjects != null) {
+                                    %>
+                                    <form action="LoadManager" target="_parent" method="GET">
+                                        <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                                            <%for (QadimProduct project : loadedProjects) {%>
+                                            <option value="" disabled selected>Load Existing Project</option>
+                                            <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                                            <%=project.getProjectName()%>                            
+                                            <%}%>
+                                        </select>
+                                        <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
+                                    </form>
+                                    </p>
+                                    <%
+                                } else {%>
+                                    You have no existing project to Load
+                                    <%}
+                                    %>
+                                </center>
                             </div>
                         </div>
-
                         <!-- END NEW / LOAD PROJECT MODAL -->
-                        <button class="progress-button" data-style="fill" data-horizontal id="QaDIMSave">Save</button><br><br>
-                        <a href="FileDownload" class="btn btn-sq-sm btn-danger">                                     
-                            <i class="glyphicon glyphicon-download fa-2x">
-                            </i><br/>DOWNLOAD</a>
-
                     </td>
                     <!--END OF QADIM TOOLS-->
                 </tr>
             </table>
             <br><br>
+            <!--HIDDEN DIVS TO LOAD QADIM VALUES-->
             <div hidden id="productNameHidden"><%=productName%></div>
             <div hidden id="opName1hidden"><%=opName1%></div>
             <div hidden id="opComment1hidden"><%=opComment1%></div>
@@ -413,39 +416,23 @@
             <div hidden id="opName8hidden"><%=session.getAttribute("opName8")%></div>
             <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
         </div>
+
         <!--SCRIPTS FOR QADIM DRAGGABLE-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
         <script src="resources/js/qadim/qadimDragDrop.js"></script>
         <script src="resources/js/qadim/qadimAppController.js"></script>
-
         <!--SCRIPT FOR TEXT FUNCTION-->
         <script>
-                                                changetext = function (e) {
-                                                src = (e.parentNode);
-                                                        src.outerHTML = "<div><input +" + "name=input" + "></div>";
-                                                }
+                                            changetext = function (e) {
+                                            src = (e.parentNode);
+                                                    src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                            }
         </script>
         <!--SCRIPTS FOR BUTTON-->
         <script src="resources/js/qadim/qadimClassie.js"></script>
         <script src="resources/js/qadim/qadimProgressButton.js"></script>
-        <script>
-                                                [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
-                                        new ProgressButton(bttn, {
-                                        callback: function (instance) {
-                                        var progress = 0,
-                                                interval = setInterval(function () {
-                                                progress = Math.min(progress + Math.random() * 0.1, 1);
-                                                        instance._setProgress(progress);
-                                                        if (progress === 1) {
-                                                instance._stop(1);
-                                                        clearInterval(interval);
-                                                }
-                                                }, 200);
-                                        }
-                                        });
-                                        });</script>
         <!--SCRIPT FOR QADIM SAVE FUNCTION-->
         <script src ="resources/js/qadim/qadimSave.js"></script>
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->

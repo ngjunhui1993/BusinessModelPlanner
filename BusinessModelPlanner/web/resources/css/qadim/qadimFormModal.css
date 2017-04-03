@@ -1,4 +1,3 @@
-
 /* The Modal (background) */
 .formModal {
     display: none; /* Hidden by default */
@@ -16,17 +15,26 @@
 /* Modal Content/Box */
 .formModal-content {
     background-color: #3b3f45;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 18% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #3b3f45;
-    width: 80% ; /* Could be more or less, depending on screen size */
+    width: 50% ; /* Could be more or less, depending on screen size */
 }
-.formModal-context {
-    style: "color: #000"
+.formModal-content h2{
+    color: #646c77;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 20px;
+    margin-bottom: -10px;
 }
 
+.formModal-content p{
+     color: #fff;
+     font-size: 18px;
+     margin-left: 20px;
+}
 
-/* The Close Button */
 .close {
     color: #aaa;
     float: right;
