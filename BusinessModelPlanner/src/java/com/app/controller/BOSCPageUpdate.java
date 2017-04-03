@@ -53,6 +53,8 @@ public class BOSCPageUpdate extends HttpServlet {
             
             if (startNewProject != null){
                 request.getSession().setAttribute("BOSCNewProject", "true");
+                request.getSession().setAttribute("currentValue", null);
+                request.getSession().setAttribute("operatorList", null);
                 response.sendRedirect("BOSC.jsp");
                 return;
             }
@@ -64,9 +66,14 @@ public class BOSCPageUpdate extends HttpServlet {
                 //Verify that project is on DataBase
                 if (projectLoaded!=null){
                     //All operators are in here for the project you are retrieving
-                    ArrayList<BOSOperator> operatorList =  BOSDAO.getAllOperators(username, projectToLoad);
+                    ArrayList<BOSOperator> operatorList =  BOSDAO.getAllOperators(username,projectToLoad);
+                    request.getSession().setAttribute("currentValue", projectLoaded.getOriginalCost());
+                    request.getSession().setAttribute("operatorList", operatorList);
                     
                 }
+                request.getSession().setAttribute("BOSCNewProject", "false");
+                response.sendRedirect("BOSC.jsp");
+                return;
             }
         }
     }
