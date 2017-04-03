@@ -95,7 +95,7 @@
                         </form>
                         <button class="BOSCSaveButton" id="save" type="button" >Save</button><br/>
                         
-                     <a class="downloadButton" href="FileDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br /> 
+                     <a class="downloadButton" href="BOSCDownload" ><i class="fa fa-download fa-3x" aria-hidden="true"></i> Download Project</a> <br /> 
                     </div>
 
                 </div>
