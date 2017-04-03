@@ -31,7 +31,7 @@
     if(session.getAttribute("operatorList") != null){
     operatorList = (ArrayList<BOSOperator>) session.getAttribute("operatorList");
         projectName = operatorList.get(0).getProjectName();
-        currentValue = (int) session.getAttribute("currentValue");
+        currentValue = (Integer) session.getAttribute("currentValue");
         factor1Name = operatorList.get(0).getFactorName();
         factor2Name = operatorList.get(1).getFactorName();
     }
