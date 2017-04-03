@@ -9,6 +9,7 @@ import com.app.model.Excel;
 import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
 import com.app.model.entity.Operator;
+import com.app.model.entity.QadimProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -43,15 +44,22 @@ public class QADIMParser extends HttpServlet {
         String userid = user.getUserid();
         String productName = (String) request.getSession().getAttribute("productName");
         
-        //if exisiting project have been loaded, the editcheck will be == projectName
+        // ----------- Validation for Save/Load/ Existing Project on DataBase ----------
+        //if existing project have been loaded, the editcheck will be == projectName
         String editCheck = (String)request.getSession().getAttribute("editCheck");
+        //Check if project is currently in the database
+        QadimProduct projectChecker = QaDIMDAO.retrieveProject(projectName);
         
-            ArrayList<Operator> validOperatorsList = new ArrayList<>();
+        ArrayList<Operator> validOperatorsList = new ArrayList<>();
+        int productid = 0;
+        
+        //if no, create new project
+        if (projectChecker == null){
             Operator validOperator = null;
             String validName ="";
             String validComment ="";
 
-            int productid = QaDIMDAO.retrieveNoOfProjects(userid);
+            productid = QaDIMDAO.retrieveNoOfProjects(userid);
             productid++;
 
             int validOperatorId = 1;
@@ -65,9 +73,27 @@ public class QADIMParser extends HttpServlet {
                     validOperatorId++;
                 }
             }
+            //if no, replace the current values on the database
+        }else{
+            productid = projectChecker.getProductID();
+            Operator validOperator = null;
+            String validName ="";
+            String validComment ="";
+
+            int validOperatorId = 1;
+            //retrieve all the items and checks if they are empty
+            for(int i = 1; i <= 8; i++){
+                validName = (String)request.getParameter("opName"+i);
+                validComment = (String)request.getParameter("opComment"+i);
+                if(validName!=null && validComment!=null){
+                    validOperator = new Operator (userid, validName.trim(), productid , validOperatorId, validComment.trim());
+                    validOperatorsList.add(validOperator); 
+                    validOperatorId++;
+                }
+            }
+        }
         // ----------------------- If User is starting a NEW Project -----------------------
-        if(editCheck == null||!(editCheck.equals(projectName))){
-        
+        if(editCheck == null && projectChecker == null||!(editCheck.equals(projectName))&& projectChecker == null){
             // ----------------------- Saving onto Database -----------------------
             QaDIMDAO.createQadimProduct(userid , projectName , productid , productName);
             QaDIMDAO.upload(validOperatorsList);
@@ -77,11 +103,15 @@ public class QADIMParser extends HttpServlet {
         // ----------------------- If User is editting on existing Project  -----------------------
         }else{
             // ----------------------- Saving onto Database -----------------------
+            QaDIMDAO.deleteProject(productid, userid);
             QaDIMDAO.deleteOperators(productid, userid);
             QaDIMDAO.upload(validOperatorsList);
+            // ----------------------- Creation of Excel -----------------------
             Excel.delete(userid, projectName);
             Excel.Export(userid, validOperatorsList, projectName, productName, productid);
         }
+        // Saving the project onto the session to recognise that it has been saved.
+        request.getSession().setAttribute("editCheck", projectName);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
