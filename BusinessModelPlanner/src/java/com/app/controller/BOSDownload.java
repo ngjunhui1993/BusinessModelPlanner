@@ -5,8 +5,11 @@
  */
 package com.app.controller;
 
+import com.app.model.entity.Demographics;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,6 +62,37 @@ public class BOSDownload extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    try {
+            PrintWriter out = response.getWriter();
+            // System.out.println(System.getenv("OPENSHIFT_DATA_DIR"));
+            Demographics user = (Demographics) request.getSession().getAttribute("user");
+            String userid = user.getUserid();
+            String fileName = userid + "BOSC.xls";
+            String filePath = "C:\\Users\\DELL\\Desktop\\";// tells the server where to find
+           String pathdir = new String(System.getenv("OPENSHIFT_DATA_DIR"));
+
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+            // jh add some stuff here. If it is connected to openshift, use pathdir, else use fileName
+            FileInputStream fi = null;
+            //if((System.getenv("OPENSHIFT_DATA_DIR")+"Excel") ==null){
+            fi = new FileInputStream(pathdir + fileName);
+
+            //}else{
+            //     fi= new FileInputStream(pathdir+fileName);
+            //}
+            int i;
+            while ((i = fi.read()) != -1) {
+                out.write(i);
+            }
+            out.close();
+            fi.close();
+        } catch (Exception e) {
+            request.setAttribute("errorMsg", "Please save your project first before downloading.");
+            RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
+            rd.forward(request, response);
+            return;
+        }
     }
 
     /**
