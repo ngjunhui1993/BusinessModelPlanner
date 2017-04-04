@@ -38,7 +38,7 @@
                                         String productName = project.getProductName();
                                         int productid = project.getProductID();
                             %>
-                                         <option value="<%=productid%> + ' ,' + <%=projectName%>"><%=projectName%></option>
+                                         <option value="<%=productid%>,<%=projectName%>"><%=projectName%></option>
                             <%
                                     };%>
                             </select>
@@ -51,6 +51,21 @@
                                 <button class="fs-submit" type="submit">Delete</button>
                             </div>
                     </form><!-- /fs-form -->
+                    <%
+                    String[] projectsDeleted = (String[])request.getAttribute("projectsDeleted");
+                    if(projectsDeleted!=null){
+                        %>
+                    You have successfully deleted the following project(s):
+                    <%
+                        for(String project : projectsDeleted){
+                            String projectNameDeleted = project.substring(project.indexOf(",")+1 ,project.length());
+                            projectNameDeleted.trim();
+                        %>
+                        <li><%=projectNameDeleted%></li>
+                    <%
+                        }
+                    }
+                    %>
                 </div>
             </div><!-- /fs-form-wrap -->
         </div>
