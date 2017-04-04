@@ -3,7 +3,7 @@ var projectFormmodal = document.getElementById('myProjectForm');
 // Get the button that opens the modal
 var projectFormBtn = document.getElementById("newLoadProject");
 // Get the <span> element that closes the modal
-var projectFormSpan = document.getElementsByClassName("close")[0];
+var projectFormSpan = document.getElementsById("projectClose")[0];
 // When the user clicks on the button, open the modal 
 projectFormBtn.onclick = function () {
     projectFormmodal.style.display = "block";

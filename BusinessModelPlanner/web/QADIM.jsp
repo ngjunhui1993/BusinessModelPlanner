@@ -142,26 +142,15 @@
             - Project Name
             - This section allows users to edit the operators and comments
             -->
-            <!--EDIT OPERATOR ONE FORM-->
-            <div id="operatorOneModal" class="formModal">
-                <div class="formModal-content">
-                    <div class="close">&times;</div>
-                    <div ng-app="drag-and-drop" ng-controller="oneCtrl as loki" ng-model="operatorOne">
-                        <h2>Edit Operator One</h2>
-                        Edit Operator:<br>
-                        <input ng-model="operatorOne" id="{{item.title}}" variableinput placeholder="Edit Operator"><br>
-                        Edit Operator Comment:<br>
-                        <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
-                    </div>
-                </div>
-            </div>
-            
             <table>
                 <tr><td>
-                        <!--PROJECT CONTENT-->
-                        <div id="qadimcontent" class="qadimcontent">
-                            <!--FIRST ROW-->
+                        <!--PROJECT CONTENT
+                        DISPLAY OF OPERATORS
+                        EDITING OF OPERATORS MODAL
+                        -->
+                        <div id="qadimcontent" class="qadimcontent"> 
                             <div ng-controller="oneCtrl as loki">
+                                <!--FIRST ROW-->
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
                                         <!--OPERATOR ONE-->
@@ -175,18 +164,6 @@
                                         <!--OPERATOR TWO-->
                                         <li ng-repeat="item in operatorTwo" data-drop="true" ng-model='operatorTwo' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorTwoModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorTwo" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR TWO FORM-->
-                                                <div class="formModal" id="operatorTwoModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorTwoName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorTwoComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR TWO DISPLAY-->
                                                 <div id="opTwoName">{{item.title}}</div><br>
                                                 <div id="opTwoComment">{{item.comment}}</div>
@@ -195,18 +172,6 @@
                                         <!--OPERATOR THREE-->
                                         <li ng-repeat="item in operatorThree" data-drop="true" ng-model='operatorThree' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorThreeModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorThree" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR THREE FORM-->
-                                                <div class="formModal" id="operatorThreeModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorThreeName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorThreeComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR THREE DISPLAY-->
                                                 <div id="opThreeName">{{item.title}}</div><br>
                                                 <div id="opThreeComment">{{item.comment}}</div>
@@ -215,18 +180,6 @@
                                         <!--OPERATOR FOUR-->
                                         <li ng-repeat="item in operatorFour" data-drop="true" ng-model='operatorFour' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorFourModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFour" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR FOUR FORM-->
-                                                <div class="formModal" id="operatorFourModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorFourName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorFourComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR FOUR DISPLAY-->
                                                 <div id="opFourName">{{item.title}}</div><br>
                                                 <div id="opFourComment">{{item.comment}}</div>
@@ -235,18 +188,6 @@
                                         <!--PRODUCT NAME-->
                                         <li ng-repeat="item in currentProductName" data-drop="false" ng-model='currentProductName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#currentProductNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProductName" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT PROJECT NAME FORM-->
-                                                <div class="formModal" id="currentProductNameModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Product Name" id="currentProductName"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                                 <!--PRODUCT NAME DISPLAY-->
                                                 <div id="curProductName">{{item.title}}</div><br>
                                             </div>
@@ -254,18 +195,6 @@
                                         <!--OPERATOR FIVE-->
                                         <li ng-repeat="item in operatorFive" data-drop="true" ng-model='operatorFive' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorFiveModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFive" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR FIVE FORM-->
-                                                <div class="formModal" id="operatorFiveModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorFiveName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorFiveComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR FIVE DISPLAY-->
                                                 <div id="opFiveName">{{item.title}}</div><br>
                                                 <div id="opFiveComment">{{item.comment}}</div>
@@ -274,18 +203,6 @@
                                         <!--OPERATOR SIX-->
                                         <li ng-repeat="item in operatorSix" data-drop="true" ng-model='operatorSix' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorSixModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSix" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR SIX FORM-->
-                                                <div class="formModal" id="operatorSixModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorSixName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorSixComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR SIX DISPLAY-->
                                                 <div id="opSixName">{{item.title}}</div><br>
                                                 <div id="opSixComment">{{item.comment}}</div>
@@ -294,18 +211,6 @@
                                         <!--OPERATOR SEVEN-->
                                         <li ng-repeat="item in operatorSeven" data-drop="true" ng-model='operatorSeven' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorSevenModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSeven" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR SEVEN FORM-->
-                                                <div class="formModal" id="operatorSevenModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorSevenName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorSevenComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR SEVEN DISPLAY-->
                                                 <div id="opSevenName">{{item.title}}</div><br>
                                                 <div id="opSevenComment">{{item.comment}}</div>
@@ -314,18 +219,6 @@
                                         <!--OPERATOR EIGHT-->
                                         <li ng-repeat="item in operatorEight" data-drop="true" ng-model='operatorEight' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorEightModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorEight" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR EIGHT FORM-->
-                                                <div class="formModal" id="operatorEightModal">
-                                                    <div class="formModal-content">
-                                                        <div class="modal-content">
-                                                            <input ng-model="item.title" variableinput placeholder="Edit Operator" id="operatorEightName"><br>
-                                                            <input ng-model="item.comment" variableinput placeholder="Edit Comment" id="operatorEightComment"><br>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <!--OPERATOR SEVEN DISPLAY-->
                                                 <div id="opEightName">{{item.title}}</div><br>
                                                 <div id="opEightComment">{{item.comment}}</div>
@@ -334,127 +227,298 @@
                                         <!--CLOSE HERE-->
                                     </ul>
                                 </div>
+                                <!--EDIT PRODUCT NAME-->
+                                <!--EDIT PRODUCT NAME FORM-->                  
+                                <div id="currentProductNameModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in currentProductName">
+                                            <h2>Edit Product Name</h2>
+                                            <p>Edit Product Name<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                            <center><button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button></center>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDITING OPERATORS FORM-->
+                                <!--EDIT OPERATOR ONE FORMS-->
+                                <div id="operatorOneModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorOne">
+                                            <h2>Edit Operator One</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center><button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorTwoModal">NEXT</button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR TWO FORMS-->
+                                <div id="operatorTwoModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorTwo">
+                                            <h2>Edit Operator Two</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorOneModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorThreeModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR THREE FORMS-->
+                                <div id="operatorThreeModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorThree">
+                                            <h2>Edit Operator Three</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorTwoModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFourModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR FOUR FORMS-->
+                                <div id="operatorFourModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorFour">
+                                            <h2>Edit Operator Four</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorThreeModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFiveModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR Five FORMS-->
+                                <div id="operatorFiveModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorFive">
+                                            <h2>Edit Operator Five</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFourModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSixModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR SIX FORMS-->
+                                <div id="operatorSixModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorSix">
+                                            <h2>Edit Operator Six</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFiveModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSevenModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR SEVEN FORMS-->
+                                <div id="operatorSevenModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorSeven">
+                                            <h2>Edit Operator Seven</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSixModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorEightModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--EDIT OPERATOR EIGHT FORMS-->
+                                <div id="operatorEightModal" class="formModal">
+                                    <div class="formModal-content">
+                                        <div id="closeOperator" class="close" data-dismiss="modal">&times;</div>
+                                        <div ng-repeat="item in operatorEight">
+                                            <h2>Edit Operator Eight</h2>
+                                            <p>Edit Operator:<br>
+                                                <input type="text" ng-model="item.title" variableinput placeholder="i.e. Add, Raise, Combine, Separate, Reduce, Remove"><br><br>
+                                                Edit Operator Comment:<br>
+                                                <input type="text" ng-model="item.comment" variableinput placeholder="i.e. Wheels"><br>
+                                            <center>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSevenModal"><</button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
+                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorOneModal">></button>
+                                            </center>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--END OF QADIM MODEL-->
+                                </td>
+                                <!--
+                                QADIM SIDE TOOLS
+                                    - PROJECT NAME (Non modifiable / current project)
+                                    - SAVE BUTTON
+                                    - DOWNLOAD BUTTON
+                                -->
+                                <td>
+                                    <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
+                                        YOU ARE MODIFYING PROJECT<br></p><br>
+                                    <div id="curProjectName" style="font-size:40px; color:#fff;margin-top:0.5em;text-transform: uppercase;font-weight: bold;"><%=projectName%></div>
+
+                                    <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">NEW / LOAD PROJECT </button>
+                                    <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
+                                    <a href="FileDownload">
+                                        <button class="QADIMbtn QADIMDownloadbtn" id="QaDIMSave">DOWNLOAD </button></a>
+                                <center>
+                                    <a href="QADIMindex.jsp">
+                                        <button class="btn btn-2 btn-2i">BACK</button></a></center>
+
+                                <!-- NEW / LOAD PROJECT MODAL -->
+                                <div id="myProjectForm" class="formModal">
+                                    <!-- Modal content -->
+                                    <div class="formModal-content">
+                                        <div id="projectClose" class="close" data-dismiss="modal">&times;</div>
+                                        <h2>New or Load Project</h2>
+                                        <p>
+                                            Create a New Project or Load an Existing Project<br>
+                                        </p>
+                                        <center>
+                                            <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
+                                            <!--LOAD EXISTING PROJECT-->
+                                            <%
+                                                String userid = user.getUserid();
+                                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                                if (loadedProjects.size() != 0) {
+                                            %>                               
+                                            <h3>OR</h3>
+                                            <form action="LoadManager" target="_parent" method="GET">
+                                                <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
+                                                <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                                                    <%for (QadimProduct project : loadedProjects) {%>
+                                                    <option disabled>Load Existing Project</option>
+                                                    <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                                                    <%=project.getProjectName()%>
+                                                    <%}%>
+                                                </select>
+                                            </form>
+                                            <br><br><br>
+                                            <%
+                                            } else {
+                                            %>
+                                            <!--IF NO PROJECTS, NOTHING DISPLAYED-->
+                                            <%
+                                                }
+                                            %>
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- END NEW / LOAD PROJECT MODAL -->
+                                </td>
+                                <!--END OF QADIM TOOLS-->
+                                </tr>
+                                </table>
+                                <br><br>
+                                <!--HIDDEN DIVS TO LOAD QADIM VALUES-->
+                                <div hidden id="productNameHidden"><%=productName%></div>
+                                <div hidden id="opName1hidden"><%=opName1%></div>
+                                <div hidden id="opComment1hidden"><%=opComment1%></div>
+                                <div hidden id="opName2hidden"><%=opName2%></div>
+                                <div hidden id="opComment2hidden"><%=opComment2%></div>
+                                <div hidden id="opName3hidden"><%=session.getAttribute("opName3")%></div>
+                                <div hidden id="opComment3hidden"><%=session.getAttribute("opComment3")%></div>
+                                <div hidden id="opName4hidden"><%=session.getAttribute("opName4")%></div>
+                                <div hidden id="opComment4hidden"><%=session.getAttribute("opComment4")%></div>
+                                <div hidden id="opName5hidden"><%=session.getAttribute("opName5")%></div>
+                                <div hidden id="opComment5hidden"><%=session.getAttribute("opComment5")%></div>
+                                <div hidden id="opName6hidden"><%=session.getAttribute("opName6")%></div>
+                                <div hidden id="opComment6hidden"><%=session.getAttribute("opComment6")%></div>
+                                <div hidden id="opName7hidden"><%=session.getAttribute("opName7")%></div>
+                                <div hidden id="opComment7hidden"><%=session.getAttribute("opComment7")%></div>
+                                <div hidden id="opName8hidden"><%=session.getAttribute("opName8")%></div>
+                                <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
                             </div>
-                        </div>
-                        <!--END OF QADIM MODEL-->
-                    </td>
-                    <!--
-                    QADIM SIDE TOOLS
-                        - PROJECT NAME (Non modifiable / current project)
-                        - SAVE BUTTON
-                        - DOWNLOAD BUTTON
-                    -->
-                    <td>
-                        <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
-                            YOU ARE MODIFYING PROJECT<br></p><br>
-                        <div id="curProjectName" style="font-size:40px; color:#fff;margin-top:0.5em;text-transform: uppercase;font-weight: bold;"><%=projectName%></div>
 
-                        <button class="QADIMbtn QadimNewLoadbtn" id="newLoadProject">NEW / LOAD PROJECT </button>
-                        <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
-                        <a href="FileDownload">
-                            <button class="QADIMbtn QADIMDownloadbtn" id="QaDIMSave">DOWNLOAD </button></a>
-                <center>
-                    <a href="QADIMindex.jsp">
-                        <button class="btn btn-2 btn-2i">BACK</button></a></center>
-
-                <!-- NEW / LOAD PROJECT MODAL -->
-                <div id="myProjectForm" class="formModal">
-                    <!-- Modal content -->
-                    <div class="formModal-content">
-                        <span class="close">&times;</span>
-                        <h2>New or Load Project</h2>
-                        <p>
-                            Create a New Project or Load an Existing Project<br>
-                        </p>
-                        <center>
-                            <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
-                            <!--LOAD EXISTING PROJECT-->
-                            <%
-                                String userid = user.getUserid();
-                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                if (loadedProjects.size() != 0) {
-                            %>                               
-                            <h3>OR</h3>
-                            <form action="LoadManager" target="_parent" method="GET">
-                                <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
-                                <select name="toLoadQadim" class="cs-select cs-skin-elastic">
-                                    <%for (QadimProduct project : loadedProjects) {%>
-                                    <option disabled>Load Existing Project</option>
-                                    <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                                    <%=project.getProjectName()%>
-                                    <%}%>
-                                </select>
-                            </form>
-                            <br><br><br>
-                            <%
-                            } else {
-                            %>
-                            <!--IF NO PROJECTS, NOTHING DISPLAYED-->
-                            <%
-                                }
-                            %>
-                        </center>
-                    </div>
-                </div>
-                <!-- END NEW / LOAD PROJECT MODAL -->
-                </td>
-                <!--END OF QADIM TOOLS-->
-                </tr>
-            </table>
-            <br><br>
-            <!--HIDDEN DIVS TO LOAD QADIM VALUES-->
-            <div hidden id="productNameHidden"><%=productName%></div>
-            <div hidden id="opName1hidden"><%=opName1%></div>
-            <div hidden id="opComment1hidden"><%=opComment1%></div>
-            <div hidden id="opName2hidden"><%=opName2%></div>
-            <div hidden id="opComment2hidden"><%=opComment2%></div>
-            <div hidden id="opName3hidden"><%=session.getAttribute("opName3")%></div>
-            <div hidden id="opComment3hidden"><%=session.getAttribute("opComment3")%></div>
-            <div hidden id="opName4hidden"><%=session.getAttribute("opName4")%></div>
-            <div hidden id="opComment4hidden"><%=session.getAttribute("opComment4")%></div>
-            <div hidden id="opName5hidden"><%=session.getAttribute("opName5")%></div>
-            <div hidden id="opComment5hidden"><%=session.getAttribute("opComment5")%></div>
-            <div hidden id="opName6hidden"><%=session.getAttribute("opName6")%></div>
-            <div hidden id="opComment6hidden"><%=session.getAttribute("opComment6")%></div>
-            <div hidden id="opName7hidden"><%=session.getAttribute("opName7")%></div>
-            <div hidden id="opComment7hidden"><%=session.getAttribute("opComment7")%></div>
-            <div hidden id="opName8hidden"><%=session.getAttribute("opName8")%></div>
-            <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
-        </div>
-
-        <!--SCRIPTS FOR QADIM DRAGGABLE-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-        <script src="resources/js/qadim/qadimDragDrop.js"></script>
-        <script src="resources/js/qadim/qadimAppController.js"></script>
-        <!--SCRIPT FOR TEXT FUNCTION-->
-        <script>
-                                        changetext = function (e) {
-                                        src = (e.parentNode);
-                                                src.outerHTML = "<div><input +" + "name=input" + "></div>";
-                                        }
-        </script>
-        <!--SCRIPTS FOR BUTTON-->
-        <script src="resources/js/qadim/qadimClassie.js"></script>
-        <script src="resources/js/qadim/qadimProgressButton.js"></script>
-        <!--SCRIPT FOR QADIM SAVE FUNCTION-->
-        <script src ="resources/js/qadim/qadimSave.js"></script>
-        <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
-        <script src ="resources/js/qadim/qadimFormModal.js"></script>
-        <script src="resources/js/qadim/qadimClassie.js"></script>
-        <!--SCRIPT FOR DROPDOWN-->
-        <script src="resources/js/qadim/qadimClassie.js"></script>
-        <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
-        <script>
-                                        (function () {
-                                        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                        new SelectFx(el);
-                                        });
-                                        })();        </script>
-        <!--SCRIPT FOR OPERATOR MODAL-->
-        <script src="resources/js/qadim/qadimOperatorModal.js"></script>
+                            <!--SCRIPTS FOR QADIM DRAGGABLE-->
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+                            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+                            <script src="resources/js/qadim/qadimDragDrop.js"></script>
+                            <script src="resources/js/qadim/qadimAppController.js"></script>
+                            <!--SCRIPT FOR TEXT FUNCTION-->
+                            <script>
+                                                        changetext = function (e) {
+                                                        src = (e.parentNode);
+                                                                src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                                        }
+                            </script>
+                            <!--SCRIPTS FOR BUTTON-->
+                            <script src="resources/js/qadim/qadimClassie.js"></script>
+                            <script src="resources/js/qadim/qadimProgressButton.js"></script>
+                            <!--SCRIPT FOR QADIM SAVE FUNCTION-->
+                            <script src ="resources/js/qadim/qadimSave.js"></script>
+                            <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
+                            <script src ="resources/js/qadim/qadimFormModal.js"></script>
+                            <script src="resources/js/qadim/qadimClassie.js"></script>
+                            <!--SCRIPT FOR DROPDOWN-->
+                            <script src="resources/js/qadim/qadimClassie.js"></script>
+                            <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
+                            <script>
+                                                        (function () {
+                                                        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                                        new SelectFx(el);
+                                                        });
+                                                        })();</script>
+                            <!--SCRIPT FOR OPERATOR MODAL-->
+                            <script src="resources/js/qadim/qadimOperatorModal.js"></script>
 
 
-    </body>
-</html>
+                            </body>
+                            </html>

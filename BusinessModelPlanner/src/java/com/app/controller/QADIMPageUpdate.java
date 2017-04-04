@@ -83,12 +83,9 @@ public class QADIMPageUpdate extends HttpServlet {
                         request.getSession().setAttribute("opName"+numbering,operatorName);
                         request.getSession().setAttribute("opComment"+numbering,operatorComments);
                     }
-                }
-            }
                     response.sendRedirect("QADIM.jsp");
-                    return;
+                        return;
                 }
-            
             //-------------------- End of Validation for newly created Projects --------------------
             
             //When user accesses a current project and changes the projectName
@@ -100,7 +97,7 @@ public class QADIMPageUpdate extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("QADIM.jsp");
                     rd.forward(request, response);
                     return;
-                }
+                    }
                 QaDIMDAO.editProjectName(projectName, loggedInUserID, newProjName);
                 request.getSession().setAttribute("projectName", newProjName);
                 response.sendRedirect("QADIM.jsp");

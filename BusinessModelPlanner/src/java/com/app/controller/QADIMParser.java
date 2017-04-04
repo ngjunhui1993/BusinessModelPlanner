@@ -105,6 +105,7 @@ public class QADIMParser extends HttpServlet {
             // ----------------------- Saving onto Database -----------------------
             QaDIMDAO.deleteProject(productid, userid);
             QaDIMDAO.deleteOperators(productid, userid);
+            QaDIMDAO.createQadimProduct(userid , projectName , productid , productName);
             QaDIMDAO.upload(validOperatorsList);
             // ----------------------- Creation of Excel -----------------------
             Excel.delete(userid, projectName);

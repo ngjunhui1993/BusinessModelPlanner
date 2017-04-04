@@ -4,7 +4,6 @@ var productName = document.getElementById("productNameHidden").innerHTML;
 //LOAD VALUES FROM FRONT-END JSP PAGE
 var opName1 = document.getElementById("opName1hidden").innerHTML;
 var opComment1 = document.getElementById("opComment1hidden").innerHTML;
-
 var opName2 = document.getElementById("opName2hidden").innerHTML;
 var opComment2 = document.getElementById("opComment2hidden").innerHTML;
 var opName3 = document.getElementById("opName3hidden").innerHTML;
