@@ -42,7 +42,7 @@ public class QADIMParser extends HttpServlet {
         String projectName = (String) request.getSession().getAttribute("projectName");
         Demographics user = (Demographics)request.getSession().getAttribute("user");
         String userid = user.getUserid();
-        String productName = (String) request.getSession().getAttribute("productName");
+        String productName = (String)request.getParameter("saveProductName");
         
         // ----------- Validation for Save/Load/ Existing Project on DataBase ----------
         //if existing project have been loaded, the editcheck will be == projectName

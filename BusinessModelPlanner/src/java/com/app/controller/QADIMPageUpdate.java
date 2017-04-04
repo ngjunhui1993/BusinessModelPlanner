@@ -66,7 +66,7 @@ public class QADIMPageUpdate extends HttpServlet {
                 //if project name exists, prompt user to input another name.
                     //PS: Destination of errormsgs unclear
                 if (QaDIMDAO.retrieveProjectByUser(projectName, loggedInUserID) != null) {
-                    request.setAttribute("errorMsg", "Project already exists. Enter new project name.");
+                    request.setAttribute("errorMsg", projectName + " already exists. Enter new project name.");
                     RequestDispatcher rd = request.getRequestDispatcher("QADIMnewProject.jsp");
                     rd.forward(request, response);
                     return;
