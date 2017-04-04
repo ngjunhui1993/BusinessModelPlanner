@@ -14,17 +14,18 @@
         url('../fonts/icomoon/icomoon.woff') format('woff'),
         url('../fonts/icomoon/icomoon.svg#icomoon') format('svg');
 }
-/*GENERAL BUTTON STYLES*/
-.btn {
+/*QADIM INDEX BUTTON GENERAL STYLES*/
+/*QADIM INDEX NEW PROJECT BUTTON*/
+.QADIMIndexbtn {
     border: none;
     font-family: inherit;
     font-size: inherit;
     color: inherit;
     background: none;
     cursor: pointer;
-    padding: 20px 0px;
+    padding: 28px 0px;
     display: inline-block;
-    margin: 10px -2px;
+    margin: 0px 0px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
@@ -33,8 +34,69 @@
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-    width: 100%;
+    width: 47%;
+    height: 50%;
+}
+.QADIMnewProjectbtn{
+    background: #ffae00;
+    color: #fff;
+    box-shadow: 0 6px #d39c26;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+    border-radius: 5px;
+}
+
+.QADIMnewProjectbtn:hover {
+    box-shadow: 0 4px #d39c26;
+    top: 2px;
+}
+
+.QADIMnewProjectbtn:active {
+    box-shadow: 0 0 #d39c26;
+    top: 6px;
+}
+/*QADIM INDEX LOAD*/
+.QADIMIndexLoadbtn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 22px 0px;
+    display: inline-block;
+    margin: 0px 0px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 10%;
     height: 100%;
+}
+
+.QadimIndexLoadBtn{
+    border-radius: 5px;
+    background: #cb4e4e;
+    color: #fff;
+    box-shadow: 0 6px #ab3c3c;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.QadimIndexLoadBtn:hover {
+    box-shadow: 0 4px #ab3c3c;
+    top: 2px;
+}
+
+.QadimIndexLoadBtn:active {
+    box-shadow: 0 0 #ab3c3c;
+    top: 6px;
 }
 /*QADIM BUTTON GENERAL STYLES*/
 .QADIMbtn {
@@ -100,25 +162,25 @@
 }
 /*QADIM DOWNLOAD PROJECT BUTTON*/
 .QADIMDownloadbtn {
-	background: #cb4e4e;
-	color: #fff;
-	box-shadow: 0 6px #ab3c3c;
-	-webkit-transition: none;
-	-moz-transition: none;
-	transition: none;
+    background: #cb4e4e;
+    color: #fff;
+    box-shadow: 0 6px #ab3c3c;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
 }
 .QADIMDownloadbtn{
-	border-radius: 40px;
+    border-radius: 40px;
 }
 
 .QADIMDownloadbtn:hover {
-	box-shadow: 0 4px #ab3c3c;
-	top: 2px;
+    box-shadow: 0 4px #ab3c3c;
+    top: 2px;
 }
 
 .QADIMDownloadbtn:active {
-	box-shadow: 0 0 #ab3c3c;
-	top: 6px;
+    box-shadow: 0 0 #ab3c3c;
+    top: 6px;
 }
 /*QADIM MODAL BUTTON STYLE*/
 .QADIMModalbtn {
@@ -164,6 +226,28 @@
 }
 
 /*ALL BUTTON STYLES*/
+/*GENERAL BUTTON STYLES*/
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 20px 0px;
+    display: inline-block;
+    margin: 10px -2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 100%;
+    height: 100%;
+}
 /* Button 2 */
 .btn-2 {
     background: #cb4e4e;
@@ -198,20 +282,6 @@
 }
 
 .btn-2b:active {
-    box-shadow: 0 0 #ab3c3c;
-    top: 6px;
-}
-/* Button 2c */
-.btn-2c {
-    border-radius: 5px;
-}
-
-.btn-2c:hover {
-    box-shadow: 0 4px #ab3c3c;
-    top: 2px;
-}
-
-.btn-2c:active {
     box-shadow: 0 0 #ab3c3c;
     top: 6px;
 }

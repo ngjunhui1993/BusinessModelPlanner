@@ -25,6 +25,7 @@
         <!--TEST-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
     <body>
         <%//PROJECT NAME & PRODUCT NAME
@@ -141,33 +142,32 @@
             - Project Name
             - This section allows users to edit the operators and comments
             -->
+            <!--EDIT OPERATOR ONE FORM-->
+            <div id="operatorOneModal" class="formModal">
+                <div class="formModal-content">
+                    <div class="close">&times;</div>
+                    <div ng-app="drag-and-drop" ng-controller="oneCtrl as loki" ng-model="operatorOne">
+                        <h2>Edit Operator One</h2>
+                        Edit Operator:<br>
+                        <input ng-model="operatorOne" id="{{item.title}}" variableinput placeholder="Edit Operator"><br>
+                        Edit Operator Comment:<br>
+                        <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
+                    </div>
+                </div>
+            </div>
+            
             <table>
                 <tr><td>
                         <!--PROJECT CONTENT-->
-                        <div id="qadimcontent">
+                        <div id="qadimcontent" class="qadimcontent">
                             <!--FIRST ROW-->
                             <div ng-controller="oneCtrl as loki">
                                 <div class='contentWrapper ng-cloak'>
                                     <ul class="thumbnails">
                                         <!--OPERATOR ONE-->
                                         <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
-                                            <div class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
-                                                <!--EDIT OPERATOR ONE FORM-->
-                                                <div>
-                                                    <div class="formModal" id="operatorOneModal">
-                                                        <div class="formModal-content">
-                                                            <div class="modal-content">
-                                                                <input ng-model="item.title" variableinput placeholder="Edit Operator"><br>
-                                                                <input ng-model="item.comment" variableinput placeholder="Edit Comment"><br>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <span class="closeProjectForm">x</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div id="operatorOneModalbtn" class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR ONE DISPLAY-->
-                                                <!--OPERATOR TWO DISPLAY-->
                                                 <div id="opOneName">{{item.title}}</div><br>
                                                 <div id="opOneComment">{{item.comment}}</div>
                                             </div>
@@ -353,47 +353,52 @@
                         <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
                         <a href="FileDownload">
                             <button class="QADIMbtn QADIMDownloadbtn" id="QaDIMSave">DOWNLOAD </button></a>
+                <center>
+                    <a href="QADIMindex.jsp">
+                        <button class="btn btn-2 btn-2i">BACK</button></a></center>
 
-                        <!-- NEW / LOAD PROJECT MODAL -->
-                        <div id="myProjectForm" class="formModal">
-                            <!-- Modal content -->
-                            <div class="formModal-content">
-                                <span class="close">&times;</span>
-                                <h2>New or Load Project</h2>
-                                <p>
-                                    Create a New Project or Load an Existing Project<br>
-                                </p>
-                                <center>
-                                    <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
-                                    <h2>OR</h2>
-                                    <!--LOAD EXISTING PROJECT-->
-                                    <%
-                                        String userid = user.getUserid();
-                                        ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                        if (loadedProjects != null) {
-                                    %>
-                                    <form action="LoadManager" target="_parent" method="GET">
-                                        <select name="toLoadQadim" class="cs-select cs-skin-elastic">
-                                            <%for (QadimProduct project : loadedProjects) {%>
-                                            <option value="" disabled selected>Load Existing Project</option>
-                                            <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                                            <%=project.getProjectName()%>                            
-                                            <%}%>
-                                        </select>
-                                        <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
-                                    </form>
-                                    </p>
-                                    <%
-                                } else {%>
-                                    You have no existing project to Load
-                                    <%}
-                                    %>
-                                </center>
-                            </div>
-                        </div>
-                        <!-- END NEW / LOAD PROJECT MODAL -->
-                    </td>
-                    <!--END OF QADIM TOOLS-->
+                <!-- NEW / LOAD PROJECT MODAL -->
+                <div id="myProjectForm" class="formModal">
+                    <!-- Modal content -->
+                    <div class="formModal-content">
+                        <span class="close">&times;</span>
+                        <h2>New or Load Project</h2>
+                        <p>
+                            Create a New Project or Load an Existing Project<br>
+                        </p>
+                        <center>
+                            <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
+                            <!--LOAD EXISTING PROJECT-->
+                            <%
+                                String userid = user.getUserid();
+                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                if (loadedProjects.size() != 0) {
+                            %>                               
+                            <h3>OR</h3>
+                            <form action="LoadManager" target="_parent" method="GET">
+                                <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
+                                <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                                    <%for (QadimProduct project : loadedProjects) {%>
+                                    <option disabled>Load Existing Project</option>
+                                    <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                                    <%=project.getProjectName()%>
+                                    <%}%>
+                                </select>
+                            </form>
+                            <br><br><br>
+                            <%
+                            } else {
+                            %>
+                            <!--IF NO PROJECTS, NOTHING DISPLAYED-->
+                            <%
+                                }
+                            %>
+                        </center>
+                    </div>
+                </div>
+                <!-- END NEW / LOAD PROJECT MODAL -->
+                </td>
+                <!--END OF QADIM TOOLS-->
                 </tr>
             </table>
             <br><br>
@@ -425,10 +430,10 @@
         <script src="resources/js/qadim/qadimAppController.js"></script>
         <!--SCRIPT FOR TEXT FUNCTION-->
         <script>
-                                            changetext = function (e) {
-                                            src = (e.parentNode);
-                                                    src.outerHTML = "<div><input +" + "name=input" + "></div>";
-                                            }
+                                        changetext = function (e) {
+                                        src = (e.parentNode);
+                                                src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                        }
         </script>
         <!--SCRIPTS FOR BUTTON-->
         <script src="resources/js/qadim/qadimClassie.js"></script>
@@ -438,6 +443,17 @@
         <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
         <script src ="resources/js/qadim/qadimFormModal.js"></script>
         <script src="resources/js/qadim/qadimClassie.js"></script>
+        <!--SCRIPT FOR DROPDOWN-->
+        <script src="resources/js/qadim/qadimClassie.js"></script>
+        <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
+        <script>
+                                        (function () {
+                                        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                        new SelectFx(el);
+                                        });
+                                        })();        </script>
+        <!--SCRIPT FOR OPERATOR MODAL-->
+        <script src="resources/js/qadim/qadimOperatorModal.js"></script>
 
 
     </body>

@@ -26,6 +26,14 @@
     text-transform: uppercase;
     font-weight: bold;
     margin: 20px;
+    margin-bottom: 10px;
+}
+.formModal-content h3{
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 20px;
     margin-bottom: -10px;
 }
 

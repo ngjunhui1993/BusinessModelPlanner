@@ -15,7 +15,7 @@ body {
 #tooltipcontent {
     margin-top: 0px;
 }
-#qadimcontent {
+.qadimcontent {
     width: 800px;
     margin: 20px -100px 0px -25px;
 
@@ -44,7 +44,7 @@ h1{
     margin: 10px auto auto 4px;
 }
 
-li {
+.qadimcontent li {
     height: 200px;
     width: 205px;
     line-height: 30px;

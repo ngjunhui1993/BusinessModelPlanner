@@ -6,7 +6,7 @@ div.cs-select {
 	text-align: left;
 	background: #fff;
 	z-index: 100;
-	width: 100%;
+	width: 50%;
 	max-width: 500px;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -90,7 +90,9 @@ div.cs-active {
 }
 
 .cs-select ul span {
+    width: 100%;
 	padding: 1em;
+        background-color: #fff;
 }
 
 .cs-select ul li.cs-focus span {

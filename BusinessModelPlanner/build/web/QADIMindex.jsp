@@ -42,54 +42,44 @@
             </div>
             <br><br>
             <!--END OF EXPLANATION-->          
-            <table>
-                <tr><td>
-                        <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->
-                <center>
-                    <button class="btn btn-2 btn-2a"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
-                </center>
-                </td></tr>
-                <tr><td><center><h1>OR</h1></center></td></tr>
-                <tr><td>
-                        <!--LOAD EXISTING PROJECT-->
-                        <%                            
-                            String userid = user.getUserid();
-                            ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                            if (loadedProjects.size() != 0) {
-                        %>
-                <center>
-                    THERE ARE PROJECTS
-                    <form action="LoadManager" target="_parent" method="GET">
-                        <select name="toLoadQadim" class="cs-select cs-skin-elastic">
-                            <%for (QadimProduct project : loadedProjects) {%>
-                            <option value="" disabled selected>Load Existing Project</option>
-                            <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
-                            <%=project.getProjectName()%>
+            <!--LOAD NEW PROJECT//NAV TO QADIMnewProjectForm-->
 
-                            <%}%>
-                        </select>
-                        <input type="submit" class="btn btn-2 btn-2i" name="submit" value="load">
-                    </form>
-                </center>
-                </td> </tr>
-                <%
-                } else {
-                %>
-                NO PROJECTS<br>
-                <%
-                    }
-                %>
-            </table>
-    </CENTER>
-    <!--SCRIPT FOR DROPDOWN-->
-    <script src="resources/js/qadim/qadimClassie.js"></script>
-    <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
-    <script>
-                        (function () {
-                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                new SelectFx(el);
-                            });
-                        })();
-    </script>
-</body>
-</html>
+            <button class="QADIMIndexbtn QADIMnewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>
+            <br>
+            <!--IF THERE ARE EXISTING PROJECT-->
+            <!--LOAD EXISTING PROJECT-->
+            <%                            String userid = user.getUserid();
+                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                if (loadedProjects.size() != 0) {
+            %>
+            <h1>OR</h1>
+            <form action="LoadManager" target="_parent" method="GET">
+                <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
+                <select name="toLoadQadim" class="cs-select cs-skin-elastic">
+                    <%for (QadimProduct project : loadedProjects) {%>
+                    <option disabled selected>Load Existing Project</option>
+                    <option value="<%=project.getProjectName()%>" ><%=project.getProjectName()%></option>
+                    <%=project.getProjectName()%>
+                    <%};%>
+                </select>
+            </form>
+
+            <%
+            } else {
+            %>
+            <!--IF NO PROJECTS, NOTHING DISPLAYED-->
+            <%
+                }
+            %>
+            <!--SCRIPT FOR DROPDOWN-->
+            <script src="resources/js/qadim/qadimClassie.js"></script>
+            <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
+            <script>
+                (function () {
+                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                        new SelectFx(el);
+                    });
+                })();
+            </script>
+            </body>
+            </html>
