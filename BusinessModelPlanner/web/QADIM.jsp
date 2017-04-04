@@ -196,7 +196,7 @@
                                         <li ng-repeat="item in operatorFive" data-drop="true" ng-model='operatorFive' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorFiveModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFive" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR FIVE DISPLAY-->
-                                                <div id="oFiveName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opFiveName" class="qadimOperator">{{item.title}}</div><br>
                                                 <div id="opFiveComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
@@ -411,9 +411,11 @@
                                 <td>
                                     <p style="font-size:20px; color:#fff; margin-bottom:-2.2em">
                                         YOU ARE MODIFYING PROJECT<br></p><br>
-                                    <div id="curProjectName" style="font-size:40px; color:#fff;margin-top:0.5em;text-transform: uppercase;font-weight: bold;"><%=projectName%></div>
+                                    <div id="curProjectName" style="font-size:40px; color:#fff;margin-top:0.5em;text-transform: uppercase;font-weight: bold;">
+                                        <%=projectName%>
+                                    </div>
 
-                                    <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">NEW / LOAD PROJECT </button>
+                                    <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">SAVE/LOAD PROJECT </button>
                                     <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
                                     
                                     <a href="FileDownload">

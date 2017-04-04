@@ -53,6 +53,9 @@
                 if (loadedProjects.size() != 0) {
             %>
             <h1>OR</h1>
+            <!--LOAD PROJECT
+            FOR USERS TO LOAD PREVIOUSLY CREATED PROJECTS
+            -->
             <form action="LoadManager" target="_parent" method="GET">
                 <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
                 <select name="toLoadQadim" class="cs-select cs-skin-elastic">
@@ -63,6 +66,12 @@
                     <%};%>
                 </select>
             </form>
+                <br>
+            <!--MANAGE PROJECTS
+            FOR USERS TO DELETE EXISTING PROJECTS
+            -->
+            <button class="QADIMIndexbtn QADIMnewProjectbtn"  onclick="window.location.href = 'QADIMmanageProjects.jsp'">MANAGE EXISTING PROJECTS</button>
+
 
             <%
             } else {
@@ -75,11 +84,11 @@
             <script src="resources/js/qadim/qadimClassie.js"></script>
             <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
             <script>
-                (function () {
-                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                        new SelectFx(el);
-                    });
-                })();
+    (function () {
+        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+            new SelectFx(el);
+        });
+    })();
             </script>
             </body>
             </html>

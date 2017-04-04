@@ -31,9 +31,6 @@ App.controller('oneCtrl', function ($scope) {
     $scope.operatorFour = [
         {'title': opName4, 'drag': true, 'comment': opComment4},
     ];
-    $scope.currentProductName = [
-        {'title': productName, 'drag': false},
-    ];
     $scope.operatorFive = [
         {'title': opName5, 'drag': true, 'comment': opComment5},
     ];
@@ -46,7 +43,9 @@ App.controller('oneCtrl', function ($scope) {
     $scope.operatorEight = [
         {'title': opName8, 'drag': true, 'comment': opComment8},
     ];
-
+        $scope.currentProductName = [
+        {'title': productName, 'drag': false},
+    ];
 });
 
 app.directive('variableinput', [
