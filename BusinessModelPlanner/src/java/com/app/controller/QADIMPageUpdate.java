@@ -7,6 +7,7 @@ package com.app.controller;
 
 import com.app.model.QaDIMDAO;
 import com.app.model.entity.Demographics;
+import com.app.model.entity.Operator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -72,6 +73,18 @@ public class QADIMPageUpdate extends HttpServlet {
                 }else{
                     request.getSession().setAttribute("projectName", projectName);
                     request.getSession().setAttribute("productName", productName);
+                    
+                    // ----------- Clear session of any possible operators in the sesssion ----------
+                    String operatorName = "";
+                    String operatorComments = "";
+                    for(int i = 0; i < 8; i++){
+                        int numbering = i+1;
+                        //---------- Sets all the operators back to the same naming convention for UI ----------
+                        request.getSession().setAttribute("opName"+numbering,operatorName);
+                        request.getSession().setAttribute("opComment"+numbering,operatorComments);
+                    }
+                }
+            }
                     response.sendRedirect("QADIM.jsp");
                     return;
                 }
