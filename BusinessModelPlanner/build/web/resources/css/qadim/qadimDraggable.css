@@ -23,6 +23,17 @@ body {
 table {
     border-spacing: 0px 0px;
 }
+
+input[type=text]{
+        width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 h1{
     font-size: 120%;
     text-align: center;
@@ -47,7 +58,6 @@ h1{
 .qadimcontent li {
     height: 200px;
     width: 205px;
-    line-height: 30px;
     border: none;
     background: #1c232d;
     padding: 3px;
@@ -56,3 +66,20 @@ h1{
     float:left;
 }
 
+div.qadimOperator{
+    color:#505F71;
+    font-size: 20px;
+    padding-top: 30%;
+    text-transform: uppercase;
+    text-wrap: normal;
+    font-weight: bold;
+    margin:0px;
+}
+
+div.qadimComment{
+    width:80%;
+    color:#000;
+    font-size: 20px;
+    margin:-10px 20px;
+    text-wrap: normal;
+}

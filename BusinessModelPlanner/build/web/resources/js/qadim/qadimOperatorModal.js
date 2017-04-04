@@ -3,7 +3,7 @@ var formModal = document.getElementById('operatorOneModal');
 // Get the button that opens the modal
 var formBtn = document.getElementById("operatorOneModalbtn");
 // Get the <span> element that closes the modal
-var formSpan = document.getElementsByClassName("closeOperator")[0];
+var formSpan = document.getElementsById("closeOperator")[0];
 // When the user clicks on the button, open the modal 
 formBtn.onclick = function () {
     formModal.style.display = "block";
