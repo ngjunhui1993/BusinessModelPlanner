@@ -25,22 +25,28 @@
                     Select Project to Delete<br>
                 </div>
                 <div style='margin-top: 100px;'>
-                    <form class="me-select">
+                    <form class="me-select" action="QADIMParser">
                         <ul id="me-select-list" style='padding:150px; margin-bottom: -120px;'>
                             <li><span>Project Name || </span> <span> Product Name</span></li>
                             <%                            String userid = user.getUserid();
                                 ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                if (loadedProjects.size() != 0) {
-                                    for (int i = 0; i <= loadedProjects.size() - 1; i++) {
-                                        QadimProduct project = loadedProjects.get(i);
-                                        int checkboxCount = i + 1;
-                                        String checkboxId = "cb" + checkboxCount;
-                            %>
-                            <li><input id='<%=checkboxId%>' name="<%=checkboxId%>" type="checkbox"><label for="<%=checkboxId%>"><span><%=project.getProjectName()%></span><span><%=project.getProductName()%></span><span></span></label></li>
+                                if (loadedProjects.size() != 0) {%>
+                            <select name="projectsToDelete" multiple>
                             <%
-                                    };
+                                    for (QadimProduct project: loadedProjects){
+                                        String projectName = project.getProjectName();
+                                        String productName = project.getProductName();
+                                        int productid = project.getProductID();
+                            %>
+                                         <option value="<%=productid%> + ' ,' + <%=projectName%>"><%=projectName%></option>
+                            <%
+                                    };%>
+                            </select>
+                            <%
                                 };
                             %></ul>
+                            <input type="hidden" value="deleteProject" name="deleteCheck"/>
+                            
                             <div style='margin-left:20px;'>
                                 <button class="fs-submit" type="submit">Delete</button>
                             </div>

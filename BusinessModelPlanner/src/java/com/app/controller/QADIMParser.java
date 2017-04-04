@@ -53,13 +53,33 @@ public class QADIMParser extends HttpServlet {
         ArrayList<Operator> validOperatorsList = new ArrayList<>();
         int productid = 0;
         
+        // ----------- Validation for Delete Option Check ----------
+        String deleteCheck = request.getParameter("deleteCheck");
+        if(deleteCheck!=null){
+            String[] projectsToDelete = request.getParameterValues("projectsToDelete");
+            for(String project: projectsToDelete){
+                String projectNameToDelete = project.substring(0, project.indexOf(",")+1);
+                int productidToDelete = Integer.parseInt(project.substring(project.indexOf(",")+1),project.length());
+                QaDIMDAO.deleteProject(productidToDelete, userid);
+                QaDIMDAO.deleteOperators(productidToDelete, userid);
+                Excel.delete(userid, projectNameToDelete);
+                response.sendRedirect("QADIMmanageProjects.jsp");
+                return;
+            }
+        }
+        
         //if no, create new project
         if (projectChecker == null){
             Operator validOperator = null;
             String validName ="";
             String validComment ="";
-
-            productid = QaDIMDAO.retrieveNoOfProjects(userid);
+            
+            //----------- Assigns a Unique productid to the project ----------
+            int tempProductid = QaDIMDAO.checkForNextValidProductId(userid);
+            if (tempProductid == 0){
+                tempProductid = 1;
+            }
+            productid = tempProductid;
             productid++;
 
             int validOperatorId = 1;
