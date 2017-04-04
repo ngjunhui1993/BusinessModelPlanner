@@ -144,7 +144,7 @@ button.fs-continue,
 }
 
 .fs-form-overview ol {
-	max-width: ;
+	max-width: 0px;
 }
 
 .fs-fields > li {
