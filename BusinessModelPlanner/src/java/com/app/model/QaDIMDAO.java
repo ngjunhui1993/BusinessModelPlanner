@@ -176,7 +176,27 @@ public class QaDIMDAO {
         }
         return products;
     }
-    
+    public static int checkForNextValidProductId(String userid){
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement preStmt = null;
+        int maxProductid = 0;
+        try {
+            conn = ConnectionManager.getConnection();
+            String sql = "select max(product_id) from qadim_product where userid = ?";
+            preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, userid);
+            rs = preStmt.executeQuery();
+            while(rs.next()){
+                maxProductid = rs.getInt("max(product_id)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preStmt, rs);
+        }
+        return maxProductid;
+    }
     public static void deleteProject(int productId , String userId) {
         Connection conn = null;
         ResultSet rs = null;
