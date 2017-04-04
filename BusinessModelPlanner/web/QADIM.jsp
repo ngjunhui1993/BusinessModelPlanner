@@ -157,71 +157,71 @@
                                         <li ng-repeat="item in operatorOne" data-drop="true" ng-model='operatorOne' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div id="operatorOneModalbtn" class="thumbnail" data-toggle="modal" data-target="#operatorOneModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorOne" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR ONE DISPLAY-->
-                                                <div id="opOneName">{{item.title}}</div><br>
-                                                <div id="opOneComment">{{item.comment}}</div>
+                                                <div id="opOneName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opOneComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR TWO-->
                                         <li ng-repeat="item in operatorTwo" data-drop="true" ng-model='operatorTwo' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorTwoModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorTwo" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR TWO DISPLAY-->
-                                                <div id="opTwoName">{{item.title}}</div><br>
-                                                <div id="opTwoComment">{{item.comment}}</div>
+                                                <div id="opTwoName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opTwoComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR THREE-->
                                         <li ng-repeat="item in operatorThree" data-drop="true" ng-model='operatorThree' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorThreeModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorThree" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR THREE DISPLAY-->
-                                                <div id="opThreeName">{{item.title}}</div><br>
-                                                <div id="opThreeComment">{{item.comment}}</div>
+                                               <div id="opThreeName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opThreeComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR FOUR-->
                                         <li ng-repeat="item in operatorFour" data-drop="true" ng-model='operatorFour' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorFourModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFour" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR FOUR DISPLAY-->
-                                                <div id="opFourName">{{item.title}}</div><br>
-                                                <div id="opFourComment">{{item.comment}}</div>
+                                                <div id="opFourName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opFourComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--PRODUCT NAME-->
                                         <li ng-repeat="item in currentProductName" data-drop="false" ng-model='currentProductName' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#currentProductNameModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="currentProductName" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--PRODUCT NAME DISPLAY-->
-                                                <div id="curProductName">{{item.title}}</div><br>
+                                                <div id="curProductName"class="qadimOperator">{{item.title}}</div><br>
                                             </div>
                                         </li>
                                         <!--OPERATOR FIVE-->
                                         <li ng-repeat="item in operatorFive" data-drop="true" ng-model='operatorFive' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorFiveModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorFive" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR FIVE DISPLAY-->
-                                                <div id="opFiveName">{{item.title}}</div><br>
-                                                <div id="opFiveComment">{{item.comment}}</div>
+                                                <div id="oFiveName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opFiveComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR SIX-->
                                         <li ng-repeat="item in operatorSix" data-drop="true" ng-model='operatorSix' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorSixModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSix" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR SIX DISPLAY-->
-                                                <div id="opSixName">{{item.title}}</div><br>
-                                                <div id="opSixComment">{{item.comment}}</div>
+                                                <div id="opSixName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opSixComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR SEVEN-->
                                         <li ng-repeat="item in operatorSeven" data-drop="true" ng-model='operatorSeven' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorSevenModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorSeven" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR SEVEN DISPLAY-->
-                                                <div id="opSevenName">{{item.title}}</div><br>
-                                                <div id="opSevenComment">{{item.comment}}</div>
+                                                <div id="opSevenName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opSevenComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--OPERATOR EIGHT-->
                                         <li ng-repeat="item in operatorEight" data-drop="true" ng-model='operatorEight' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorEightModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorEight" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR SEVEN DISPLAY-->
-                                                <div id="opEightName">{{item.title}}</div><br>
-                                                <div id="opEightComment">{{item.comment}}</div>
+                                                <div id="opEightName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opEightComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
                                         <!--CLOSE HERE-->
@@ -273,7 +273,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorOneModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorThreeModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorThreeModal">></button>
                                             </center>
                                             </p>
 
@@ -293,7 +293,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorTwoModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFourModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFourModal">></button>
                                             </center>
                                             </p>
 
@@ -313,7 +313,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorThreeModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFiveModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFiveModal">></button>
                                             </center>
                                             </p>
 
@@ -333,7 +333,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFourModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSixModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSixModal">></button>
                                             </center>
                                             </p>
 
@@ -353,7 +353,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorFiveModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSevenModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSevenModal">></button>
                                             </center>
                                             </p>
 
@@ -373,7 +373,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSixModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorEightModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorEightModal">></button>
                                             </center>
                                             </p>
 
@@ -393,7 +393,7 @@
                                             <center>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorSevenModal"><</button>
                                                 <button class="btn btn-2 btn-2i" data-dismiss="modal">OK</button>
-                                            <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorOneModal">></button>
+                                                <button class="btn btn-2 btn-2i" data-dismiss="modal" data-toggle="modal" data-target="#operatorOneModal">></button>
                                             </center>
                                             </p>
 
