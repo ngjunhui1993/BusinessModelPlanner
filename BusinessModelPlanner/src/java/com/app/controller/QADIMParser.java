@@ -58,14 +58,15 @@ public class QADIMParser extends HttpServlet {
         if(deleteCheck!=null){
             String[] projectsToDelete = request.getParameterValues("projectsToDelete");
             for(String project: projectsToDelete){
-                String projectNameToDelete = project.substring(0, project.indexOf(",")+1);
-                int productidToDelete = Integer.parseInt(project.substring(project.indexOf(",")+1),project.length());
+                int productidToDelete = Integer.parseInt(project.substring(0, project.indexOf(",")));
+                String projectNameToDelete = project.substring(project.indexOf(",")+1 ,project.length());
+                projectNameToDelete.trim();
                 QaDIMDAO.deleteProject(productidToDelete, userid);
                 QaDIMDAO.deleteOperators(productidToDelete, userid);
                 Excel.delete(userid, projectNameToDelete);
-                response.sendRedirect("QADIMmanageProjects.jsp");
-                return;
             }
+            request.setAttribute("projectsDeleted",projectsToDelete);
+            request.getRequestDispatcher("QADIMmanageProjects.jsp").forward(request,response);
         }
         
         //if no, create new project
