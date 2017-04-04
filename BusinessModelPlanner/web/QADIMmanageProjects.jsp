@@ -27,6 +27,7 @@
                 <div style='margin-top: 100px;'>
                     <form class="me-select">
                         <ul id="me-select-list" style='padding:150px; margin-bottom: -120px;'>
+                            <li><span>Project Name || </span> <span> Product Name</span></li>
                             <%                            String userid = user.getUserid();
                                 ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
                                 if (loadedProjects.size() != 0) {
@@ -35,7 +36,7 @@
                                         int checkboxCount = i + 1;
                                         String checkboxId = "cb" + checkboxCount;
                             %>
-                            <li><input id='<%=checkboxId%>' name="<%=checkboxId%>" type="checkbox"><label for="<%=checkboxId%>"><span><%=project.getProjectName()%></span><span></span><span></span></label></li>
+                            <li><input id='<%=checkboxId%>' name="<%=checkboxId%>" type="checkbox"><label for="<%=checkboxId%>"><span><%=project.getProjectName()%></span><span><%=project.getProductName()%></span><span></span></label></li>
                             <%
                                     };
                                 };
