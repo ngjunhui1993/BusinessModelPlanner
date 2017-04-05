@@ -1,9 +1,4 @@
-<%-- 
-    Document   : Admin
-    Created on : Jan 19, 2017, 7:22:33 PM
-    Author     : jiaohui.lee.2014
---%>
-
+<%@include file="Protect.jsp"%>
 <%@page import="com.app.model.entity.Group"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.entity.Demographics"%>
@@ -16,28 +11,24 @@
         <title>Admin Page</title>
     </head>
     <body>
-        <h1>Administrator Page</h1>
-        Current Groups: <br />
-        <%
-            Demographics user = (Demographics)request.getSession().getAttribute("user");
-            ArrayList<Group> existingGroups= GroupDAO.retrieveGroupsByInstructor(user.getEmail());
-            if(existingGroups!=null){
-                for(Group g: existingGroups){
-                %>
-                <a href="groupView"><%=g.getSection()%></a><br/>
-                <%
-                }
-            }
-        %>
-        <br />
-        Create Group
-        <form action="GroupManager">
-            Course: <input type="text" name="course"/> <br>
-            Section: <input type="text" name="session"/> <br>
-            Course Code: <input type="text" name="courseId"/> <br>
-            Password: <input type="password" name="password" /> <br>
-            <input type="submit" value="Create Group"/>
-        </form>
-        
+        <div class="main">
+            <div style="background: #424242; width:100%; height:200px; color:#fff;">
+                <center>
+                    <img src="resources/image/webapplogo.png" alt="SIMHA" width="300" style='padding-top:35px;'><br>
+                </center>
+                <div style='margin:20px;'>
+                    <%    String name = user.getName().toUpperCase();
+                    %>
+                    <h4>WELCOME, ADMINISTRATOR <%=name%></h4>
+                    <h4 style='margin-top: -20px;'>ADMINISTRATOR PAGE</h4>
+                </div>
+            </div>
+            <div>
+                This page allows you to upload data for Business Model Buffet<br>
+                Upload Data
+                <form action="MainFileUpload"  method="post" enctype="multipart/form-data">
+                    Upload Company Data file Here: <input type="file" name="upfile" onChange="this.form.submit()">
+                </form>
+            </div>
     </body>
 </html>

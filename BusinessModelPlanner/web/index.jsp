@@ -28,7 +28,6 @@
                             <%                                if (user.getType().equals("administrator")) {
                             %>
                         <li><a href="Admin.jsp">ADMIN PAGE</a></li>
-                        <li><a href='Bootstrap.jsp'>ADMIN UPLOAD DATA</a></li>
                             <%
                                 }
                             %>

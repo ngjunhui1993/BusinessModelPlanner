@@ -13,7 +13,6 @@
         <!--CSS FOR NEW FORM-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimForm.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimformComponent.css" />
-        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimManageProject.css" />
         <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
     <body>
@@ -23,14 +22,14 @@
                     <h1>Manage Projects</h1>
                     <a class="codrops-icon codrops-icon-prev" href="QADIMindex.jsp"> BACK</a><br>
                     Select Project to Delete<br>
+                    Project Name || Product Name<br>
                 </div>
                 <div style='margin-top: 100px;'>
                     <form class="me-select" action="QADIMParser">
-                        <ul id="me-select-list" style='padding:150px; margin-bottom: -120px;'>
-                            <li><span>Project Name || </span> <span> Product Name</span></li>
-                                <%                            String userid = user.getUserid();
-                                    ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                    if (loadedProjects.size() != 0) {%>
+                        <ul style='padding:150px; margin-bottom: -120px;'>
+                            <%String userid = user.getUserid();
+                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                if (loadedProjects.size() != 0) {%>
                             <select name="projectsToDelete" multiple>
                                 <%
                                     for (QadimProduct project : loadedProjects) {
@@ -38,34 +37,35 @@
                                         String productName = project.getProductName();
                                         int productid = project.getProductID();
                                 %>
-                                <option value="<%=productid%>,<%=projectName%>"><%=projectName%></option>
+                                <li><option value="<%=productid%>,<%=projectName%>"><%=projectName%></option></li>
                                 <%
-                                };%>
+                                    };%>
                             </select>
                             <%
                                 };
                             %></ul>
                         <input type="hidden" value="deleteProject" name="deleteCheck"/>
-
                         <div style='margin-left:20px;'>
                             <button class="fs-submit" type="submit">Delete</button>
                         </div>
                     </form><!-- /fs-form -->
-                    <%
-                        String[] projectsDeleted = (String[]) request.getAttribute("projectsDeleted");
-                        if (projectsDeleted != null) {
-                    %>
-                    You have successfully deleted the following project(s):
-                    <%
-                        for (String project : projectsDeleted) {
-                            String projectNameDeleted = project.substring(project.indexOf(",") + 1, project.length());
-                            projectNameDeleted.trim();
-                    %>
-                    <li><%=projectNameDeleted%></li>
+                    <div style='margin:20px 30px;'>
                         <%
-                                }
-                            }
+                            String[] projectsDeleted = (String[]) request.getAttribute("projectsDeleted");
+                            if (projectsDeleted != null) {
                         %>
+                        You have successfully deleted the following project(s):
+                        <%
+                            for (String project : projectsDeleted) {
+                                String projectNameDeleted = project.substring(project.indexOf(",") + 1, project.length());
+                                projectNameDeleted.trim();
+                        %>
+                        <ul><li><%=projectNameDeleted%></li></ul>
+                                <%
+                                        }
+                                    }
+                                %>
+                    </div>
                 </div>
             </div><!-- /fs-form-wrap -->
         </div>

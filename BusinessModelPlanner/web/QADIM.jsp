@@ -58,46 +58,46 @@
             //Operator 1
             <%if (opName1 != null && !opName1.equals("")) {%>
             document.getElementById('opName1').innerHTML = <%=opName1%>;
-                    document.getElementById('opComment1').innerHTML = <%=opComment1%>;
+            document.getElementById('opComment1').innerHTML = <%=opComment1%>;
             <%};%>
             //Operator 2
             <%if (opName2 != null && !opName2.equals("")) {%>
 
             document.getElementById('opName2').innerHTML = <%=opName2%>;
-                    document.getElementById('opComment2').innerHTML = <%=opComment2%>;
+            document.getElementById('opComment2').innerHTML = <%=opComment2%>;
             <%};%>
             //Operator 3
             <%if (opName3 != null && !opName3.equals("")) {%>
 
             document.getElementById('opName3').innerHTML = <%=opName3%>;
-                    document.getElementById('opComment3').innerHTML = <%=opComment3%>;
+            document.getElementById('opComment3').innerHTML = <%=opComment3%>;
             <%};%>
             //Operator 4
             <%if (opName4 != null && !opName4.equals("")) {%>
 
             document.getElementById('opName4').innerHTML = <%=opName4%>;
-                    document.getElementById('opComment4').innerHTML = <%=opComment4%>;
+            document.getElementById('opComment4').innerHTML = <%=opComment4%>;
             <%};%>
             //Operator 5
             <%if (opName5 != null && !opName5.equals("")) {%>
 
             document.getElementById('opName5').innerHTML = <%=opName5%>;
-                    document.getElementById('opComment5').innerHTML = <%=opComment5%>;
+            document.getElementById('opComment5').innerHTML = <%=opComment5%>;
             <%};%>
             //Operator 6
             <%if (opName6 != null && !opName6.equals("")) {%>
             document.getElementById('opName6').innerHTML = <%=opName6%>;
-                    document.getElementById('opComment6').innerHTML = <%=opComment6%>;
+            document.getElementById('opComment6').innerHTML = <%=opComment6%>;
             <%};%>
             //Operator 7
             <%if (opName7 != null && !opName7.equals("")) {%>
             document.getElementById('opName7').innerHTML = <%=opName7%>;
-                    document.getElementById('opComment7').innerHTML = <%=opComment7%>;
+            document.getElementById('opComment7').innerHTML = <%=opComment7%>;
             <%};%>
             //Operator 8
             <%if (opName8 != null && !opName8.equals("")) {%>
             document.getElementById('opName8').innerHTML = <%=opName8%>;
-                    document.getElementById('opComment8').innerHTML = <%=opComment8%>;
+            document.getElementById('opComment8').innerHTML = <%=opComment8%>;
             <%};%>
         </script>
         <!--
@@ -431,20 +431,20 @@
                                     <div class="formModal-content">
                                         <div id="projectClose" class="close" data-dismiss="modal">&times;</div>
                                         <h2>New or Load Project</h2>
-                                        
-                                            <p> Create a new project, but remember to save before you leave! </p>
-                                            <center>
+
+                                        <p> Create a new project, but remember to save before you leave! </p>
+                                        <center>
                                             <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
-                                            </center>
-                                            <!--LOAD EXISTING PROJECT-->
-                                            <%
-                                                String userid = user.getUserid();
-                                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                                if (loadedProjects.size() != 0) {
-                                            %>                               
-                                            <center><h3>OR</h3></center>
-                                            <p> Load an existing project</p>
-                                            <center>
+                                        </center>
+                                        <!--LOAD EXISTING PROJECT-->
+                                        <%
+                                            String userid = user.getUserid();
+                                            ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                            if (loadedProjects.size() != 0) {
+                                        %>                               
+                                        <center><h3>OR</h3></center>
+                                        <p> Load an existing project</p>
+                                        <center>
                                             <form action="LoadManager" target="_parent" method="GET">
                                                 <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
                                                 <select name="toLoadQadim" class="cs-select cs-skin-elastic">
@@ -492,39 +492,39 @@
                                 <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
                             </div>
                         </div>
-                            <!--SCRIPTS FOR QADIM DRAGGABLE-->
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-                            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-                            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-                            <script src="resources/js/qadim/qadimDragDrop.js"></script>
-                            <script src="resources/js/qadim/qadimAppController.js"></script>
-                            <!--SCRIPT FOR TEXT FUNCTION-->
-                            <script>
-                                                            changetext = function (e) {
-                                                            src = (e.parentNode);
-                                                                    src.outerHTML = "<div><input +" + "name=input" + "></div>";
-                                                            }
-                            </script>
-                            <!--SCRIPTS FOR BUTTON-->
-                            <script src="resources/js/qadim/qadimClassie.js"></script>
-                            <script src="resources/js/qadim/qadimProgressButton.js"></script>
-                            <!--SCRIPT FOR QADIM SAVE FUNCTION-->
-                            <script src ="resources/js/qadim/qadimSave.js"></script>
-                            <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
-                            <script src ="resources/js/qadim/qadimFormModal.js"></script>
-                            <script src="resources/js/qadim/qadimClassie.js"></script>
-                            <!--SCRIPT FOR DROPDOWN-->
-                            <script src="resources/js/qadim/qadimClassie.js"></script>
-                            <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
-                            <script>
-                                                            (function () {
-                                                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                                            new SelectFx(el);
-                                                            });
-                                                            })();</script>
-                            <!--SCRIPT FOR OPERATOR MODAL-->
-                            <script src="resources/js/qadim/qadimOperatorModal.js"></script>
+                        <!--SCRIPTS FOR QADIM DRAGGABLE-->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+                        <script src="resources/js/qadim/qadimDragDrop.js"></script>
+                        <script src="resources/js/qadim/qadimAppController.js"></script>
+                        <!--SCRIPT FOR TEXT FUNCTION-->
+                        <script>
+                                            changetext = function (e) {
+                                                src = (e.parentNode);
+                                                src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                            }
+                        </script>
+                        <!--SCRIPTS FOR BUTTON-->
+                        <script src="resources/js/qadim/qadimClassie.js"></script>
+                        <script src="resources/js/qadim/qadimProgressButton.js"></script>
+                        <!--SCRIPT FOR QADIM SAVE FUNCTION-->
+                        <script src ="resources/js/qadim/qadimSave.js"></script>
+                        <!--SCRIPTS FOR NEW LOAD PROJECT BUTTON MODAL FORM-->
+                        <script src ="resources/js/qadim/qadimFormModal.js"></script>
+                        <script src="resources/js/qadim/qadimClassie.js"></script>
+                        <!--SCRIPT FOR DROPDOWN-->
+                        <script src="resources/js/qadim/qadimClassie.js"></script>
+                        <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
+                        <script>
+                                            (function () {
+                                                [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                                    new SelectFx(el);
+                                                });
+                                            })();</script>
+                        <!--SCRIPT FOR OPERATOR MODAL-->
+                        <script src="resources/js/qadim/qadimOperatorModal.js"></script>
 
 
-                            </body>
-                            </html>
+                        </body>
+                        </html>
