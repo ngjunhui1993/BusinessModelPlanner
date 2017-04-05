@@ -431,18 +431,20 @@
                                     <div class="formModal-content">
                                         <div id="projectClose" class="close" data-dismiss="modal">&times;</div>
                                         <h2>New or Load Project</h2>
-                                        <p>
-                                            Create a New Project or Load an Existing Project<br>
-                                        </p>
-                                        <center>
+                                        
+                                            <p> Create a new project, but remember to save before you leave! </p>
+                                            <center>
                                             <button class="QADIMModalbtn QadimModalNewProjectbtn"  onclick="window.location.href = 'QADIMnewProject.jsp'">CREATE NEW PROJECT</button>                               
+                                            </center>
                                             <!--LOAD EXISTING PROJECT-->
                                             <%
                                                 String userid = user.getUserid();
                                                 ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
                                                 if (loadedProjects.size() != 0) {
                                             %>                               
-                                            <h3>OR</h3>
+                                            <center><h3>OR</h3></center>
+                                            <p> Load an existing project</p>
+                                            <center>
                                             <form action="LoadManager" target="_parent" method="GET">
                                                 <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
                                                 <select name="toLoadQadim" class="cs-select cs-skin-elastic">
