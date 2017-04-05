@@ -23,10 +23,8 @@
         <!--CSS FOR DRIVERS SEARCH SELECT SCRIPTS-->
         <link rel="stylesheet" href="resources/css/bmc/bmc-searchdrivers-valuedropdownlist.css">
     </head>
-
     <body>
         <section>
-
             <div class="container">	
                 <div class="tooltipcontent">
                     <div class="dummy dummy-text">
