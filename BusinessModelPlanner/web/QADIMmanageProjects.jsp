@@ -28,44 +28,44 @@
                     <form class="me-select" action="QADIMParser">
                         <ul id="me-select-list" style='padding:150px; margin-bottom: -120px;'>
                             <li><span>Project Name || </span> <span> Product Name</span></li>
-                            <%                            String userid = user.getUserid();
-                                ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
-                                if (loadedProjects.size() != 0) {%>
+                                <%                            String userid = user.getUserid();
+                                    ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
+                                    if (loadedProjects.size() != 0) {%>
                             <select name="projectsToDelete" multiple>
-                            <%
-                                    for (QadimProduct project: loadedProjects){
+                                <%
+                                    for (QadimProduct project : loadedProjects) {
                                         String projectName = project.getProjectName();
                                         String productName = project.getProductName();
                                         int productid = project.getProductID();
-                            %>
-                                         <option value="<%=productid%>,<%=projectName%>"><%=projectName%></option>
-                            <%
-                                    };%>
+                                %>
+                                <option value="<%=productid%>,<%=projectName%>"><%=projectName%></option>
+                                <%
+                                };%>
                             </select>
                             <%
                                 };
                             %></ul>
-                            <input type="hidden" value="deleteProject" name="deleteCheck"/>
-                            
-                            <div style='margin-left:20px;'>
-                                <button class="fs-submit" type="submit">Delete</button>
-                            </div>
+                        <input type="hidden" value="deleteProject" name="deleteCheck"/>
+
+                        <div style='margin-left:20px;'>
+                            <button class="fs-submit" type="submit">Delete</button>
+                        </div>
                     </form><!-- /fs-form -->
                     <%
-                    String[] projectsDeleted = (String[])request.getAttribute("projectsDeleted");
-                    if(projectsDeleted!=null){
-                        %>
+                        String[] projectsDeleted = (String[]) request.getAttribute("projectsDeleted");
+                        if (projectsDeleted != null) {
+                    %>
                     You have successfully deleted the following project(s):
                     <%
-                        for(String project : projectsDeleted){
-                            String projectNameDeleted = project.substring(project.indexOf(",")+1 ,project.length());
+                        for (String project : projectsDeleted) {
+                            String projectNameDeleted = project.substring(project.indexOf(",") + 1, project.length());
                             projectNameDeleted.trim();
-                        %>
-                        <li><%=projectNameDeleted%></li>
-                    <%
-                        }
-                    }
                     %>
+                    <li><%=projectNameDeleted%></li>
+                        <%
+                                }
+                            }
+                        %>
                 </div>
             </div><!-- /fs-form-wrap -->
         </div>
