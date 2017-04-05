@@ -85,36 +85,31 @@
                                         <figure>
                                             <div><img src="resources/image/keypartners.jpg" alt="keypartners"></div>
                                             <figcaption>
-
                                                 <h3>Key Partners</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     CanvasDAO cDAO = new CanvasDAO();
                                                     ArrayList<String> traits = cDAO.retrieveTraitsByDriver("key_partnerships");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="keyPartnerSelect">
-                                                        <div class="selectBox" onclick="keyPartners()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="keyPartners">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                int count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-
-                                                        </div>
+                                                <div class="multiselect" id="keyPartnerSelect">
+                                                    <div class="selectBox" onclick="keyPartners()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="keyPartners">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                            <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                    
+                                                <%} else {%>There are currently no traits available<%};%>
+
 
                                             </figcaption>
                                         </figure>
@@ -126,32 +121,28 @@
                                             <div><img src="resources/image/keyactivities.jpg" alt="img06"></div>
                                             <figcaption>
                                                 <h3>Key Activities</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
-                                                <%
-                                                    traits = cDAO.retrieveTraitsByDriver("key_activities");
+                                                <%                                                    traits = cDAO.retrieveTraitsByDriver("key_activities");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="keyActivitiesSelect">
-                                                        <div class="selectBox" onclick="keyactivities()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="keyactivities">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="keyActivitiesSelect">
+                                                    <div class="selectBox" onclick="keyactivities()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="keyactivities">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
+
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -161,32 +152,29 @@
                                             <div><img src="resources/image/keyresources.jpg" alt="img02"></div>
                                             <figcaption>
                                                 <h3>Key Resources</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("key_resources");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="keyResourcesSelect">
-                                                        <div class="selectBox" onclick="keyresources()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="keyresources">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="keyResourcesSelect">
+                                                    <div class="selectBox" onclick="keyresources()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="keyresources">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
+
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -195,32 +183,29 @@
                                             <div><img src="resources/image/valueproposition.jpg" alt="img04"></div>
                                             <figcaption>
                                                 <h3>Value Proposition</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("value_proposition");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="valuePropositionSelect">
-                                                        <div class="selectBox" onclick="valueproposition()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="valueproposition">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="valuePropositionSelect">
+                                                    <div class="selectBox" onclick="valueproposition()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="valueproposition">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
+
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -229,10 +214,10 @@
                                             <div><img src="resources/image/customersegments.jpg" alt="img01"></div>
                                             <figcaption>
                                                 <h3>Customer Segments</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("customer_acquisition");
+                                                    if (traits.size() > 0) {
                                                     //      out.println(traits.size());
                                                 %>
                                                 <div class="multiselect" id="customerSegmentSelect">
@@ -245,14 +230,11 @@
                                                     <div class="checkboxes" id="customersegments">
                                                         <!--LOAD DATA HERE-->
                                                         <%
-                                                            count = 1;
-                                                            for (String trait : traits) {
-                                                                out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                count++;
-                                                            }
-                                                        %>
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
                                                     </div>
                                                 </div>
+                                                <%} else {%>There are currently no traits available<%};%>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -261,32 +243,27 @@
                                             <div><img src="resources/image/customerrelationship.jpg" alt="img03"></div>
                                             <figcaption>
                                                 <h3>Customer Relationship</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
-                                                <%
-                                                    traits = cDAO.retrieveTraitsByDriver("customer_relations");
+                                                <%                                                    traits = cDAO.retrieveTraitsByDriver("customer_relations");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="customerRelationshipSelect">
-                                                        <div class="selectBox" onclick="customerrelationship()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="customerrelationship">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="customerRelationshipSelect">
+                                                    <div class="selectBox" onclick="customerrelationship()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="customerrelationship">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -295,32 +272,28 @@
                                             <div><img src="resources/image/channels.jpg" alt="img03"></div>
                                             <figcaption>
                                                 <h3>Channels</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("channel_strategy");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="channelSelect">
-                                                        <div class="selectBox" onclick="channels()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="channels">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="channelSelect">
+                                                    <div class="selectBox" onclick="channels()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="channels">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                            for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -329,32 +302,28 @@
                                             <div><img src="resources/image/coststructure.jpg" alt="img03"></div>
                                             <figcaption>
                                                 <h3>Cost Structure</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("cost_management");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="costStructureSelect">
-                                                        <div class="selectBox" onclick="coststructure()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="coststructure">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="costStructureSelect">
+                                                    <div class="selectBox" onclick="coststructure()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="coststructure">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                                for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -363,32 +332,28 @@
                                             <div><img src="resources/image/revenuestreams.jpg" alt="img03"></div>
                                             <figcaption>
                                                 <h3>Revenue Streams</h3>
-                                                <span>SHORT DESCRIPTION</span>
                                                 <!--SEARCH OPTIONS-->
                                                 <%
                                                     traits = cDAO.retrieveTraitsByDriver("revenues");
                                                     //      out.println(traits.size());
+                                                    if (traits.size() > 0) {
                                                 %>
-                                                <DIV>
-                                                    <div class="multiselect" id="revenueStreamSelect">
-                                                        <div class="selectBox" onclick="revenuestreams()">
-                                                            <select>
-                                                                <option>Select an option</option>
-                                                            </select>
-                                                            <div class="overSelect"></div>
-                                                        </div>
-                                                        <div class="checkboxes" id="revenuestreams">
-                                                            <!--LOAD DATA HERE-->
-                                                            <%
-                                                                count = 1;
-                                                                for (String trait : traits) {
-                                                                    out.println("<label for='" + count + "'><input type='checkbox' id='" + count + "' name=allTheTraits value='" + trait + "'>" + trait + "</label>");
-                                                                    count++;
-                                                                }
-                                                            %>
-                                                        </div>
+
+                                                <div class="multiselect" id="revenueStreamSelect">
+                                                    <div class="selectBox" onclick="revenuestreams()">
+                                                        <select>
+                                                            <option>Select an option</option>
+                                                        </select>
+                                                        <div class="overSelect"></div>
                                                     </div>
-                                                </DIV>
+                                                    <div class="checkboxes" id="revenuestreams">
+                                                        <!--LOAD DATA HERE-->
+                                                        <%
+                                                                for (String trait : traits) {%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                    </div>
+                                                </div>
+                                                <%} else {%>There are currently no traits available<%};%>
                                             </figcaption>
                                         </figure>
                                     </li>
@@ -402,7 +367,6 @@
                     <span class="bl-icon bl-icon-close"></span>
             </section>
         </div>
-    </div>
 
     <!-- SCRIPT FOR MAIN INDEX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

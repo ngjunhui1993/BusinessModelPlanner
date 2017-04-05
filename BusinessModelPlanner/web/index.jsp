@@ -19,7 +19,7 @@
         <![endif]-->
     </head>
     <body>
-        <div class="container">
+        <div class="indexcontainer" style="width:100%">
             <nav id="menu" class="menu">
                 <button class="menu__handle"><span>Menu</span></button>
                 <div class="menu__inner">
@@ -40,7 +40,7 @@
                 </div>
             </nav>
             <!--BODY-->
-            <div class="main">
+            <div class="main" style="width:100%">
                 <div style="background: #424242; width:100%; height:180px; color:#fff;">
                     <center>
                         <img src="resources/image/webapplogo.png" alt="SIMHA" width="300" style='padding-top:35px;'><br>

@@ -525,6 +525,5 @@
                         <!--SCRIPT FOR OPERATOR MODAL-->
                         <script src="resources/js/qadim/qadimOperatorModal.js"></script>
 
-
                         </body>
                         </html>

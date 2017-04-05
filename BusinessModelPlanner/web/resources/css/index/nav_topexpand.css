@@ -1,6 +1,10 @@
 html, 
 body, 
-.container, 
+.indexcontainer{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+.container,
 .content-wrap {
     overflow: auto;
     width: 100%;
