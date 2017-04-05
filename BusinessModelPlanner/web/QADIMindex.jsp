@@ -10,7 +10,7 @@
     <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR TOOLTIPS-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimTooltip.css" />
         <!--CSS FOR CURRENT PAGE-->

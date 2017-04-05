@@ -9,7 +9,7 @@
     <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Business Model Canvas</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR INDEX-->
         <link rel="stylesheet" type="text/css" href="resources/css/bmc/bmc-component.css" />
         <!--CSS FOR TOOLTIPS-->

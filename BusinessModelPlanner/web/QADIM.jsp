@@ -9,7 +9,7 @@
     <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR DRAGGABLE ELEMENTS-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimDraggable.css" />
         <!--CSS FOR TOOLTIPS-->
@@ -416,7 +416,7 @@
                                         <%=projectName%>
                                     </div>
 
-                                    <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">SAVE/LOAD PROJECT </button>
+                                    <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">NEW/LOAD PROJECT </button>
                                     <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
 
                                     <a href="FileDownload">

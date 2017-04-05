@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>New Project Form</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR NEW FORM-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimForm.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimformComponent.css" />

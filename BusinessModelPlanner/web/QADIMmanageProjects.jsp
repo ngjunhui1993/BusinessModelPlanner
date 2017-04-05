@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage Projects</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR NEW FORM-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimForm.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimformComponent.css" />
@@ -22,28 +22,30 @@
                     <h1>Manage Projects</h1>
                     <a class="codrops-icon codrops-icon-prev" href="QADIMindex.jsp"> BACK</a><br>
                     Select Project to Delete<br>
+                    Hold shift to select multiple projects to delete <br>
                     Project Name || Product Name<br>
                 </div>
                 <div style='margin-top: 100px;'>
                     <form class="me-select" action="QADIMParser">
-                        <ul style='padding:150px; margin-bottom: -120px;'>
+                        <div style='padding:150px; margin-bottom: -120px;'>
                             <%String userid = user.getUserid();
                                 ArrayList<QadimProduct> loadedProjects = QaDIMDAO.retrieveAllProjects(userid);
                                 if (loadedProjects.size() != 0) {%>
-                            <select name="projectsToDelete" multiple>
+                            <select name="projectsToDelete" style="width:200px; height: auto; margin:10px 10px 10px;" multiple>
+                                <option disabled>Choose Project to Delete</option>
                                 <%
                                     for (QadimProduct project : loadedProjects) {
                                         String projectName = project.getProjectName();
                                         String productName = project.getProductName();
                                         int productid = project.getProductID();
                                 %>
-                                <li><option value="<%=productid%>,<%=projectName%>"><%=projectName%></option></li>
+                                <option value="<%=productid%>,<%=projectName%>"><%=projectName%></option>
                                 <%
                                     };%>
                             </select>
                             <%
                                 };
-                            %></ul>
+                            %></div>
                         <input type="hidden" value="deleteProject" name="deleteCheck"/>
                         <div style='margin-left:20px;'>
                             <button class="fs-submit" type="submit">Delete</button>
