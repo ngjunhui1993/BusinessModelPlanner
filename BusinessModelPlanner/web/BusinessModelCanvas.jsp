@@ -3,8 +3,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.CanvasDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html>
+    <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Business Model Canvas</title>

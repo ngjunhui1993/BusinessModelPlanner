@@ -1,12 +1,13 @@
-<%@include file="Protect.jsp"%>
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.QaDIMDAO"%>
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html>
+    <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -22,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimButton.css" />
         <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
-    <body>
+    <body id="qadimContent">
     <CENTER>
         <!--EXPLANATION-->
         <div id="maincontent">

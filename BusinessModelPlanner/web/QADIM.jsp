@@ -1,11 +1,12 @@
-<%@include file="Protect.jsp"%>
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.QaDIMDAO"%>
 <%@page import="com.app.model.entity.Demographics"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html ng-app="drag-and-drop">
+    <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -27,7 +28,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
-    <body>
+    <body class="qadimbody">
         <%//PROJECT NAME & PRODUCT NAME
             String projectName = (String) request.getSession().getAttribute("projectName");
             String productName = (String) request.getSession().getAttribute("productName");
@@ -106,7 +107,7 @@
         3. SIDE PANEL (PROJECT NAME AND BUTTONS)
         -->
         <!--TOOLTIPS-->
-        <div id="maincontent">
+        <div id="maincontent" style="padding-top: -100px;">
             <div class="tooltipcontent">
                 <div class="dummy dummy-text">
                     <br><br><br>
@@ -132,7 +133,7 @@
                                 1. <strong>Save</strong> your current project.<br>
                                 2. <Strong>Create</strong> a new project or <Strong>load</Strong> previous projects.<br>
                                 3. <Strong>Download</Strong> your project in excel format.<br>
-                            </span></span></span> on the right to perform more functions. Our model have pre-defined some examples for you to get you started. To change the values, simply click on the operator boxes.<br>
+                            </span></span></span> on the right to perform more functions. To change the values, simply click on the operator boxes.<br>
                 </div>
             </div>
             <!--END OF TOOLTIPS-->
@@ -173,7 +174,7 @@
                                         <li ng-repeat="item in operatorThree" data-drop="true" ng-model='operatorThree' jqyoui-droppable="{index: {{$index}}, onDrop:'loki.dropCallback(item.title, $index)'}">
                                             <div class="thumbnail" data-toggle="modal" data-target="#operatorThreeModal" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="operatorThree" jqyoui-draggable="{index: {{$index}},animate:true}">
                                                 <!--OPERATOR THREE DISPLAY-->
-                                               <div id="opThreeName" class="qadimOperator">{{item.title}}</div><br>
+                                                <div id="opThreeName" class="qadimOperator">{{item.title}}</div><br>
                                                 <div id="opThreeComment" class="qadimComment">{{item.comment}}</div>
                                             </div>
                                         </li>
@@ -417,7 +418,7 @@
 
                                     <button class="QADIMbtn QadimNewLoadbtn" data-toggle="modal" data-target="#myProjectForm" id="newLoadProject">SAVE/LOAD PROJECT </button>
                                     <button class="QADIMbtn QADIMSavebtn" id="QaDIMSave">SAVE PROJECT </button>
-                                    
+
                                     <a href="FileDownload">
                                         <button class="QADIMbtn QADIMDownloadbtn" id="QaDIMSave">DOWNLOAD </button></a>
                                 <center>
@@ -488,7 +489,7 @@
                                 <div hidden id="opName8hidden"><%=session.getAttribute("opName8")%></div>
                                 <div hidden id="opComment8hidden"><%=session.getAttribute("opComment8")%></div>
                             </div>
-
+                        </div>
                             <!--SCRIPTS FOR QADIM DRAGGABLE-->
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                             <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
@@ -497,10 +498,10 @@
                             <script src="resources/js/qadim/qadimAppController.js"></script>
                             <!--SCRIPT FOR TEXT FUNCTION-->
                             <script>
-                                                        changetext = function (e) {
-                                                        src = (e.parentNode);
-                                                                src.outerHTML = "<div><input +" + "name=input" + "></div>";
-                                                        }
+                                                            changetext = function (e) {
+                                                            src = (e.parentNode);
+                                                                    src.outerHTML = "<div><input +" + "name=input" + "></div>";
+                                                            }
                             </script>
                             <!--SCRIPTS FOR BUTTON-->
                             <script src="resources/js/qadim/qadimClassie.js"></script>
@@ -514,11 +515,11 @@
                             <script src="resources/js/qadim/qadimClassie.js"></script>
                             <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
                             <script>
-                                                        (function () {
-                                                        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                                                        new SelectFx(el);
-                                                        });
-                                                        })();</script>
+                                                            (function () {
+                                                            [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                                                            new SelectFx(el);
+                                                            });
+                                                            })();</script>
                             <!--SCRIPT FOR OPERATOR MODAL-->
                             <script src="resources/js/qadim/qadimOperatorModal.js"></script>
 
