@@ -69,12 +69,13 @@ public class MainFileUpload extends HttpServlet {
         // Redirects back to the admin page with the error message
         if (!hasContents) {
             request.setAttribute("uploadError", "Please upload a valid zipped file containing all of the necessary CSV files");
-            RequestDispatcher view = request.getRequestDispatcher("Bootstrap.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("Admin.jsp");
             view.forward(request, response);
         } else {
             request.setAttribute("uploadFile", fileContents);
+            request.setAttribute("success", "File has been uploaded successfully");
             // redirects to bootstrap servlet
-            RequestDispatcher view = request.getRequestDispatcher("BootStrap");
+            RequestDispatcher view = request.getRequestDispatcher("Admin.jsp");
             view.forward(request, response);
             
             }
