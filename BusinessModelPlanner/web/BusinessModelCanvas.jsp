@@ -22,6 +22,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/bmc/bmc-searchdrivers-component.css" />
         <!--CSS FOR DRIVERS SEARCH SELECT SCRIPTS-->
         <link rel="stylesheet" href="resources/css/bmc/bmc-searchdrivers-valuedropdownlist.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimButton.css" />
     </head>
     <body>
         <section>
@@ -104,10 +105,10 @@
                                                         <!--LOAD DATA HERE-->
                                                         <%
                                                             for (String trait : traits) {%>
-                                                            <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
+                                                        <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
                                                     </div>
                                                 </div>
-                                                    
+
                                                 <%} else {%>There are currently no traits available<%};%>
 
 
@@ -319,7 +320,7 @@
                                                     <div class="checkboxes" id="coststructure">
                                                         <!--LOAD DATA HERE-->
                                                         <%
-                                                                for (String trait : traits) {%>
+                                                            for (String trait : traits) {%>
                                                         <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
                                                     </div>
                                                 </div>
@@ -349,7 +350,7 @@
                                                     <div class="checkboxes" id="revenuestreams">
                                                         <!--LOAD DATA HERE-->
                                                         <%
-                                                                for (String trait : traits) {%>
+                                                            for (String trait : traits) {%>
                                                         <label><input type='checkbox' name='allTheTraits' value='<%=trait%>'><%=trait%></label><%};%>
                                                     </div>
                                                 </div>
@@ -357,49 +358,49 @@
                                             </figcaption>
                                         </figure>
                                     </li>
-
-
+                                    <center><button type="submit" value="submit" name="traitsSearch" class="btn btn-2 btn-2i">SUBMIT</button></center>
                                 </ul>
+
                             </div>
                         </div>
-                        <input type="submit" value="submit" name="traitsSearch">
+
                     </form>
                     <span class="bl-icon bl-icon-close"></span>
             </section>
         </div>
 
-    <!-- SCRIPT FOR MAIN INDEX -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="resources/js/bmc/bmc-modernizr.custom.js"></script>
-    <script src="resources/js/bmc/bmc-boxlayout.js"></script>
-    <script>
-                                                            $(function () {
-                                                                Boxlayout.init();
+        <!-- SCRIPT FOR MAIN INDEX -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="resources/js/bmc/bmc-modernizr.custom.js"></script>
+        <script src="resources/js/bmc/bmc-boxlayout.js"></script>
+        <script>
+                                                        $(function () {
+                                                            Boxlayout.init();
+                                                        });
+        </SCRIPT>                                                                                                                
+
+        <!--SCRIPT FOR COMPANY SEARCH-->
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="resources/js/bmc/bmc-searchcom-listnav.js"></script>
+        <script>
+                                                        $(function () {
+                                                            $('#demoFour').listnav({
+                                                                includeAll: true,
+                                                                includeNums: true,
+                                                                showCounts: false,
+                                                                allText: 'All Companies',
+                                                                onClick: function (letter) {
+                                                                    $(".myLastClicked").text(letter.toUpperCase());
+                                                                }
                                                             });
-    </SCRIPT>                                                                                                                
-
-    <!--SCRIPT FOR COMPANY SEARCH-->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="resources/js/bmc/bmc-searchcom-listnav.js"></script>
-    <script>
-                                                            $(function () {
-                                                                $('#demoFour').listnav({
-                                                                    includeAll: true,
-                                                                    includeNums: true,
-                                                                    showCounts: false,
-                                                                    allText: 'All Companies',
-                                                                    onClick: function (letter) {
-                                                                        $(".myLastClicked").text(letter.toUpperCase());
-                                                                    }
-                                                                });
-                                                            });
-    </script>
+                                                        });
+        </script>
 
 
-    <!--SCRIPT FOR COMPANY SEARCH AUTOFILL-->
+        <!--SCRIPT FOR COMPANY SEARCH AUTOFILL-->
 
-    <!--SCRIPT FOR DRIVERS SEARCH-->
-    <script src="resources/js/bmc/bmc-searchdrivers-dropdown.js"></script>
+        <!--SCRIPT FOR DRIVERS SEARCH-->
+        <script src="resources/js/bmc/bmc-searchdrivers-dropdown.js"></script>
 
-</body>
+    </body>
 </html>

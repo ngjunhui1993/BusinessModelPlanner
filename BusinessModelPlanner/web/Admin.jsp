@@ -25,7 +25,6 @@
             </div>
             <div>
                 This page allows you to upload data for Business Model Buffet<br>
-                Upload Data
                 <form action="MainFileUpload"  method="post" enctype="multipart/form-data">
                     Upload Company Data file Here: <input type="file" name="upfile" onChange="this.form.submit()">
                 </form>
