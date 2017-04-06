@@ -7,8 +7,10 @@ public class Demographics{
 	private String name;
 	private String password;
 	private String email;
-        private String userid;
-        private String type;
+    private String userid;
+    private String type;
+	private String sharedSecret;
+	private boolean isActivated;
   /**
   *The default constructor
   */
@@ -16,12 +18,14 @@ public class Demographics{
             
         }
 
-    public Demographics(String name, String password, String email, String userid, String type) {
+    public Demographics(String name, String password, String email, String userid, String type, String sharedSecret, boolean isActivated) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.userid = userid;
         this.type=type;
+		this.sharedSecret = sharedSecret;
+		this.isActivated = isActivated;
     }
 
     public String getUserid() {
@@ -31,6 +35,15 @@ public class Demographics{
     public String getType() {
         return type;
     }
+	
+	public String getSharedSecret() {
+		return sharedSecret;
+		
+	}
+	
+	public boolean getIsActivated() {
+		return isActivated;
+	}
 
 /**
   * Gets the name of the user
