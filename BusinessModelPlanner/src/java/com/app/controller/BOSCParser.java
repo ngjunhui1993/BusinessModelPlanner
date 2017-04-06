@@ -7,6 +7,7 @@ package com.app.controller;
 
 import com.app.model.BOSDAO;
 import com.app.model.Excel;
+import com.app.model.QaDIMDAO;
 import com.app.model.entity.BOSOperator;
 import com.app.model.entity.BOSProduct;
 import com.app.model.entity.Demographics;
@@ -47,7 +48,7 @@ public class BOSCParser extends HttpServlet {
        String projectName = (String)request.getParameter("projectName");
        
        String BOSCEditChecker = (String)request.getSession().getAttribute("BOSCEditChecker");
-       
+
        //----------- Validation of Project ----------
        BOSProduct projectChecker = BOSDAO.retrieveProjectByUser(projectName, userId);
         Double savedCurrent = Double.parseDouble((String)request.getParameter("savedCurrent"));
@@ -88,16 +89,18 @@ public class BOSCParser extends HttpServlet {
                                          int column 
                                          int productID
              */
-           int productID = BOSDAO.retrieveNoOfProjects(userId);
-           // still not catered for multiple saves.
-           if(productID > 0){
-               productID += 1 ;
+         
+           int productID = 0;
 
-           }else{
-               productID =1 ;
-
-           }
         if(projectChecker==null){
+            //----------- Assigns a Unique productid to the project ----------
+            int tempProductid = BOSDAO.checkForNextValidProductId(userId);
+            if (tempProductid == 0){
+                tempProductid = 1;
+            }
+            productID = tempProductid;
+            productID++;
+            
            boolean save = BOSDAO.saveProjectOperators(factorsArray,gridsArray , greenArray , blueArray , pricePointsArray  , weightsArray,
                    projectName , userId  ,boxCount , productID );
 
@@ -108,6 +111,7 @@ public class BOSCParser extends HttpServlet {
              int prodid = project.getProductID();
              ArrayList<BOSOperator> operatorList = BOSDAO.getAllOperators(userId, projectName);
              Excel.BOSExport (userId, operatorList, project);
+             
         // ---------- If project exist in database & was loaded ----------
        }else if (projectChecker!=null && BOSCEditChecker.equals(projectName)){
            BOSProduct project = BOSDAO.retrieveProjectByUser(projectName, userId);
@@ -123,6 +127,7 @@ public class BOSCParser extends HttpServlet {
              Excel.BOSDelete(userId, projectName);
              Excel.BOSExport (userId, operatorList, project);
        }
+       request.getSession().setAttribute("BOSCEditChecker", projectName);
        
        //String weightVar = (String)request.getParameter("currentWeight");
        //System.out.println(weightVar + " got from the getParameter(currentWeight)");
