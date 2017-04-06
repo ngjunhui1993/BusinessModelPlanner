@@ -73,9 +73,8 @@ public class MainFileUpload extends HttpServlet {
             view.forward(request, response);
         } else {
             request.setAttribute("uploadFile", fileContents);
-            request.setAttribute("success", "File has been uploaded successfully");
             // redirects to bootstrap servlet
-            RequestDispatcher view = request.getRequestDispatcher("Admin.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("BootStrap");
             view.forward(request, response);
             
             }

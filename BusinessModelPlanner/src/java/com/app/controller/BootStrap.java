@@ -208,7 +208,8 @@ public class BootStrap extends HttpServlet {
                 request.setAttribute("unknownFiles", errorMsg);
             }
             request.setAttribute("result", uploadResult);
-            RequestDispatcher view = request.getRequestDispatcher("Bootstrap.jsp");
+            request.setAttribute("success", "File has been uploaded successfully");
+            RequestDispatcher view = request.getRequestDispatcher("Admin.jsp");
             view.forward(request, response);
         }
     }
