@@ -71,6 +71,7 @@ public class BOSCPageUpdate extends HttpServlet {
                     request.getSession().setAttribute("operatorList", operatorList);
                     
                 }
+                request.getSession().setAttribute("BOSCEditChecker", projectToLoad);
                 request.getSession().setAttribute("BOSCNewProject", "false");
                 response.sendRedirect("BOSC.jsp");
                 return;
