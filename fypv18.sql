@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `blueoceanstrategy_operator` (
   `per_unit_value` int(11) NOT NULL,
   `original_value` int(11) NOT NULL,
   `new_value` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`project_name`,`userid`)
+  PRIMARY KEY (`product_id`,`project_name`,`userid`,`factor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
