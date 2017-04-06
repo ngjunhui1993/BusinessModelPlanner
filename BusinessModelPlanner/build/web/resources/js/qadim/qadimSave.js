@@ -73,7 +73,7 @@ $('#QaDIMSave').click(function parse() {
                         type: 'GET',
                         cache: false,
                         success: function () {
-                            alert( 'Product: ' + saveProductName+ ' for Project: '+saveProjectName + ' has been saved!');
+                            alert( saveProductName+ ' for '+saveProjectName + ' has been saved!');
                         },
                         error: function () {
                             alert('You have an existing project with the same title! Use a different project title');

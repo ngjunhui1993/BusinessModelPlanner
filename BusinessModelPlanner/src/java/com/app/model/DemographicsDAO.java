@@ -48,7 +48,7 @@ public class DemographicsDAO {
 
         try{
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type, sharedSecret, isActivated FROM demographics");
+            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type FROM demographics");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 String name = rs.getString(1);
@@ -56,9 +56,7 @@ public class DemographicsDAO {
                 String email = rs.getString(3);
                 String userid = rs.getString(4);
                 String type = rs.getString(5);
-                String sharedSecret = rs.getString(6);
-                boolean isActivated = rs.getBoolean(7);
-                Demographics u = new Demographics(name,password,email,userid,type,sharedSecret, isActivated);
+                Demographics u = new Demographics(name,password,email,userid,type);
                 userList.put(email,u);
             }	
         }catch(SQLException e){
@@ -85,7 +83,7 @@ public class DemographicsDAO {
         
         try{
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type, sharedSecret, isActivated FROM demographics");
+            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type FROM demographics");
             rs = pstmt.executeQuery();
             
             while (rs.next()) {
@@ -96,7 +94,7 @@ public class DemographicsDAO {
               String school = email.substring(n+1,end);
               String year = email.substring((n-4),n);
               
-              users.add(new Demographics(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7)));
+              users.add(new Demographics(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
               
             }
         }catch(SQLException e){
@@ -121,7 +119,7 @@ public class DemographicsDAO {
         
         try{
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type, sharedSecret, isActivated FROM demographics");
+            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type FROM demographics");
             //pstmt.setString(1, "'" + username + "%'");
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -130,11 +128,9 @@ public class DemographicsDAO {
               String email = rs.getString(3);
               String username = rs.getString(4);
               String type = rs.getString(5);
-              String sharedSecret = rs.getString(6);
-              boolean isActivated = rs.getBoolean(7);
               
               if(username.equals(userName)){
-                user = new Demographics(name, password, email, username,type, sharedSecret, isActivated);
+                user = new Demographics(name, password, email, username,type);
               }
             }
 
@@ -158,7 +154,7 @@ public class DemographicsDAO {
         
         try{
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type, sharedSecret, isActivated FROM demographics");
+            pstmt = conn.prepareStatement("SELECT name, password, email, userid, type FROM demographics");
             //pstmt.setString(1, "'" + username + "%'");
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -167,11 +163,9 @@ public class DemographicsDAO {
               String email = rs.getString(3);
               String username = rs.getString(4);
               String type = rs.getString(5);
-              String sharedSecret = rs.getString(6);
-              boolean isActivated = rs.getBoolean(7);
               
               if(type.equals(targetedType)){
-                user = new Demographics(name, password, email, username,type, sharedSecret, isActivated);
+                user = new Demographics(name, password, email, username,type);
                 groupList.add(user);
               }
             }
@@ -186,7 +180,7 @@ public class DemographicsDAO {
 
         }
     
-    public static String activateAccount(String email){
+    public static String register(String name, String password, String email, String userid, String type){
         Connection conn = null ;
             PreparedStatement pstmt = null ;
             ResultSet rs = null ;
@@ -196,67 +190,12 @@ public class DemographicsDAO {
                 conn = ConnectionManager.getConnection();
                 System.out.println("There is no problem with connection Manager");
                 
-                pstmt = conn.prepareStatement("update demographics set isActivated = ? where email = ?");
-                pstmt.setBoolean(1, true);
-                pstmt.setString(2, email);
-                pstmt.executeUpdate();
-                
-                    
-            }catch(Exception e){
-                System.out.println("There is an error while activating new user.");
-               // e.printStackTrace();
-                return null;
-            }finally{
-                ConnectionManager.close(conn , pstmt , rs);
-                
-            }
-            return "Congratulation! Your account has been activated!";
-    }
-    
-        public static void updateUserSS(String email, String sharedSecret){
-        Connection conn = null ;
-            PreparedStatement pstmt = null ;
-            ResultSet rs = null ;
-            String statement = null ;
-            System.out.println("there is no problem with the validations it is with the connection manager and sql");
-            try{
-                conn = ConnectionManager.getConnection();
-                System.out.println("There is no problem with connection Manager");
-                
-                pstmt = conn.prepareStatement("update demographics set sharedSecret = ? where email = ?");
-                pstmt.setString(1, email);
-                pstmt.setString(2, sharedSecret);
-                pstmt.executeUpdate();
-                
-                    
-            }catch(Exception e){
-                System.out.println("There is an error while updating shared secret");
-               // e.printStackTrace();
-            }finally{
-                ConnectionManager.close(conn , pstmt , rs);
-                
-            }
-    }
-    
-    
-    public static String register(String name, String password, String email, String userid, String type, String sharedSecret, boolean isActivated){
-        Connection conn = null ;
-            PreparedStatement pstmt = null ;
-            ResultSet rs = null ;
-            String statement = null ;
-            System.out.println("there is no problem with the validations it is with the connection manager and sql");
-            try{
-                conn = ConnectionManager.getConnection();
-                System.out.println("There is no problem with connection Manager");
-                
-                pstmt = conn.prepareStatement("INSERT INTO demographics (name, password, email,userid, type, sharedSecret, isActivated) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                pstmt = conn.prepareStatement("INSERT INTO demographics (name, password, email,userid, type) VALUES (?, ?, ?, ?, ?)");
                 pstmt.setString(1 , name);
                 pstmt.setString(2 , password);
                 pstmt.setString(3 , email);
                 pstmt.setString(4 , userid);
                 pstmt.setString(5, type);
-                pstmt.setString(6, sharedSecret);
-                pstmt.setBoolean(7, isActivated);
                 pstmt.execute();
                 
                     
@@ -268,7 +207,7 @@ public class DemographicsDAO {
                 ConnectionManager.close(conn , pstmt , rs);
                 
             }
-            return "Congratulation! Your account has been created! Please activate your account from your email.";
+            return "Congratulation! Your account has been created!";
     }
     
 }//end of class

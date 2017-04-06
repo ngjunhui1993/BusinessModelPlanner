@@ -1,16 +1,21 @@
-body {
+.qadimbody {
     background: #505F71;
     font-weight: 500;
     font-size: 1em;
     font-family: 'Raleway', Arial, sans-serif;
     padding-top: -5px;
 }
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 #maincontent {
     width: 900px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -40px;
-
+    margin-top: -20px;
 }
 #tooltipcontent {
     margin-top: 0px;

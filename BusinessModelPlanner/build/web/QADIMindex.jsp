@@ -1,15 +1,16 @@
-<%@include file="Protect.jsp"%>
 <%@page import="com.app.model.entity.QadimProduct"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.app.model.QaDIMDAO"%>
 <%@page import="com.app.model.entity.Demographics"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html>
+    <%@include file="newHeader.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>SIMHA INNOVATION MODEL</title>
         <!--CSS FOR TOOLTIPS-->
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimTooltip.css" />
         <!--CSS FOR CURRENT PAGE-->
@@ -22,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/qadim/qadimButton.css" />
         <script src="resources/js/qadim/qadimmodernizr.custom.js"></script>
     </head>
-    <body>
+    <body id="qadimContent">
     <CENTER>
         <!--EXPLANATION-->
         <div id="maincontent">
@@ -53,6 +54,9 @@
                 if (loadedProjects.size() != 0) {
             %>
             <h1>OR</h1>
+            <!--LOAD PROJECT
+            FOR USERS TO LOAD PREVIOUSLY CREATED PROJECTS
+            -->
             <form action="LoadManager" target="_parent" method="GET">
                 <input type="submit" class="QADIMIndexLoadbtn QadimIndexLoadBtn" name="submit" value="load">
                 <select name="toLoadQadim" class="cs-select cs-skin-elastic">
@@ -63,6 +67,12 @@
                     <%};%>
                 </select>
             </form>
+                <br>
+            <!--MANAGE PROJECTS
+            FOR USERS TO DELETE EXISTING PROJECTS
+            -->
+            <button class="QADIMIndexbtn QADIMnewProjectbtn"  onclick="window.location.href = 'QADIMmanageProjects.jsp'">MANAGE EXISTING PROJECTS</button>
+
 
             <%
             } else {
@@ -75,11 +85,11 @@
             <script src="resources/js/qadim/qadimClassie.js"></script>
             <script src="resources/js/qadim/qadimFormSelectFx.js"></script>
             <script>
-                (function () {
-                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-                        new SelectFx(el);
-                    });
-                })();
+    (function () {
+        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+            new SelectFx(el);
+        });
+    })();
             </script>
             </body>
             </html>
