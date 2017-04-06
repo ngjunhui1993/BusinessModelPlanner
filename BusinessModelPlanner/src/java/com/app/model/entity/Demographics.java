@@ -9,8 +9,6 @@ public class Demographics{
 	private String email;
         private String userid;
         private String type;
-        private String sharedSecret;
-        private boolean isActivated;
   /**
   *The default constructor
   */
@@ -18,14 +16,12 @@ public class Demographics{
             
         }
 
-    public Demographics(String name, String password, String email, String userid, String type, String sharedSecret, boolean isActivated) {
+    public Demographics(String name, String password, String email, String userid, String type) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.userid = userid;
         this.type=type;
-        this.sharedSecret = sharedSecret;
-        this.isActivated = isActivated;
     }
 
     public String getUserid() {
@@ -57,14 +53,7 @@ public class Demographics{
 	public String getEmail(){
 		return email;
 	}
-        
-        public String getSharedSecret() {
-            return sharedSecret;
-        }
-        
-        public boolean getIsActivated() {
-            return isActivated;
-        }
+
   /**
   * validate the user's password.
   * @param password the user's password
