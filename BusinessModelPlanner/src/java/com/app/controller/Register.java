@@ -6,14 +6,19 @@
 package com.app.controller;
 
 import com.app.model.ConnectionManager;
+import com.app.model.Cryptography;
 import com.app.model.entity.Demographics;
 import com.app.model.DemographicsDAO;
 import com.app.model.Encryption;
+import com.app.model.Email;
+import com.nimbusds.jose.JOSEException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
@@ -50,37 +55,33 @@ public class Register extends HttpServlet {
                 response.sendRedirect("index.jsp");
                 return;
             }
-            
+
+            if (request.getParameter("name") == null || request.getParameter("email") == null || request.getParameter("password") == null) {
+                request.setAttribute("errorMsg", "Please do not leave any fields blank");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            } 
+
             //retrieve the name sent from the form
-            String name = request.getParameter("name");
+            String name = request.getParameter("name").trim();
             //retrieve the email id sent from the form
-            String email = request.getParameter("email");
+            final String email = request.getParameter("email").trim();
             //retrieve the password sent from the form
-            String password = request.getParameter("password");
+            String password = request.getParameter("password").trim();
             //retrieve the user type from the form
             String type = request.getParameter("type");
             //String type = "student";
             //retrieve confirmed password from form.
             String confirmPassword = request.getParameter("confirmPassword");
-            
-            if(name == null || email == null || password == null) {
-                request.setAttribute("errorMsg", "Please do not leave any fields blank");
-                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                rd.forward(request, response);
-                return;                
-            } else {
-                name = name.trim();
-                email = email.trim();
-                password = password.trim();
-            }
-           
+
             DemographicsDAO demoDAO = new DemographicsDAO();
             if (email == "" || password == "" || name == "") {
                 request.setAttribute("errorMsg", "Please do not leave any fields blank");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
-            } 
+            }
             if (demoDAO.userExist(email)) {
                 request.setAttribute("errorMsg", "The email had been registered. Please use another email address!");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
@@ -99,21 +100,45 @@ public class Register extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-            
-            if(!password.equals(confirmPassword)) {
+
+            if (!password.equals(confirmPassword)) {
                 request.setAttribute("errorMsg", "The passwords don't match. Please try again.");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
                 return;
             }
-            
+
             Encryption encryption = new Encryption();
             String userid = email;
             String encryptedPassword = encryption.SHA1(password);
-            String success = demoDAO.register(name, encryptedPassword, email, userid,type);
-            
+            Cryptography cryptography = new Cryptography();
+            String sharedSecret = cryptography.generateRandString(32);
+            String success = "";
+            try {
+                final String activationCode = cryptography.generateAccessToken(email.toLowerCase(), sharedSecret);
+
+                Thread t1 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Email activationCode to user to activate account
+                        String content = "Please click on the following link to activate your account! \n"
+                                + "http://fypbmpt-junhui.rhcloud.com/BusinessModelPlanner/ActivationServlet?email=" + email.toLowerCase() + "&activationCode=" + activationCode;
+                        //String content = "http://localhost:8084/Fitnexx6Server/ActivationServlet?email=" + email.toLowerCase() + "&activationCode=" + activationCode;
+                        Email mail = new Email();
+                        mail.sendMail(email, "", "Account Activation", content); 
+                    }
+                });
+                t1.start();
+
+                success = demoDAO.register(name, encryptedPassword, email, userid, type, sharedSecret, false);
+            } catch (JOSEException ex) {
+                request.setAttribute("errorMsg", "Unable to send activation email. Please try again.");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+                return;
+            }
             //check if there were any exceptions thrown during the method, register, in the demoDAO.
-            if(success == null) {
+            if (success == null || success.equals("")) {
                 request.setAttribute("errorMsg", "An error has occured in the database.");
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
