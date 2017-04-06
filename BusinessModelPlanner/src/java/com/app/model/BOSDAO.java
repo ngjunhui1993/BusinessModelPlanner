@@ -387,12 +387,12 @@ public class BOSDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "TRUNCATE * from blueoceanstrategy_product where project_name = ? and userID = ? and product_id = ?";
+            String sql = "delete from blueoceanstrategy_product where project_name = ? and userID = ? and product_id = ?";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, projectName);
             preStmt.setString(2, userId);
-            preStmt.setInt(3, prodid);
-            rs = preStmt.executeQuery();
+            preStmt.setString(3, Integer.toString(prodid));
+            preStmt.executeUpdate();
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -406,12 +406,12 @@ public class BOSDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            String sql = "TRUNCATE * from blueoceanstrategy_operator where project_name = ? and userID = ? and product_id = ?";
+            String sql = "delete from blueoceanstrategy_operator where project_name = ? and userid = ? and product_id = ?";
             preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, projectName);
             preStmt.setString(2, userId);
-            preStmt.setInt(3, prodid);
-            rs = preStmt.executeQuery();
+            preStmt.setString(3, Integer.toString(prodid));
+            preStmt.executeUpdate();
             
         } catch (SQLException e) {
             e.printStackTrace();

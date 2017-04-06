@@ -90,7 +90,7 @@ public class BOSCParser extends HttpServlet {
                                          int productID
              */
          
-           int productID = 0;
+        int productID = 0;
 
         if(projectChecker==null){
             //----------- Assigns a Unique productid to the project ----------
@@ -119,9 +119,9 @@ public class BOSCParser extends HttpServlet {
            BOSDAO.deleteProject(projectName, userId, prodid);
            BOSDAO.deleteOperator(projectName, userId, prodid);
            boolean save = BOSDAO.saveProjectOperators(factorsArray,gridsArray , greenArray , blueArray , pricePointsArray  , weightsArray,
-                   projectName , userId  ,boxCount , productID );
+                   projectName , userId  ,boxCount , prodid );
 
-           boolean saveProj= BOSDAO.saveProject(userId ,  projectName ,  productID,  savedCurrent ,  savedNewValue );
+           boolean saveProj= BOSDAO.saveProject(userId ,  projectName ,  prodid,  savedCurrent ,  savedNewValue );
            // ------------ Creation of Excel ----------
              ArrayList<BOSOperator> operatorList = BOSDAO.getAllOperators(userId, projectName);
              Excel.BOSDelete(userId, projectName);
