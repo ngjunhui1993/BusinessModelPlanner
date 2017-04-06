@@ -47,14 +47,14 @@ $(function() {
                     var factorName = document.createElement("div");
                     factorName.className = 'factorBox';
                     factorName.innerHTML = '<span class="factorName" id="factor'+boxCount+'" contenteditable="true">\n\
-                    Factor ' + boxCount + '</span><br/>Weight: <select class="weight fontBlack id="weight' + boxCount + '"> \n\
+                    Factor ' + boxCount + '</span><br/>Weight: <select class="weight fontBlack" id="weight' + boxCount + '"> \n\
                     <option value="1">1</option>\n\
                     <option value="2">2</option>\n\
                     <option value="3">3</option>\n\
                     <option value="4">4</option>\n\
                     <option value="5">5</option>\n\
                     </select><br/>\n\
-                    Grid: <select class="fontBlack" id="grid' + boxCount + '"><option value="0">0</option>\n\
+                    Grid: <select class="fontBlack" id="grid'+boxCount+'"><option value="0">0</option>\n\
                     <option value="1">1</option>\n\
                     <option value="2">2</option><option value="3">3</option>\n\
                     <option value="4">4</option><option value="5">5</option>\n\

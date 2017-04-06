@@ -373,6 +373,10 @@ Excel Spreadsheet for offline usage.
                             <!--hidden=""-->
                             
                         </div>
+                              <%
+                              if (operatorList != null){
+                                  %>
+                              
                               <script>
                     var myElement = document.getElementsByClassName("box");
                     
@@ -394,6 +398,7 @@ Excel Spreadsheet for offline usage.
                                   </script>
                             
                             <%
+                              }
                                 }
                         }
                         %>
