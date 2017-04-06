@@ -8,6 +8,7 @@
     var lines =[];
     var boxCount = 2;
     var linesCount = 2;
+    var globalLineAllign = 10;
     </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,31 @@
         factor1Name = operatorList.get(0).getFactorName();
         factor2Name = operatorList.get(1).getFactorName();
     }
+    %>
+            <section>
+            <div class="container">	
+                <div class="tooltipcontent">
+                    <div class="dummy dummy-text">
+                        <span class="tooltip-item" style="font-size:1.8em">BLUE OCEAN STRATEGIC CANVAS</span><br>
+                        Simha Innovation's Blue Ocean Strategy Canvas differs from all existing implementations of the Strategy Canvas as it enables users to 
+input price points across all factors and display real time calculations of the budget required to achieve the new value curve.
+The weights options allows users to determine the most important factor that should be implemented first.
+The grid allows users to determine the number of increments or decrements for each factor.
+Firstly, determine how many operators are required for your value curve. 
 
+Edit the names of the factors by simply clicking on its label.
+Next, enter the number of grids and the increment/decrement cost or savings
+Drag the blue(original) curve to depict the current value curve.
+Enter the total cost of the implementation of the blue curve.
+Finally, you can edit your green(new) curve and see the budget required for your implementation.
+You may save your current progress and load it out in the future, alternatively, you may download your implementations onto an
+Excel Spreadsheet for offline usage.
+                    </div>
+                </div>    
+
+            </div>
+        </section>
+    <%
     if((String)session.getAttribute("BOSCNewProject") == "true"){
     
     %>
@@ -43,33 +68,37 @@
             <div class="container">
                 <div class="row text-center g-pad-bottom">
                     <div class="col-md-8 col-md-offset-2 ">
-                        <h3>Blue Ocean Strategic Canvas</h3>
-                        <br/>
-                        
                         <form method="GET" name="BOSCNewButton" action="BOSCPageUpdate">
                                 <input type="hidden" name="newProject" id="newProject" value="false"/>
-                                <input type="submit" value="New Project"/>
+                                <input class="newProjectButton" type="submit" value="CREATE NEW PROJECT"/>
                         </form>
                        <br/>
-                    <form action="BOSCPageUpdate">
                         <%
                                 Demographics user = (Demographics)request.getSession().getAttribute("user");
                                 String username = user.getUserid();
                                 ArrayList<BOSProduct> userProjectList = BOSDAO.retrieveAllProjectsByUser(username);
-                                if(userProjectList!=null){
+                                if(userProjectList!=null && userProjectList.size()!= 0 ){
                         %>
-                    <input type="submit" value="Load Project"/><br/>
-                    Select Project:
-                    <select name="projectToLoad">
+                    <form action="BOSCPageUpdate" class="loadForm">
+                        <table>
+                            <tr>
+                                <td>
+                                     <input class="loadProjectButton" type="submit" value="LOAD"/><br/>
+                                </td>
+                            <td>
+                    <select class="loadProjectValue" name="projectToLoad" required="required">
+                        <option value="" selected>Select Project</option>
                         <%for(BOSProduct project :userProjectList){%>
                         <option value="<%=project.getProjectName()%>"><%=project.getProjectName()%></option>
                         <%}%>    
                     </select>
-                        
-                    <%}
-                    %>
+                    </td>
+                    </tr>
+                        </table>
                     </form>
-                        
+                    
+                                            <%}
+                    %>
                     </div>
 
                 </div>
@@ -85,18 +114,26 @@
             <div class="container">
                 <div class="row text-center g-pad-bottom">
                     <div class="col-md-8 col-md-offset-2 ">
-                        <h3>Blue Ocean Strategic Canvas</h3>
-                        <br/>
                         <h2><span class="projectTitle" id="projectTitle" contenteditable="true"><%=projectName%></span></h2>
+                        <br/>
+                        <table style="display:inline;">
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <form class="BOSCNewForm" method="GET" name="BOSCNewButton" action="BOSCPageUpdate">
+                                            <input type="hidden" name="startNewProject" id="startNewProject" value="false"/>
+                                            <input class="fontBlack newLoadProjectButton" type="submit" value="New/Load Project"/>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button class="saveProjectButton fontBlack" id="save" type="button" >Save</button><br/>
+                                </td>
+                            </tr>
+                        </table>
                         
-                        <form method="GET" name="BOSCNewButton" action="BOSCPageUpdate">
-                                <input type="hidden" name="startNewProject" id="startNewProject" value="false"/>
-                                <input type="submit" value="Start New Project"/>
-                        </form>
-                        <button class="BOSCSaveButton" id="save" type="button" >Save</button><br/>
-                        
+                        <br/>
                      <a href="BOSDownload" class="btn btn-sq-sm btn-danger">                                     
-                            <i class="glyphicon glyphicon-download fa-2x">
+                            <i class="fa fa-download fa-2x">
                             </i><br/>DOWNLOAD</a> 
                     </div>
 
@@ -138,11 +175,11 @@
                     <div id="valuesContainer" class="valuesContainer">
                         <div class="valueContainer">
                             Current Value: 
-                            <span class="value original" id="currentValue" contenteditable="true"><%=currentValue%></span>
+                            <span class="value original fontBlack" id="currentValue" contenteditable="true"><%=currentValue%></span>
                         </div>
                         <div class="valueContainer">
                             New Value: 
-                            <span class="value new" id="newValue" contenteditable="false">0</span>
+                            <span class="value new fontBlack" id="newValue" contenteditable="false">0</span>
                         </div>
                         <div class="valueContainer">
                             <input id="indicationCheck" type="checkbox"/>Adjust Higher Weight First Indicator
@@ -246,7 +283,7 @@
                         <div class="factorBox">
                             <span class="factorName" id="factor1" contenteditable="true"><%=factor1Name%></span><br/>
                             Weight: 
-                            <select class="weight" id="weight1">
+                            <select class="weight fontBlack" id="weight1">
                                 <option value="1" <%if(operatorList!= null && operatorList.get(0).getWeight()==1){%> selected <%}%> >1</option>
                                 <option value="2" <%if(operatorList!= null && operatorList.get(0).getWeight()==2){%> selected <%}%> >2</option>
                                 <option value="3" <%if(operatorList!= null && operatorList.get(0).getWeight()==3){%> selected <%}%> >3</option>
@@ -254,7 +291,7 @@
                                 <option value="5" <%if(operatorList!= null && operatorList.get(0).getWeight()==5){%> selected <%}%> >5</option>
                             </select><br/>
                             Grid:  
-                            <select id="grid1">
+                            <select class="fontBlack" id="grid1">
                                 <option value="0" <%if(operatorList!= null && operatorList.get(0).getGrid()==0){%> selected <%}%> >0</option>
                                 <option value="1" <%if(operatorList!= null && operatorList.get(0).getGrid()==1){%> selected <%}%> >1</option>
                                 <option value="2" <%if(operatorList!= null && operatorList.get(0).getGrid()==2){%> selected <%}%> >2</option>
@@ -266,14 +303,14 @@
                                 <option value="8" <%if(operatorList!= null && operatorList.get(0).getGrid()==0){%> selected <%}else if(operatorList == null){%> selected <%}%>>8</option>
                             </select><br/>
                             Value: 
-                            <span class="factorValue" id="value1" contenteditable="false"><%if(operatorList!= null){%><%=operatorList.get(0).getPerUnitValue()%><%}else{%>0<%}%></span></br>
+                            <span class="factorValue fontBlack" id="value1" contenteditable="false"><%if(operatorList!= null){%><%=operatorList.get(0).getPerUnitValue()%><%}else{%>0<%}%></span></br>
                            <span class="GreenDotValue" id="greenDot1" hidden="">0</span><br>
                               <span class="BlueDotValue" id="blueDot1" hidden="">0</span><br>
                         </div>
                         <div class="factorBox">
                             <span class="factorName" id="factor2" contenteditable="true"><%=factor2Name%></span><br/>
                             Weight:
-                            <select class="weight" id="weight2">
+                            <select class="weight fontBlack" id="weight2">
                                 <option value="1" <%if(operatorList!= null && operatorList.get(1).getWeight()==1){%> selected <%}%> >1</option>
                                 <option value="2" <%if(operatorList!= null && operatorList.get(1).getWeight()==2){%> selected <%}%> >2</option>
                                 <option value="3" <%if(operatorList!= null && operatorList.get(1).getWeight()==3){%> selected <%}%> >3</option>
@@ -281,7 +318,7 @@
                                 <option value="5" <%if(operatorList!= null && operatorList.get(1).getWeight()==5){%> selected <%}%> >5</option>
                             </select><br/>
                             Grid:  
-                            <select id="grid2">
+                            <select class="fontBlack" id="grid2">
                                 <option value="0" <%if(operatorList!= null && operatorList.get(1).getGrid()==0){%> selected <%}%> >0</option>
                                 <option value="1" <%if(operatorList!= null && operatorList.get(1).getGrid()==1){%> selected <%}%> >1</option>
                                 <option value="2" <%if(operatorList!= null && operatorList.get(1).getGrid()==2){%> selected <%}%> >2</option>
@@ -293,10 +330,10 @@
                                 <option value="8" <%if(operatorList!= null && operatorList.get(1).getGrid()==0){%> selected <%}else if(operatorList == null){%> selected <%}%>>8</option>
                             </select><br/>
                             Value: 
-                            <span class="factorValue" id="value2" contenteditable="false"><%if(operatorList!= null){%><%=operatorList.get(1).getPerUnitValue()%><%}else{%>0<%}%></span><br>
+                            <span class="factorValue fontBlack" id="value2" contenteditable="false"><%if(operatorList!= null){%><%=operatorList.get(1).getPerUnitValue()%><%}else{%>0<%}%></span><br>
                               <span class="GreenDotValue" id="greenDot2" hidden="" >0</span><br>
                               <span class="BlueDotValue" id="blueDot2" hidden="">0</span><br>
-                              <span class="boxCount" id="boxCounter" >2</span><br>
+                              <span class="boxCount" id="boxCounter" hidden="true">2</span><br>
                              
                             <!--hidden=""-->
                             
@@ -308,7 +345,7 @@
                             <div class="factorBox">
                             <span class="factorName" id="factor<%=(i+1)%>" contenteditable="true"><%=operatorList.get(i).getFactorName()%></span><br/>
                             Weight:
-                            <select class="weight" id="weight<%=(i+1)%>">
+                            <select class="weight fontBlack" id="weight<%=(i+1)%>">
                                 <option value="1" <%if(operatorList!= null && operatorList.get(i).getWeight()==1){%> selected <%}%> >1</option>
                                 <option value="2" <%if(operatorList!= null && operatorList.get(i).getWeight()==2){%> selected <%}%> >2</option>
                                 <option value="3" <%if(operatorList!= null && operatorList.get(i).getWeight()==3){%> selected <%}%> >3</option>
@@ -374,7 +411,28 @@
         <!--FOOTER SECTION -->
         
         <!--INCLUDE FOOTER AND JAVASCRIPT -->
-        <%@include file="footer.jsp"%>
+            <!-- END FOOTER SECTION -->
+    
+    <!--STANDARD JS USED ACROSS ALL PAGES-->
+    
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="resources/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP CORE SCRIPT   -->
+    <script src="resources/js/bootstrap.js"></script>
+    <!-- SIDE MENU SCRIPTS -->
+    <script src="resources/js/modernizr.custom.js"></script>
+    <script src="resources/js/classie.js"></script>
+    <!-- VEGAS SLIDESHOW SCRIPTS -->
+    <script src="resources/js/jquery.vegas.min.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="resources/js/custom.js"></script>
+    <!--SCRIPTS FOR AJAX-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+
+</body>
+
         
         <!-- JAVASCRIPT FOR BOSC  -->
         <!-- STRATEGY CANVAS SCRIPTS -->
@@ -535,7 +593,24 @@
             var tempdotBY = $('#dotB2').offset().top;
             var tempDifference = Math.abs(tempdotAY - tempdotBY);
             $('.draggable2B').css('top', (difference-tempDifference)+'px');
-            
+            Element.prototype.globalLineAllign = function(){
+                var count = 0;
+                for(i = 2; i <= boxCount; i++){
+                    var dot1Name = '#dotA'+(i-1);
+                    var dot2Name = '#dotB'+(i-1);
+                    lines[count]
+                       .css('top', $(dot1Name).offset().top + $(dot1Name).outerWidth() / 2)
+                       .css('left', $(dot1Name).offset().left + $(dot1Name).outerHeight() / 2);
+                    count++;
+                    lines[count]
+                       .css('top', $(dot2Name).offset().top + $(dot2Name).outerWidth() / 2)
+                       .css('left', $(dot2Name).offset().left + $(dot2Name).outerHeight() / 2);
+                    count++;
+                    
+                    
+                }
+                  
+            };
             
         </script>
             <%if(operatorList!=null){
@@ -570,6 +645,9 @@
             }
             %>
                     document.getElementById("boxCounter").innerHTML = boxCount;
+
+
+  
             </script>
             <%
                 

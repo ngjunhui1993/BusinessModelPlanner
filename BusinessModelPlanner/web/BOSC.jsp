@@ -116,11 +116,21 @@ Excel Spreadsheet for offline usage.
                     <div class="col-md-8 col-md-offset-2 ">
                         <h2><span class="projectTitle" id="projectTitle" contenteditable="true"><%=projectName%></span></h2>
                         <br/>
-                        <form method="GET" name="BOSCNewButton" action="BOSCPageUpdate">
-                                <input type="hidden" name="startNewProject" id="startNewProject" value="false"/>
-                                <input class="fontBlack" type="submit" value="Start New Project"/>
-                        </form>
-                        <button class="BOSCSaveButton fontBlack" id="save" type="button" >Save</button><br/>
+                        <table style="display:inline;">
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <form class="BOSCNewForm" method="GET" name="BOSCNewButton" action="BOSCPageUpdate">
+                                            <input type="hidden" name="startNewProject" id="startNewProject" value="false"/>
+                                            <input class="fontBlack newLoadProjectButton" type="submit" value="New/Load Project"/>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button class="saveProjectButton fontBlack" id="save" type="button" >Save</button><br/>
+                                </td>
+                            </tr>
+                        </table>
+                        
                         <br/>
                      <a href="BOSDownload" class="btn btn-sq-sm btn-danger">                                     
                             <i class="fa fa-download fa-2x">

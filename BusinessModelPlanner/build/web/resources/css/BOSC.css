@@ -1,3 +1,9 @@
+body {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    color: #f2ede3;
+    background: #333;
+}
+
 .legendContainer {
     width: 862px;
     height: 50px;
@@ -16,8 +22,11 @@
     height: 50px;
     float: left;
     position:relative;
-    background-color: white;
     text-align: center;
+}
+
+.fa-plus{
+    color: black;
 }
 
 .indicatorCheckBoxContainer{
@@ -108,8 +117,11 @@
     height: 20px;
     float: left;
     position:relative;
-    background-color: white;
     text-align: center;
+}
+
+.fontBlack{
+    color: black;
 }
 
 .factorBox{
@@ -117,7 +129,6 @@
     height: 50px;
     float: left;
     position:relative;
-    background-color: white;
     text-align: center;
 }
 .draggable 
@@ -252,4 +263,109 @@
     //visibility: hidden;
     position:relative;
     z-index: 200;
+}
+
+.dummy {
+	text-align: left;
+	padding: 1em;
+	min-height: 0;
+	margin: 0 auto;
+	font-weight: 300;
+}
+
+.dummy-text {
+	max-width: 1000px;
+	font-size: 1.63em;
+        color: #eaeaea;
+}
+
+.tooltip-item {
+	background: rgba(0,0,0,0.3);
+	cursor: default;
+	display: inline-block;
+	font-weight: 700;
+	padding: 0 10px;
+}
+
+
+/* Gap filler */
+
+.tooltip-item::after {
+	content: '';
+	position: absolute;
+	width: 360px;
+	height: 20px;
+	bottom: 100%;
+	left: 50%;
+	pointer-events: none;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.tooltip:hover .tooltip-item::after {
+	pointer-events: auto;
+}
+
+.newProjectButton{
+    width: 800px;
+    height: 80px;
+    color: white;
+    font-weight: bold;
+    background: #cb4e4e;
+    font-size: 20px;
+    border-radius: 25px;
+}
+
+.loadForm{
+    display: inline-block;
+    text-align: center;
+}
+
+.loadProjectButton{
+    width: 150px;
+    height: 80px;
+    color: white;
+    font-weight: bold;
+    background: lightseagreen;
+    font-size: 20px;
+    border-radius: 25px;
+}
+
+.loadProjectValue{
+    width: 650px;
+    height: 80px;
+    color: black;
+    background: white;
+    font-size: 20px;
+    border-radius: 25px;
+    
+}
+
+.saveProjectButton{
+    width: 180px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    background: green;
+    font-size: 15px;
+    border-radius: 25px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.newLoadProjectButton{
+    width: 180px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    background: blueviolet;
+    font-size: 15px;
+    border-radius: 25px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.BOSCNewForm{
+    display: inline-block;
+    text-align: center;
 }

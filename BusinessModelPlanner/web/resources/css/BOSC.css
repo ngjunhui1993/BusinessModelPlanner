@@ -338,4 +338,34 @@ body {
     background: white;
     font-size: 20px;
     border-radius: 25px;
+    
+}
+
+.saveProjectButton{
+    width: 180px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    background: green;
+    font-size: 15px;
+    border-radius: 25px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.newLoadProjectButton{
+    width: 180px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    background: blueviolet;
+    font-size: 15px;
+    border-radius: 25px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.BOSCNewForm{
+    display: inline-block;
+    text-align: center;
 }
