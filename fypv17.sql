@@ -46,12 +46,12 @@ CREATE TABLE IF NOT EXISTS `blueoceanstrategy_operator` (
 INSERT INTO `blueoceanstrategy_operator` (`userid`, `project_name`, `product_id`, `factor_id`, `factor_name`, `weight`, `grid`, `per_unit_value`, `original_value`, `new_value`) VALUES
 ('tester5@email.com', 'testing project', 1, 1, 'Factor 1', 1, 8, 10, 3, 5),
 ('tester5@email.com', 'testing project', 1, 2, 'Factor 2', 1, 8, 20, 3, 6),
-('tester5@email.com', 'testing project', 1, 3, '\n                    Factor 3', 1, 8, 30, 3, 5),
-('tester5@email.com', 'testing project', 1, 4, '\n                    Factor 4', 1, 8, 40, 5, 8),
-('tester5@email.com', 'testing project', 1, 5, '\n                    Factor 5', 1, 8, 50, 4, 6),
-('tester5@email.com', 'testing project', 1, 6, '\n                    Factor 6', 1, 8, 60, 5, 7),
-('tester5@email.com', 'testing project', 1, 7, '\n                    Factor 7', 1, 8, 70, 3, 5),
-('tester5@email.com', 'testing project', 1, 8, '\n                    Factor 8', 1, 8, 80, 3, 6),
+('tester5@email.com', 'testing project', 1, 3, 'Factor 3', 1, 8, 30, 3, 5),
+('tester5@email.com', 'testing project', 1, 4, 'Factor 4', 1, 8, 40, 5, 8),
+('tester5@email.com', 'testing project', 1, 5, 'Factor 5', 1, 8, 50, 4, 6),
+('tester5@email.com', 'testing project', 1, 6, 'Factor 6', 1, 8, 60, 5, 7),
+('tester5@email.com', 'testing project', 1, 7, 'Factor 7', 1, 8, 70, 3, 5),
+('tester5@email.com', 'testing project', 1, 8, 'Factor 8', 1, 8, 80, 3, 6),
 ('tester5@email.com', 'Enter Project Title', 2, 1, 'Factor 1', 1, 8, 0, 1, 1),
 ('tester5@email.com', 'Enter Project Title', 2, 2, 'Factor 2', 1, 8, 0, 1, 1);
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `demographics` (
   `email` varchar(42) NOT NULL,
   `userid` varchar(42) NOT NULL,
   `type` varchar(20) NOT NULL,
-  `sharedSecret` varchar(32) NOT NULL,
+  `sharedSecret` text NOT NULL,
   `isActivated` boolean NOT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

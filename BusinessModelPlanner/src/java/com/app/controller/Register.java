@@ -110,7 +110,8 @@ public class Register extends HttpServlet {
             Encryption encryption = new Encryption();
             String userid = email;
             String encryptedPassword = encryption.SHA1(password);
-            String success = demoDAO.register(name, encryptedPassword, email, userid,type);
+            String sharedSecret = encryption.SHA1(userid);
+            String success = demoDAO.register(name, encryptedPassword, email, userid,type, sharedSecret, false);
             
             //check if there were any exceptions thrown during the method, register, in the demoDAO.
             if(success == null) {

@@ -50,7 +50,7 @@ public class CanvasController extends HttpServlet {
 
             if (companyName == null || companyName.equals("") || companyName.equals("[]")) {
                 request.setAttribute("errorMsg", "Please do not leave any blanks.");
-                RequestDispatcher rd = request.getRequestDispatcher("BMC_SearchByCompanies.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
                 rd.forward(request, response);
                 return;
             }
@@ -71,8 +71,14 @@ public class CanvasController extends HttpServlet {
 
         //testing for canvas traits
         if (request.getParameter("traitsSearch") != null) {
+            if (request.getParameterValues("allTheTraits") == null) {
+                request.setAttribute("errorMsg", "Please do not leave any blanks.");
+                RequestDispatcher rd = request.getRequestDispatcher("BusinessModelCanvas.jsp");
+                rd.forward(request, response);
+                return;
+            }
             String[] allTraits = request.getParameterValues("allTheTraits");
-        //    request.setAttribute("traitsSelected", allTraits);
+            //    request.setAttribute("traitsSelected", allTraits);
             /*    RequestDispatcher rd = request.getRequestDispatcher("BMCTest2.jsp");
             rd.forward(request, response); */
 
@@ -80,7 +86,7 @@ public class CanvasController extends HttpServlet {
             CanvasDAO cDAO = new CanvasDAO();
             //   ArrayList<String> companyList = cDAO.retrieveAllCompanies();
             HashMap<String, ArrayList<String>> all = cDAO.retrieveAll();
-            out.println(all.size() + "<BR>");
+            //     out.println(all.size() + "<BR>");
             Iterator iter = all.entrySet().iterator();
 
             // hashmap values directly retrieved from sql may have diff hashcode, hence, manually sorting them out again.
@@ -88,7 +94,7 @@ public class CanvasController extends HttpServlet {
 
             while (iter.hasNext()) {
                 Map.Entry pair = (Map.Entry) iter.next();
-                out.println(pair.getKey() + ", " + pair.getValue() + "<BR>");
+                //        out.println(pair.getKey() + ", " + pair.getValue() + "<BR>");
                 allAll.put((String) pair.getKey(), (ArrayList<String>) pair.getValue());
                 iter.remove();
             }
@@ -113,16 +119,15 @@ public class CanvasController extends HttpServlet {
                 Map.Entry pair = (Map.Entry) iter2.next();
                 companiesMatched.add((String) pair.getKey());
                 maxNumberOfTraitsMatched = (Integer) pair.getValue();
-             //   out.println((String) pair.getKey() + ", " + (Integer) pair.getValue());
+                //   out.println((String) pair.getKey() + ", " + (Integer) pair.getValue());
                 iter2.remove();
             }
-            
+
             //sending results to display
-            
             request.setAttribute("companiesMatched", companiesMatched);
             request.setAttribute("maxValue", maxNumberOfTraitsMatched);
             RequestDispatcher rd = request.getRequestDispatcher("BMC_Results.jsp");
-            rd.forward(request, response); 
+            rd.forward(request, response);
         }
 
         /*    if(request.getParameter("searchByTraits")!=null) {

@@ -1,7 +1,13 @@
             var dotAY = $('#dotA1').offset().top;
             var dotBY = $('#dotB1').offset().top;
             var difference = Math.abs(dotAY - dotBY)+10;
+            
 $(function() {
+    
+            $(window).scroll(function(){
+                lineAllign();
+            });
+            
             var linkLine = $('<div class="line lineA" id="line1A"></div>');
             var topOfCanvas = $('#topLabel').offset().top;
             var bottomOfCanvas = topOfCanvas + $('#container').outerHeight();
@@ -9,7 +15,6 @@ $(function() {
             difference = Math.abs(dotAY - dotBY)+10;
             console.log("Bottom of canvas for A = " +canvasHeight );
             
-
 
             $("#addBox").click(function() {
                 removeIndication();
@@ -42,20 +47,20 @@ $(function() {
                     var factorName = document.createElement("div");
                     factorName.className = 'factorBox';
                     factorName.innerHTML = '<span class="factorName" id="factor'+boxCount+'" contenteditable="true">\n\
-                    Factor ' + boxCount + '</span><br/>Weight: <select class="weight" id="weight' + boxCount + '"> \n\
+                    Factor ' + boxCount + '</span><br/>Weight: <select class="weight fontBlack id="weight' + boxCount + '"> \n\
                     <option value="1">1</option>\n\
                     <option value="2">2</option>\n\
                     <option value="3">3</option>\n\
                     <option value="4">4</option>\n\
                     <option value="5">5</option>\n\
                     </select><br/>\n\
-                    Grid: <select id="grid' + boxCount + '"><option value="0">0</option>\n\
+                    Grid: <select class="fontBlack" id="grid' + boxCount + '"><option value="0">0</option>\n\
                     <option value="1">1</option>\n\
                     <option value="2">2</option><option value="3">3</option>\n\
                     <option value="4">4</option><option value="5">5</option>\n\
                     <option value="6">6</option><option value="7">7</option>\n\
                     <option value="8" selected="selected">8</option></select><br/>\n\
-                    Value: <span class="factorValue" id="value' + boxCount + '" contenteditable="false">0</span><br>\n\
+                    Value: <span class="factorValue fontBlack" id="value' + boxCount + '" contenteditable="false">0</span><br>\n\
                      <span class="GreenDotValue" id="greenDot'+ boxCount +'" hidden="" >0</span><br>\n\
                      <span class="BlueDotValue" id="blueDot' + boxCount + '" hidden="" >0</span><br>';
                      document.getElementById('boxCounter').innerHTML = boxCount ;
@@ -369,6 +374,8 @@ $(function() {
                           lineAllign();
                           }});
             
+            
+           
             
             function lineAllign(){
                 var count = 0;
