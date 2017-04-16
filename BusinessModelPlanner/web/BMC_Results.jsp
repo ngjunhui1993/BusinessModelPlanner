@@ -20,10 +20,10 @@
                 <div><table style="width:500px;">
                         <tr>
                             <%                    CanvasDAO canvasDAO = new CanvasDAO();
-                                ArrayList<CanvasCompany> companySelected = new ArrayList<>();
-                                ArrayList<CanvasCompany> allCompaniesSelected = new ArrayList<>();
+                                ArrayList<CanvasCompany> companySelected = new ArrayList<CanvasCompany>();
+                                ArrayList<CanvasCompany> allCompaniesSelected = new ArrayList<CanvasCompany>();
                                 //if it was redirected from searching of traits:
-                                ArrayList<String> companiesMatched = new ArrayList<>();
+                                ArrayList<String> companiesMatched = new ArrayList<String>();
                                 int number = 0;
                                 if (request.getAttribute("companiesMatched") != null) {
                                     companiesMatched = (ArrayList<String>) request.getAttribute("companiesMatched");
