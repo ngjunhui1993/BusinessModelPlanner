@@ -117,7 +117,7 @@ public class Register extends HttpServlet {
             final String emailForSending = email;
 
             String content = "Please click on the following link to activate your account! \n"
-                    + "http://fypbmpt-junhui.rhcloud.com/BusinessModelPlanner/Activation?email=" + emailForSending.toLowerCase() + "&activationCode=" + sharedSecret;
+                    + "http://live-junhui.rhcloud.com/BusinessModelPlanner/Activation?email=" + emailForSending.toLowerCase() + "&activationCode=" + sharedSecret;
             Email.sendMail(emailForSending, "", "Account Activation", content); 
             
             //check if there were any exceptions thrown during the method, register, in the demoDAO.
